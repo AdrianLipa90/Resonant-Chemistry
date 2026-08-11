@@ -1,0 +1,38 @@
+\chapter{Helium Restricted Hartree--Fock Control}
+
+\section{Self-consistent field equation}
+The one-parameter $1s^2$ ansatz establishes the first interacting variational bound but does not permit the orbital to relax freely. The next control layer solves the spherical restricted Hartree--Fock equation numerically. For a helium-like two-electron ion with opposite spins sharing one spatial orbital $\phi$, the Fock equation is
+\begin{equation}
+\left[-\frac12\nabla^2-\frac{Z}{r}+J[\phi](r)\right]\phi(r)=\varepsilon\phi(r),
+\end{equation}
+where the self-interaction is cancelled by exchange and the remaining Coulomb field is that of the opposite-spin electron.
+
+Writing the $s$ orbital as $\phi(r)=u(r)/(r\sqrt{4\pi})$ with $\int_0^\infty |u(r)|^2\,dr=1$, spherical symmetry reduces the Coulomb potential to
+\begin{equation}
+J(r)=\frac{1}{r}\int_0^r |u(r')|^2\,dr'+\int_r^\infty\frac{|u(r')|^2}{r'}\,dr'.
+\end{equation}
+The total RHF energy is evaluated as
+\begin{equation}
+E_{\rm RHF}=2\langle\phi|h|\phi\rangle+J,
+\end{equation}
+with $h=-\nabla^2/2-Z/r$.
+
+\section{Discretization and SCF}
+The implementation uses a uniform radial grid, a second-order three-point finite-difference kinetic operator, direct spherical Coulomb quadrature, density/orbital mixing, and repeated diagonalization of the one-orbital Fock operator until the total energy changes by less than the requested tolerance. No experimental energy is used inside the SCF loop.
+
+Because the finite-difference error is second order in the grid spacing, two nested grids with steps $h$ and $h/2$ are combined by Richardson extrapolation,
+\begin{equation}
+E_{\infty}\approx\frac{4E_{h/2}-E_h}{3}.
+\end{equation}
+
+\section{Helium benchmark}
+For $Z=2$, $r_{\max}=20a_0$, and nested grids of 399 and 799 interior points, the implementation obtains
+\begin{align}
+E_{399} &= -2.8534029917\ {\rm Ha},\\
+E_{799} &= -2.8596016563\ {\rm Ha},\\
+E_{\rm Richardson} &= -2.8616678778\ {\rm Ha}.
+\end{align}
+Against the diagnostic Hartree--Fock limit $-2.861679995612$ Ha, the relative discrepancy is approximately $4.23\times10^{-6}$, or $0.000423\%$. Both SCF calculations converge in 19 iterations under the default high-accuracy gate.
+
+\section{Interpretation and TIR boundary}
+This result closes the first mean-field control requirement for the atom programme: the code can recover the conventional helium RHF limit without any TIR correction. Therefore the missing correlation energy must not be relabelled as ``resonance'' or as an informational interaction. The next control layer is an explicitly correlated or configuration-interaction calculation. Only after conventional correlation is quantified will a TIR relational observable be introduced, and it must predict an independent invariant or residual rather than repair a known energy by fitting.
