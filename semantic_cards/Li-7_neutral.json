@@ -11,26 +11,64 @@
     "closed_shell_control": false,
     "open_shell_control": true,
     "ground_configuration_term_target": "1s^2 2s^1, doublet-S control target",
-    "solver_status": "PENDING_OPEN_SHELL_CONTROL"
+    "solver_status": "PASS_OPEN_SHELL_CONTROL",
+    "solver": {
+      "method": "spherical radial unrestricted Hartree-Fock, s orbitals only",
+      "spin_occupancy": {"alpha": 2, "beta": 1},
+      "coarse_points": 400,
+      "fine_points": 801,
+      "rmax_bohr": 30.0,
+      "coarse_energy_hartree": -7.3331443588440735,
+      "fine_energy_hartree": -7.407328551685333,
+      "richardson_energy_hartree": -7.432056615965752,
+      "hf_reference_hartree": -7.432727,
+      "relative_error_vs_hf_reference": 9.019354999147178e-05,
+      "tir_applied": false
+    }
   },
-  "state_invariants": {"status": "PENDING_SOLVER", "values": {}},
+  "state_invariants": {
+    "status": "STANDARD_QM_STATE_DERIVED_CONTROL",
+    "spin_sector": {
+      "N_alpha": 2,
+      "N_beta": 1,
+      "S_z": 0.5,
+      "target_S2": 0.75,
+      "S2_expectation_fine_grid": 0.7500160648628318,
+      "spin_contamination": 1.6064862831788318e-05
+    },
+    "energy_components_fine_grid_hartree": {
+      "kinetic": 7.356885300331097,
+      "nuclear_attraction": -17.04116010105321,
+      "electron_electron": 2.276946249036769,
+      "virial_residual": -0.05044325135424854
+    }
+  },
   "tir": {
     "kappa": 0.009193150006360484,
     "relation_operator": {"status": "RESERVED_NOT_YET_APPLIED", "symbol": "W_ij"},
-    "semantic_axes": {"status": "CANDIDATE_UNASSIGNED", "values": {}}
+    "semantic_axes": {
+      "status": "CANDIDATE_UNASSIGNED",
+      "input_invariants_available": true,
+      "values": {}
+    }
   },
   "affective_mapping": {
     "status": "RESERVED_UNASSIGNED",
     "labels": [],
     "coordinates": {},
     "provenance": [],
-    "note": "No affective meaning assigned; card opened before solver to preserve provenance order."
+    "note": "No affective meaning assigned; open-shell and spin descriptors are physical inputs only."
   },
-  "solver_evidence": [],
+  "solver_evidence": [
+    {"model": "radial UHF open-shell control", "configuration": "1s^2 2s^1", "status": "PASS_CONTROL_GATE"},
+    {"model": "Richardson 400->801", "energy_hartree": -7.432056615965752, "relative_error_vs_hf_reference": 9.019354999147178e-05, "status": "PASS_GRID_CONVERGENCE_GATE"},
+    {"model": "spin-purity diagnostic", "S2": 0.7500160648628318, "spin_contamination": 1.6064862831788318e-05, "status": "PASS_SPIN_GATE"}
+  ],
   "epistemic_status": {
     "identity": "ESTABLISHED_INPUT",
     "electronic_bookkeeping": "CONTROL_MODEL_V0_1",
-    "solver": "PENDING",
+    "solver": "IMPLEMENTED_TESTED_CONTROL",
+    "state_invariants": "IMPLEMENTED_TESTED_CONTROL",
     "tir_semantics": "OPEN",
     "affective_semantics": "OPEN"
   }
