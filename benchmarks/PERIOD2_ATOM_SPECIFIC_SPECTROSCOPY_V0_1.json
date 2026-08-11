@@ -1,0 +1,46 @@
+{
+  "schema": "RESCHEM_PERIOD2_ATOM_SPECIFIC_SPECTROSCOPY_V0_1",
+  "status": "BLIND_RADIAL_TO_SPECTRUM_CONTROL_PASS_WITH_APPROXIMATION_ERROR",
+  "branch": "atom-foundations-v0.1",
+  "protocol": {
+    "reference_values_available_to_solver": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "radial_control": "configuration-average nonrelativistic HF, Slater radial basis",
+    "slater_integrals": "F^k derived directly from normalized shell radial density",
+    "spin_orbit": "Pauli central-field zeta from nucleus plus spherical direct field of all other electrons",
+    "basis_size": 24,
+    "grid_points": 1500
+  },
+  "results": [
+    {"symbol":"B","Z":5,"p_electrons":1,"hf_energy_hartree":-24.4143602558323,"virial_residual_hartree":0.00016106578897012724,"F0_hartree":0.3292568003760742,"F2_hartree":0.14268097742645422,"zeta_hartree":4.51349132106848e-05,"zeta_cm-1":9.905968438854556,"ground_LS":"^2P","ground_J":0.5,"levels_cm-1":[{"J":0.5,"E":0.0},{"J":1.5,"E":14.858952658281833}]},
+    {"symbol":"C","Z":6,"p_electrons":2,"hf_energy_hartree":-37.53017057074136,"virial_residual_hartree":-9.501093479613587e-05,"F0_hartree":0.5043562040467318,"F2_hartree":0.2248789332809651,"zeta_hartree":0.00017367658650709484,"zeta_cm-1":38.117604801331396,"ground_LS":"^3P","ground_J":0.0,"levels_cm-1":[{"J":0,"E":0.0},{"J":1,"E":19.156804810947744},{"J":2,"E":57.21298054135344},{"J":2,"E":11883.53007264199},{"J":0,"E":29651.44620052055}]},
+    {"symbol":"N","Z":7,"p_electrons":3,"hf_energy_hartree":-54.402889938806084,"virial_residual_hartree":-9.36178941923771e-06,"F0_hartree":0.6605126855402389,"F2_hartree":0.2976998905522315,"zeta_hartree":0.0004420214756923301,"zeta_cm-1":97.01250043541857,"ground_LS":"^4S","ground_J":1.5,"levels_cm-1":[{"J":1.5,"E":0.0},{"J":1.5,"E":23521.01644972995},{"J":2.5,"E":23521.766619065715},{"J":0.5,"E":39202.784316183126},{"J":1.5,"E":39203.774558908466}]},
+    {"symbol":"O","Z":8,"p_electrons":4,"hf_energy_hartree":-74.62000814954412,"virial_residual_hartree":0.00036756677339955246,"F0_hartree":0.7220105174993469,"F2_hartree":0.31592864395338244,"zeta_hartree":0.0008044879962841004,"zeta_cm-1":176.5647064264451,"ground_LS":"^3P","ground_J":2.0,"levels_cm-1":[{"J":2,"E":0.0},{"J":1,"E":177.49639587071852},{"J":0,"E":264.273721311484},{"J":2,"E":16731.343173153906},{"J":0,"E":41693.71267306029}]},
+    {"symbol":"F","Z":9,"p_electrons":5,"hf_energy_hartree":-99.16131744456412,"virial_residual_hartree":0.0002390283056445952,"F0_hartree":0.843826894073915,"F2_hartree":0.37149222899265694,"zeta_hartree":0.0014116101862660152,"zeta_cm-1":309.81262526957653,"ground_LS":"^2P","ground_J":1.5,"levels_cm-1":[{"J":1.5,"E":0.0},{"J":0.5,"E":464.7189379043509}]},
+    {"symbol":"Ne","Z":10,"p_electrons":6,"hf_energy_hartree":-128.54247370192866,"virial_residual_hartree":-5.965224367621147e-05,"F0_hartree":0.9681692438385329,"F2_hartree":0.4276040879193332,"zeta_hartree":0.0023565112307310254,"zeta_cm-1":517.1944336851351,"ground_LS":"^1S","ground_J":0.0,"levels_cm-1":[{"J":0,"E":0.0}]}
+  ],
+  "post_hoc_validation": {
+    "opened_after_blind_run": true,
+    "source": "NIST Atomic Spectra Database v5.12",
+    "comparisons": {
+      "B_2P_3_2_cm-1": {"predicted":14.858952658281833,"reference":15.287,"relative_error":0.028000741919157964},
+      "C_3P1_cm-1": {"predicted":19.156804810947744,"reference":16.4167130,"relative_error":0.16690867477233368},
+      "C_3P2_cm-1": {"predicted":57.21298054135344,"reference":43.4134567,"relative_error":0.31786282158346174},
+      "C_1D2_cm-1": {"predicted":11883.53007264199,"reference":10192.657,"relative_error":0.16589129533565103},
+      "C_1S0_cm-1": {"predicted":29651.44620052055,"reference":21648.030,"relative_error":0.36970644444416195},
+      "O_3P1_cm-1": {"predicted":177.49639587071852,"reference":158.265,"relative_error":0.12151389044146546},
+      "O_3P0_cm-1": {"predicted":264.273721311484,"reference":226.977,"relative_error":0.16431938615579547},
+      "O_1D2_cm-1": {"predicted":16731.343173153906,"reference":15867.862,"relative_error":0.054416982776501754},
+      "O_1S0_cm-1": {"predicted":41693.71267306029,"reference":33792.583,"relative_error":0.23381254025654954},
+      "F_2P1_2_cm-1": {"predicted":464.7189379043509,"reference":404.141,"relative_error":0.14989307668450097}
+    }
+  },
+  "promotion": {
+    "radial_Fk": "PASS_CONTROL",
+    "atom_specific_zeta": "PASS_PAULI_CENTRAL_FIELD_CONTROL",
+    "absolute_period2_fine_structure": "PASS_APPROXIMATE_CONTROL_NOT_HIGH_PRECISION",
+    "correlation_and_Dirac": "OPEN",
+    "tir": "NOT_APPLIED"
+  }
+}
