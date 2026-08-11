@@ -1,0 +1,12 @@
+{
+  "schema": "RESCHEM_ATOM_SEMANTIC_CARD_V0_1",
+  "card_id": "ATOM:Ne:20:q+0",
+  "entity_level": "atomic_species",
+  "identity": {"symbol": "Ne", "Z": 10, "N": 10, "A": 20, "charge": 0, "electron_count": 10},
+  "physical_control": {"electron_configuration": "1s^2 2s^2 2p^6", "shell_population": {"1": 2, "2": 8}, "outer_shell_n": 2, "outer_shell_electrons": 8, "closed_shell_control": true, "open_shell_control": false, "solver_status": "MULTI_L_AVERAGE_HF_PASS"},
+  "state_invariants": {"status": "IMPLEMENTED_TESTED_CONTROL", "values": {"average_hf_energy_hartree": -128.54388747299046, "virial_residual_hartree": -7.610233295096691e-06, "target_S": 0.0, "target_S2": 0.0, "outer_subshell": "2p", "outer_radial_channels": {"alpha": {"mean_radius_bohr": 0.9653729651643247, "radial_sigma_bohr": 0.5447602213082429}, "beta": {"mean_radius_bohr": 0.9653729651643247, "radial_sigma_bohr": 0.5447602213082429}}}},
+  "tir": {"kappa": 0.009193150006360484, "relation_operator": {"status": "RESERVED_NOT_YET_APPLIED", "symbol": "W_ij"}, "semantic_axes": {"status": "CANDIDATE_UNASSIGNED", "values": {}}},
+  "affective_mapping": {"status": "RESERVED_UNASSIGNED", "labels": [], "coordinates": {}, "provenance": [], "note": "No affective meaning assigned. Physical state invariants may be consumed by a future mapping but cannot be rewritten by it."},
+  "solver_evidence": [{"model": "spherically averaged configuration UHF, Slater radial basis, nonlocal multipole exchange l<=2", "basis_size": 26, "grid_points": 1800, "energy_hartree": -128.54388747299046, "virial_residual_hartree": -7.610233295096691e-06, "converged": true, "term_resolution": "CLOSED_SHELL_DIRECTLY_COMPARABLE", "status": "PASS_CONTROL_CHECKPOINT"}],
+  "epistemic_status": {"identity": "ESTABLISHED_INPUT", "electronic_bookkeeping": "CONTROL_MODEL_V0_1", "solver": "IMPLEMENTED_TESTED_CONTROL", "term_resolved_multiplet": "IMPLEMENTED_CLOSED_SHELL", "tir_semantics": "OPEN", "affective_semantics": "OPEN"}
+}
