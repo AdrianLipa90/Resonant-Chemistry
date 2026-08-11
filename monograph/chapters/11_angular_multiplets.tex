@@ -1,0 +1,54 @@
+\section{Angular Multiplets: From Configuration Average to LS Structure}
+
+The H--Kr control solver establishes a common radial/electrostatic baseline, but an open shell is not fully specified by a configuration label such as $2p^2$ or $3d^7$.  The next layer resolves the allowed electrostatic LS multiplets without modifying the already verified control energies.
+
+\subsection{Microstate construction}
+
+For an equivalent-electron shell with orbital angular momentum $l$, the one-electron spin-orbital set is
+\[
+\{|l m \sigma\rangle: m=-l,\ldots,l;\;\sigma=\pm\tfrac12\}.
+\]
+For $N$ electrons the antisymmetric determinant basis therefore contains
+\[
+\binom{2(2l+1)}{N}
+\]
+microstates.  The implementation constructs the two-electron Coulomb operator directly in this determinant basis.  Angular Coulomb matrix elements are evaluated from the spherical multipole expansion and integer Wigner $3j$ symbols computed by the Racah factorial formula.  Radial Slater parameters $F^k$ remain explicit coefficients.
+
+The many-electron operators $L^2$ and $S^2$ are constructed independently from second-quantized one-body ladder operators.  Each degenerate electrostatic eigenspace is subsequently diagonalized with respect to $L^2$ and $S^2$.  Therefore the term label $^{2S+1}L$ is an output of the angular algebra rather than a hard-coded periodic-table label.
+
+\subsection{Equivalent $p$ shells}
+
+With the dimensionless diagnostic choice $F^0=0$, $F^2=1$, the solver obtains
+\[
+p^1\to{}^2P,\quad
+p^2\to{}^3P,\quad
+p^3\to{}^4S,\quad
+p^4\to{}^3P,\quad
+p^5\to{}^2P,\quad
+p^6\to{}^1S.
+\]
+For $p^2$, all 15 microstates are resolved into
+\[
+{}^3P\;(9),\qquad{}^1D\;(5),\qquad{}^1S\;(1),
+\]
+where parentheses give degeneracy.  For $p^3$, all 20 microstates become
+\[
+{}^4S\;(4),\qquad{}^2D\;(10),\qquad{}^2P\;(6).
+\]
+The same equivalent-shell algebra applies to both the $2p$ sequence B--Ne and the $4p$ sequence Ga--Kr.  Spin--orbit splitting into $J$ levels is intentionally outside this layer.
+
+\subsection{Equivalent $d$ shells}
+
+For a dimensionless angular diagnostic $F^0=0$, $F^2=1$, $F^4/F^2=0.625$, the ground-term sequence is
+\[
+{}^2D,\ {}^3F,\ {}^4F,\ {}^5D,\ {}^6S,\ {}^5D,\ {}^4F,\ {}^3F,\ {}^2D,\ {}^1S
+\]
+for $d^1$ through $d^{10}$.  In particular, $d^5$ contains $\binom{10}{5}=252$ microstates and its lowest angular term is $^6S$.
+
+This is an angular control result.  The ratio $F^4/F^2=0.625$ is not fitted to any atom-specific spectrum; atom-specific term splittings require coupling these angular coefficients to radial Slater integrals extracted from the converged atomic state.
+
+\subsection{Status and next gate}
+
+This layer promotes equivalent-shell LS structure from OPEN to IMPLEMENTED/TESTED for $p$ shells and to a tested angular control diagnostic for isolated $d$ shells.  It does not yet claim fine-structure $J$ splitting, explicit $3d$--$4s$ exchange for chromium, or atom-specific multiplet separation in Hartree/eV.  Those are the next gates.
+
+TIR and affective mappings remain absent by construction.  Multiplet invariants may later become semantic inputs, but they are not allowed to rewrite the control physics.
