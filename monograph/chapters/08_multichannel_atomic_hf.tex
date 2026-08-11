@@ -1,0 +1,67 @@
+\section{Multi-channel atomic Hartree--Fock control: from configuration to $s$, $p$, and $d$ channels}
+\label{sec:multichannel-atomic-hf}
+
+The first atom solver chapters deliberately started with hydrogenic and $s$-shell systems.  The present layer removes that artificial boundary.  The electronic configuration is no longer duplicated inside a solver: it is consumed directly from the canonical atom constructor, which supplies occupied subshells $(n,l,q)$ through krypton.
+
+For each radial channel the one-electron operator is
+\begin{equation}
+ h_l=-\frac12\frac{d^2}{dr^2}+\frac{l(l+1)}{2r^2}-\frac{Z}{r}.
+\end{equation}
+The centrifugal term therefore enters because the configuration requests a nonzero $l$, rather than through an element-specific branch.
+
+\subsection{Spherical direct field and nonlocal exchange}
+The radial charge density is
+\begin{equation}
+ P(r)=\sum_a q_a u_a(r)^2,
+\end{equation}
+with $\int u_a^2dr=1$.  Its spherical Coulomb potential is
+\begin{equation}
+ V_J(r)=\frac1r\int_0^r P(r')\,dr'+\int_r^\infty\frac{P(r')}{r'}\,dr'.
+\end{equation}
+Exchange is retained as a nonlocal multipole operator rather than replaced by a fitted local correction.  For target angular momentum $l_a$ and source $l_b$, allowed multipoles carry the exact angular coefficient
+\begin{equation}
+ c_k(l_a,l_b)=
+ \begin{pmatrix}
+ l_a & l_b & k\\
+ 0 & 0 & 0
+ \end{pmatrix}^{\!2},
+\end{equation}
+and the radial kernel is
+\begin{equation}
+ G_k(r,r')=\frac{r_<^k}{r_>^{k+1}}.
+\end{equation}
+In v0.1 all coefficients required by $l\le2$ are frozen explicitly, so the runtime remains NumPy/SciPy-only.
+
+Open subshells follow Hund occupancy counts for $\alpha$ and $\beta$ electrons, but magnetic substates are spherically averaged.  Consequently this is an \emph{average-of-configuration} Hartree--Fock control model.  Closed shells are directly comparable to spherical atomic HF; open $p$ and $d$ shells are not yet term-resolved multiplet calculations.  This distinction is mandatory and is stored in every benchmark and semantic card.
+
+\subsection{Blind H--Ne checkpoint}
+No reference energy, TIR correction, or semantic/affective parameter enters the solve.  A 26-function even-tempered Slater radial basis and 1800-point logarithmic quadrature produced the following first multi-channel blind checkpoint:
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Atom & Configuration & $E$ / $E_h$ & target $S$\\
+\hline
+H  & $1s^1$                 & -0.500000000000 & $1/2$\\
+He & $1s^2$                 & -2.861614881532 & $0$\\
+Li & $1s^2 2s^1$            & -7.432610713447 & $1/2$\\
+Be & $1s^2 2s^2$            & -14.572750829746 & $0$\\
+B  & $1s^2 2s^2 2p^1$       & -24.414563685151 & $1/2$\\
+C  & $1s^2 2s^2 2p^2$       & -37.530502491026 & $1$\\
+N  & $1s^2 2s^2 2p^3$       & -54.403396984787 & $3/2$\\
+O  & $1s^2 2s^2 2p^4$       & -74.620738988853 & $1$\\
+F  & $1s^2 2s^2 2p^5$       & -99.162355082192 & $1/2$\\
+Ne & $1s^2 2s^2 2p^6$       & -128.543887472990 & $0$\\
+\hline
+\end{tabular}
+\end{center}
+
+All ten systems converged.  The largest absolute virial residual in this checkpoint is $4.97\times10^{-5}\,E_h$.  Hydrogen also provides an internal self-interaction gate: the direct Coulomb term is cancelled by exact one-electron exchange to numerical precision.
+
+\subsection{Why this is not yet H--Kr PASS}
+The same machinery already consumes $3s$, $3p$, $4s$, $3d$, and $4p$ configurations from the atom constructor.  Prototype runs through the third period mostly converge, but aluminium and selected open-$3d$ cases exhibit a two-cycle SCF oscillation.  No element-specific damping constant is admitted as a fix.  Promotion beyond the H--Ne checkpoint is blocked until a single global SCF stabilizer resolves those cases.
+
+This is an important methodological constraint: failure of a numerical fixed-point iteration is not repaired by changing the physical model or by inserting a semantic correction.  TIR remains absent until the conventional control layer is reproducible.
+
+\subsection{Semantic-card output}
+For every atomic species the solver exports quantities suitable for later relational analysis without assigning meanings to them: total energy, virial residual, target spin, and for each occupied spin channel the mean radius and radial width.  These are physical state coordinates.  The semantic and affective layers remain explicitly unassigned and may later consume these coordinates, but may not rewrite them.
