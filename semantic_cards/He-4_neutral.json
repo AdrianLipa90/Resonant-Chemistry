@@ -18,27 +18,48 @@
       "scope": "finite radial s-orbital CI; angular correlation not represented"
     }
   },
+  "state_invariants": {
+    "status": "STANDARD_QM_STATE_DERIVED_CONTROL",
+    "model": "five-spatial-orbital radial CI on 799-point grid",
+    "natural_occupations": [
+      1.999012068234575,
+      0.0009879277966358658,
+      3.934331262293872e-09,
+      3.360229123934629e-11,
+      8.554117458640999e-13
+    ],
+    "occupation_trace": 1.9999999999999996,
+    "one_body_entropy_nats": 0.004254454654909321,
+    "one_body_linear_entropy": 0.0009874437627985788,
+    "basis_invariant_within_active_space": true
+  },
   "tir": {
     "kappa": 0.009193150006360484,
     "relation_operator": {"status": "RESERVED_NOT_YET_APPLIED", "symbol": "W_ij"},
-    "semantic_axes": {"status": "CANDIDATE_UNASSIGNED", "values": {}}
+    "semantic_axes": {
+      "status": "CANDIDATE_UNASSIGNED",
+      "input_invariants_available": true,
+      "values": {}
+    }
   },
   "affective_mapping": {
     "status": "RESERVED_UNASSIGNED",
     "labels": [],
     "coordinates": {},
     "provenance": [],
-    "note": "No affective meaning assigned in v0.1."
+    "note": "No affective meaning assigned in v0.1; future mappings may consume state invariants but may not rewrite physical control data."
   },
   "solver_evidence": [
     {"model": "two-electron 1s^2 variational", "energy_hartree": -2.84765625, "status": "PASS_CONTROL"},
     {"model": "spherical RHF SCF + Richardson", "energy_hartree": -2.8616678778202016, "relative_error_vs_hf_limit": 4.234502745596748e-06, "status": "PASS_CONTROL_GATE"},
-    {"model": "finite radial s-orbital CI + Richardson", "spatial_orbitals": 5, "energy_hartree": -2.862747724850492, "recovered_fraction_of_full_nonrel_correlation": 0.02539528951026613, "status": "PASS_CORRELATION_GATE"}
+    {"model": "finite radial s-orbital CI + Richardson", "spatial_orbitals": 5, "energy_hartree": -2.862747724850492, "recovered_fraction_of_full_nonrel_correlation": 0.02539528951026613, "status": "PASS_CORRELATION_GATE"},
+    {"model": "one-particle reduced density matrix spectrum", "points": 799, "spatial_orbitals": 5, "status": "PASS_STATE_INVARIANT_GATE"}
   ],
   "epistemic_status": {
     "identity": "ESTABLISHED_INPUT",
     "electronic_bookkeeping": "CONTROL_MODEL_V0_1",
     "correlation_layer": "IMPLEMENTED_TESTED_CONTROL",
+    "state_invariants": "IMPLEMENTED_TESTED_CONTROL",
     "tir_semantics": "OPEN",
     "affective_semantics": "OPEN"
   }
