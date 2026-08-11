@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "RESCHEM_ATOM_SEMANTIC_CARD_V0_1",
+  "title": "Resonant Chemistry Atom Semantic Card v0.1",
+  "type": "object",
+  "required": ["schema", "card_id", "entity_level", "identity", "physical_control", "tir", "affective_mapping", "epistemic_status"],
+  "properties": {
+    "schema": {"const": "RESCHEM_ATOM_SEMANTIC_CARD_V0_1"},
+    "card_id": {"type": "string"},
+    "entity_level": {"const": "atomic_species"},
+    "identity": {"type": "object"},
+    "physical_control": {"type": "object"},
+    "tir": {"type": "object"},
+    "affective_mapping": {
+      "type": "object",
+      "required": ["status", "labels", "coordinates", "provenance"],
+      "properties": {
+        "status": {"enum": ["RESERVED_UNASSIGNED", "CANDIDATE", "TESTED", "VALIDATED"]},
+        "labels": {"type": "array"},
+        "coordinates": {"type": "object"},
+        "provenance": {"type": "array"}
+      }
+    },
+    "solver_evidence": {"type": "array"},
+    "epistemic_status": {"type": "object"}
+  },
+  "additionalProperties": true
+}
