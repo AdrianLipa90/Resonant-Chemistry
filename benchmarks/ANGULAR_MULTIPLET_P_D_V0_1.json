@@ -1,0 +1,49 @@
+{
+  "schema": "RESCHEM_ANGULAR_MULTIPLET_P_D_V0_1",
+  "status": "IMPLEMENTED_TESTED_ANGULAR_CONTROL",
+  "protocol": {
+    "reference_values_available_to_solver": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "hamiltonian": "second-quantized electrostatic shell Hamiltonian in determinant microstate basis",
+    "classification": "simultaneous energy, L^2 and S^2 eigenspace resolution",
+    "spin_orbit": false,
+    "J_resolution": false
+  },
+  "p_shell": {
+    "dimensionless_slater": {"F0": 0.0, "F2": 1.0},
+    "ground_sequence_p1_to_p6": ["^2P", "^3P", "^4S", "^3P", "^2P", "^1S"],
+    "p2_terms": [
+      {"term": "^3P", "degeneracy": 9, "energy_over_F2": -0.2},
+      {"term": "^1D", "degeneracy": 5, "energy_over_F2": 0.04},
+      {"term": "^1S", "degeneracy": 1, "energy_over_F2": 0.4}
+    ],
+    "p3_terms": [
+      {"term": "^4S", "degeneracy": 4, "energy_over_F2": -0.6},
+      {"term": "^2D", "degeneracy": 10, "energy_over_F2": -0.24},
+      {"term": "^2P", "degeneracy": 6, "energy_over_F2": 0.0}
+    ],
+    "microstate_checks": {"p2": 15, "p3": 20}
+  },
+  "d_shell": {
+    "dimensionless_slater": {"F0": 0.0, "F2": 1.0, "F4": 0.625},
+    "ground_sequence_d1_to_d10": ["^2D", "^3F", "^4F", "^5D", "^6S", "^5D", "^4F", "^3F", "^2D", "^1S"],
+    "d5_microstate_count": 252,
+    "d5_ground_term": "^6S",
+    "note": "F4/F2=0.625 is a dimensionless angular diagnostic ratio, not an atom-specific fitted radial integral."
+  },
+  "post_hoc_validation": {
+    "opened_after_angular_solution": true,
+    "source": "NIST Atomic Spectra Database v5.12",
+    "p_shell_ground_LS_sequence_agrees": true,
+    "Fe_ground_shell_and_LS": "[Ar] 3d6 4s2, ^5D",
+    "Co_ground_shell_and_LS": "[Ar] 3d7 4s2, ^4F",
+    "fine_structure_J": "outside v0.1 angular electrostatic layer"
+  },
+  "promotion": {
+    "p_shell_LS_term_structure": "PASS",
+    "isolated_d_shell_LS_term_structure": "PASS_CONTROL_DIAGNOSTIC",
+    "atom_specific_term_splittings_hartree": "OPEN_RADIAL_SLATER_COUPLING",
+    "spin_orbit_J_splitting": "OPEN"
+  }
+}
