@@ -1,0 +1,36 @@
+\section{Third Period: Global SCF Stabilization from Na to Ar}
+
+The first multi-$\ell$ implementation reproduced the second period but exposed a two-cycle SCF instability in aluminium.  The failure was numerical rather than element-specific: the direct and exchange fields alternated between two nearby density configurations while the total energy remained close to stationary.
+
+The correction introduced here acts only on the fixed-point iteration.  For each angular/spin block we form the generalized commutator residual
+\[
+R = F P S - S P F,
+\]
+where $F$ is the raw Fock matrix, $P$ the occupied radial density matrix and $S$ the non-orthogonal Slater-basis overlap matrix.  A Pulay/DIIS extrapolation is then constructed from a finite history of $(F,R)$ pairs.  No atomic reference energies, TIR corrections or element-specific branches enter the iteration.
+
+Using one parameter set for every neutral atom from sodium through argon,
+\[
+\text{basis}=15,\qquad N_r=600,\qquad \lambda_{\rm damp}=0.25,
+\]
+with DIIS beginning at iteration three, all eight systems converge.  The calculated control energies are
+\begin{align*}
+E_{\rm Na}&=-161.8214667868\ E_h,\\
+E_{\rm Mg}&=-199.5688114017\ E_h,\\
+E_{\rm Al}&=-241.7481654795\ E_h,\\
+E_{\rm Si}&=-288.6907148139\ E_h,\\
+E_{\rm P} &=-340.6375397417\ E_h,\\
+E_{\rm S} &=-397.2889482732\ E_h,\\
+E_{\rm Cl}&=-459.2240885149\ E_h,\\
+E_{\rm Ar}&=-526.6829149879\ E_h.
+\end{align*}
+
+The Hund-spin sequence of the $3p$ shell emerges from the configuration generator as
+\[
+\frac12,\ 1,\ \frac32,\ 1,\ \frac12,\ 0
+\]
+for Al through Ar.  The semantic-card layer stores this spin coordinate together with the outer-channel mean radius, radial width, energy and virial residual.  These are control observables only; TIR semantics and affective coordinates remain unassigned.
+
+A second, stricter solver entry point implements a global escalation ladder.  An atom advances to a larger basis and more conservative DIIS parameters only when either SCF convergence fails or the virial quality gate fails.  The escalation condition depends on numerical quality, never on the element identity.  This becomes essential in the $3d$ region, where false stationary points can satisfy an energy-only stopping rule while violating the virial check strongly.
+
+\paragraph{Current boundary.}
+Na--Ar is therefore promoted to a tested control checkpoint.  The $3d$ sequence is not yet promoted as a whole: several transition-metal configurations require the global fallback ladder and the complete Sc--Kr run must pass both convergence and virial gates before promotion.
