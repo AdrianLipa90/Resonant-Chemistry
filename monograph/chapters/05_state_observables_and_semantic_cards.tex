@@ -1,0 +1,61 @@
+\chapter{State Invariants as the Physical Backbone of Semantic Atom Cards}
+
+\section{From labels to state-derived semantics}
+A semantic atom card must not be a list of human associations attached to an element name. Its physical backbone should be generated from state variables and invariants that survive a change of orbital representation. For the correlated helium control state, the first such object is the spin-summed one-particle reduced density matrix
+\begin{equation}
+\gamma_{ij}=\sum_{\sigma}\langle\Psi|a^\dagger_{i\sigma}a_{j\sigma}|\Psi\rangle.
+\end{equation}
+For a two-electron state,
+\begin{equation}
+\operatorname{Tr}\gamma=2.
+\end{equation}
+
+\section{Natural occupations}
+The eigenvalues of $\gamma$ are the natural occupation numbers $n_k$. Because eigenvalues are unchanged by unitary rotations of the one-particle basis, the ordered spectrum
+\begin{equation}
+\mathbf n=(n_1,n_2,\ldots)
+\end{equation}
+provides a basis-independent descriptor within the represented active space.
+
+For the present five-orbital radial CI helium state on the 799-point grid, the leading occupations are approximately
+\begin{equation}
+\mathbf n\approx(1.999012068,\;9.87928\times10^{-4},\;3.93\times10^{-9},\ldots).
+\end{equation}
+The departure from $(2,0,0,\ldots)$ is a direct signature that the state is not a single closed-shell determinant within this finite model.
+
+\section{One-body entropy}
+Normalizing the occupations by particle number,
+\begin{equation}
+p_k=\frac{n_k}{2},
+\end{equation}
+we define the one-body spectral entropy
+\begin{equation}
+S_1=-\sum_k p_k\ln p_k,
+\end{equation}
+and the corresponding linear entropy
+\begin{equation}
+L_1=1-\sum_k p_k^2.
+\end{equation}
+For the same helium control state,
+\begin{equation}
+S_1\approx 0.00425445,\qquad L_1\approx 9.87444\times10^{-4}.
+\end{equation}
+These quantities are not emotions and are not introduced as TIR postulates. They are standard state-derived descriptors that quantify departure from a rank-one normalized one-body spectrum.
+
+\section{Semantic-card contract}
+The semantic card therefore separates four layers:
+\begin{enumerate}
+\item identity and stoichiometric data $(Z,N,A,q)$;
+\item conventional physical control data such as configuration, energy and correlation;
+\item basis-invariant state descriptors such as natural occupations and one-body entropy;
+\item interpretive TIR and affective mappings, which remain unassigned until an explicit rule with provenance is supplied.
+\end{enumerate}
+
+This ordering prevents reverse fitting. An affective or relational interpretation may consume the invariant descriptor vector, but it may not rewrite the underlying control observables.
+
+\section{Entry point for a future TIR map}
+A future map may be written abstractly as
+\begin{equation}
+\mathcal F_{\mathrm{TIR}}:\mathcal I(\Psi)\longrightarrow\mathcal S,
+\end{equation}
+where $\mathcal I(\Psi)$ is a vector of state invariants and $\mathcal S$ is a semantic coordinate space. The map itself is a candidate model and must have a transformation law, provenance and falsification criterion. The current chapter establishes only the physical domain of that future map.
