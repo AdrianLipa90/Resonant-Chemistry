@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ResChem — H→Ne atomic control map</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color-scheme:dark;background:#101216;color:#edf1f7}body{max-width:1050px;margin:auto;padding:24px}.row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.atom{border:1px solid #3a4351;border-radius:12px;padding:12px;background:#181c22;cursor:pointer}.atom.active{outline:2px solid currentColor}.sym{font-size:1.8rem;font-weight:800}.small{opacity:.72;font-size:.85rem}.panel{margin-top:18px;border:1px solid #3a4351;border-radius:14px;padding:18px;background:#181c22}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{padding:10px;border-radius:10px;background:#11151a}.value{font-size:1.15rem;font-weight:700}svg{width:100%;height:260px;margin-top:16px;background:#11151a;border-radius:12px}.legend{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0}.warn{padding:12px;border-left:4px solid currentColor;background:#11151a;margin-top:14px}code{font-size:.92em}@media(max-width:700px){.row{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<h1>ResChem H→Ne atomic control map</h1>
+<p>This view is driven by the blind multi-channel average-HF checkpoint. TIR and affective semantics are deliberately absent. Open <em>p</em> shells are configuration-averaged, not term-resolved.</p>
+<div id="atoms" class="row"></div>
+<div class="panel">
+  <h2 id="title"></h2>
+  <div id="config" class="small"></div>
+  <div class="grid" style="margin-top:14px">
+    <div class="metric"><div class="small">Energy / Hartree</div><div id="energy" class="value"></div></div>
+    <div class="metric"><div class="small">Target spin S</div><div id="spin" class="value"></div></div>
+    <div class="metric"><div class="small">Virial residual / Hartree</div><div id="virial" class="value"></div></div>
+    <div class="metric"><div class="small">Outer α mean radius / bohr</div><div id="ra" class="value"></div></div>
+    <div class="metric"><div class="small">Outer β mean radius / bohr</div><div id="rb" class="value"></div></div>
+    <div class="metric"><div class="small">Semantic status</div><div class="value">UNASSIGNED</div></div>
+  </div>
+  <div id="scope" class="warn"></div>
+</div>
+<h2>Outer-channel contraction across period 2</h2>
+<svg id="plot" viewBox="0 0 900 260" aria-label="outer radius plot"></svg>
+<div class="legend"><span>Vertical axis: mean outer-channel radius</span><span>Horizontal axis: Z</span></div>
+<script>
+const data=[
+{z:1,s:'H',c:'1s^1',e:-0.49999999999974737,S:.5,v:-1.0693002039374733e-11,ra:1.5,rb:null,scope:'one-electron exact-exchange self-interaction gate'},
+{z:2,s:'He',c:'1s^2',e:-2.8616148815320206,S:0,v:3.943279686824397e-5,ra:.927,rb:.927,scope:'closed shell'},
+{z:3,s:'Li',c:'1s^2 2s^1',e:-7.432610713446669,S:.5,v:2.9815946906541768e-5,ra:3.04,rb:null,scope:'s-only open-shell control'},
+{z:4,s:'Be',c:'1s^2 2s^2',e:-14.572750829746436,S:0,v:4.972734005548318e-5,ra:2.03,rb:2.03,scope:'closed shell'},
+{z:5,s:'B',c:'1s^2 2s^2 2p^1',e:-24.41456368515139,S:.5,v:7.203883701123459e-6,ra:2.856724361964508,rb:null,scope:'open p shell: configuration average, multiplet unresolved'},
+{z:6,s:'C',c:'1s^2 2s^2 2p^2',e:-37.53050249102648,S:1,v:-1.029973124033745e-5,ra:1.841696580753261,rb:null,scope:'open p shell: configuration average, multiplet unresolved'},
+{z:7,s:'N',c:'1s^2 2s^2 2p^3',e:-54.40339698478732,S:1.5,v:4.5990879993240696e-7,ra:1.400663004430638,rb:null,scope:'half-filled p shell: configuration average, multiplet unresolved'},
+{z:8,s:'O',c:'1s^2 2s^2 2p^4',e:-74.62073898885282,S:1,v:3.878027511738935e-5,ra:1.1589382964784816,rb:1.8393594977178682,scope:'open p shell: configuration average, multiplet unresolved'},
+{z:9,s:'F',c:'1s^2 2s^2 2p^5',e:-99.16235508219151,S:.5,v:2.4773452565796106e-5,ra:1.0415662776938575,rb:1.2176455540801558,scope:'open p shell: configuration average, multiplet unresolved'},
+{z:10,s:'Ne',c:'1s^2 2s^2 2p^6',e:-128.54388747299046,S:0,v:-7.610233295096691e-6,ra:.9653729651643247,rb:.9653729651643247,scope:'closed p shell; direct spherical-HF comparison allowed'}
+];
+const atoms=document.getElementById('atoms'); let selected=9;
+data.forEach((d,i)=>{const b=document.createElement('div');b.className='atom';b.innerHTML=`<div class="sym">${d.s}</div><div>Z=${d.z}</div><div class="small">${d.c}</div>`;b.onclick=()=>select(i);atoms.appendChild(b)});
+function fmt(x,n=9){return x==null?'—':Number(x).toPrecision(n)}
+function select(i){selected=i;[...atoms.children].forEach((x,j)=>x.classList.toggle('active',i===j));const d=data[i];title.textContent=`${d.s} — Z=${d.z}`;config.textContent=d.c;energy.textContent=fmt(d.e,12);spin.textContent=d.S;virial.textContent=d.v.toExponential(4);ra.textContent=fmt(d.ra,7);rb.textContent=fmt(d.rb,7);scope.textContent=d.scope;draw()}
+function draw(){const svg=document.getElementById('plot');svg.innerHTML='';const pts=data.filter(d=>d.z>=5);const max=3.1,min=.8;const X=z=>70+(z-5)*(760/5),Y=r=>220-(r-min)/(max-min)*180;const ns='http://www.w3.org/2000/svg';const path=document.createElementNS(ns,'polyline');path.setAttribute('points',pts.map(d=>`${X(d.z)},${Y(d.ra)}`).join(' '));path.setAttribute('fill','none');path.setAttribute('stroke','currentColor');path.setAttribute('stroke-width','3');svg.appendChild(path);pts.forEach(d=>{const c=document.createElementNS(ns,'circle');c.setAttribute('cx',X(d.z));c.setAttribute('cy',Y(d.ra));c.setAttribute('r',d.z===data[selected].z?'7':'4');c.setAttribute('fill','currentColor');svg.appendChild(c);const t=document.createElementNS(ns,'text');t.setAttribute('x',X(d.z));t.setAttribute('y',242);t.setAttribute('text-anchor','middle');t.setAttribute('fill','currentColor');t.textContent=d.s;svg.appendChild(t)})}
+select(selected);
+</script>
+</body>
+</html>
