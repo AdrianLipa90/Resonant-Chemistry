@@ -1,0 +1,43 @@
+{
+  "schema": "RESCHEM_BLIND_MASS_SOLVE_S_SHELL_V0_1",
+  "status": "IMPLEMENTED_TESTED_BLIND_BATCH",
+  "branch": "atom-foundations-v0.1",
+  "protocol": {
+    "reference_values_available_to_solver": false,
+    "tir_corrections_applied": false,
+    "domain": "s-shell atomic species only; 1<=Ne<=4, Ne<=Z",
+    "grid": "uniform radial finite difference + UHF + Richardson h->0 extrapolation",
+    "default_rmax_rule": "30*Ne/Z bohr",
+    "coarse_points": 400,
+    "fine_points": 801
+  },
+  "results": [
+    {"species":"H","Z":1,"ne":1,"rmax":30.0,"coarse":-0.4993023285496811,"fine":-0.4998252166323019,"energy":-0.49999951265984216,"conv":true,"itc":2,"itf":2,"s2":0.75,"vir":-0.00034932242700325133,"status":"PASS_CONVERGENCE","post_hoc_reference_hartree":-0.5,"post_hoc_relative_error":9.746803156795991e-07},
+    {"species":"He+","Z":2,"ne":1,"rmax":15.0,"coarse":-1.9972093141987206,"fine":-1.999300866529198,"energy":-1.9999980506393573,"conv":true,"itc":2,"itf":2,"s2":0.75,"vir":-0.0013972897073514234,"status":"PASS_CONVERGENCE","post_hoc_reference_hartree":-2.0,"post_hoc_relative_error":9.746803213417365e-07},
+    {"species":"Li2+","Z":3,"ne":1,"rmax":10.0,"coarse":-4.493720956947104,"fine":-4.498426949690809,"energy":-4.499995613938711,"conv":true,"itc":2,"itf":2,"s2":0.75,"vir":-0.0031439018429129106,"status":"PASS_CONVERGENCE","post_hoc_reference_hartree":-4.5,"post_hoc_relative_error":9.74680286505405e-07},
+    {"species":"Be3+","Z":4,"ne":1,"rmax":7.5,"coarse":-7.988837256794919,"fine":-7.99720346611699,"energy":-7.999992202557681,"conv":true,"itc":2,"itf":2,"s2":0.75,"vir":-0.0055891588325156505,"status":"PASS_CONVERGENCE","post_hoc_reference_hartree":-8.0,"post_hoc_relative_error":9.74680289922425e-07},
+    {"species":"He","Z":2,"ne":2,"rmax":30.0,"coarse":-2.843282396060646,"fine":-2.85703543974077,"energy":-2.8616197876341443,"conv":true,"itc":19,"itf":19,"s2":4.440892098500626e-16,"vir":-0.009048455074737394,"status":"PASS_CONVERGENCE","post_hoc_reference_hartree":-2.861679995612239,"post_hoc_relative_error":2.1039381827112367e-05},
+    {"species":"Li+","Z":3,"ne":2,"rmax":20.0,"coarse":-7.191841282462841,"fine":-7.225167331745272,"energy":-7.236276014839416,"conv":true,"itc":18,"itf":18,"s2":0.0,"vir":-0.0220407154927158,"status":"PASS_CONVERGENCE"},
+    {"species":"Be2+","Z":4,"ne":2,"rmax":15.0,"coarse":-13.529434336027272,"fine":-13.59064639987184,"energy":-13.611050421153363,"conv":true,"itc":18,"itf":18,"s2":-4.440892098500626e-16,"vir":-0.040739689096626286,"status":"PASS_CONVERGENCE"},
+    {"species":"Li","Z":3,"ne":3,"rmax":30.0,"coarse":-7.333144334338064,"fine":-7.407328527429862,"energy":-7.4320565917937955,"conv":true,"itc":32,"itf":32,"s2":0.7500161456661847,"vir":-0.05034499191878705,"status":"PASS_CONVERGENCE","post_hoc_reference_hartree":-7.432726930729758,"post_hoc_relative_error":9.018748330318933e-05},
+    {"species":"Be+","Z":4,"ne":3,"rmax":22.5,"coarse":-14.09318386024238,"fine":-14.230458804342362,"energy":-14.276217119042357,"conv":true,"itc":26,"itf":26,"s2":0.7500207158402568,"vir":-0.0931630355482076,"status":"PASS_CONVERGENCE"},
+    {"species":"Be","Z":4,"ne":4,"rmax":30.0,"coarse":-14.249661840310978,"fine":-14.489296837123963,"energy":-14.569175169394958,"conv":true,"itc":23,"itf":23,"s2":5.551115123125783e-15,"vir":-0.1652429036284202,"status":"PASS_CONVERGENCE","post_hoc_reference_hartree":-14.5730231683164,"post_hoc_relative_error":0.00026404946159750705}
+  ],
+  "summary": {
+    "species_count": 10,
+    "converged_count": 10,
+    "convergence_fraction": 1.0,
+    "one_electron_max_relative_error": 9.746803213417365e-07,
+    "neutral_relative_errors": {
+      "H": 9.746803156795991e-07,
+      "He": 2.1039381827112367e-05,
+      "Li": 9.018748330318933e-05,
+      "Be": 0.00026404946159750705
+    }
+  },
+  "post_hoc_validation": {
+    "opened_after_blind_run": true,
+    "neutral_hf_reference_source": "Hatano & Yamamoto, JCCJ International Edition 11 (2025), DOI 10.2477/jccjie.2024-0032",
+    "one_electron_reference": "analytic hydrogenic E=-Z^2/2 Hartree"
+  }
+}
