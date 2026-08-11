@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resonant Chemistry — Helium Correlation Explorer</title>
+<style>
+:root{font-family:system-ui,sans-serif;color-scheme:dark;background:#101216;color:#edf2f7}body{max-width:1100px;margin:auto;padding:24px}.grid{display:grid;grid-template-columns:330px 1fr;gap:20px}.card{background:#181c22;border:1px solid #313844;border-radius:16px;padding:18px}.big{font-size:36px;font-weight:700}.muted{opacity:.72}.bar{height:22px;background:#0e1116;border-radius:999px;overflow:hidden;border:1px solid #39414d}.fill{height:100%;background:linear-gradient(90deg,#8aa4c8,#d8e4f5);transition:width .25s}.row{display:flex;justify-content:space-between;gap:12px;margin:8px 0}.pill{display:inline-block;padding:5px 9px;border:1px solid #46505e;border-radius:999px;margin:3px}.warn{padding:10px;border-left:4px solid #8896a8;background:#12161c}input[type=range]{width:100%}table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #2d3440;text-align:right}td:first-child,th:first-child{text-align:left}@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>Helium Correlation Explorer <small>v0.1</small></h1>
+<p class="muted">Kontrolna warstwa korelacji przed TIR. Suwak zmienia liczbę radialnych orbitali s w skończonym CI.</p>
+<div class="grid">
+<section class="card">
+<label for="basis">Liczba orbitali s: <b id="mout">5</b></label>
+<input id="basis" type="range" min="2" max="6" step="1" value="5">
+<h3>Preview Richardson 199→399</h3>
+<div class="big" id="energy">−2.862570217 Ha</div>
+<div class="row"><span>odzysk pełnej korelacji</span><b id="fraction">2.117%</b></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<p class="muted">Rosnąca baza obniża energię wariacyjnie. Ten preview obejmuje tylko radialne orbitale s.</p>
+</section>
+<section class="card">
+<h3>Drabina kontrolna</h3>
+<table>
+<tr><th>Warstwa</th><th>Energia [Ha]</th><th>Status</th></tr>
+<tr><td>RHF limit</td><td>−2.861679996</td><td>control reference</td></tr>
+<tr><td>CI radial s, M=5, 399→799</td><td>−2.862747725</td><td>PASS</td></tr>
+<tr><td>Exact nonrel.</td><td>−2.903724377</td><td>reference</td></tr>
+</table>
+<p class="warn">CI radialne odzyskuje tylko część korelacji. Brakująca większość obejmuje m.in. korelację kątową; TIR nie jest używany do dopasowania tej różnicy.</p>
+<h3>Karta semantyczna He</h3>
+<div><span class="pill">closed shell</span><span class="pill">RHF control</span><span class="pill">radial correlation</span><span class="pill">affect: unassigned</span></div>
+<p>Semantyka interpretacyjna pozostaje oddzielona od wielkości kontrolnych. Późniejsze mapowanie afektywne musi mieć jawne pochodzenie i regułę transformacji.</p>
+</section>
+</div>
+<script>
+const data={
+2:{e:-2.861725782807636,f:0.0010890205560712995},
+3:{e:-2.8618862514525887,f:0.004905669523793214},
+4:{e:-2.8621433703955432,f:0.011021086953148221},
+5:{e:-2.862570217484914,f:0.02117338495193232},
+6:{e:-2.863184977757966,f:0.035795083553746145}
+};
+function update(){const m=+document.getElementById('basis').value,d=data[m];document.getElementById('mout').textContent=m;document.getElementById('energy').textContent=d.e.toFixed(9)+' Ha';document.getElementById('fraction').textContent=(100*d.f).toFixed(3)+'%';document.getElementById('fill').style.width=Math.min(100,100*d.f)+'%'}
+document.getElementById('basis').addEventListener('input',update);update();
+</script>
+</body>
+</html>
