@@ -1,0 +1,57 @@
+\section{Control Coverage from Hydrogen to Krypton}
+\label{sec:h-to-kr-control}
+
+The atom-control layer now spans every neutral element from hydrogen through krypton, $1\le Z\le36$. This statement is a coverage claim, not a claim of exact many-body spectroscopy. The purpose of the layer is to provide a reproducible, unfitted physical state vector before any TIR or semantic interpretation is permitted to enter.
+
+\subsection{Architecture}
+
+The calculation is factored into four layers:
+\begin{enumerate}
+  \item \texttt{atom.py} constructs the deterministic electronic configuration through Kr, including the neutral Cr and Cu exceptions;
+  \item \texttt{atomic\_hf\_average.py} supplies the spherical average-of-configuration Hartree--Fock operator with $s$, $p$, and $d$ angular channels and nonlocal multipole exchange;
+  \item \texttt{atomic\_hf\_diis.py} stabilizes the SCF fixed-point iteration by Pulay/DIIS and applies a quality ladder independent of element identity;
+  \item \texttt{atomic\_mass\_h\_to\_kr.py} exposes batch solving for an arbitrary range and for the complete H--Kr interval.
+\end{enumerate}
+
+The robust acceptance condition is
+\begin{equation}
+  \mathrm{PASS} \iff
+  \mathrm{SCF\ converged}\;\land\;
+  E\in\mathbb{R}\;\land\;
+  \left|2T+V\right| < 2\,E_h.
+\end{equation}
+The $2E_h$ threshold is intentionally a coarse control gate. It is not a high-precision virial criterion and therefore does not justify promotion to benchmark-quality atomic HF.
+
+\subsection{Blind checkpoint sequence}
+
+The coverage was accumulated in three independent checkpoints:
+\begin{equation}
+  \mathrm{H\rightarrow Ne}\quad\rightarrow\quad
+  \mathrm{Na\rightarrow Ar}\quad\rightarrow\quad
+  \mathrm{K\rightarrow Kr}.
+\end{equation}
+Reference energies were not available to the solver during these runs. TIR corrections and affective mappings were absent by construction.
+
+The final K--Kr batch contains 18 species and all 18 satisfy the frozen control quality gate. The convergence ladder is genuinely adaptive: most elements pass the first stage, Co and Cu require a later stage, Zn requires the third stage after a false stationary point is rejected by the virial test, and the Ga--Kr tail is verified on the fourth global fallback. No branch is conditioned on the element name or atomic number beyond the physical configuration itself.
+
+A useful negative result is that the largest numerical stage is not universally superior. Vanadium passes an earlier stage with a small virial residual, while the same stage-4 parameter set can worsen its virial quality. The robust algorithm must therefore accept the first physically admissible fixed point rather than blindly maximize basis size and iteration depth.
+
+\subsection{Post-hoc krypton check}
+
+After the blind calculation was frozen, the krypton result was compared with the Roothaan--Hartree--Fock compilation of Bunge and collaborators. The control solver gives
+\begin{equation}
+ E_{\mathrm{Kr}}^{\mathrm{control}}=-2751.8469168706\,E_h,
+\end{equation}
+while the published RHF value is approximately
+\begin{equation}
+ E_{\mathrm{Kr}}^{\mathrm{RHF}}=-2752.054969\,E_h.
+\end{equation}
+The relative difference is about $7.56\times10^{-5}$. This validates the usefulness of the common control solver while leaving a clear distinction between control coverage and high-precision atomic HF.
+
+\subsection{Semantic contract}
+
+Every newly covered species has a semantic card. The physical layer may contain configuration, energy, spin target, virial residual, radial information, and solver provenance. The TIR semantic axes remain \texttt{CANDIDATE\_UNASSIGNED}; the relation operator $W_{ij}$ remains reserved; and affective mappings remain \texttt{RESERVED\_UNASSIGNED}. A future semantic or affective mapping may consume the immutable physical invariants but may not rewrite them.
+
+\subsection{Remaining atomic work}
+
+The H--Kr control layer is therefore complete with caveats, but the atomic programme is not finished. The next atomic refinements are: tighter treatment of the low-margin Co solution, term-resolved open-shell multiplets, systematic comparison against external HF references, correlation beyond HF, and only then the first TIR relational observable that is not fitted back into the control energy.
