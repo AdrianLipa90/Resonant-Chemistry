@@ -1,0 +1,57 @@
+\section{Atom-Specific Period-2 Spectroscopy from the Radial State}
+\label{sec:period2_atom_specific_spectroscopy}
+
+The previous angular layer resolved the allowed $LS$ terms and the ordering of $J$ branches without assigning an atom-specific energy scale.  This chapter closes that gap for the neutral second-period $2p^n$ sequence B--Ne without fitting to observed spectra.
+
+\subsection{Radial Slater integrals}
+
+Let $P_{2p}(r)$ denote the normalized shell-averaged radial probability amplitude obtained from the configuration-average atomic Hartree--Fock control state.  When alpha and beta radial functions differ, the one-electron shell density is defined by occupancy averaging,
+\begin{equation}
+ g_{2p}(r)=\frac{n_\alpha P_\alpha(r)^2+n_\beta P_\beta(r)^2}{n_{2p}},
+ \qquad \int_0^\infty g_{2p}(r)\,dr=1.
+\end{equation}
+The radial Slater integrals are then
+\begin{equation}
+ F^k(2p,2p)=\int_0^\infty\!dr_1\int_0^\infty\!dr_2\;
+ g_{2p}(r_1)g_{2p}(r_2)\frac{r_<^k}{r_>^{k+1}},
+\end{equation}
+with $k=0,2$ for a $p$ shell.  No reference spectrum enters this calculation.
+
+\subsection{Pauli central-field spin--orbit scale}
+
+The first atom-specific spin--orbit control parameter is evaluated in the Pauli central-field approximation,
+\begin{equation}
+ \zeta_{2p}=\frac{\alpha^2}{2}\int_0^\infty g_{2p}(r)
+ \frac{1}{r}\frac{dV_{\rm loc}}{dr}\,dr.
+\end{equation}
+For the spherical nuclear-plus-direct field of the other electrons,
+\begin{equation}
+ \frac{1}{r}\frac{dV_{\rm loc}}{dr}=\frac{Z-Q_{\rm other}(r)}{r^3}.
+\end{equation}
+The active electron's own shell-averaged density is removed before constructing $Q_{\rm other}$, preventing an explicit Hartree self-field from entering the control spin--orbit scale.  Exchange remains nonlocal and is therefore not silently replaced by an ad hoc local exchange potential.
+
+\subsection{From radial state to spectrum}
+
+The atom-specific shell Hamiltonian is
+\begin{equation}
+ H_{\rm shell}=H_{\rm Coulomb}[F^0,F^2]+\zeta_{2p}\sum_i \mathbf l_i\cdot\mathbf s_i.
+\end{equation}
+It is diagonalized in the same determinant microstate space used in the angular multiplet solver.  The resulting eigenvectors are classified by $J^2$ and monitored with $L^2$ and $S^2$ expectations.
+
+For the blind high-resolution control run (24 radial functions, 1500 radial points), representative values are
+\begin{center}
+\begin{tabular}{c|c|c|c}
+Atom & $F^2$ (Ha) & $\zeta_{2p}$ (cm$^{-1}$) & Ground $LS_J$\\ \hline
+B & 0.142681 & 9.906 & $^2P_{1/2}$\\
+C & 0.224879 & 38.118 & $^3P_0$\\
+N & 0.297700 & 97.013 & $^4S_{3/2}$\\
+O & 0.315929 & 176.565 & $^3P_2$\\
+F & 0.371492 & 309.813 & $^2P_{3/2}$\\
+Ne & 0.427604 & 517.194 & $^1S_0$
+\end{tabular}
+\end{center}
+
+Post-hoc comparison with NIST ASD was opened only after the blind calculation.  The B $^2P$ splitting is predicted as 14.859 cm$^{-1}$ versus 15.287 cm$^{-1}$; F is 464.719 cm$^{-1}$ versus 404.141 cm$^{-1}$.  Oxygen gives the correct $^3P_{2,1,0}$ ordering with 177.50 and 264.27 cm$^{-1}$ above the ground level, compared with 158.265 and 226.977 cm$^{-1}$.  The larger errors of some singlet terms identify missing correlation/configuration interaction rather than a reason to fit $F^2$ by hand.
+
+\paragraph{Epistemic boundary.}
+This layer is promoted as an atom-specific spectroscopy \emph{control} model, not as high-precision atomic structure.  The radial state is nonrelativistic Hartree--Fock; the spin--orbit term is Pauli central-field; correlation, Breit interaction, and Dirac self-consistency remain open.  TIR and affective mappings remain absent from the control Hamiltonian.
