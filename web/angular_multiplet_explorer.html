@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ResChem Angular Multiplet Explorer</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:960px;margin:2rem auto;padding:0 1rem;line-height:1.45}button{padding:.55rem .8rem;margin:.2rem;border:1px solid #888;border-radius:.5rem;background:transparent;cursor:pointer}.active{font-weight:700}table{border-collapse:collapse;width:100%;margin-top:1rem}th,td{border-bottom:1px solid #bbb;padding:.55rem;text-align:left}.note{padding:.8rem;border:1px solid #aaa;border-radius:.6rem;margin:1rem 0}code{font-size:.95em}</style>
+</head>
+<body>
+<h1>Angular Multiplet Explorer</h1>
+<p>This view shows the electrostatic LS structure produced by the microstate angular solver. It does not include spin-orbit <em>J</em> splitting, TIR corrections, or affective semantics.</p>
+<div>
+  <button id="pbtn" class="active" onclick="showShell('p')">p shell</button>
+  <button id="dbtn" onclick="showShell('d')">d shell</button>
+</div>
+<div class="note" id="scope"></div>
+<table>
+<thead><tr><th>occupancy</th><th>ground LS term</th><th>control note</th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+<div id="detail"></div>
+<script>
+const data={
+ p:{terms:['^2P','^3P','^4S','^3P','^2P','^1S'],note:'Dimensionless angular diagnostic: F0=0, F2=1. Exact p2/p3 microstate decomposition is included below.',details:`<h2>Exact p-shell checks</h2><p><code>p² → ³P(9), ¹D(5), ¹S(1)</code> — 15 microstates.</p><p><code>p³ → ⁴S(4), ²D(10), ²P(6)</code> — 20 microstates.</p>`},
+ d:{terms:['^2D','^3F','^4F','^5D','^6S','^5D','^4F','^3F','^2D','^1S'],note:'Dimensionless angular control diagnostic: F0=0, F2=1, F4/F2=0.625. Atom-specific radial Slater integrals are not yet coupled.',details:`<h2>d-shell checkpoint</h2><p><code>d⁵</code> contains <strong>252</strong> determinant microstates and resolves to a lowest <code>⁶S</code> angular term.</p>`}
+};
+function showShell(shell){
+ document.getElementById('pbtn').classList.toggle('active',shell==='p');
+ document.getElementById('dbtn').classList.toggle('active',shell==='d');
+ const d=data[shell]; document.getElementById('scope').textContent=d.note;
+ document.getElementById('rows').innerHTML=d.terms.map((t,i)=>`<tr><td>${shell}<sup>${i+1}</sup></td><td>${t}</td><td>${shell==='p'?'equivalent-shell LS resolved':'isolated d-shell angular diagnostic'}</td></tr>`).join('');
+ document.getElementById('detail').innerHTML=d.details;
+}
+showShell('p');
+</script>
+</body>
+</html>
