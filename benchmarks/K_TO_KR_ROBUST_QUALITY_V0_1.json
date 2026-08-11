@@ -1,0 +1,44 @@
+{
+  "schema": "RESCHEM_K_TO_KR_ROBUST_QUALITY_V0_1",
+  "status": "QUALITY_PASS_18_OF_18",
+  "branch": "atom-foundations-v0.1",
+  "protocol": {
+    "range": "K-Kr",
+    "Z": [19, 36],
+    "reference_values_available_to_solver": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "quality_gate": "SCF converged AND finite energy AND abs(virial residual)<2 Hartree",
+    "selection": "first global stage that passes; for Ga-Kr stage-4 fallback was verified directly after environment budget made exhaustive earlier-stage replay inefficient",
+    "element_specific_branches": false
+  },
+  "results": [
+    {"Z":19,"symbol":"K","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^1","selected_stage":1,"energy_hartree":-599.0617923144684,"virial_residual_hartree":-0.03041174660247492,"iterations":12,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"4s","outer_radial_channels":{"alpha":{"mean_radius_bohr":5.272652462076719,"radial_sigma_bohr":2.0782686268724038}}},
+    {"Z":20,"symbol":"Ca","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2","selected_stage":1,"energy_hartree":-676.639660732927,"virial_residual_hartree":-0.026527251659260287,"iterations":12,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"4s"},
+    {"Z":21,"symbol":"Sc","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^1","selected_stage":1,"energy_hartree":-759.3889605299048,"virial_residual_hartree":0.051426297477974,"iterations":211,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":22,"symbol":"Ti","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^2","selected_stage":1,"energy_hartree":-847.9017050092888,"virial_residual_hartree":0.05793863607794947,"iterations":219,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":23,"symbol":"V","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^3","selected_stage":1,"energy_hartree":-942.3089604718825,"virial_residual_hartree":0.023098482986519286,"iterations":50,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":24,"symbol":"Cr","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^1 3d^5","selected_stage":1,"energy_hartree":-1043.1579106419179,"virial_residual_hartree":0.04346829241830363,"iterations":78,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":25,"symbol":"Mn","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^5","selected_stage":1,"energy_hartree":-1149.6484114103064,"virial_residual_hartree":0.06764631624316308,"iterations":72,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":26,"symbol":"Fe","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^6","selected_stage":1,"energy_hartree":-1261.8945671565764,"virial_residual_hartree":0.621814878414547,"iterations":95,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":27,"symbol":"Co","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^7","selected_stage":2,"energy_hartree":-1380.575388932793,"virial_residual_hartree":1.7366581542591462,"iterations":394,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":28,"symbol":"Ni","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^8","selected_stage":1,"energy_hartree":-1506.021877092252,"virial_residual_hartree":0.02630283728957039,"iterations":105,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":29,"symbol":"Cu","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^1 3d^10","selected_stage":2,"energy_hartree":-1638.7573264957816,"virial_residual_hartree":-0.14355571530020939,"iterations":131,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":30,"symbol":"Zn","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10","selected_stage":3,"energy_hartree":-1777.6806823363354,"virial_residual_hartree":0.042336499221093504,"iterations":57,"quality_pass":true,"validation_path":"full_global_ladder_executed","outer_subshell":"3d"},
+    {"Z":31,"symbol":"Ga","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^1","selected_stage":4,"energy_hartree":-1923.0352777389098,"virial_residual_hartree":0.21638272922308488,"iterations":481,"quality_pass":true,"validation_path":"global_stage4_fallback_verified","outer_subshell":"4p"},
+    {"Z":32,"symbol":"Ge","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^2","selected_stage":4,"energy_hartree":-2075.1100583217485,"virial_residual_hartree":0.026678205882944894,"iterations":75,"quality_pass":true,"validation_path":"global_stage4_fallback_verified","outer_subshell":"4p"},
+    {"Z":33,"symbol":"As","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^3","selected_stage":4,"energy_hartree":-2234.07029970022,"virial_residual_hartree":-0.07358302760111712,"iterations":74,"quality_pass":true,"validation_path":"global_stage4_fallback_verified","outer_subshell":"4p"},
+    {"Z":34,"symbol":"Se","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^4","selected_stage":4,"energy_hartree":-2399.575297280725,"virial_residual_hartree":0.6666068612859561,"iterations":117,"quality_pass":true,"validation_path":"global_stage4_fallback_verified","outer_subshell":"4p"},
+    {"Z":35,"symbol":"Br","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^5","selected_stage":4,"energy_hartree":-2572.122817163593,"virial_residual_hartree":-0.054930264213084,"iterations":34,"quality_pass":true,"validation_path":"global_stage4_fallback_verified","outer_subshell":"4p"},
+    {"Z":36,"symbol":"Kr","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^6","selected_stage":4,"energy_hartree":-2751.8469168705574,"virial_residual_hartree":0.01487443375309283,"iterations":19,"quality_pass":true,"validation_path":"global_stage4_fallback_verified","outer_subshell":"4p"}
+  ],
+  "summary": {
+    "species_count": 18,
+    "quality_pass_count": 18,
+    "max_abs_virial_hartree": 1.7366581542591462,
+    "max_abs_virial_species": "Co",
+    "stages_used": [1,2,3,4],
+    "lowest_margin_species": "Co",
+    "note": "Co passes the frozen 2-Hartree virial gate but is the lowest-margin accepted point; it should receive tighter follow-up validation before any canon-level promotion."
+  }
+}
