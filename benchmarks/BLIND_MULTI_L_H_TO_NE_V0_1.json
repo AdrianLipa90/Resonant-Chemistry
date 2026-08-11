@@ -1,0 +1,40 @@
+{
+  "schema": "RESCHEM_BLIND_MULTI_L_H_TO_NE_V0_1",
+  "status": "IMPLEMENTED_TESTED_BLIND_CHECKPOINT",
+  "branch": "atom-foundations-v0.1",
+  "protocol": {
+    "reference_values_available_to_solver": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "configuration_source": "reschem.atom.electron_configuration",
+    "method": "spherically averaged configuration UHF; Slater radial basis; nonlocal multipole exchange l<=2",
+    "open_shell_scope": "configuration-averaged over m; term-resolved multiplets not yet solved for p-open shells",
+    "basis_size": 26,
+    "grid_points": 1800,
+    "radial_grid_max_bohr": 120.0,
+    "zeta_min": 0.02
+  },
+  "results": [
+    {"symbol":"H","Z":1,"configuration":"1s^1","energy_hartree":-0.49999999999974737,"virial_residual_hartree":-1.0693002039374733e-11,"target_S":0.5,"target_S2":0.75,"iterations":2,"converged":true,"term_resolution":"ONE_ELECTRON_EXACT_LIMIT"},
+    {"symbol":"He","Z":2,"configuration":"1s^2","energy_hartree":-2.8616148815320206,"virial_residual_hartree":3.943279686824397e-05,"target_S":0.0,"target_S2":0.0,"iterations":30,"converged":true,"term_resolution":"CLOSED_SHELL_DIRECTLY_COMPARABLE"},
+    {"symbol":"Li","Z":3,"configuration":"1s^2 2s^1","energy_hartree":-7.432610713446669,"virial_residual_hartree":2.9815946906541768e-05,"target_S":0.5,"target_S2":0.75,"iterations":50,"converged":true,"term_resolution":"S_ONLY_OPEN_SHELL_CONTROL"},
+    {"symbol":"Be","Z":4,"configuration":"1s^2 2s^2","energy_hartree":-14.572750829746436,"virial_residual_hartree":4.972734005548318e-05,"target_S":0.0,"target_S2":0.0,"iterations":35,"converged":true,"term_resolution":"CLOSED_SHELL_DIRECTLY_COMPARABLE"},
+    {"symbol":"B","Z":5,"configuration":"1s^2 2s^2 2p^1","energy_hartree":-24.41456368515139,"virial_residual_hartree":7.203883701123459e-06,"target_S":0.5,"target_S2":0.75,"iterations":42,"converged":true,"term_resolution":"CONFIGURATION_AVERAGE_NOT_TERM_RESOLVED"},
+    {"symbol":"C","Z":6,"configuration":"1s^2 2s^2 2p^2","energy_hartree":-37.53050249102648,"virial_residual_hartree":-1.029973124033745e-05,"target_S":1.0,"target_S2":2.0,"iterations":46,"converged":true,"term_resolution":"CONFIGURATION_AVERAGE_NOT_TERM_RESOLVED"},
+    {"symbol":"N","Z":7,"configuration":"1s^2 2s^2 2p^3","energy_hartree":-54.40339698478732,"virial_residual_hartree":4.5990879993240696e-07,"target_S":1.5,"target_S2":3.75,"iterations":46,"converged":true,"term_resolution":"CONFIGURATION_AVERAGE_NOT_TERM_RESOLVED"},
+    {"symbol":"O","Z":8,"configuration":"1s^2 2s^2 2p^4","energy_hartree":-74.62073898885282,"virial_residual_hartree":3.878027511738935e-05,"target_S":1.0,"target_S2":2.0,"iterations":45,"converged":true,"term_resolution":"CONFIGURATION_AVERAGE_NOT_TERM_RESOLVED"},
+    {"symbol":"F","Z":9,"configuration":"1s^2 2s^2 2p^5","energy_hartree":-99.16235508219151,"virial_residual_hartree":2.4773452565796106e-05,"target_S":0.5,"target_S2":0.75,"iterations":46,"converged":true,"term_resolution":"CONFIGURATION_AVERAGE_NOT_TERM_RESOLVED"},
+    {"symbol":"Ne","Z":10,"configuration":"1s^2 2s^2 2p^6","energy_hartree":-128.54388747299046,"virial_residual_hartree":-7.610233295096691e-06,"target_S":0.0,"target_S2":0.0,"iterations":37,"converged":true,"term_resolution":"CLOSED_SHELL_DIRECTLY_COMPARABLE"}
+  ],
+  "summary": {
+    "species_count": 10,
+    "converged_count": 10,
+    "max_abs_virial_residual_hartree": 4.972734005548318e-05,
+    "checkpoint": "PASS"
+  },
+  "next_gate": {
+    "Na_to_Ar": "PROTOTYPE_CONVERGES_EXCEPT_AL_REQUIRES_GLOBAL_SCF_STABILIZATION",
+    "d_shell": "BLOCKED_BY_PERIOD_TWO_SCF_OSCILLATION_IN_SELECTED_OPEN_D_CONFIGURATIONS",
+    "promotion_rule": "do not call H-to-Kr PASS until d-shell stabilization passes without element-specific exceptions"
+  }
+}
