@@ -1,0 +1,41 @@
+{
+  "schema": "RESCHEM_SPIN_ORBIT_J_SEQUENCE_V0_1",
+  "status": "IMPLEMENTED_TESTED_DIMENSIONLESS_J_ORDERING",
+  "protocol": {
+    "reference_values_available_to_solver": false,
+    "electrostatic_shell_solver": "reschem.multiplet_angular",
+    "spin_orbit_operator": "zeta * sum_i l_i dot s_i",
+    "zeta_units": 0.001,
+    "absolute_zeta_from_atom": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false
+  },
+  "p_shell": {
+    "LS_sequence_p1_to_p6": ["^2P", "^3P", "^4S", "^3P", "^2P", "^1S"],
+    "J_sequence_p1_to_p6": [0.5, 0.0, 1.5, 2.0, 1.5, 0.0]
+  },
+  "d_shell": {
+    "LS_sequence_d1_to_d10": ["^2D", "^3F", "^4F", "^5D", "^6S", "^5D", "^4F", "^3F", "^2D", "^1S"],
+    "J_sequence_d1_to_d10": [1.5, 2.0, 1.5, 0.0, 2.5, 4.0, 4.5, 4.0, 2.5, 0.0]
+  },
+  "verification": {
+    "local_implementation_equivalent_checks": 4,
+    "passed": 4,
+    "postwrite_ci": "NOT_CONFIGURED"
+  },
+  "post_hoc_validation": {
+    "opened_after_solution": true,
+    "source": "NIST Atomic Spectra Database v5.12",
+    "examples": [
+      "2p3 ground level ^4S_3/2",
+      "Fe [Ar]3d6 4s2 ground level ^5D_4",
+      "Co [Ar]3d7 4s2 ground level ^4F_9/2"
+    ]
+  },
+  "promotion": {
+    "dimensionless_ground_J_ordering": "PASS",
+    "atom_specific_fine_structure_magnitude": "OPEN_ZETA_EXTRACTION",
+    "chromium_3d5_4s1_explicit_spin_orbit_exchange": "OPEN",
+    "tir": "NOT_APPLIED_CONTROL_BASELINE"
+  }
+}
