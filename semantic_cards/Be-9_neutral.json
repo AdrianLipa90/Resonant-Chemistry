@@ -1,0 +1,37 @@
+{
+  "schema": "RESCHEM_ATOM_SEMANTIC_CARD_V0_1",
+  "card_id": "ATOM:Be:9:q+0",
+  "entity_level": "atomic_species",
+  "identity": {"symbol": "Be", "Z": 4, "N": 5, "A": 9, "charge": 0, "electron_count": 4},
+  "physical_control": {
+    "electron_configuration": "1s^2 2s^2",
+    "shell_population": {"1": 2, "2": 2},
+    "outer_shell_n": 2,
+    "outer_shell_electrons": 2,
+    "closed_shell_control": true,
+    "open_shell_control": false,
+    "ground_configuration_term_target": "1s^2 2s^2, singlet-S control target",
+    "solver_status": "PENDING_MULTI_ORBITAL_CLOSED_SHELL_CONTROL"
+  },
+  "state_invariants": {"status": "PENDING_SOLVER", "values": {}},
+  "tir": {
+    "kappa": 0.009193150006360484,
+    "relation_operator": {"status": "RESERVED_NOT_YET_APPLIED", "symbol": "W_ij"},
+    "semantic_axes": {"status": "CANDIDATE_UNASSIGNED", "values": {}}
+  },
+  "affective_mapping": {
+    "status": "RESERVED_UNASSIGNED",
+    "labels": [],
+    "coordinates": {},
+    "provenance": [],
+    "note": "No affective meaning assigned; card opened before solver to preserve provenance order."
+  },
+  "solver_evidence": [],
+  "epistemic_status": {
+    "identity": "ESTABLISHED_INPUT",
+    "electronic_bookkeeping": "CONTROL_MODEL_V0_1",
+    "solver": "PENDING",
+    "tir_semantics": "OPEN",
+    "affective_semantics": "OPEN"
+  }
+}
