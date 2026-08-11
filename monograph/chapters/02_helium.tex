@@ -1,0 +1,32 @@
+\chapter{Helium: the First Interacting Atom}
+
+\section{Why helium is the first chemistry gate}
+Hydrogen tests the one-electron Hamiltonian, but helium introduces the first unavoidable electron--electron relation. In atomic units, for a two-electron ion of nuclear charge $Z$,
+\begin{equation}
+H=\sum_{i=1}^{2}\left(-\frac12\nabla_i^2-\frac{Z}{r_i}\right)+\frac{1}{r_{12}}.
+\end{equation}
+The $1/r_{12}$ term prevents exact separation into two independent hydrogenic problems. Any proposed Resonant-Chemistry extension must therefore first survive this ordinary interacting benchmark.
+
+\section{Minimal variational control model}
+Take a normalized hydrogenic $1s$ spatial orbital with a free effective charge $\zeta$ and combine two copies with the antisymmetric spin singlet. For this restricted ansatz the expectation value is
+\begin{equation}
+E(\zeta)=\zeta^2-2Z\zeta+\frac{5}{8}\zeta,
+\end{equation}
+where $5\zeta/8$ is the analytic expectation value of the electron--electron Coulomb term. Minimization gives
+\begin{equation}
+\zeta_*=Z-\frac{5}{16},\qquad E_*=-\left(Z-\frac{5}{16}\right)^2.
+\end{equation}
+For neutral helium, $Z=2$, hence
+\begin{equation}
+\zeta_*=\frac{27}{16}=1.6875,
+\qquad E_*=-2.84765625\ {\rm Ha}=-77.4886741\ {\rm eV}.
+\end{equation}
+At the optimum the virial residual $2T+V$ vanishes exactly for this one-parameter family.
+
+\section{What the error means}
+The nonrelativistic infinite-nuclear-mass reference energy used only for diagnostics is approximately $-2.903724377034$ Ha, while the restricted Hartree--Fock limit is approximately $-2.861679995612$ Ha. The simple shared-orbital ansatz therefore lies about $0.4901\%$ above the Hartree--Fock limit and $1.9309\%$ above the exact nonrelativistic reference. These reference numbers are never used to choose $\zeta$; the optimum follows analytically from the Hamiltonian.
+
+The gap is scientifically useful. It separates three layers that must not be conflated: orbital relaxation, mean-field exchange, and genuine electron correlation. Resonant Chemistry will not label this missing binding as a TIR effect. The next implementation stage is a numerical restricted Hartree--Fock solver; only after that control layer is reproduced may a relational invariant be tested for additional predictive content.
+
+\section{TIR status}
+At this stage $\kappa=\ln 2/(24\pi)$ remains provenance metadata and the future relation operator is inactive. The two-electron benchmark is deliberately conventional. The TIR bridge will enter only through a separately defined relation observable whose effect can be compared against Hartree--Fock and correlated calculations without refitting known helium energies.
