@@ -1,0 +1,31 @@
+\section{Weak Spin--Orbit Ordering and Ground-$J$ Resolution}
+
+The electrostatic LS layer classifies open-shell states by $L$ and $S$, but spectroscopy resolves total angular momentum $J$.  The next control layer adds the one-electron spin--orbit operator
+\[
+H_{\mathrm{SO}}=\zeta\sum_i \mathbf l_i\cdot\mathbf s_i
+\]
+to the same determinant microstate basis.  In version 0.1, $\zeta$ is deliberately dimensionless and small compared with the electrostatic Slater scale.  The purpose is to resolve the angular ordering of $J$ branches in the LS-coupling regime, not to claim atom-specific fine-structure magnitudes.
+
+The total operator $J^2$ is built independently from many-electron ladder operators.  The lowest eigenspace of $H_{\mathrm{Coulomb}}+H_{\mathrm{SO}}$ is projected onto $J^2$, making the ground-$J$ value an output of the same microstate calculation.
+
+For equivalent $p$ shells the calculated sequence is
+\[
+J(p^1\ldots p^6)=\left(\tfrac12,0,\tfrac32,2,\tfrac32,0\right).
+\]
+Together with the LS sequence this gives the familiar weak-coupling ground branches
+\[
+{}^2P_{1/2},\ {}^3P_0,\ {}^4S_{3/2},\ {}^3P_2,\ {}^2P_{3/2},\ {}^1S_0.
+\]
+
+For equivalent $d$ shells the calculated sequence is
+\[
+J(d^1\ldots d^{10})=\left(\tfrac32,2,\tfrac32,0,\tfrac52,4,\tfrac92,4,\tfrac52,0\right),
+\]
+corresponding to
+\[
+{}^2D_{3/2},\ {}^3F_2,\ {}^4F_{3/2},\ {}^5D_0,\ {}^6S_{5/2},\ {}^5D_4,\ {}^4F_{9/2},\ {}^3F_4,\ {}^2D_{5/2},\ {}^1S_0.
+\]
+
+This layer reproduces angular branch ordering only.  Absolute splittings require an atom-specific spin--orbit constant or an explicit relativistic one-electron operator coupled to the converged radial state.  Chromium remains a special configuration-level gate because its neutral ground configuration $3d^5 4s^1$ requires explicit inter-subshell coupling rather than an isolated equivalent-$d$ shell.
+
+No TIR correction and no affective mapping is present in this control layer.
