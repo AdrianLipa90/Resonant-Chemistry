@@ -1,0 +1,53 @@
+\chapter{The Atom: Control Physics Before Resonance}
+
+\section{Atomic identity}
+The first invariant of chemistry is not a resonance label but proton number. We define an atomic species by
+\begin{equation}
+\mathfrak A=(Z,N,q;\mathcal H_A,H_A,\rho_A),
+\end{equation}
+with
+\begin{equation}
+A=Z+N,\qquad N_e=Z-q.
+\end{equation}
+The element is fixed by $Z$; isotope and ionization state are additional coordinates.
+
+\section{Electronic state space}
+For $N_e$ indistinguishable electrons the many-electron state belongs to the antisymmetric fermionic space
+\begin{equation}
+\mathcal H_A=\bigwedge^{N_e}\left[L^2(\mathbb R^3)\otimes\mathbb C^2\right].
+\end{equation}
+The orbital language used by chemistry is therefore a representation of quantum states, not a literal planetary-orbit model.
+
+\section{Hamiltonian control layer}
+In the clamped-nucleus non-relativistic approximation, using atomic units,
+\begin{equation}
+H_A=\sum_i\left(-\frac12\nabla_i^2-\frac{Z}{r_i}\right)+\sum_{i<j}\frac{1}{r_{ij}}+H_{\mathrm{corr}}.
+\end{equation}
+The correction sector names finite-mass, relativistic, spin--orbit and QED terms according to the precision required. Resonant Chemistry does not remove this control structure; a new relational layer must coexist with it and survive comparison against it.
+
+\section{Hydrogenic benchmark}
+One-electron atoms provide the first exact test of the implementation. At the non-relativistic infinite-nuclear-mass level,
+\begin{equation}
+E_n=-13.605693122994\,\mathrm{eV}\,\frac{Z^2}{n^2},
+\end{equation}
+and the characteristic radial scale follows
+\begin{equation}
+r_n\sim a_0\frac{n^2}{Z}.
+\end{equation}
+Any later ResChem solver must reproduce this limit before introducing additional structure.
+
+\section{Entry point for TIR}
+TIR begins from ordered relations. Its quark/color construction uses holonomic link operators, but the colour $SU(3)$ representation is not copied onto atomic bonding. Instead we reserve an active electronic subspace $\mathcal E_A\subset\mathcal H_A$. The next stage will construct
+\begin{equation}
+W_{AB}:\mathcal E_B\rightarrow\mathcal E_A
+\end{equation}
+from the relation between electronic subspaces of distinct atoms.
+
+The information quantum
+\begin{equation}
+\kappa=\frac{\ln 2}{24\pi}
+\end{equation}
+is carried as TIR metadata in the present atom layer. It does not modify the benchmark spectrum in version 0.1. This separation is deliberate: if a later relational correction is physical, it must produce a discriminating observable rather than merely restating an already-known energy.
+
+\section{Implementation contract}
+The accompanying solver reconstructs atomic identity and electron configuration through krypton and solves the exact hydrogenic benchmark. Multi-electron total energies remain explicitly open until a Hartree--Fock/DFT/CI layer is implemented and validated.

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resonant Chemistry — Atom Builder v0.1</title>
+<style>
+:root{font-family:system-ui,sans-serif;color-scheme:dark;background:#101216;color:#eef2f6}body{max-width:1100px;margin:auto;padding:24px}.grid{display:grid;grid-template-columns:360px 1fr;gap:22px}.card{background:#181c22;border:1px solid #313844;border-radius:16px;padding:18px}label{display:block;margin:12px 0 4px}input{width:100%;box-sizing:border-box;padding:9px;border-radius:8px;border:1px solid #445;background:#0f1217;color:#fff}.big{font-size:64px;font-weight:700}.muted{opacity:.72}.pill{display:inline-block;padding:5px 9px;border:1px solid #46505e;border-radius:999px;margin:3px}.warn{padding:10px;border-left:4px solid #8896a8;background:#12161c}svg{width:100%;height:430px;background:#0e1116;border-radius:12px}code{white-space:pre-wrap}.row{display:flex;gap:14px;flex-wrap:wrap}@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>Resonant Chemistry — Atom Builder <small>v0.1</small></h1>
+<p class="muted">Interaktywna warstwa kontrolna atomu. Wizualizacja pokazuje obsadzenie powłok, nie klasyczne orbity elektronów.</p>
+<div class="grid">
+<section class="card">
+<label>Z — protony / liczba atomowa</label><input id="z" type="number" min="1" max="36" value="6">
+<label>N — neutrony</label><input id="nn" type="number" min="0" value="6">
+<label>q — ładunek jonu</label><input id="q" type="number" value="0">
+<label>n — poziom benchmarku wodoropodobnego</label><input id="level" type="number" min="1" value="1">
+<hr>
+<div id="symbol" class="big">C</div>
+<div id="identity"></div>
+<div id="config"></div>
+<div id="hydrogenic"></div>
+</section>
+<section class="card">
+<svg id="atom" viewBox="0 0 600 430" aria-label="schematic shell population"></svg>
+<h3>TIR bridge status</h3>
+<div class="row"><span class="pill">κ = ln2/(24π)</span><span class="pill">W_AB: reserved</span><span class="pill">atomic energy: standard control</span></div>
+<p class="warn">v0.1 nie stosuje jeszcze operatora relacji do energii atomu. Najpierw atom musi odtwarzać kontrolną fizykę bez dodatkowych parametrów.</p>
+</section>
+</div>
+<script>
+const symbols=['','H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu','Zn','Ga','Ge','As','Se','Br','Kr'];
+const orbitals=[[1,'s',2],[2,'s',2],[2,'p',6],[3,'s',2],[3,'p',6],[4,'s',2],[3,'d',10],[4,'p',6]];
+const ryd=13.605693122994, a0=0.529177210903, kappa=Math.log(2)/(24*Math.PI);
+function fill(ne){let left=ne,o={};for(const [n,s,c] of orbitals){if(left<=0)break;const x=Math.min(c,left);o[n+s]=x;left-=x}return o}
+function neutral(z){let o=fill(z);if(z===24){o['4s']=1;o['3d']=5}if(z===29){o['4s']=1;o['3d']=10}return o}
+function conf(z,q){let ne=z-q;if(ne<0||ne>36)throw Error('v0.1: liczba elektronów musi być 0..36');if(q===0)return neutral(z);if(q<0)return fill(ne);let o=neutral(z),remove=q;const keys=Object.keys(o).sort((a,b)=>{let na=+a[0],nb=+b[0],la='spdf'.indexOf(a[1]),lb='spdf'.indexOf(b[1]);return nb-na||lb-la});for(const k of keys){let t=Math.min(o[k],remove);o[k]-=t;remove-=t;if(remove<=0)break}return o}
+function shellPop(o){let s={};for(const [k,v] of Object.entries(o)){if(v<=0)continue;let n=+k[0];s[n]=(s[n]||0)+v}return s}
+function draw(z,nn,shells){const svg=document.getElementById('atom');svg.innerHTML='';const NS='http://www.w3.org/2000/svg';function el(n,a){let x=document.createElementNS(NS,n);for(const [k,v] of Object.entries(a))x.setAttribute(k,v);svg.appendChild(x);return x}el('circle',{cx:300,cy:215,r:36,fill:'#d7dde8'});let t=el('text',{x:300,y:210,'text-anchor':'middle',fill:'#111','font-size':14});t.textContent=`${z}p + ${nn}n`;let t2=el('text',{x:300,y:230,'text-anchor':'middle',fill:'#111','font-size':12});t2.textContent='jądro';const radii=[75,120,165,205];for(const [sn,count] of Object.entries(shells)){let r=radii[sn-1];el('circle',{cx:300,cy:215,r,fill:'none',stroke:'#657083','stroke-width':1.2});for(let i=0;i<count;i++){let a=2*Math.PI*i/count-Math.PI/2;el('circle',{cx:300+r*Math.cos(a),cy:215+r*Math.sin(a),r:5,fill:'#f0f4fa'})}}
+}
+function update(){try{let z=+document.getElementById('z').value,nn=+document.getElementById('nn').value,q=+document.getElementById('q').value,n=+document.getElementById('level').value;if(z<1||z>36||nn<0||n<1)throw Error('zakres: Z=1..36, N≥0, n≥1');let ne=z-q,o=conf(z,q),shells=shellPop(o);document.getElementById('symbol').textContent=symbols[z];document.getElementById('identity').innerHTML=`A=${z+nn} · Z=${z} · N=${nn} · q=${q} · N<sub>e</sub>=${ne}`;document.getElementById('config').innerHTML='<h3>Konfiguracja</h3><code>'+Object.entries(o).filter(x=>x[1]>0).map(([k,v])=>`${k}^${v}`).join(' ')+'</code>';document.getElementById('hydrogenic').innerHTML=ne===1?`<h3>Benchmark wodoropodobny</h3>E<sub>${n}</sub> = ${(-ryd*z*z/(n*n)).toFixed(9)} eV<br>r~ = ${(a0*n*n/z).toFixed(9)} Å<br><small>nierelatywistyczny, nieskończenie ciężkie jądro</small>`:'<h3>Energia</h3><span class="muted">v0.1 nie zgaduje energii wieloelektronowej.</span>';draw(z,nn,shells)}catch(e){document.getElementById('identity').textContent=e.message}}
+for(const id of ['z','nn','q','level'])document.getElementById(id).addEventListener('input',update);update();
+</script>
+</body>
+</html>
