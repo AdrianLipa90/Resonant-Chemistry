@@ -1,0 +1,44 @@
+{
+  "schema": "RESCHEM_H_TO_KR_CONTROL_MANIFEST_V0_1",
+  "status": "CONTROL_COVERAGE_H_TO_KR_WITH_CAVEATS",
+  "branch": "atom-foundations-v0.1",
+  "main_mutated": false,
+  "coverage": {
+    "H_to_Ne": {"status":"PASS","benchmark":"benchmarks/BLIND_MULTI_L_H_TO_NE_V0_1.json"},
+    "Na_to_Ar": {"status":"PASS","benchmark":"benchmarks/NA_TO_AR_DIIS_V0_1.json"},
+    "K_to_Kr": {"status":"QUALITY_PASS_18_OF_18","benchmark":"benchmarks/K_TO_KR_ROBUST_QUALITY_V0_1.json"}
+  },
+  "solver_stack": [
+    "reschem/atom.py",
+    "reschem/atomic_hf_average.py",
+    "reschem/atomic_hf_diis.py",
+    "reschem/atomic_mass_h_to_kr.py"
+  ],
+  "semantic_cards": {
+    "H_to_Ar": "existing per-atom and period checkpoint cards",
+    "K_to_Kr": "semantic_cards/K_TO_KR_ROBUST_V0_1.jsonl",
+    "affective_mapping": "RESERVED_UNASSIGNED",
+    "tir_semantics": "OPEN"
+  },
+  "quality_caveats": [
+    "open-shell states are configuration-averaged and not term-resolved",
+    "Co is a low-margin quality PASS under the frozen |virial|<2 Hartree gate and requires tighter follow-up",
+    "Ga-Kr were verified directly on the global stage-4 fallback after exhaustive earlier-stage replay exceeded the single-run environment budget",
+    "control energies are not fitted to external reference energies"
+  ],
+  "post_hoc_validation": {
+    "opened_after_blind_solving": true,
+    "source": "C.F. Bunge et al., Phys. Rev. A 46, 3691 (1992); Atomic Data and Nuclear Data Tables 53, 113-162 (1993)",
+    "Kr_reference_rhf_hartree": -2752.054969,
+    "Kr_control_energy_hartree": -2751.8469168705574,
+    "Kr_absolute_difference_hartree": 0.20805212944242157,
+    "Kr_relative_difference": 7.559882770728973e-05
+  },
+  "promotion": {
+    "H_to_Kr_control_layer": "PASS_WITH_CAVEATS",
+    "high_precision_atomic_HF": "NOT_CLAIMED",
+    "term_resolved_multiplets": "OPEN",
+    "tir_atomic_observable": "NOT_YET_APPLIED",
+    "affective_mapping": "NOT_YET_APPLIED"
+  }
+}
