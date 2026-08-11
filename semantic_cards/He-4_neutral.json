@@ -9,7 +9,14 @@
     "outer_shell_n": 1,
     "outer_shell_electrons": 2,
     "closed_shell_control": true,
-    "hydrogenic": false
+    "hydrogenic": false,
+    "correlation_control": {
+      "hf_limit_hartree": -2.861679995612,
+      "radial_s_ci_richardson_hartree": -2.862747724850492,
+      "radial_correlation_lowering_hartree": 0.001067729238492,
+      "recovered_fraction_of_full_nonrel_correlation": 0.02539528951026613,
+      "scope": "finite radial s-orbital CI; angular correlation not represented"
+    }
   },
   "tir": {
     "kappa": 0.009193150006360484,
@@ -25,11 +32,13 @@
   },
   "solver_evidence": [
     {"model": "two-electron 1s^2 variational", "energy_hartree": -2.84765625, "status": "PASS_CONTROL"},
-    {"model": "spherical RHF SCF + Richardson", "energy_hartree": -2.8616678778202016, "relative_error_vs_hf_limit": 4.234502745596748e-06, "status": "PASS_CONTROL_GATE"}
+    {"model": "spherical RHF SCF + Richardson", "energy_hartree": -2.8616678778202016, "relative_error_vs_hf_limit": 4.234502745596748e-06, "status": "PASS_CONTROL_GATE"},
+    {"model": "finite radial s-orbital CI + Richardson", "spatial_orbitals": 5, "energy_hartree": -2.862747724850492, "recovered_fraction_of_full_nonrel_correlation": 0.02539528951026613, "status": "PASS_CORRELATION_GATE"}
   ],
   "epistemic_status": {
     "identity": "ESTABLISHED_INPUT",
     "electronic_bookkeeping": "CONTROL_MODEL_V0_1",
+    "correlation_layer": "IMPLEMENTED_TESTED_CONTROL",
     "tir_semantics": "OPEN",
     "affective_semantics": "OPEN"
   }
