@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resonant Chemistry — Lithium Open-Shell Explorer</title>
+<style>
+:root{font-family:system-ui,sans-serif;color-scheme:dark;background:#101216;color:#eef2f6}body{max-width:1100px;margin:auto;padding:24px}.grid{display:grid;grid-template-columns:340px 1fr;gap:20px}.card{background:#181c22;border:1px solid #313844;border-radius:16px;padding:18px}.big{font-size:34px;font-weight:700}.muted{opacity:.72}.pill{display:inline-block;padding:5px 9px;border:1px solid #46505e;border-radius:999px;margin:3px}.warn{padding:10px;border-left:4px solid #8896a8;background:#12161c}input[type=range]{width:100%}.spin{display:flex;gap:12px;margin:18px 0}.orb{flex:1;padding:12px;border:1px solid #3c4654;border-radius:12px}.arrow{font-size:28px}.row{display:flex;justify-content:space-between;gap:12px;margin:8px 0}@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>Lithium Open-Shell Explorer <small>v0.1</small></h1>
+<p class="muted">Pierwszy otwartopowłokowy atom ResChem: neutralny Li-7, konfiguracja 1s² 2s¹.</p>
+<div class="grid">
+<section class="card">
+<h3>Siatka radialna</h3>
+<input id="grid" type="range" min="0" max="7" value="4" step="1">
+<div class="row"><span>punkty</span><b id="points">400</b></div>
+<div class="big" id="energy">−7.333144359 Ha</div>
+<p class="muted">Surowa energia UHF. Zwiększanie rozdzielczości obniża błąd dyskretyzacji.</p>
+<h3>Richardson 400→801</h3>
+<div class="big">−7.432056616 Ha</div>
+<div class="row"><span>błąd wzgl. do HF ref.</span><b>0.00902%</b></div>
+</section>
+<section class="card">
+<h3>Obsadzenie spinowe</h3>
+<div class="spin">
+<div class="orb"><b>1s</b><div><span class="arrow">↑</span><span class="arrow">↓</span></div></div>
+<div class="orb"><b>2s</b><div><span class="arrow">↑</span></div></div>
+</div>
+<div><span class="pill">Nα = 2</span><span class="pill">Nβ = 1</span><span class="pill">doublet target</span></div>
+<h3>Spin purity</h3>
+<div class="row"><span>⟨S²⟩, grid 801</span><b>0.750016065</b></div>
+<div class="row"><span>spin contamination</span><b>1.606×10⁻⁵</b></div>
+<p class="warn">To jest sferyczny radialny UHF ograniczony do orbitali s. TIR i mapowanie afektywne pozostają wyłączone; najpierw kontrola fizyczna.</p>
+<h3>Karta semantyczna</h3>
+<div><span class="pill">open shell</span><span class="pill">valence 2s¹</span><span class="pill">spin axis available</span><span class="pill">affect: unassigned</span></div>
+</section>
+</div>
+<script>
+const data=[
+[120,-6.567369844],[200,-7.065924659],[240,-7.169633874],[300,-7.259621604],
+[400,-7.333144359],[500,-7.368306886],[600,-7.387725544],[801,-7.407328552]
+];
+function update(){const i=+document.getElementById('grid').value;document.getElementById('points').textContent=data[i][0];document.getElementById('energy').textContent=data[i][1].toFixed(9)+' Ha'}
+document.getElementById('grid').addEventListener('input',update);update();
+</script>
+</body>
+</html>
