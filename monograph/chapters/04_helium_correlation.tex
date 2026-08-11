@@ -1,0 +1,55 @@
+\chapter{Helium Beyond Hartree--Fock: A Controlled Correlation Layer}
+
+\section{Why helium is the first correlation gate}
+For the two-electron helium atom, restricted Hartree--Fock (RHF) already solves the self-consistent one-particle problem to high accuracy, but its single-determinant form cannot represent the full correlated dependence of the electronic state. In the conventional definition, the correlation energy is the difference between the exact non-relativistic energy and the Hartree--Fock limit,
+\begin{equation}
+E_{\mathrm{corr}}=E_{\mathrm{exact}}-E_{\mathrm{HF}}.
+\end{equation}
+This makes helium an ideal control problem: the missing structure is quantitatively known, while the system remains small enough to expose every approximation.
+
+\section{Finite radial CI basis}
+The present ResChem control solver first converges a spherical RHF orbital on a radial grid. The final Fock operator is then diagonalized to obtain a finite set of orthonormal radial $s$ orbitals
+\begin{equation}
+\{u_p(r)\}_{p=1}^{M}.
+\end{equation}
+From these orbitals we construct one-electron matrix elements $h_{pq}$ and Coulomb integrals
+\begin{equation}
+(pq|rs)=\iint \phi_p(1)\phi_q(1)\frac{1}{r_{12}}\phi_r(2)\phi_s(2)\,d1\,d2.
+\end{equation}
+For spherical $s$ orbitals, angular integration reduces the Coulomb kernel to
+\begin{equation}
+\frac{1}{r_>} = \frac{1}{\max(r_1,r_2)},
+\end{equation}
+so the remaining integral is evaluated directly on the radial grid.
+
+\section{Exact diagonalization inside the finite basis}
+Each spatial orbital is paired with spin $\alpha$ and $\beta$, and all two-electron Slater determinants in the resulting spin-orbital space are generated. The second-quantized Hamiltonian
+\begin{equation}
+\hat H=\sum_{pq}h_{pq}a_p^\dagger a_q+
+\frac{1}{2}\sum_{pqrs}(pq|rs)a_p^\dagger a_r^\dagger a_s a_q
+\end{equation}
+is then diagonalized exactly within that finite orbital space. Thus the term ``CI'' here means exact configuration interaction in the supplied radial $s$-orbital basis, not an exact solution of the full helium problem.
+
+\section{What this layer captures and what it cannot}
+The radial CI state permits the two electrons to occupy and mix multiple radial configurations. Consequently its energy must lie below the RHF energy computed on the same numerical grid. However, an $s$-only basis cannot reproduce angular correlation. The residual gap to the exact non-relativistic helium energy is therefore expected and is itself a diagnostic rather than a failure.
+
+With five spatial $s$ orbitals and Richardson extrapolation from 399 and 799 radial points, the current control implementation gives approximately
+\begin{equation}
+E_{\mathrm{CI},s}\approx -2.862747725\,E_h.
+\end{equation}
+Relative to the Hartree--Fock limit $E_{\mathrm{HF}}\approx -2.861679996\,E_h$, the finite radial CI lowers the energy by approximately
+\begin{equation}
+\Delta E_{\mathrm{radial\ corr}}\approx 1.068\times10^{-3}\,E_h,
+\end{equation}
+which is about $2.54\%$ of the full non-relativistic correlation gap to $E_{\mathrm{exact}}\approx -2.903724377\,E_h$.
+
+\section{ResChem/TIR interpretation gate}
+No TIR correction is fitted to these energies. Instead, the correlated control state supplies new state descriptors that may later feed a relational observable. The first admissible TIR candidate must therefore satisfy all of the following:
+\begin{enumerate}
+\item it is computed from the state or relations between state subspaces, not from the known target energy;
+\item it has a fixed transformation law and explicit provenance;
+\item it predicts or organizes an observable without refitting the helium reference value;
+\item failure of the prediction demotes or rejects the candidate.
+\end{enumerate}
+
+This separation is central to the Resonant Chemistry programme: conventional correlation is established first, and only then is a relational interpretation allowed to enter.
