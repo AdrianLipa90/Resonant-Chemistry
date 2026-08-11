@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resonant Chemistry — Period 3 DIIS checkpoint</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#111;color:#eee}main{max-width:980px;margin:auto;padding:24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:10px}.el{border:1px solid #555;border-radius:10px;padding:12px;background:#1b1b1b;cursor:pointer}.el:hover,.el.active{outline:2px solid #aaa}.big{font-size:2rem;font-weight:700}.panel{margin-top:18px;border:1px solid #555;border-radius:12px;padding:18px;background:#181818}.bars{display:grid;gap:10px}.bar{height:18px;background:#333;border-radius:9px;overflow:hidden}.fill{height:100%;background:#aaa}code{white-space:pre-wrap}small{color:#bbb}
+</style>
+</head>
+<body><main>
+<h1>Period 3 — global-DIIS atomic control checkpoint</h1>
+<p>Blind control layer. No TIR correction and no affective mapping. Select an atom to inspect the physical state invariants stored for its semantic card.</p>
+<div id="grid" class="grid"></div>
+<div id="panel" class="panel"></div>
+<script>
+const D=[
+{s:'Na',z:11,c:'1s² 2s² 2p⁶ 3s¹',e:-161.821466786796,v:-0.002255857642,S:.5,r:4.2195441205353035,w:1.7385967408492073},
+{s:'Mg',z:12,c:'1s² 2s² 2p⁶ 3s²',e:-199.568811401689,v:-0.020437674255,S:0,r:3.2610413639816884,w:1.364394277438866},
+{s:'Al',z:13,c:'1s² 2s² 2p⁶ 3s² 3p¹',e:-241.748165479502,v:-0.024397445312,S:.5,r:4.15157007056751,w:3.0141715174864117},
+{s:'Si',z:14,c:'1s² 2s² 2p⁶ 3s² 3p²',e:-288.690714813925,v:-0.014606256171,S:1,r:2.905594867455407,w:1.2990861517990007},
+{s:'P',z:15,c:'1s² 2s² 2p⁶ 3s² 3p³',e:-340.637539741742,v:-0.014015191535,S:1.5,r:2.323527996532398,w:.9963491986811176},
+{s:'S',z:16,c:'1s² 2s² 2p⁶ 3s² 3p⁴',e:-397.288948273182,v:.014804471035,S:1,r:2.268917845971881,w:1.0926603924761237,n:'mean of alpha/beta outer channels'},
+{s:'Cl',z:17,c:'1s² 2s² 2p⁶ 3s² 3p⁵',e:-459.224088514925,v:.048064277621,S:.5,r:1.8867845799959936,w:.8554149809880108,n:'mean of alpha/beta outer channels'},
+{s:'Ar',z:18,c:'1s² 2s² 2p⁶ 3s² 3p⁶',e:-526.682914987924,v:.087789756017,S:0,r:1.6647892478299289,w:.739843549060287}
+];
+const grid=document.getElementById('grid'), panel=document.getElementById('panel');
+function draw(i){document.querySelectorAll('.el').forEach((x,j)=>x.classList.toggle('active',i===j));const d=D[i];const maxR=Math.max(...D.map(x=>x.r));panel.innerHTML=`<div class="big">${d.s} <small>Z=${d.z}</small></div><p><code>${d.c}</code></p><div class="bars"><div>outer mean radius ${d.r.toFixed(4)} a₀<div class="bar"><div class="fill" style="width:${100*d.r/maxR}%"></div></div></div><div>outer radial σ ${d.w.toFixed(4)} a₀<div class="bar"><div class="fill" style="width:${Math.min(100,30*d.w)}%"></div></div></div></div><p>E = ${d.e.toFixed(9)} Eₕ<br>|2T+V| = ${Math.abs(d.v).toExponential(3)} Eₕ<br>S = ${d.S}, S(S+1) = ${(d.S*(d.S+1)).toFixed(2)}</p><small>${d.n||''} Configuration-average control model; open-shell multiplets are not term resolved.</small>`}
+D.forEach((d,i)=>{const b=document.createElement('button');b.className='el';b.innerHTML=`<b>${d.z}</b><div class="big">${d.s}</div><small>S=${d.S}</small>`;b.onclick=()=>draw(i);grid.appendChild(b)});draw(0);
+</script>
+</main></body></html>
