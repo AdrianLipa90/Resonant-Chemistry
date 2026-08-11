@@ -1,0 +1,36 @@
+{
+  "schema": "RESCHEM_ATOM_SEMANTIC_CARD_V0_1",
+  "card_id": "ATOM:He:4:q+0",
+  "entity_level": "atomic_species",
+  "identity": {"symbol": "He", "Z": 2, "N": 2, "A": 4, "charge": 0, "electron_count": 2},
+  "physical_control": {
+    "electron_configuration": "1s^2",
+    "shell_population": {"1": 2},
+    "outer_shell_n": 1,
+    "outer_shell_electrons": 2,
+    "closed_shell_control": true,
+    "hydrogenic": false
+  },
+  "tir": {
+    "kappa": 0.009193150006360484,
+    "relation_operator": {"status": "RESERVED_NOT_YET_APPLIED", "symbol": "W_ij"},
+    "semantic_axes": {"status": "CANDIDATE_UNASSIGNED", "values": {}}
+  },
+  "affective_mapping": {
+    "status": "RESERVED_UNASSIGNED",
+    "labels": [],
+    "coordinates": {},
+    "provenance": [],
+    "note": "No affective meaning assigned in v0.1."
+  },
+  "solver_evidence": [
+    {"model": "two-electron 1s^2 variational", "energy_hartree": -2.84765625, "status": "PASS_CONTROL"},
+    {"model": "spherical RHF SCF + Richardson", "energy_hartree": -2.8616678778202016, "relative_error_vs_hf_limit": 4.234502745596748e-06, "status": "PASS_CONTROL_GATE"}
+  ],
+  "epistemic_status": {
+    "identity": "ESTABLISHED_INPUT",
+    "electronic_bookkeeping": "CONTROL_MODEL_V0_1",
+    "tir_semantics": "OPEN",
+    "affective_semantics": "OPEN"
+  }
+}
