@@ -1,0 +1,28 @@
+{
+  "schema": "RESCHEM_NA_TO_AR_DIIS_V0_1",
+  "status": "IMPLEMENTED_TESTED_CONTROL_CHECKPOINT",
+  "protocol": {
+    "reference_values_available_to_solver": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "solver": "reschem.atomic_hf_diis.solve_atom_average_hf_diis",
+    "basis_size": 15,
+    "grid_points": 600,
+    "damping": 0.25,
+    "diis_start": 3,
+    "diis_size": 7,
+    "max_iterations": 220,
+    "tolerance_hartree": 1e-7
+  },
+  "results": [
+    {"Z":11,"symbol":"Na","configuration":"1s^2 2s^2 2p^6 3s^1","energy_hartree":-161.821466786796,"virial_residual_hartree":-0.002255857642,"target_S":0.5,"outer_subshell":"3s","outer_mean_radius_bohr":4.2195441205353035,"outer_radial_sigma_bohr":1.7385967408492073,"iterations":28,"converged":true},
+    {"Z":12,"symbol":"Mg","configuration":"1s^2 2s^2 2p^6 3s^2","energy_hartree":-199.568811401689,"virial_residual_hartree":-0.020437674255,"target_S":0.0,"outer_subshell":"3s","outer_mean_radius_bohr":3.2610413639816884,"outer_radial_sigma_bohr":1.364394277438866,"iterations":25,"converged":true},
+    {"Z":13,"symbol":"Al","configuration":"1s^2 2s^2 2p^6 3s^2 3p^1","energy_hartree":-241.748165479502,"virial_residual_hartree":-0.024397445312,"target_S":0.5,"outer_subshell":"3p","outer_mean_radius_bohr":4.15157007056751,"outer_radial_sigma_bohr":3.0141715174864117,"iterations":55,"converged":true},
+    {"Z":14,"symbol":"Si","configuration":"1s^2 2s^2 2p^6 3s^2 3p^2","energy_hartree":-288.690714813925,"virial_residual_hartree":-0.014606256171,"target_S":1.0,"outer_subshell":"3p","outer_mean_radius_bohr":2.905594867455407,"outer_radial_sigma_bohr":1.2990861517990007,"iterations":11,"converged":true},
+    {"Z":15,"symbol":"P","configuration":"1s^2 2s^2 2p^6 3s^2 3p^3","energy_hartree":-340.637539741742,"virial_residual_hartree":-0.014015191535,"target_S":1.5,"outer_subshell":"3p","outer_mean_radius_bohr":2.323527996532398,"outer_radial_sigma_bohr":0.9963491986811176,"iterations":16,"converged":true},
+    {"Z":16,"symbol":"S","configuration":"1s^2 2s^2 2p^6 3s^2 3p^4","energy_hartree":-397.288948273182,"virial_residual_hartree":0.014804471035,"target_S":1.0,"outer_subshell":"3p","outer_mean_radius_bohr_alpha":2.001958656362251,"outer_mean_radius_bohr_beta":2.535877035581511,"outer_radial_sigma_bohr_alpha":0.8634021188577897,"outer_radial_sigma_bohr_beta":1.3219186660948576,"iterations":13,"converged":true},
+    {"Z":17,"symbol":"Cl","configuration":"1s^2 2s^2 2p^6 3s^2 3p^5","energy_hartree":-459.224088514925,"virial_residual_hartree":0.048064277621,"target_S":0.5,"outer_subshell":"3p","outer_mean_radius_bohr_alpha":1.8069396700200917,"outer_mean_radius_bohr_beta":1.9666294899718955,"outer_radial_sigma_bohr_alpha":0.7894953005466013,"outer_radial_sigma_bohr_beta":0.9213346614294203,"iterations":15,"converged":true},
+    {"Z":18,"symbol":"Ar","configuration":"1s^2 2s^2 2p^6 3s^2 3p^6","energy_hartree":-526.682914987924,"virial_residual_hartree":0.087789756017,"target_S":0.0,"outer_subshell":"3p","outer_mean_radius_bohr":1.6647892478299289,"outer_radial_sigma_bohr":0.739843549060287,"iterations":10,"converged":true}
+  ],
+  "summary": {"species_count":8,"converged_count":8,"all_same_scf_parameters":true,"element_specific_branches":false}
+}
