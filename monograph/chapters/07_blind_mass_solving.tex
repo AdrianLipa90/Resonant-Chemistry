@@ -1,0 +1,36 @@
+\chapter{First Blind Mass-Solving Experiment}
+
+\section{Purpose}
+The first mass-solving experiment tests whether the atom solver can be applied repeatedly without species-specific tuning. The benchmark is deliberately restricted to atomic species whose occupied orbitals belong to the spherical $s$ sector, so that the current radial Hartree--Fock geometry is not asked to represent missing $p$-shell angular structure.
+
+The frozen blind domain is
+\begin{equation}
+1\le N_e\le 4,\qquad N_e\le Z\le 4,
+\end{equation}
+which generates ten species: H, He$^+$, Li$^{2+}$, Be$^{3+}$, He, Li$^+$, Be$^{2+}$, Li, Be$^+$ and Be.
+
+\section{Blind protocol}
+No external reference energy is supplied to the solver and no TIR correction enters the Hamiltonian. Each species is solved using unrestricted Hartree--Fock on a uniform radial grid. The radial box is scaled before the run as
+\begin{equation}
+r_{\max}=30\frac{N_e}{Z}\;a_0,
+\end{equation}
+which expresses the expected compactification of positively charged isoelectronic ions without using a fitted energy. Calculations use 400 and 801 interior grid points followed by second-order Richardson extrapolation,
+\begin{equation}
+E_{\infty}\approx\frac{4E_{h/2}-E_h}{3}.
+\end{equation}
+
+\section{Result}
+All ten systems converged without manual rescue. The four one-electron ions recover the exact hydrogenic law $E=-Z^2/2$ with a maximum relative error of approximately $9.75\times10^{-7}$. For the neutral sequence, the extrapolated energies are
+\begin{align}
+E_{\mathrm H}  &= -0.499999512660\;E_h,\\
+E_{\mathrm{He}}&= -2.861619787634\;E_h,\\
+E_{\mathrm{Li}}&= -7.432056591794\;E_h,\\
+E_{\mathrm{Be}}&= -14.569175169395\;E_h.
+\end{align}
+
+Only after this blind run were independent Hartree--Fock limits opened. The resulting relative errors for H, He, Li and Be are approximately $9.75\times10^{-7}$, $2.10\times10^{-5}$, $9.02\times10^{-5}$ and $2.64\times10^{-4}$, respectively. The increasing error is accompanied by a growing virial residual and therefore identifies radial discretization and the nuclear cusp as the next numerical bottleneck.
+
+\section{Interpretation}
+This is a successful architectural gate but not a claim of universal atomic accuracy. The solver demonstrates repeatability, spin-sector stability and systematic error structure over the complete present $s$-shell domain. It also produces a falsification signal: extending the same representation directly to boron would be invalid because the $2p$ shell introduces angular structure absent from the present Hamiltonian representation.
+
+The next solver revision should therefore introduce an adaptive or logarithmic radial mesh and then add explicit $l=1$ channels before any blind batch containing B--Ne is attempted. TIR and affective semantics remain outside the energy functional during these control tests.
