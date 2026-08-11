@@ -2,6 +2,7 @@ import math
 import unittest
 
 from reschem.atom import Atom, KAPPA, electron_configuration, hydrogenic_energy_ev
+from reschem.radial import numerical_hydrogenic_energy_ev
 
 
 class AtomTests(unittest.TestCase):
@@ -18,6 +19,21 @@ class AtomTests(unittest.TestCase):
         he_plus = Atom(2, 2, charge=1)
         self.assertTrue(he_plus.is_hydrogenic)
         self.assertAlmostEqual(hydrogenic_energy_ev(2, 1), 4 * hydrogenic_energy_ev(1, 1), places=12)
+
+    def test_numeric_hydrogen_ground_state(self):
+        numeric = numerical_hydrogenic_energy_ev(1, 1, 0, points=600)
+        analytic = hydrogenic_energy_ev(1, 1)
+        self.assertLess(abs((numeric - analytic) / analytic), 0.002)
+
+    def test_numeric_hydrogen_n2(self):
+        numeric = numerical_hydrogenic_energy_ev(1, 2, 0, points=600)
+        analytic = hydrogenic_energy_ev(1, 2)
+        self.assertLess(abs((numeric - analytic) / analytic), 0.002)
+
+    def test_numeric_he_plus_scaling(self):
+        numeric = numerical_hydrogenic_energy_ev(2, 1, 0, points=600)
+        analytic = hydrogenic_energy_ev(2, 1)
+        self.assertLess(abs((numeric - analytic) / analytic), 0.002)
 
     def test_carbon(self):
         self.assertEqual(electron_configuration(6), {"1s": 2, "2s": 2, "2p": 2})

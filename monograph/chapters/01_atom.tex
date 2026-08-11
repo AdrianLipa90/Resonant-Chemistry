@@ -34,7 +34,12 @@ and the characteristic radial scale follows
 \begin{equation}
 r_n\sim a_0\frac{n^2}{Z}.
 \end{equation}
-Any later ResChem solver must reproduce this limit before introducing additional structure.
+
+The independent numerical track solves
+\begin{equation}
+\left[-\frac12\frac{d^2}{dr^2}+\frac{\ell(\ell+1)}{2r^2}-\frac{Z}{r}\right]u(r)=Eu(r)
+\end{equation}
+on a finite radial grid. Agreement with the analytic spectrum is therefore a convergence test of the implementation rather than a repeated evaluation of the same formula.
 
 \section{Entry point for TIR}
 TIR begins from ordered relations. Its quark/color construction uses holonomic link operators, but the colour $SU(3)$ representation is not copied onto atomic bonding. Instead we reserve an active electronic subspace $\mathcal E_A\subset\mathcal H_A$. The next stage will construct
@@ -50,4 +55,4 @@ The information quantum
 is carried as TIR metadata in the present atom layer. It does not modify the benchmark spectrum in version 0.1. This separation is deliberate: if a later relational correction is physical, it must produce a discriminating observable rather than merely restating an already-known energy.
 
 \section{Implementation contract}
-The accompanying solver reconstructs atomic identity and electron configuration through krypton and solves the exact hydrogenic benchmark. Multi-electron total energies remain explicitly open until a Hartree--Fock/DFT/CI layer is implemented and validated.
+The accompanying solver reconstructs atomic identity and electron configuration through krypton, evaluates the analytic one-electron benchmark, and independently reconstructs it with a finite-difference radial eigensolver. Multi-electron total energies remain explicitly open until a Hartree--Fock/DFT/CI layer is implemented and validated.

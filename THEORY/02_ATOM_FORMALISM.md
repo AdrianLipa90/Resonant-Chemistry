@@ -43,13 +43,19 @@ For a hydrogen-like ion with one electron, the non-relativistic infinite-nuclear
 E_n=-R_\infty\frac{Z^2}{n^2},
 \]
 
-with `R_∞ hc = 13.605693122994 eV` used by the v0.1 solver. The characteristic Bohr radius scales as
+with `R_∞ hc = 13.605693122994 eV` used by the analytic v0.1 solver. The characteristic Bohr radius scales as
 
 \[
 r_n\sim a_0\frac{n^2}{Z}.
 \]
 
-This is the first benchmark because it has a closed-form solution and therefore exposes implementation errors immediately.
+An independent numerical radial solver discretizes
+
+\[
+\left[-\frac12\frac{d^2}{dr^2}+\frac{\ell(\ell+1)}{2r^2}-\frac{Z}{r}\right]u(r)=E u(r)
+\]
+
+with Dirichlet boundaries. The numerical spectrum must converge to the analytic hydrogenic spectrum without using the analytic energy as an input.
 
 ## 4. TIR bridge — TIR-DEFINED / CANDIDATE
 
@@ -82,14 +88,16 @@ v0.1 computes:
 1. `Z,N,q,A,N_e` consistency;
 2. element identity for `1 <= Z <= 36`;
 3. ground-state baseline electron configurations through Kr, including neutral Cr/Cu exceptions;
-4. exact non-relativistic hydrogenic energy/radius for one-electron species.
+4. analytic non-relativistic hydrogenic energy/radius for one-electron species;
+5. an independent finite-difference radial hydrogenic spectrum.
 
 v0.1 deliberately does **not** claim ab-initio multi-electron energies. Hartree-Fock/DFT/CI are later solver layers.
 
 ## 6. Falsification / validation gates
 
-- Hydrogen: `E_1 = -13.605693122994 eV` within numerical tolerance.
-- He+: `E_1 = 4 E_H` under the same approximation.
+- Hydrogen analytic: `E_1 = -13.605693122994 eV` within numerical tolerance.
+- Hydrogen numerical: finite-difference `n=1,2` within 0.2% of analytic control at the default grid.
+- He+: numerical ground state within 0.2% of analytic `Z^2` scaling.
 - Electron counting: `N_e=Z-q` for neutral atoms and ions.
 - Aufbau bookkeeping tests for H, He, C, Ne, Cr, Cu, Kr.
 - Invalid negative particle counts must fail loudly.

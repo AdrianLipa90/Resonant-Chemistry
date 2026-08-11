@@ -8,7 +8,8 @@ Implemented:
 - atomic identity `(Z,N,q,A,N_e)`;
 - elements H..Kr;
 - baseline configurations through Kr with neutral Cr/Cu exceptions;
-- one-electron hydrogenic benchmark;
+- analytic one-electron hydrogenic benchmark;
+- independent finite-difference radial Schrödinger eigensolver;
 - TIR `kappa` carried as metadata only;
 - reserved chemistry-level `W_AB` interface, not yet given physical dynamics;
 - interactive self-contained HTML atom builder;
@@ -23,8 +24,9 @@ Not claimed:
 - any replacement of Coulomb/QM/QED control physics.
 
 Next gate:
-1. run tests;
-2. add numerical radial Schrödinger solver as an independent hydrogenic cross-check;
-3. implement active orbital subspaces;
-4. derive overlap matrix and chemistry-level `W_AB`;
-5. begin H2 vs He2 bond benchmark.
+1. validate numerical radial convergence across grid sizes;
+2. expose radial probability in the interactive HTML;
+3. add Hartree-Fock control for He and H2 as the first many-electron layer;
+4. implement active orbital subspaces;
+5. derive overlap matrix and chemistry-level `W_AB`;
+6. begin H2 vs He2 bond benchmark.

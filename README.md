@@ -10,12 +10,13 @@ Current working branch: `atom-foundations-v0.1`.
 
 ## First milestone: build the atom
 
-The first implementation defines an atom by nuclear composition `(Z,N)`, charge `q`, electron count `N_e=Z-q`, a fermionic electronic state space, and a Hamiltonian control layer. A lightweight solver provides deterministic atomic bookkeeping and exact non-relativistic hydrogenic energies for one-electron species. Multi-electron energies are intentionally not guessed in v0.1.
+The first implementation defines an atom by nuclear composition `(Z,N)`, charge `q`, electron count `N_e=Z-q`, a fermionic electronic state space, and a Hamiltonian control layer. The solver now has two independent one-electron paths: the analytic hydrogenic spectrum and a finite-difference radial Schrödinger eigensolver. Multi-electron energies are intentionally not guessed in v0.1.
 
 ## Layout
 
 - `THEORY/02_ATOM_FORMALISM.md` — formal definition and epistemic boundaries.
 - `reschem/atom.py` — atom data model and electron configuration engine.
+- `reschem/radial.py` — numerical one-electron radial solver.
 - `solver.py` — command-line atomic solver.
 - `web/atom_builder.html` — self-contained interactive atom builder.
 - `monograph/` — LaTeX monograph source; Chapter 1 is the atom.
