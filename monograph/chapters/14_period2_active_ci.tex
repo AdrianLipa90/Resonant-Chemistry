@@ -23,11 +23,12 @@ H_{\mathrm{act}}
 where the one-electron operator contains the nuclear field and the frozen-core direct and exchange potentials.  The two-electron matrix elements use explicit radial multipoles
 \begin{equation}
 R^k(ab;cd)=\iint
-u_a(r_1)u_c(r_1)u_b(r_2)u_d(r_2)
+u_a(r_1)\nu_c(r_1)\nu_b(r_2)\nu_d(r_2)
 \frac{r_<^k}{r_>^{k+1}}\,dr_1dr_2,
 \qquad k=0,2,
 \end{equation}
-combined with the same angular Wigner algebra used by the equivalent-shell solver.  Diagonalization is exact inside this finite active space.  Consequently, configurations analogous to $2p^{n-2}3p^2$ are not inserted as hand-written corrections; they arise as determinants in the common CI basis.
+where $u_a(r)\equiv \nu_a(r)$ is the normalized radial function used by the code.
+The multipoles are combined with the same angular Wigner algebra used by the equivalent-shell solver.  Diagonalization is exact inside this finite active space.  Consequently, configurations analogous to $2p^{n-2}3p^2$ are not inserted as hand-written corrections; they arise as determinants in the common CI basis.
 
 \subsection{Reference isolation}
 Experimental levels were already known from the preceding post-hoc spectroscopy audit, so this stage is not called blind in the human-information sense.  The solver itself remains reference-isolated: no NIST value, empirical term energy, fitted $F^k$, or fitted spin--orbit constant is consumed by the Hamiltonian.  The previous benchmark is frozen before the new CI result is evaluated.
