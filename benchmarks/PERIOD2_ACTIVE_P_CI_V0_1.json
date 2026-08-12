@@ -1,0 +1,44 @@
+{
+  "schema": "RESCHEM_PERIOD2_ACTIVE_P_CI_V0_1",
+  "status": "REFERENCE_ISOLATED_CORRELATION_CONTROL_PASS",
+  "branch": "period2-correlation-ci-v0.1",
+  "protocol": {
+    "experimental_reference_values_consumed_by_solver": false,
+    "references_already_known_from_previous_post_hoc_stage": true,
+    "fit_to_reference": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "frozen_core": "1s^2 2s^2",
+    "active_radial_p_orbitals": 2,
+    "basis_size": 18,
+    "grid_points": 800,
+    "method": "FCI in two radial p shells with frozen-core one-body operator and explicit R^0/R^2 Coulomb integrals"
+  },
+  "results": [
+    {"symbol":"B","Z":5,"p_electrons":1,"determinants":12,"p_orbital_energies_hartree":[-0.27537502914566225,-0.07846971776889466],"ground_term":"^2P"},
+    {"symbol":"C","Z":6,"p_electrons":2,"determinants":66,"p_orbital_energies_hartree":[-0.8639446457477268,-0.28386714587692347],"ground_term":"^3P","term_centers_cm-1":{"^1D":10972.162,"^1S":25192.838}},
+    {"symbol":"N","Z":7,"p_electrons":3,"determinants":220,"p_orbital_energies_hartree":[-1.7118761392073334,-0.6060651089295694],"ground_term":"^4S","term_centers_cm-1":{"^2D":18903.854,"^2P":30217.188}},
+    {"symbol":"O","Z":8,"p_electrons":4,"determinants":495,"p_orbital_energies_hartree":[-2.814246850986396,-1.0423165811626298],"ground_term":"^3P","term_centers_cm-1":{"^1D":15536.996,"^1S":36975.430}},
+    {"symbol":"F","Z":9,"p_electrons":5,"determinants":792,"p_orbital_energies_hartree":[-4.169158469798882,-1.5915422079084305],"ground_term":"^2P"}
+  ],
+  "post_hoc_replay_against_frozen_nist_targets": {
+    "source": "NIST ASD v5.12 values already frozen by the preceding spectroscopy benchmark",
+    "comparisons": {
+      "C_1D": {"reference_cm-1":10192.657,"previous_control_cm-1":11883.53007264199,"active_ci_cm-1":10972.162,"previous_relative_error":0.1658912953,"active_ci_relative_error":0.07647711485,"fractional_error_reduction":0.5389925994},
+      "C_1S": {"reference_cm-1":21648.030,"previous_control_cm-1":29651.44620052055,"active_ci_cm-1":25192.838,"previous_relative_error":0.3697064444,"active_ci_relative_error":0.1637473710,"fractional_error_reduction":0.5570881345},
+      "N_2D_centroid": {"reference_cm-1":19228.8205,"previous_control_cm-1":23521.01644972995,"active_ci_cm-1":18903.854,"previous_relative_error":0.2232168088,"active_ci_relative_error":0.01689997054,"fractional_error_reduction":0.9242889878},
+      "N_2P_centroid": {"reference_cm-1":28839.113,"previous_control_cm-1":39202.784316183126,"active_ci_cm-1":30217.188,"previous_relative_error":0.3593616529,"active_ci_relative_error":0.04778493014,"fractional_error_reduction":0.8670282993},
+      "O_1D": {"reference_cm-1":15867.862,"previous_control_cm-1":16731.343173153906,"active_ci_cm-1":15536.996,"previous_relative_error":0.05441698278,"active_ci_relative_error":0.02085132830,"fractional_error_reduction":0.6168231453},
+      "O_1S": {"reference_cm-1":33792.583,"previous_control_cm-1":41693.71267306029,"active_ci_cm-1":36975.430,"previous_relative_error":0.2338125403,"active_ci_relative_error":0.09418773936,"fractional_error_reduction":0.5971655786}
+    }
+  },
+  "promotion": {
+    "two_radial_p_active_space": "PASS_CONTROL",
+    "correlation_direction": "PASS_ALL_SIX_FROZEN_CNO_TARGETS_IMPROVE",
+    "high_precision": "NOT_CLAIMED",
+    "core_valence_correlation": "OPEN",
+    "s_d_virtual_channels": "OPEN",
+    "spin_orbit_rediagonalization_in_correlated_space": "OPEN",
+    "TIR": "NOT_APPLIED"
+  }
+}
