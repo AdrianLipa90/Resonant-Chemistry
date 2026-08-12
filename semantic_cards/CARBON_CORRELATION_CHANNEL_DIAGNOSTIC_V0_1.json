@@ -1,0 +1,17 @@
+{
+  "schema": "RESCHEM_ATOM_SEMANTIC_OVERLAY_V0_1",
+  "card_id": "ATOM:C:12:q+0",
+  "physical_control": {
+    "correlation_channel_diagnostic": {
+      "status": "PASS_DIAGNOSTIC_NOT_PROMOTED_AS_SINGLE_BEST_MODEL",
+      "p_only_two_radial": {"^1D_cm^-1":10972.161518855737,"^1S_cm^-1":25192.838255094237},
+      "open_2s_consistent": {"^1D_cm^-1":14880.496640583786,"^1S_cm^-1":23564.401050106404},
+      "balanced_2s_plus_two_radial_p": {"^1D_cm^-1":10584.508278105779,"^1S_cm^-1":16214.142561126238},
+      "interpretation": "radial-p and explicit-2s correlation act differently; balanced truncated CI overcorrelates ^1S relative to ^3P",
+      "next_gate": "virtual d correlation channel"
+    }
+  },
+  "tir": {"status":"NOT_APPLIED"},
+  "affective_mapping": {"status":"RESERVED_UNASSIGNED"},
+  "epistemic_status": {"correlation_channel_diagnostic":"VALIDATED","balanced_model":"CANDIDATE_NOT_PROMOTED"}
+}
