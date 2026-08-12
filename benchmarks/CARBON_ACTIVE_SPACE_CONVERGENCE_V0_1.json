@@ -1,0 +1,37 @@
+{
+  "schema": "RESCHEM_CARBON_ACTIVE_SPACE_CONVERGENCE_V0_1",
+  "status": "P_ONLY_CONVERGENCE_DIAGNOSTIC_PASS_NEXT_CHANNEL_IDENTIFIED",
+  "branch": "period2-correlation-ci-v0.1",
+  "protocol": {
+    "atom": "C",
+    "frozen_core": "1s^2 2s^2",
+    "active_electrons": 2,
+    "radial_p_spaces": [2,3,4],
+    "basis_size": 18,
+    "grid_points": 800,
+    "experimental_references_consumed": false,
+    "TIR": "NOT_APPLIED"
+  },
+  "results": [
+    {"radial_p_orbitals":2,"spin_orbitals":12,"determinants":66,"ground_term":"^3P","^1D_cm-1":10972.161518855737,"^1S_cm-1":25192.838255094237},
+    {"radial_p_orbitals":3,"spin_orbitals":18,"determinants":153,"ground_term":"^3P","^1D_cm-1":10928.101957265468,"^1S_cm-1":25329.330426092736},
+    {"radial_p_orbitals":4,"spin_orbitals":24,"determinants":276,"ground_term":"^3P","^1D_cm-1":10915.102728086673,"^1S_cm-1":25366.886448739824}
+  ],
+  "interpretation": {
+    "^1D": "converges smoothly downward as radial p space grows",
+    "^1S": "does not improve; shifts upward from the two-radial-p result",
+    "decision": "do not spend the next model increment on more p-only radial functions; open 2s valence/core-valence and later s/d virtual channels"
+  },
+  "verification": {
+    "github_actions_run_id":31559718363,
+    "head_sha":"b861072373fce3fddc92baeba76b5c26e61bdd93",
+    "tests":"PASS_9_OF_9",
+    "machine_readable_probe":"PASS"
+  },
+  "promotion": {
+    "p_only_active_space_convergence":"DIAGNOSTIC_COMPLETE",
+    "more_p_only":"NOT_NEXT_PRIORITY",
+    "open_2s_valence":"NEXT_GATE",
+    "TIR":"NOT_APPLIED"
+  }
+}
