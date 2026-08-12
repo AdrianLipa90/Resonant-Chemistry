@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
       - name: Run period-2 correlation test stack
-        run: python -m unittest tests.test_period2_active_ci tests.test_period2_correlated_spectrum tests.test_period2_active_convergence tests.test_carbon_valence_ci tests.test_carbon_valence_ci_consistent -v
+        run: python -m unittest tests.test_period2_active_ci tests.test_period2_correlated_spectrum tests.test_period2_active_convergence tests.test_carbon_valence_ci tests.test_carbon_valence_ci_consistent tests.test_carbon_balanced_valence_ci -v
       - name: Print carbon correlation diagnostics
         run: |
           python - <<'PY'
@@ -25,10 +25,13 @@ jobs:
           from reschem.period2_active_convergence import solve_carbon_active_space_convergence
           from reschem.carbon_valence_ci import solve_carbon_valence_sp_ci
           from reschem.carbon_valence_ci_consistent import solve_carbon_valence_sp_ci_consistent
+          from reschem.carbon_balanced_valence_ci_v2 import solve_carbon_balanced_valence_ci_v2
           points = solve_carbon_active_space_convergence(radial_spaces=(2,3,4), basis_size=18, grid_points=800)
           print("RESCHEM_CARBON_ACTIVE_SPACE_CONVERGENCE=" + json.dumps([p.as_dict() for p in points], sort_keys=True))
           naive = solve_carbon_valence_sp_ci(basis_size=18, grid_points=800, tolerance_hartree=1e-9)
           print("RESCHEM_CARBON_OPEN_2S_NAIVE=" + json.dumps(naive.as_dict(), sort_keys=True))
           consistent = solve_carbon_valence_sp_ci_consistent(basis_size=18, grid_points=800, tolerance_hartree=1e-9)
           print("RESCHEM_CARBON_OPEN_2S_CONSISTENT=" + json.dumps(consistent.as_dict(), sort_keys=True))
+          balanced = solve_carbon_balanced_valence_ci_v2(basis_size=18, grid_points=800, tolerance_hartree=1e-9)
+          print("RESCHEM_CARBON_BALANCED_2S_2P3P=" + json.dumps(balanced.as_dict(), sort_keys=True))
           PY
