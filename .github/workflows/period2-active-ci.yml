@@ -16,13 +16,16 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
-      - name: Run active-CI, correlated-spectrum, and convergence tests
-        run: python -m unittest tests.test_period2_active_ci tests.test_period2_correlated_spectrum tests.test_period2_active_convergence -v
-      - name: Print carbon active-space convergence
+      - name: Run period-2 correlation test stack
+        run: python -m unittest tests.test_period2_active_ci tests.test_period2_correlated_spectrum tests.test_period2_active_convergence tests.test_carbon_valence_ci -v
+      - name: Print carbon correlation diagnostics
         run: |
           python - <<'PY'
           import json
           from reschem.period2_active_convergence import solve_carbon_active_space_convergence
+          from reschem.carbon_valence_ci import solve_carbon_valence_sp_ci
           points = solve_carbon_active_space_convergence(radial_spaces=(2,3,4), basis_size=18, grid_points=800)
           print("RESCHEM_CARBON_ACTIVE_SPACE_CONVERGENCE=" + json.dumps([p.as_dict() for p in points], sort_keys=True))
+          valence = solve_carbon_valence_sp_ci(basis_size=18, grid_points=800, tolerance_hartree=1e-9)
+          print("RESCHEM_CARBON_OPEN_2S_VALENCE_CI=" + json.dumps(valence.as_dict(), sort_keys=True))
           PY
