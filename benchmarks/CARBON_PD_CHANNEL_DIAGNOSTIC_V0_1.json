@@ -1,0 +1,43 @@
+{
+  "schema": "RESCHEM_CARBON_PD_CHANNEL_DIAGNOSTIC_V0_1",
+  "status": "VIRTUAL_D_CHANNEL_PASS_MODEST_TWO_TERM_IMPROVEMENT",
+  "branch": "period2-correlation-ci-v0.1",
+  "protocol": {
+    "atom":"C",
+    "frozen_core":"1s^2 2s^2",
+    "active_electrons":2,
+    "active_space":"two radial p orbitals plus one radial d orbital; even parity",
+    "spin_orbitals":22,
+    "even_determinants":111,
+    "experimental_reference_values_consumed":false,
+    "fit_to_reference":false,
+    "TIR":"NOT_APPLIED"
+  },
+  "result": {
+    "ground_term":"^3P",
+    "one_body_p_hartree":[-0.8639624301123232,-0.28386893845078276],
+    "one_body_d_hartree":-0.22809595786729606,
+    "term_centers_cm-1":{"^1D":10964.677487695944,"^1S":24882.416823881395}
+  },
+  "replay_against_frozen_targets": {
+    "^1D":{"reference_cm-1":10192.657,"p_only_cm-1":10972.161518855737,"pd_cm-1":10964.677487695944,"p_only_relative_error":0.0764770676434749,"pd_relative_error":0.07574281050524365},
+    "^1S":{"reference_cm-1":21648.030,"p_only_cm-1":25192.838255094237,"pd_cm-1":24882.416823881395,"p_only_relative_error":0.16374738279160914,"pd_relative_error":0.14940790565614495}
+  },
+  "interpretation": {
+    "virtual_d":"improves both frozen singlet targets, but the effect is modest",
+    "radial_p":"remains the dominant isolated improvement channel for ^1D",
+    "explicit_2s":"remains the dominant isolated improvement channel for ^1S",
+    "decision":"a balanced 2s + radial-p + d model is required; dense full diagonalization would scale to thousands of even-parity determinants, so the next implementation gate is a sparse symmetry-aware eigensolver rather than more ad-hoc channel tuning"
+  },
+  "verification": {
+    "github_actions_run_id":31560580021,
+    "head_sha":"b108dd11032b940c17ac5f17ac21c898ddd6fd79",
+    "tests":"PASS_18_OF_18"
+  },
+  "promotion": {
+    "virtual_d_channel":"PASS_DIAGNOSTIC",
+    "virtual_d_as_complete_missing_physics":"REJECTED",
+    "balanced_sparse_multichannel_ci":"NEXT_GATE",
+    "TIR":"NOT_APPLIED"
+  }
+}
