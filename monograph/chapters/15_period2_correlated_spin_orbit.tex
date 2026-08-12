@@ -1,0 +1,43 @@
+\section{Correlated spin--orbit rediagonalization in the period-2 active space}
+\label{sec:period2-correlated-spin-orbit}
+
+The active-space CI layer of Sec.~\ref{sec:period2-active-ci} improves the electrostatic term centers without refitting the radial Slater integrals.  The next question is whether the previously derived atom-specific spin--orbit scale can be rediagonalized inside the same correlated space without introducing a new empirical parameter.
+
+\subsection{Conservative projection}
+The established period-2 spectroscopy control layer already supplies an atom-specific Pauli central-field constant $\zeta_{2p}$.  Version 0.1 reuses that same constant and projects the one-electron operator
+\begin{equation}
+H_{\mathrm{SO}}=\zeta_{2p}\sum_i \mathbf l_i\cdot\mathbf s_i
+\end{equation}
+onto the lowest radial $p$ channel of the two-radial-orbital CI basis.  The virtual radial $p$ channel and cross-radial spin--orbit blocks are set to zero.  This is deliberately conservative: no virtual-channel $\zeta$ is inferred from experiment, and no cross-radial scale is introduced by hand.
+
+The correlated Hamiltonian is therefore
+\begin{equation}
+H_{\mathrm{corr,SO}}=H_{\mathrm{active\,CI}}+P_{2p}H_{\mathrm{SO}}P_{2p},
+\end{equation}
+with $P_{2p}$ the projector onto the physical lowest radial $p$ channel.  The full determinant-space Hamiltonian is rediagonalized and classified by $J^2$, with $L^2$ and $S^2$ retained as approximate labels.
+
+\subsection{Frozen benchmark replay}
+Experimental values were already frozen by the earlier post-hoc NIST audit.  They are not consumed by the Hamiltonian.  Relative to the previous equivalent-shell fine-structure control, the correlated calculation gives
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Target & previous / cm$^{-1}$ & correlated / cm$^{-1}$ & frozen reference / cm$^{-1}$\\
+\hline
+B $^2P_{3/2}$ & 14.859 & 14.859 & 15.287\\
+C $^3P_1$ & 19.157 & 18.219 & 16.417\\
+C $^3P_2$ & 57.213 & 54.410 & 43.413\\
+O $^3P_1$ & 177.496 & 144.907 & 158.265\\
+O $^3P_0$ & 264.274 & 215.751 & 226.977\\
+F $^2P_{1/2}$ & 464.719 & 383.480 & 404.141\\
+\hline
+\end{tabular}
+\end{center}
+B is preserved, while every listed C, O, and F target improves.  The strongest reduction in relative error occurs for O $^3P_0$ and F $^2P_{1/2}$.
+
+\subsection{Rejected stronger ansatz}
+A prototype in which the physical $2p$ spin--orbit scale was extended to the virtual radial channel through a radial $\langle r^{-3}\rangle$ scaling produced excessive quenching of several splittings.  That ansatz is therefore not promoted.  The present projector construction keeps the validated physical $2p$ scale and leaves virtual/cross-radial spin--orbit coupling open for a future derivation.
+
+\subsection{Verification and boundary}
+The exact repository workflow on GitHub Actions runs both the active-CI and correlated-spectrum tests.  At the current checkpoint all seven tests pass.  This validates implementation and numerical regression, not high-precision spectroscopy.  Core--valence correlation, additional radial $p$ orbitals, $s/d$ virtual channels, virtual spin--orbit matrix elements, Dirac self-consistency, and Breit terms remain open.
+
+TIR and affective mappings remain absent from the control Hamiltonian.
