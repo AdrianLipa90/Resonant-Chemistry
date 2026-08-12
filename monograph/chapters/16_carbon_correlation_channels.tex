@@ -1,0 +1,39 @@
+\section{Carbon correlation channels: why one truncated CI is not enough}
+\label{sec:carbon-correlation-channels}
+
+The period-2 correlation programme now has enough controlled variants to ask a more specific question than whether ``correlation helps'': which active channels lower which carbon term centers, and when does a truncated active space become unbalanced between states?
+
+\subsection{Radial $p$ convergence}
+With the $1s^2 2s^2$ core frozen, the two-radial-$p$ active CI gives
+\begin{equation}
+E(^1D)-E(^3P)=10972.16\;\mathrm{cm^{-1}},\qquad
+E(^1S)-E(^3P)=25192.84\;\mathrm{cm^{-1}}.
+\end{equation}
+Expanding the radial $p$ space from two to four functions changes these values to
+\begin{equation}
+10915.10\;\mathrm{cm^{-1}},\qquad 25366.89\;\mathrm{cm^{-1}},
+\end{equation}
+respectively.  The $^1D$ center converges smoothly downward, whereas $^1S$ moves slightly upward.  The missing $^1S$ physics is therefore not simply more radial $p$ flexibility.
+
+\subsection{Opening the physical $2s$ channel}
+A naive frozen-$1s^2$ calculation using orbitals generated in the field of the bare core is rejected: it overcontracts the valence functions and yields large errors in both singlets.  A mean-field-consistent variant instead keeps the established closed-$1s^22s^2$ radial shapes, removes the active-$2s$ mean field from the one-body Hamiltonian, and restores the $2s/2p$ interaction explicitly in FCI.  This gives
+\begin{equation}
+^1D:14880.50\;\mathrm{cm^{-1}},\qquad
+^1S:23564.40\;\mathrm{cm^{-1}}.
+\end{equation}
+The $^1S$ center improves strongly while $^1D$ worsens.  Thus the radial-$p$ and explicit-$2s$ channels are not redundant.
+
+\subsection{Balanced $2s+2p+3p$ active space}
+The next model combines physical $2s$ participation with two radial $p$ functions in a four-electron even-parity FCI.  The space contains 14 spin orbitals and 561 even-parity determinants.  The resulting term centers are
+\begin{equation}
+^1D:10584.51\;\mathrm{cm^{-1}},\qquad
+^1S:16214.14\;\mathrm{cm^{-1}}.
+\end{equation}
+Relative to the frozen post-hoc experimental targets, the $^1D$ error drops to about $3.84\%$, but the $^1S$ center is driven too low, with an error of about $25.10\%$.  The combined truncated space therefore overcorrelates $^1S$ relative to $^3P$.
+
+This result is not promoted as a globally superior carbon model.  It is promoted only as a channel diagnostic: different term symmetries respond differently to different correlation channels, and a variationally larger active space can improve one excitation while worsening another when orbital relaxation and complementary angular channels are incomplete.
+
+\subsection{Next gate}
+The next controlled extension is an even-parity virtual $d$ channel coupled to the frozen-$1s^22s^2$ active-$p$ reference.  This is preferable to further $p$-only growth or empirical rescaling because it introduces a genuinely new angular-correlation mechanism.  State-averaged orbital optimization may be considered only after the $d$-channel contribution has been measured separately.
+
+No TIR or affective term is used anywhere in this diagnostic chain.
