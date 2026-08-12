@@ -1,0 +1,8 @@
+{
+  "schema":"RESCHEM_ATOM_SEMANTIC_OVERLAY_V0_1",
+  "card_id":"ATOM:C:12:q+0",
+  "physical_control":{"sparse_multichannel_correlation":{"status":"PASS_ARCHITECTURE_DIAGNOSTIC_CHANNEL_TENSION","models":{"spd":{"determinants":5346,"^1D_cm^-1":10615.04772910052,"^1S_cm^-1":17513.781056076245},"s2pd":{"determinants":7502,"^1D_cm^-1":12177.402330248304,"^1S_cm^-1":20155.92892020112}},"interpretation":"virtual d and virtual s move the two singlet symmetries differently; no single fixed frozen-orbital truncation is promoted as globally balanced","next_gate":"state-averaged orbital optimization/MCSCF"}},
+  "tir":{"status":"NOT_APPLIED"},
+  "affective_mapping":{"status":"RESERVED_UNASSIGNED"},
+  "epistemic_status":{"sparse_architecture":"VALIDATED_CONTROL","channel_interpretation":"VALIDATED_DIAGNOSTIC","MCSCF":"OPEN"}
+}
