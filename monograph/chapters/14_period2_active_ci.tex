@@ -1,0 +1,56 @@
+\section{Period-2 active-space correlation without refitting}
+\label{sec:period2-active-ci}
+
+The atom-specific spectroscopy layer of Sec.~\ref{sec:atom-specific-period2-spectroscopy} exposed a controlled failure mode: the ordering of the low $2p^n$ terms was correct and the absolute scale was meaningful, but selected singlet and doublet term centers remained too high.  This chapter adds the smallest correlation layer that can address that failure without changing any experimental target, refitting any Slater integral, or introducing a TIR correction.
+
+\subsection{Frozen core and active space}
+For neutral B--Ne we freeze the closed $1s^2 2s^2$ core and solve it self-consistently.  The active electrons occupy an $l=1$ radial basis generated from the frozen-core Fock operator.  Version 0.1 keeps the two lowest radial $p$ functions, so the spin-orbital active space has
+\begin{equation}
+N_{\mathrm{so}}=2\times(2l+1)\times 2=12
+\end{equation}
+spin orbitals.  For $n$ active $p$ electrons the determinant dimension is therefore
+\begin{equation}
+\dim\mathcal H_{p^n}=\binom{12}{n}.
+\end{equation}
+This gives 12, 66, 220, 495, and 792 determinants for B through F.
+
+The active Hamiltonian is
+\begin{equation}
+H_{\mathrm{act}}
+=\sum_{pq}h^{\mathrm{core}}_{pq}a_p^\dagger a_q
++\frac12\sum_{pqrs}(pq|rs)a_p^\dagger a_q^\dagger a_s a_r,
+\end{equation}
+where the one-electron operator contains the nuclear field and the frozen-core direct and exchange potentials.  The two-electron matrix elements use explicit radial multipoles
+\begin{equation}
+R^k(ab;cd)=\iint
+u_a(r_1)u_c(r_1)u_b(r_2)u_d(r_2)
+\frac{r_<^k}{r_>^{k+1}}\,dr_1dr_2,
+\qquad k=0,2,
+\end{equation}
+combined with the same angular Wigner algebra used by the equivalent-shell solver.  Diagonalization is exact inside this finite active space.  Consequently, configurations analogous to $2p^{n-2}3p^2$ are not inserted as hand-written corrections; they arise as determinants in the common CI basis.
+
+\subsection{Reference isolation}
+Experimental levels were already known from the preceding post-hoc spectroscopy audit, so this stage is not called blind in the human-information sense.  The solver itself remains reference-isolated: no NIST value, empirical term energy, fitted $F^k$, or fitted spin--orbit constant is consumed by the Hamiltonian.  The previous benchmark is frozen before the new CI result is evaluated.
+
+\subsection{Correlation checkpoint}
+At basis size 18 and 800 radial grid points, the correlated electrostatic term centers are
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Target & previous control / cm$^{-1}$ & active CI / cm$^{-1}$\\
+\hline
+C $^1D$ & 11883.53 & 10972.16\\
+C $^1S$ & 29651.45 & 25192.84\\
+N $^2D$ & 23521.02 & 18903.85\\
+N $^2P$ & 39202.78 & 30217.19\\
+O $^1D$ & 16731.34 & 15537.00\\
+O $^1S$ & 41693.71 & 36975.43\\
+\hline
+\end{tabular}
+\end{center}
+All six frozen C/N/O targets move toward the experimental term centers.  The largest improvement occurs for the nitrogen $^2D$ center, while both carbon and oxygen singlets improve simultaneously.  This is the expected qualitative signature of a missing configuration-interaction channel rather than a simple scale error in $F^2$.
+
+\subsection{Current boundary}
+The result is promoted only as a control correlation layer.  The $1s^2 2s^2$ core is frozen, only two radial $p$ orbitals are retained, $s$ and $d$ virtual channels are absent, and the spin--orbit operator has not yet been rediagonalized in the enlarged correlated space.  No high-precision claim is made.  The next controlled extension is therefore a larger active space and correlated spin--orbit rediagonalization, followed by core--valence and relativistic tests.
+
+TIR and affective mappings remain absent from the control Hamiltonian.
