@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-import math
 
 import numpy as np
 from scipy.linalg import eigh
@@ -12,8 +11,8 @@ from .atomic_hf_average import (
     _eval_slater_basis,
     _exchange_matrix,
     _local_matrix,
+    _radial_kernel_apply,
 )
-from .atomic_radial_spectroscopy import HARTREE_TO_WAVENUMBER_CM
 from .carbon_balanced_valence_ci import (
     _classify_terms,
     _selected_determinants,
@@ -22,7 +21,7 @@ from .carbon_balanced_valence_ci import (
 )
 from .carbon_valence_ci import _mixed_angular_coulomb_coefficient
 from .carbon_valence_ci_consistent import _solve_1s2_2s2_orbitals
-from .multiplet_angular import _apply_two_body, _radial_kernel_apply, _wigner_3j_int
+from .multiplet_angular import _apply_two_body, _wigner_3j_int
 
 
 @dataclass(frozen=True)
