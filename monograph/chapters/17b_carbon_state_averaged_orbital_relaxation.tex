@@ -41,6 +41,40 @@ Let $\Theta$ be a symmetric scan containing $\theta=0$.  The candidate passes th
 \end{equation}
 with finite classified $^3P$, $^1D$, and $^1S$ states throughout the accepted scan.  A strict decrease demonstrates that the frozen active subspace was not stationary against the tested external $p$ direction.  Equality within numerical tolerance is a valid negative result: it would mean that this particular external direction does not supply the missing relaxation.
 
+\subsection{Production numerical gate}
+The production benchmark used 18 radial basis functions, 800 radial grid points, a $10^{-9}$~Ha SCF tolerance, a 21-point coarse scan over $\theta\in[-1.45,1.45]$, and an 11-point refinement over the preselected neighboring coarse interval $[-0.435,-0.145]$.  The equal $^3P/^1D/^1S$ weights were fixed before the run.  The complete generated benchmark was recorded by GitHub Actions run 31698054125 and its SHA-256 digest is \texttt{4991f89450a47480a8ed71df33799bb9da60451770a9471cc182db7ab288fdbe}.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Quantity & Frozen $\theta=0$ & Best sampled $\theta=-0.290$ \\
+\midrule
+$\overline E$ (Ha) & $-5.243337545$ & $-5.246907956$ \\
+$E(^3P)$ (Ha) & $-5.284039512$ & $-5.287703975$ \\
+$E(^1D)$ (Ha) & $-5.235812345$ & $-5.239533714$ \\
+$E(^1S)$ (Ha) & $-5.210160777$ & $-5.213486180$ \\
+$^1D-{}^3P$ (cm$^{-1}$) & $10584.64$ & $10572.15$ \\
+$^1S-{}^3P$ (cm$^{-1}$) & $16214.51$ & $16288.92$ \\
+\bottomrule
+\end{tabular}
+\caption{Production one-coordinate state-averaged radial-$p$ relaxation benchmark.  Experimental term energies are absent from the objective.}
+\label{tab:carbon-state-average-production}
+\end{table}
+
+The sampled state-average decreases by
+\begin{equation}
+\Delta\overline E
+=\overline E(0)-\overline E(-0.290)
+=0.0035704116\ \mathrm{Ha}>0.
+\end{equation}
+The refined sampled values around the minimum are $-5.246893018$~Ha at $\theta=-0.319$, $-5.246907956$~Ha at $\theta=-0.290$, and $-5.246860274$~Ha at $\theta=-0.261$.  Thus the best sampled point is interior to the refinement interval, rather than an edge artifact of the earlier small scan.
+
+This is a \emph{variational} improvement, not a claim of globally improved spectroscopy.  Relative to the frozen point, the $^1D$ gap changes by approximately $-12.49$~cm$^{-1}$ whereas the $^1S$ gap changes by approximately $+74.42$~cm$^{-1}$.  All three \emph{absolute} target-state energies decrease sufficiently to lower the fixed state-average, but the two excitation gaps do not move in the same direction.  The distinction is essential: the optimization objective is the internal variational energy, not agreement with experimental term centers.
+
+The production verdict is therefore \textbf{PASS\_VARIATIONAL\_DIRECTION}.  It establishes that the frozen two-radial-$p$ active space is not stationary along the tested active--external $p$ direction.  It does not yet establish a continuously converged optimum or basis/grid convergence of the optimum angle and energy gain.
+
 \subsection{Implementation boundary}
 The reference implementation is \code{reschem/carbon\_state\_averaged\_orbital\_relaxation.py}.  It constructs the common closed-reference radial basis, evaluates the valence one-body operator in the frozen-$1s^2$ field, rebuilds two-body Coulomb integrals after each active--external rotation, and classifies the resulting CI eigenstates.
 
