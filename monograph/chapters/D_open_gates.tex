@@ -5,8 +5,9 @@ This appendix is deliberately a list of unresolved scientific gates rather than 
 
 \section{Atomic correlation}
 \begin{enumerate}
-\item Implement state-averaged orbital optimization/MCSCF for carbon over a common $^3P$, $^1D$, $^1S$ objective without using experimental term energies in the objective.
-\item Re-evaluate correlated spin--orbit structure after orbital optimization.
+\item Validate the implemented first state-averaged active--external radial-$p$ relaxation gate for carbon over the fixed common $^3P$, $^1D$, $^1S$ objective, including a finite numerical scan and a machine-readable benchmark.
+\item If the one-coordinate gate is variationally informative, generalize it to multidimensional state-averaged MCSCF/CASSCF with simultaneous admissible active--external $s$, $p$, and $d$ orbital rotations; do not use experimental term energies in the objective.
+\item Re-evaluate correlated spin--orbit structure only after the orbital-optimization layer is frozen.
 \item Extend systematic correlation controls beyond the second period and separate core--valence from valence correlation.
 \item Tighten the H--Kr control quality gate where high-precision comparison is intended; the present coarse virial gate is a coverage criterion, not a precision theorem.
 \end{enumerate}
