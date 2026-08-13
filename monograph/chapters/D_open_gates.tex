@@ -1,0 +1,42 @@
+\chapter{Open Gates and Next Experiments}
+\label{app:open-gates}
+
+This appendix is deliberately a list of unresolved scientific gates rather than a roadmap written as if completion were guaranteed.
+
+\section{Atomic correlation}
+\begin{enumerate}
+\item Implement state-averaged orbital optimization/MCSCF for carbon over a common $^3P$, $^1D$, $^1S$ objective without using experimental term energies in the objective.
+\item Re-evaluate correlated spin--orbit structure after orbital optimization.
+\item Extend systematic correlation controls beyond the second period and separate core--valence from valence correlation.
+\item Tighten the H--Kr control quality gate where high-precision comparison is intended; the present coarse virial gate is a coverage criterion, not a precision theorem.
+\end{enumerate}
+
+\section{Shell topology}
+\begin{enumerate}
+\item Derive trajectory-like or current-density proxies from actual SCF/CI states rather than synthetic circular paths.
+\item Test particle--hole invariants internally for $p^k\leftrightarrow p^{6-k}$ before consulting knot labels.
+\item Test transfer of the same shell descriptors from $2p^k$ to $3p^k$ and, where data permit, $4p^k$.
+\item Keep unrestricted 3D exchange permutation data separate from projected winding and effective-2D braid data.
+\end{enumerate}
+
+\section{Conformal knot candidate}
+\begin{enumerate}
+\item Symbolically verify the numerically observed unit-circle roots of $V_K(q)-1/2$ for the candidate singular family.
+\item Freeze mirror/amphichirality metadata and a canonical knot-table normalization.
+\item Run replacement-anchor controls for $z_\star$ and quantify the look-elsewhere effect.
+\item Pre-register a shell-symmetry comparison rule before combining knot and shell labels.
+\item Retain the existing failed direct spectral match as a negative control.
+\end{enumerate}
+
+\section{Molecular extension}
+\begin{enumerate}
+\item Implement an $\mathrm{H}_2^+$ two-centre electronic control with the topological diagnostic disabled by default.
+\item Add $\mathrm{H}_2$ and test whether the diagnostic contributes information beyond energy, density and one-body invariants without changing them.
+\item Only after simple two-centre controls consider multi-centre ring systems where loop language is visually compelling and therefore especially vulnerable to confirmation bias.
+\end{enumerate}
+
+\section{Relational/TIR admission}
+The first admitted relational physics test must define a no-refit observable whose prediction is not already encoded in the control target.  Until that exists, $\kappa$, $W_{AB}$, 36D encodings and affective semantics remain metadata, representation machinery or candidate maps rather than corrections to the validated Hamiltonians.
+
+\section{Promotion rule}
+An open gate is closed by a derivation, implementation and declared validation result, not by narrative plausibility.  Any failure that changes the next hypothesis remains part of the permanent validation history.
