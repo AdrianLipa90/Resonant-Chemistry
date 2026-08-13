@@ -1,0 +1,53 @@
+{
+  "schema": "RESCHEM_PERIOD2_CORRELATED_SPECTRUM_V0_1",
+  "status": "REFERENCE_ISOLATED_CORRELATED_FINE_STRUCTURE_PASS",
+  "branch": "period2-correlation-ci-v0.1",
+  "protocol": {
+    "experimental_reference_values_consumed_by_solver": false,
+    "references_already_known_from_previous_post_hoc_stage": true,
+    "fit_to_reference": false,
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "electrostatic_layer": "frozen-core two-radial-p FCI",
+    "spin_orbit_layer": "previous atom-specific Pauli central-field zeta projected only onto physical lowest radial 2p channel",
+    "virtual_or_cross_radial_zeta": "zero by conservative v0.1 design",
+    "basis_size_active_ci": 18,
+    "grid_points_active_ci": 800,
+    "basis_size_zeta_source": 24,
+    "grid_points_zeta_source": 1500
+  },
+  "results": [
+    {"symbol":"B","Z":5,"ground":"^2P_1/2","levels_cm-1":{"^2P_1/2":0.0,"^2P_3/2":14.8589526583}},
+    {"symbol":"C","Z":6,"ground":"^3P_0","levels_cm-1":{"^3P_0":0.0,"^3P_1":18.21917216,"^3P_2":54.41003529}},
+    {"symbol":"O","Z":8,"ground":"^3P_2","levels_cm-1":{"^3P_2":0.0,"^3P_1":144.90705175,"^3P_0":215.75051987}},
+    {"symbol":"F","Z":9,"ground":"^2P_3/2","levels_cm-1":{"^2P_3/2":0.0,"^2P_1/2":383.47974441}}
+  ],
+  "replay_against_frozen_nist_targets": {
+    "source": "NIST ASD values frozen in the preceding spectroscopy stage; not read by this solver",
+    "comparisons": {
+      "B_2P_3_2": {"reference_cm-1":15.287,"previous_control_cm-1":14.8589526583,"correlated_cm-1":14.8589526583,"previous_relative_error":0.02800074192,"correlated_relative_error":0.02800074192,"status":"PRESERVED"},
+      "C_3P1": {"reference_cm-1":16.4167130,"previous_control_cm-1":19.1568048109,"correlated_cm-1":18.21917216,"previous_relative_error":0.1669086748,"correlated_relative_error":0.1097939303,"fractional_error_reduction":0.3421867184},
+      "C_3P2": {"reference_cm-1":43.4134567,"previous_control_cm-1":57.2129805414,"correlated_cm-1":54.41003529,"previous_relative_error":0.3178628216,"correlated_relative_error":0.2533036390,"fractional_error_reduction":0.2031095607},
+      "O_3P1": {"reference_cm-1":158.265,"previous_control_cm-1":177.496395871,"correlated_cm-1":144.90705175,"previous_relative_error":0.1215138904,"correlated_relative_error":0.08440545762,"fractional_error_reduction":0.3053809923},
+      "O_3P0": {"reference_cm-1":226.977,"previous_control_cm-1":264.273721311,"correlated_cm-1":215.75051987,"previous_relative_error":0.1643193862,"correlated_relative_error":0.04946085886,"fractional_error_reduction":0.6990004517},
+      "F_2P_1_2": {"reference_cm-1":404.141,"previous_control_cm-1":464.718937904,"correlated_cm-1":383.47974441,"previous_relative_error":0.1498930767,"correlated_relative_error":0.05112459419,"fractional_error_reduction":0.6589257580}
+    }
+  },
+  "verification": {
+    "github_actions_run_id": 31559420217,
+    "head_sha": "b2fbe94ee1e43f00b3dcc75d8302f7c3c62465fa",
+    "exact_repo_tests": "PASS_7_OF_7",
+    "runtime_seconds": 6.978
+  },
+  "promotion": {
+    "correlated_electrostatic_ci": "PASS_CONTROL",
+    "correlated_projected_spin_orbit": "PASS_CONTROL",
+    "frozen_fine_structure_targets": "PASS_NO_TARGET_WORSENED_C_O_F_IMPROVED_B_PRESERVED",
+    "high_precision": "NOT_CLAIMED",
+    "virtual_cross_radial_spin_orbit": "OPEN",
+    "larger_active_space": "NEXT_GATE",
+    "core_valence_correlation": "OPEN",
+    "Dirac_Breit": "OPEN",
+    "TIR": "NOT_APPLIED"
+  }
+}

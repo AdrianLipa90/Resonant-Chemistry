@@ -1,0 +1,32 @@
+\section{Sparse multichannel carbon CI and the frozen-orbital boundary}
+\label{sec:carbon-sparse-multichannel}
+
+The channel diagnostics of Sec.~\ref{sec:carbon-correlation-channels} show that radial $p$, explicit $2s$, and virtual $d$ correlation affect the carbon singlets differently.  Combining these channels increases the determinant space beyond the point where repeated dense diagonalization is a sensible default.  The implementation therefore moves to a sparse symmetry-preserving Hamiltonian while leaving the underlying Coulomb formalism unchanged.
+
+\subsection{Sparse $2s+2p+3p+3d$ model}
+With the $1s^2$ core frozen, the first sparse balanced space contains the physical $2s$ orbital, two radial $p$ functions, one radial $d$ function, and four active electrons.  Restricting to even parity leaves 5346 determinants.  The Hamiltonian contains 217140 nonzero elements and is stored in compressed sparse-row form.  Only the low spectrum is requested from a Lanczos/ARPACK solver, while $L$ and $S$ are identified from Casimir expectation values built from sparse one-body angular operators.
+
+The resulting low term centers are
+\begin{equation}
+^1D=10615.05\;\mathrm{cm^{-1}},\qquad
+^1S=17513.78\;\mathrm{cm^{-1}}.
+\end{equation}
+The $^1D$ center remains close to the frozen post-hoc reference, with about $4.14\%$ relative error, whereas $^1S$ remains overcorrelated relative to $^3P$.
+
+\subsection{Opening the first virtual $s$ channel}
+The next controlled extension adds one reference-shaped virtual $s$ orbital while retaining the two radial $p$ functions and one $d$ radial function.  The active space grows to 26 spin orbitals, 7502 even-parity determinants, and 374814 nonzero Hamiltonian elements.  The low spectrum becomes
+\begin{equation}
+^1D=12177.40\;\mathrm{cm^{-1}},\qquad
+^1S=20155.93\;\mathrm{cm^{-1}}.
+\end{equation}
+The $^1S$ error falls to about $6.89\%$, the best result for that center in the present frozen-orbital channel sequence, but the $^1D$ error rises to about $19.47\%$.
+
+\subsection{What the channel tension means}
+These calculations remove the simplest remaining explanation of the carbon discrepancy.  The problem is not merely an insufficient number of radial $p$ functions, nor a missing $2s$, $3s$, or $3d$ channel considered in isolation.  Different term symmetries prefer different balances of the same frozen orbital set.  Increasing the variational CI space can therefore improve one excitation while worsening another because the orbitals themselves were optimized for a different reference state.
+
+Accordingly, no single frozen-orbital model in this sequence is promoted as a high-precision carbon solver.  The sparse architecture is promoted as a control implementation, and the channel dependence is promoted as a diagnostic result.
+
+\subsection{Next gate: state-averaged orbital optimization}
+The next model increment is state-averaged orbital optimization or MCSCF over a common $^3P$, $^1D$, and $^1S$ objective.  The objective must be defined internally from state energies and normalization constraints; experimental term values remain excluded from the optimization.  This separates genuine variational orbital relaxation from empirical spectrum fitting.
+
+No TIR or affective term is used in any Hamiltonian in this chapter.

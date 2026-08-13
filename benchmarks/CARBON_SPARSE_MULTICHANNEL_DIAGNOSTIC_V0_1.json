@@ -1,0 +1,38 @@
+{
+  "schema":"RESCHEM_CARBON_SPARSE_MULTICHANNEL_DIAGNOSTIC_V0_1",
+  "status":"SPARSE_ARCHITECTURE_PASS_CHANNEL_TENSION_CONFIRMED",
+  "branch":"period2-correlation-ci-v0.1",
+  "reference_isolation":{"experimental_values_consumed_by_hamiltonians":false,"fit_to_reference":false,"TIR":"NOT_APPLIED"},
+  "frozen_targets_cm-1":{"^1D":10192.657,"^1S":21648.030},
+  "models":[
+    {
+      "name":"sparse_2s_plus_two_radial_p_plus_one_d",
+      "spin_orbitals":24,
+      "even_determinants":5346,
+      "hamiltonian_nnz":217140,
+      "^1D_cm-1":10615.04772910052,
+      "^1S_cm-1":17513.781056076245,
+      "relative_errors":{"^1D":0.04144068902745591,"^1S":0.19097575825254098},
+      "status":"PASS_SPARSE_CONTROL_D_GOOD_S_OVERCORRELATED"
+    },
+    {
+      "name":"sparse_two_s_plus_two_radial_p_plus_one_d",
+      "spin_orbitals":26,
+      "even_determinants":7502,
+      "hamiltonian_nnz":374814,
+      "^1D_cm-1":12177.402330248304,
+      "^1S_cm-1":20155.92892020112,
+      "relative_errors":{"^1D":0.19472305702510195,"^1S":0.06892549020852606},
+      "status":"PASS_SPARSE_CONTROL_S_GOOD_D_WORSENED"
+    }
+  ],
+  "architecture":{"matrix_representation":"CSR sparse","low_spectrum_solver":"scipy.sparse.linalg.eigsh","LS_classification":"Casimir expectation values from sparse one-body angular operators","dense_FCI_abandoned_above":"561 determinant diagnostic stage"},
+  "interpretation":{
+    "virtual_d":"partially repairs balanced-space ^1S overcorrelation while preserving a good ^1D region",
+    "virtual_s":"strongly improves ^1S but shifts ^1D too high",
+    "channel_tension":"different term symmetries prefer different frozen-orbital correlation balances",
+    "decision":"stop adding isolated channels; next gate is state-averaged orbital optimization/MCSCF over a common multichannel CI objective, with no experimental fitting"
+  },
+  "verification":{"github_actions_run_id":31560943220,"head_sha":"e123bce8691471b7e508bbbe5b7ab998bbe75698","tests":"PASS_20_OF_20","python":"3.12.13"},
+  "promotion":{"sparse_multichannel_architecture":"PASS_CONTROL","virtual_s_channel":"PASS_DIAGNOSTIC","single_fixed_frozen_orbital_model":"INSUFFICIENT_FOR_BALANCED_1D_1S","state_averaged_MCSCF":"NEXT_GATE","TIR":"NOT_APPLIED"}
+}

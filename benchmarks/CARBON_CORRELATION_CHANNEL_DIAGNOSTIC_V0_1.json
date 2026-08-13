@@ -1,0 +1,38 @@
+{
+  "schema": "RESCHEM_CARBON_CORRELATION_CHANNEL_DIAGNOSTIC_V0_1",
+  "status": "DIAGNOSTIC_PASS_BALANCED_MODEL_NOT_GLOBALLY_PROMOTED",
+  "branch": "period2-correlation-ci-v0.1",
+  "reference_isolation": {
+    "experimental_values_consumed_by_hamiltonians": false,
+    "frozen_post_hoc_targets_already_known": true,
+    "fit_to_reference": false,
+    "TIR": "NOT_APPLIED"
+  },
+  "frozen_targets_cm-1": {"^1D":10192.657,"^1S":21648.030},
+  "models": [
+    {"name":"two-radial-p_frozen_1s2_2s2","^1D_cm-1":10972.161518855737,"^1S_cm-1":25192.838255094237,"relative_errors":{"^1D":0.0764770676434749,"^1S":0.16374738279160914},"status":"PASS_CONTROL"},
+    {"name":"four-radial-p_frozen_1s2_2s2","^1D_cm-1":10915.102728086673,"^1S_cm-1":25366.886448739824,"relative_errors":{"^1D":0.07087903851632343,"^1S":0.17178729190322747},"status":"DIAGNOSTIC_P_ONLY_CONVERGENCE"},
+    {"name":"open_2s_naive_frozen_1s2","^1D_cm-1":19151.55250881907,"^1S_cm-1":33933.2655109619,"relative_errors":{"^1D":0.8789558511405879,"^1S":0.5674990061895656},"status":"REJECTED_MODEL_ORBITAL_FIELD_INCONSISTENT"},
+    {"name":"open_2s_consistent_physical_2s_2p","^1D_cm-1":14880.496640583786,"^1S_cm-1":23564.401050106404,"relative_errors":{"^1D":0.4599232212546529,"^1S":0.08852403891284358},"status":"DIAGNOSTIC_2S_CHANNEL_HELPS_1S_BUT_HARMS_1D"},
+    {"name":"balanced_physical_2s_plus_two_radial_p_even_FCI","^1D_cm-1":10584.508278105779,"^1S_cm-1":16214.142561126238,"relative_errors":{"^1D":0.038444468219207203,"^1S":0.2510107127010523},"spin_orbitals":14,"even_determinants":561,"status":"DIAGNOSTIC_1D_IMPROVES_1S_OVERCORRELATES"}
+  ],
+  "interpretation": {
+    "radial_p_correlation":"dominantly improves ^1D and converges smoothly",
+    "explicit_2s_valence_channel":"substantially lowers ^1S when treated consistently",
+    "balanced_2s_plus_radial_p":"combines both mechanisms but overcorrelates ^1S relative to ^3P in the truncated active space",
+    "model_selection":"do not promote balanced model as globally superior",
+    "next_physical_channel":"add an even-parity virtual d channel to the frozen-1s2_2s2 active-p reference before further p-only growth or empirical rescaling"
+  },
+  "verification": {
+    "latest_exact_github_actions_run":31560244105,
+    "head_sha":"cfdd19cfe32ed8819b45cabefeb11df523a7d70d",
+    "tests":"PASS_16_OF_16"
+  },
+  "promotion": {
+    "channel_diagnostic":"PASS",
+    "balanced_2s_p_model":"CANDIDATE_DIAGNOSTIC_NOT_PROMOTED",
+    "virtual_d_channel":"NEXT_GATE",
+    "state_averaged_orbital_optimization":"OPEN_AFTER_D_CHANNEL",
+    "TIR":"NOT_APPLIED"
+  }
+}
