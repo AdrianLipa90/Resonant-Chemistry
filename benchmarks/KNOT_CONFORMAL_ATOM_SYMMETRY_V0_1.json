@@ -1,0 +1,60 @@
+{
+  "schema": "RESCHEM_KNOT_CONFORMAL_ATOM_SYMMETRY_V0_1",
+  "status": "CANDIDATE_NON_CANON_NEGATIVE_DIRECT_SPECTRAL_MATCH",
+  "branch": "knot-conformal-atom-symmetry-v0.1",
+  "protocol": {
+    "anchor": 0.5,
+    "knot_map": "eta(theta)=1/(V_K(exp(i theta))-1/2)",
+    "tir_corrections_applied": false,
+    "affective_mapping_applied": false,
+    "atom_knot_identity_asserted": false,
+    "label_fitting_allowed": false
+  },
+  "knot_feature_vector": [
+    "crossing_number",
+    "jones_breadth",
+    "abs_winding_about_half",
+    "minimum_distance_to_half",
+    "unit_circle_half_root_count"
+  ],
+  "candidate_half_singular_family": [
+    "4_1",
+    "6_3",
+    "8_3",
+    "8_9",
+    "8_12",
+    "8_17",
+    "8_18"
+  ],
+  "candidate_family_status": "NUMERICAL_OBSERVATION_REQUIRES_SYMBOLIC_UNIT_CIRCLE_VERIFICATION",
+  "direct_gap_spectrum_test": {
+    "status": "NO_SIGNAL_ABOVE_SIMPLE_NULL",
+    "example_best_observed_pair": "8_18_vs_O",
+    "example_empirical_null_probability_approx": 0.36,
+    "interpretation": "DO_NOT_PROMOTE_DIRECT_KNOT_TO_ATOM_SPECTRAL_MATCH"
+  },
+  "atomic_feature_vector": [
+    "period",
+    "valence_electron_count",
+    "p_electron_count",
+    "target_spin_S",
+    "abs_HF_energy_over_Z_squared",
+    "log_abs_virial_residual",
+    "log_one_plus_spin_orbit_zeta",
+    "resolved_level_count"
+  ],
+  "atomic_control_source": {
+    "H_to_Ne": "benchmarks/BLIND_MULTI_L_H_TO_NE_V0_1.json",
+    "period2_spectroscopy": "benchmarks/PERIOD2_ATOM_SPECIFIC_SPECTROSCOPY_V0_1.json"
+  },
+  "next_hypothesis": {
+    "name": "KNOT_SYMMETRY_VS_P_SHELL_ELECTRON_HOLE_SYMMETRY",
+    "pairs": [
+      ["B", "F"],
+      ["C", "O"],
+      ["N", "N"]
+    ],
+    "reason": "p^n and p^(6-n) provide an intrinsic electron-hole involution independent of knot labels"
+  },
+  "promotion_rule": "NO_PHYSICAL_CLAIM_WITHOUT_SYMBOLIC_VERIFICATION_AND_PERMUTATION_NULL_CONTROLS"
+}
