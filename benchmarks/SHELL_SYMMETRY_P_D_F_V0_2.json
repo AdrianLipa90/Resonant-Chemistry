@@ -1,0 +1,44 @@
+{
+  "schema": "RESCHEM_SHELL_SYMMETRY_P_D_F_V0_2",
+  "status": "CANDIDATE_SHELL_ONLY_SYMMETRY_RECORD_FROZEN",
+  "comparison_object": "subshell_occupation_not_atom_label",
+  "physical_claim": false,
+  "rules": {
+    "capacity": "C_l=2(2l+1)",
+    "particle_hole": "k_star=C_l-k",
+    "self_dual": "k=2l+1",
+    "principal_shell_transfer": "same l and k with different n; no equality of radial physics implied"
+  },
+  "families": {
+    "p": {
+      "l": 1,
+      "capacity": 6,
+      "orbits": [[0,6],[1,5],[2,4],[3]],
+      "self_dual": 3
+    },
+    "d": {
+      "l": 2,
+      "capacity": 10,
+      "orbits": [[0,10],[1,9],[2,8],[3,7],[4,6],[5]],
+      "self_dual": 5
+    },
+    "f": {
+      "l": 3,
+      "capacity": 14,
+      "orbits": [[0,14],[1,13],[2,12],[3,11],[4,10],[5,9],[6,8],[7]],
+      "self_dual": 7
+    }
+  },
+  "forbidden_interpretations": [
+    "knot_equals_atom",
+    "element_name_defines_shell_pairing",
+    "same_occupation_across_n_implies_same_energy_or_radial_wavefunction",
+    "shell_symmetry_test_validates_knot_shell_physics"
+  ],
+  "next_gate": [
+    "derive shell observables from actual SCF/CI states",
+    "test p^k <-> p^(6-k) without knot data",
+    "test transfer 2p^k -> 3p^k before joint comparison",
+    "pre-register any knot-shell comparison and run null controls"
+  ]
+}
