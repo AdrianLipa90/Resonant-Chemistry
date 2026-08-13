@@ -1,18 +1,55 @@
-\documentclass[11pt,a4paper]{book}
+\documentclass[11pt,a4paper,oneside]{book}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage[margin=25mm]{geometry}
-\usepackage{amsmath,amssymb,bm}
-\usepackage{hyperref}
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
 \usepackage{microtype}
-\title{Resonant Chemistry\\Foundations of a Relational Chemistry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+\setlist{nosep}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{1.2em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Resonant Chemistry}
+\fancyhead[R]{\nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage}
+
+\newcommand{\ResChem}{\textsc{Resonant Chemistry}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\epstatus}[1]{\par\noindent\textbf{Epistemic status:} #1\par}
+
+\hypersetup{
+  pdftitle={Resonant Chemistry - Foundations, Control Solvers, Shell Dynamics and Relational Candidates},
+  pdfauthor={Adrian Lipa},
+  pdfsubject={Working research textbook},
+  pdfkeywords={atomic structure, Hartree-Fock, configuration interaction, electron shells, topology, conformal maps, Resonant Chemistry}
+}
+
+\title{Resonant Chemistry\\[0.35em]\large Foundations, Control Solvers, Shell Dynamics, and Relational Candidates}
 \author{Adrian Lipa}
-\date{Working monograph -- v0.1}
+\date{Working textbook -- v0.2 -- 13 August 2026}
+
 \begin{document}
+
+\frontmatter
 \maketitle
 \tableofcontents
-\chapter*{Epistemic convention}
-\addcontentsline{toc}{chapter}{Epistemic convention}
-Every statement is classified as established control physics, TIR-defined structure, ResChem candidate, tested result, or promoted canon. The formalism is required to recover standard chemistry before any additional relational invariant is interpreted physically.
+\input{chapters/00_scope_notation_and_method}
 
+\mainmatter
+
+\part{Control Physics Before Relational Interpretation}
 \input{chapters/01_atom}
 \input{chapters/02_helium}
 \input{chapters/03_helium_rhf}
@@ -20,16 +57,47 @@ Every statement is classified as established control physics, TIR-defined struct
 \input{chapters/05_state_observables_and_semantic_cards}
 \input{chapters/06_lithium_open_shell}
 \input{chapters/07_blind_mass_solving}
+
+\part{Scalable Atomic Control from Hydrogen to Krypton}
+\chapter{Multichannel Hartree--Fock and Periodic Coverage}
+\label{ch:scalable-atomic-control}
 \input{chapters/08_multichannel_atomic_hf}
 \input{chapters/09_period3_global_diis}
 \input{chapters/10_h_to_kr_control_coverage}
+
+\part{Shell Angular Structure and Spectroscopic Control}
+\chapter{Equivalent-Shell Algebra, Spin--Orbit Ordering, and Radial Spectroscopy}
+\label{ch:angular-spectroscopy}
 \input{chapters/11_angular_multiplets}
 \input{chapters/12_spin_orbit_J_ordering}
 \input{chapters/13_atom_specific_period2_spectroscopy}
+
+\part{Correlation Architecture and the Frozen-Orbital Boundary}
+\chapter{Active Spaces, Correlated Spectra, and Carbon Channel Diagnostics}
+\label{ch:correlation-architecture}
 \input{chapters/14_period2_active_ci}
 \input{chapters/15_period2_correlated_spin_orbit}
 \input{chapters/16_carbon_correlation_channels}
 \input{chapters/17_sparse_multichannel_carbon}
+
+\part{Shell-Level Many-Body Topology and Conformal Diagnostics}
 \input{chapters/18_shell_nbody_topology}
+\input{chapters/19_knot_conformal_shell_diagnostics}
+\input{chapters/20_multicentre_shell_dynamics}
+
+\part{Relational Admission Layer}
+\input{chapters/21_relational_admission_contract}
+
+\appendix
+\part{Reproducibility and Project State}
+\input{chapters/A_benchmark_ledger}
+\input{chapters/B_implementation_map}
+\input{chapters/C_validation_reproducibility}
+\input{chapters/D_open_gates}
+
+\backmatter
+\chapter*{Current textbook status}
+\addcontentsline{toc}{chapter}{Current textbook status}
+This document is a working research textbook.  Conventional atomic-control results retain their declared validation status; the shell-topology, conformal knot--shell and relational/TIR layers remain candidates unless explicitly stated otherwise.  The current correlation frontier is state-averaged orbital optimization/MCSCF for carbon, while the current topology frontier is a shell-only particle--hole and principal-shell transfer test before any joint knot comparison.
 
 \end{document}
