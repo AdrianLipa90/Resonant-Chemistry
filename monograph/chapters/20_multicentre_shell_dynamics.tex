@@ -1,0 +1,74 @@
+\chapter{From Nuclear Centres to Molecular Shell Dynamics}
+\label{ch:multicentre-shells}
+
+\section{Why the nucleus must remain in the model}
+A shell topology detached from its nuclei would discard the dominant attractive structure that organizes ordinary atomic and molecular bound states.  The multicentre extension therefore starts from the standard clamped-nuclei electronic Hamiltonian
+\begin{equation}
+H_e=\sum_{i=1}^{N_e}\left[-\frac12\nabla_i^2-\sum_{A=1}^{M}\frac{Z_A}{|\mathbf r_i-\mathbf R_A|}\right]
++\sum_{i<j}\frac{1}{|\mathbf r_i-\mathbf r_j|}
++V_{NN},
+\end{equation}
+with
+\begin{equation}
+V_{NN}=\sum_{A<B}\frac{Z_A Z_B}{|\mathbf R_A-\mathbf R_B|}.
+\end{equation}
+The nuclei $\mathcal A_A=(Z_A,\mathbf R_A)$ are attractive Coulomb centres for the electrons.  In the exact conservative Hamiltonian they are not dissipative attractors; in an iterative electronic-structure algorithm, however, a converged fixed point may possess a basin of attraction in the numerical state space.  The two meanings are kept distinct.
+
+\section{Shells as local organization, bonding as global reorganization}
+An isolated-atom configuration provides a useful local shell decomposition, but a molecular eigenstate is not generally a tensor product of immutable atomic shells.  Bond formation changes the global one-particle density matrix, orbital occupations, exchange structure and correlation.  The shell-level programme therefore uses atomic subshells as incoming coordinates and asks how their control observables reorganize when the nuclear-centre set changes from
+\begin{equation}
+\{\mathcal A_A\}_{\rm separated}
+\quad\longrightarrow\quad
+\{\mathcal A_A\}_{\rm molecule}.
+\end{equation}
+A bond is not defined here as a knot.  The control definition remains energetic and electronic: a molecular state is characterized by its Hamiltonian, density, reduced density matrices and response to nuclear geometry.  Topological descriptors may be appended only as derived diagnostics.
+
+\section{Multicentre winding diagnostics}
+For a declared oriented projection $P:\mathbb R^3\rightarrow\mathbb C$, an electron path may be measured relative to each nuclear centre,
+\begin{equation}
+w_{iA}[\gamma]=\frac{1}{2\pi}\oint_\gamma d\arg P(\mathbf r_i-\mathbf R_A),
+\end{equation}
+and relative electron paths may be measured by
+\begin{equation}
+w_{ij}[\gamma]=\frac{1}{2\pi}\oint_\gamma d\arg P(\mathbf r_i-\mathbf r_j).
+\end{equation}
+For $M>1$ nuclei, the vector $\mathbf w_i=(w_{i1},\ldots,w_{iM})$ can distinguish projected circulation around different centres.  These quantities are projection-dependent unless an effective two-dimensional physical constraint is separately justified.
+
+\section{Basin transfer as a reduced diagnostic}
+In a reduced orbital or density-flow description, one may define centre-weighted populations using a fixed partition of real space, for example
+\begin{equation}
+Q_A=\int_{\Omega_A}\rho(\mathbf r)\,d^3r,
+\end{equation}
+with the partitioning rule specified independently of the desired chemical conclusion.  A bond-formation path then induces a redistribution
+\begin{equation}
+\Delta\mathbf Q=(\Delta Q_1,\ldots,\Delta Q_M).
+\end{equation}
+A future topological descriptor may be compared with this redistribution, but it cannot replace charge conservation or create a bond where the control wavefunction does not support one.
+
+\section{Adiabatic and nonadiabatic paths}
+For a nuclear path $\mathbf R_A(\lambda)$, an adiabatic electronic branch $|\Psi(\lambda)\rangle$ may acquire a geometric phase
+\begin{equation}
+\Gamma=i\oint\langle\Psi(\lambda)|\partial_\lambda\Psi(\lambda)\rangle\,d\lambda.
+\end{equation}
+This is conceptually distinct from projected particle winding.  Any combined shell-topology record must therefore keep Berry/Pancharatnam holonomy, exchange parity and projected spatial winding as separate fields rather than collapse them into one scalar.
+
+\section{Candidate molecular state record}
+A minimal multicentre extension of Chapter~\ref{ch:shell-nbody-topology} is
+\begin{equation}
+\Sigma_{\rm mol}=\left(\{Z_A,\mathbf R_A\},\rho,\gamma,\{n_k\},\pi_{\rm exch},\{w_{iA}\},\{w_{ij}\},\Gamma,\mathcal P_{\rm shell}\right),
+\end{equation}
+where $\mathcal P_{\rm shell}$ records the chosen shell/subshell projection and its provenance.  The density $\rho$, one-body density matrix $\gamma$ and natural occupations $n_k$ are control observables; the winding and conformal fields are candidate diagnostics.
+
+\section{First molecular validation ladder}
+The molecular programme should begin with systems whose conventional control structure is transparent:
+\begin{enumerate}
+\item $\mathrm{H}_2^+$ as a one-electron two-centre control;
+\item $\mathrm{H}_2$ as the first exchange/correlation bond;
+\item HeH$^+$ as an asymmetric two-centre test;
+\item LiH as the first clear core--valence separation test;
+\item only then multi-centre or aromatic systems where loop descriptors are tempting.
+\end{enumerate}
+For every system, the control energy curve and density reorganization must be frozen before a topological interpretation is evaluated.
+
+\section{Current status}
+This chapter is a formal specification and validation plan.  The current repository implements the shell-level primitives and atomic controls but does not yet contain a validated molecular topology solver.  The first admissible implementation target is therefore $\mathrm{H}_2^+$ with an explicit two-centre Hamiltonian and a diagnostic layer that can be disabled without changing the control solution.
