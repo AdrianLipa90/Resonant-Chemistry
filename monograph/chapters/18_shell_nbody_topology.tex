@@ -1,0 +1,58 @@
+\chapter{Shell-Level N-Body Topology with Nuclear Centres}
+\label{ch:shell-nbody-topology}
+
+\section{Status and scope}
+This chapter introduces a \emph{candidate representation layer}. It does not modify the validated Coulomb Hamiltonian and it does not identify knots with atoms. The comparison object is an electronic shell or subshell, while nuclei remain explicit attractive Coulomb centres.
+
+\section{Control Hamiltonian}
+For nuclei $A=1,\ldots,M$ and electrons $i=1,\ldots,N$, the nonrelativistic control Hamiltonian in atomic units is
+\begin{equation}
+H=\sum_i\frac{\mathbf p_i^2}{2}-\sum_{i,A}\frac{Z_A}{|\mathbf r_i-\mathbf R_A|}+\sum_{i<j}\frac{1}{|\mathbf r_i-\mathbf r_j|}+H_{\mathrm{corr}}+H_{\mathrm{SO}}+\cdots.
+\end{equation}
+The topology layer is diagnostic by default: it labels histories or sectors and does not introduce a new force term.
+
+\section{Nuclear attractive centres}
+Define $\mathcal A_A=(Z_A,\mathbf R_A)$. Each centre contributes $V_A(\mathbf r)=-Z_A/|\mathbf r-\mathbf R_A|$. In a conservative Hamiltonian flow $\mathcal A_A$ is not a dissipative attractor in the strict sense. In reduced SCF or relaxation dynamics, basin/attractor language is admissible only for the reduced map.
+
+\section{Configuration topology and dimensional boundary}
+For $N$ identical point particles in three spatial dimensions, the unordered collision-free configuration space has fundamental exchange topology governed by the permutation group $S_N$. Ordinary braid-group topology is fundamental for effective two-dimensional or otherwise constrained motion. Consequently, this work distinguishes three-dimensional exchange permutation data, projection-dependent winding diagnostics, and genuine braid invariants only after a declared effective-2D constraint.
+
+\section{Shell particle-hole duality}
+For orbital angular momentum $l$, the shell capacity is
+\begin{equation}
+C_l=2(2l+1).
+\end{equation}
+For occupation $k$, define $k^\star=C_l-k$. The self-dual half-filled shell obeys $k=k^\star=2l+1$. Thus
+\begin{align}
+p^1&\leftrightarrow p^5,&p^2&\leftrightarrow p^4,&p^3&\leftrightarrow p^3,\\
+d^k&\leftrightarrow d^{10-k},&&&d^5&\leftrightarrow d^5,\\
+f^k&\leftrightarrow f^{14-k},&&&f^7&\leftrightarrow f^7.
+\end{align}
+
+\section{Projected winding observables}
+For a declared oriented projection $P:\mathbb R^3\to\mathbb R^2\simeq\mathbb C$, define
+\begin{equation}
+w_{iA}=\frac{1}{2\pi}\oint d\arg P(\mathbf r_i-\mathbf R_A),\qquad
+w_{ij}=\frac{1}{2\pi}\oint d\arg P(\mathbf r_i-\mathbf r_j).
+\end{equation}
+These are representation observables, not projection-independent invariants of unrestricted 3D quantum dynamics.
+
+\section{Conformal reduction}
+Let $\Phi[\gamma]\in\mathbb C$ be a declared scalar relational coordinate derived from a shell history. Introduce
+\begin{equation}
+\zeta=\Phi[\gamma]-z_\star,\qquad \eta=\frac{1}{\zeta}.
+\end{equation}
+The current candidate uses $z_\star=1/2$ only as a falsifiable anchor. It must be varied under identifiability controls before any physical interpretation.
+
+\section{Shell-topology state vector}
+A minimal diagnostic record is
+\begin{equation}
+\Sigma_{nlk}=\left(n,l,k,C_l-k,\pi_{\rm exch},\{w_{iA}\},\{w_{ij}\},\Gamma_{\rm geom},\eta\right),
+\end{equation}
+where $\pi_{\rm exch}\in\{+1,-1\}$ is permutation parity and $\Gamma_{\rm geom}$ denotes an independently defined geometric phase when available.
+
+\section{Validation ladder}
+The required order is: recover standard SCF/CI control data; extract shell topology observables without fitting experimental energies; test $p^k\leftrightarrow p^{6-k}$ internally; test transfer from $2p^k$ to $3p^k$; only then compare frozen shell classes with knot/conformal families. Failure at any stage is retained and does not license retuning of the conformal anchor or shell labels.
+
+\section{Implementation status}
+The reference implementation \texttt{reschem/shell\_nbody\_topology.py} provides shell capacity and particle-hole duality, nuclear Coulomb centres, 3D exchange parity, declared-plane electron--nucleus and electron--electron winding diagnostics, and the conformal inverse coordinate. These functions are implementation primitives; physical validation against many-electron trajectories remains open.
