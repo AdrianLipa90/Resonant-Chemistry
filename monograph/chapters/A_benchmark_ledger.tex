@@ -3,7 +3,11 @@
 
 This appendix summarizes the machine-readable checkpoints that support the narrative chapters.  The JSON files in \texttt{benchmarks/} remain the authoritative numerical records; the table below is an index, not a replacement for them.
 
-\begin{longtable}{p{0.26\textwidth}p{0.23\textwidth}p{0.41\textwidth}}
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.43\textwidth}}
 \toprule
 Artifact & Status class & Scientific role \\
 \midrule
@@ -12,24 +16,25 @@ Artifact & Status class & Scientific role \\
 Artifact & Status class & Scientific role \\
 \midrule
 \endhead
-\texttt{BLIND\_MASS\_SOLVE\_S\_SHELL\_V0\_1.json} & tested control & Blind/reference-isolated $s$-shell mass-solving checkpoint for the first one- to four-electron systems. \\
-\texttt{BLIND\_MULTI\_L\_H\_TO\_NE\_V0\_1.json} & tested control & Common multi-$l$ Hartree--Fock checkpoint from H through Ne; ten of ten systems converged. \\
-\texttt{NA\_TO\_AR\_DIIS\_V0\_1.json} & tested control & Global DIIS stabilization for the third period without element-specific tuning. \\
-\texttt{H\_TO\_KR\_CONTROL\_MANIFEST\_V0\_1.json} & coverage control & Provenance and acceptance manifest for neutral H through Kr. \\
-\texttt{K\_TO\_KR\_ROBUST\_QUALITY\_V0\_1.json} & tested control & Adaptive quality ladder for the K--Kr region with virial rejection of false stationary points. \\
-\texttt{ANGULAR\_MULTIPLET\_P\_D\_V0\_1.json} & angular control & Equivalent-shell $LS$ multiplet structure for $p$ and diagnostic $d$ shells. \\
-\texttt{SPIN\_ORBIT\_J\_SEQUENCE\_V0\_1.json} & angular control & Weak-coupling $J$ ordering derived from the determinant-space spin--orbit operator. \\
-\texttt{PERIOD2\_ATOM\_SPECIFIC\_SPECTROSCOPY\_V0\_1.json} & approximate spectroscopy control & Radial $F^k$, Pauli central-field $\zeta$, and B--Ne level structure; post-hoc references are isolated from the solve. \\
-\texttt{PERIOD2\_ACTIVE\_P\_CI\_V0\_1.json} & correlation control & Finite active-$p$ CI for period-2 term centers. \\
-\texttt{PERIOD2\_CORRELATED\_SPECTRUM\_V0\_1.json} & correlation control & Rediagonalized spin--orbit structure in the correlated active space. \\
-\texttt{CARBON\_ACTIVE\_SPACE\_CONVERGENCE\_V0\_1.json} & diagnostic & Radial-$p$ active-space convergence for carbon. \\
-\texttt{CARBON\_CORRELATION\_CHANNEL\_DIAGNOSTIC\_V0\_1.json} & diagnostic & Separation of radial-$p$, explicit-$s$, and other channel effects on $^1D$ and $^1S$. \\
-\texttt{CARBON\_PD\_CHANNEL\_DIAGNOSTIC\_V0\_1.json} & diagnostic & Virtual-$d$ channel isolation. \\
-\texttt{CARBON\_SPARSE\_MULTICHANNEL\_DIAGNOSTIC\_V0\_1.json} & diagnostic & Sparse multichannel CI with thousands of determinants; establishes the frozen-orbital boundary. \\
-\texttt{SHELL\_NBODY\_TOPOLOGY\_P\_SHELL\_V0\_1.json} & candidate implementation & Particle--hole duality and shell-level topology primitives; physical trajectory validation remains open. \\
-\texttt{KNOT\_CONFORMAL\_ATOM\_SYMMETRY\_V0\_1.json} & historical candidate & Original exploratory knot/atom comparison retained for provenance; direct spectral matching was not promoted and the comparison object is superseded by shell-level v0.2. \\
+\path{BLIND_MASS_SOLVE_S_SHELL_V0_1.json} & tested control & Blind/reference-isolated $s$-shell mass-solving checkpoint for the first one- to four-electron systems. \\
+\path{BLIND_MULTI_L_H_TO_NE_V0_1.json} & tested control & Common multi-$l$ Hartree--Fock checkpoint from H through Ne; ten of ten systems converged. \\
+\path{NA_TO_AR_DIIS_V0_1.json} & tested control & Global DIIS stabilization for the third period without element-specific tuning. \\
+\path{H_TO_KR_CONTROL_MANIFEST_V0_1.json} & coverage control & Provenance and acceptance manifest for neutral H through Kr. \\
+\path{K_TO_KR_ROBUST_QUALITY_V0_1.json} & tested control & Adaptive quality ladder for the K--Kr region with virial rejection of false stationary points. \\
+\path{ANGULAR_MULTIPLET_P_D_V0_1.json} & angular control & Equivalent-shell $LS$ multiplet structure for $p$ and diagnostic $d$ shells. \\
+\path{SPIN_ORBIT_J_SEQUENCE_V0_1.json} & angular control & Weak-coupling $J$ ordering derived from the determinant-space spin--orbit operator. \\
+\path{PERIOD2_ATOM_SPECIFIC_SPECTROSCOPY_V0_1.json} & approximate spectroscopy control & Radial $F^k$, Pauli central-field $\zeta$, and B--Ne level structure; post-hoc references are isolated from the solve. \\
+\path{PERIOD2_ACTIVE_P_CI_V0_1.json} & correlation control & Finite active-$p$ CI for period-2 term centers. \\
+\path{PERIOD2_CORRELATED_SPECTRUM_V0_1.json} & correlation control & Rediagonalized spin--orbit structure in the correlated active space. \\
+\path{CARBON_ACTIVE_SPACE_CONVERGENCE_V0_1.json} & diagnostic & Radial-$p$ active-space convergence for carbon. \\
+\path{CARBON_CORRELATION_CHANNEL_DIAGNOSTIC_V0_1.json} & diagnostic & Separation of radial-$p$, explicit-$s$, and other channel effects on $^1D$ and $^1S$. \\
+\path{CARBON_PD_CHANNEL_DIAGNOSTIC_V0_1.json} & diagnostic & Virtual-$d$ channel isolation. \\
+\path{CARBON_SPARSE_MULTICHANNEL_DIAGNOSTIC_V0_1.json} & diagnostic & Sparse multichannel CI with thousands of determinants; establishes the frozen-orbital boundary. \\
+\path{SHELL_NBODY_TOPOLOGY_P_SHELL_V0_1.json} & candidate implementation & Particle--hole duality and shell-level topology primitives; physical trajectory validation remains open. \\
+\path{KNOT_CONFORMAL_ATOM_SYMMETRY_V0_1.json} & historical candidate & Original exploratory knot/atom comparison retained for provenance; direct spectral matching was not promoted and the comparison object is superseded by shell-level v0.2. \\
 \bottomrule
 \end{longtable}
+\endgroup
 
 \section{Interpretation rule}
 A benchmark status is local to the declared model and gate.  For example, H--Kr coverage does not imply high-precision term-resolved spectroscopy for every element, and a passing shell-topology unit test does not validate a topological law of chemistry.  The most restrictive scientifically relevant caveat accompanies the result throughout the book.
