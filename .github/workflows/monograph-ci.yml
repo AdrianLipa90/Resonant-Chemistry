@@ -25,6 +25,17 @@ jobs:
       - name: Run complete Python test discovery
         run: python -m unittest discover -s tests -v
 
+      - name: Run production carbon state-averaged p-relaxation benchmark
+        run: |
+          python scripts/benchmark_carbon_state_averaged_p_relaxation.py \
+            --basis-size 18 \
+            --grid-points 800 \
+            --tolerance-hartree 1e-9 \
+            --coarse-points 21 \
+            --theta-limit 1.45 \
+            --refine-points 11 \
+            --output ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
+
       - name: Audit required repository areas
         run: |
           python - <<'PY'
@@ -64,6 +75,8 @@ jobs:
         run: |
           sha256sum monograph/main.tex monograph/main.pdf > monograph/TEXTBOOK_SHA256.txt
           cat monograph/TEXTBOOK_SHA256.txt
+          sha256sum ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json > ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
+          cat ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
 
       - name: Upload complete textbook
         uses: actions/upload-artifact@v4
@@ -74,4 +87,6 @@ jobs:
             monograph/main.log
             monograph/pdfinfo.txt
             monograph/TEXTBOOK_SHA256.txt
+            ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
+            ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
           if-no-files-found: error
