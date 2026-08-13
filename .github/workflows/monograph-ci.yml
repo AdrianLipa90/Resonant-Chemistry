@@ -27,7 +27,7 @@ jobs:
 
       - name: Run production carbon state-averaged p-relaxation benchmark
         run: |
-          python scripts/benchmark_carbon_state_averaged_p_relaxation.py \
+          PYTHONPATH=. python scripts/benchmark_carbon_state_averaged_p_relaxation.py \
             --basis-size 18 \
             --grid-points 800 \
             --tolerance-hartree 1e-9 \
