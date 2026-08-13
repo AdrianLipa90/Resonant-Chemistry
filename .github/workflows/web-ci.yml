@@ -1,0 +1,53 @@
+name: resonant-chemistry-web
+
+on:
+  push:
+    branches:
+      - interactive-web-v0.1
+  workflow_dispatch:
+
+jobs:
+  web-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JavaScript syntax
+        run: |
+          node --check web/app.js
+          node --check web/phasenav36d.js
+
+      - name: Static contract
+        run: |
+          test -s web/index.html
+          test -s web/styles.css
+          test -s web/app.js
+          test -s web/phasenav36d.js
+          grep -q 'id="shell"' web/index.html
+          grep -q 'id="carbon"' web/index.html
+          grep -q 'id="topology"' web/index.html
+          grep -q 'length!==36' web/app.js
+          grep -q 'length !== 36' web/phasenav36d.js
+
+      - name: Serve and probe
+        run: |
+          python3 -m http.server 8000 >/tmp/reschem-web.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID' EXIT
+          sleep 1
+          python3 - <<'PY'
+          from urllib.request import urlopen
+          checks = {
+              'index': 'http://127.0.0.1:8000/web/',
+              'app': 'http://127.0.0.1:8000/web/app.js',
+              'phase36': 'http://127.0.0.1:8000/web/phasenav36d.js',
+              'carbon_benchmark': 'http://127.0.0.1:8000/benchmarks/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json',
+          }
+          for name, url in checks.items():
+              with urlopen(url, timeout=5) as response:
+                  body = response.read()
+                  print(name, response.status, len(body))
+                  if response.status != 200 or not body:
+                      raise SystemExit(2)
+          PY
