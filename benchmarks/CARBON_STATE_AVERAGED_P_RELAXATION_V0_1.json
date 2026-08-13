@@ -1,0 +1,76 @@
+{
+  "schema": "RESCHEM_CARBON_STATE_AVERAGED_P_RELAXATION_BENCHMARK_V0_1",
+  "status": "PASS_VARIATIONAL_DIRECTION",
+  "epistemic_status": "PRODUCTION_NUMERICAL_CANDIDATE_NOT_MCSCF_CANON",
+  "configuration": {
+    "basis_size": 18,
+    "grid_points": 800,
+    "tolerance_hartree": 1e-9,
+    "objective_terms": ["^3P", "^1D", "^1S"],
+    "weights": [0.3333333333333333, 0.3333333333333333, 0.3333333333333333],
+    "coarse_points": 21,
+    "theta_limit_rad": 1.45,
+    "refine_interval_rad": [-0.43500000000000005, -0.14500000000000002],
+    "refine_points": 11
+  },
+  "baseline": {
+    "theta_rad": 0.0,
+    "ground_energy_hartree": -5.284039512401661,
+    "state_average_hartree": -5.243337544666472,
+    "term_absolute_hartree": {
+      "^3P": -5.284039512401661,
+      "^1D": -5.235812344752689,
+      "^1S": -5.210160776845068
+    },
+    "term_relative_cm^-1": {
+      "^3P": 0.0,
+      "^1D": 10584.639841801396,
+      "^1S": 16214.508252401722
+    }
+  },
+  "best_sampled": {
+    "theta_rad": -0.29000000000000004,
+    "ground_energy_hartree": -5.287703975017287,
+    "state_average_hartree": -5.246907956250559,
+    "term_absolute_hartree": {
+      "^3P": -5.287703975017287,
+      "^1D": -5.239533714171051,
+      "^1S": -5.213486179563339
+    },
+    "term_relative_cm^-1": {
+      "^3P": 0.0,
+      "^1D": 10572.150242248474,
+      "^1S": 16288.923298386411
+    }
+  },
+  "local_refined_bracket": [
+    {"theta_rad": -0.31900000000000006, "state_average_hartree": -5.246893018274649},
+    {"theta_rad": -0.29000000000000004, "state_average_hartree": -5.246907956250559},
+    {"theta_rad": -0.261, "state_average_hartree": -5.246860273838799}
+  ],
+  "improvement_hartree": 0.0035704115840866635,
+  "relative_gap_changes_cm^-1": {
+    "^1D": -12.489599552921703,
+    "^1S": 74.41504598468918
+  },
+  "acceptance": {
+    "strict_variational_gain": true,
+    "minimum_interior_to_refined_interval": true,
+    "experimental_term_energies_used_in_objective": false,
+    "tir_used": false,
+    "affective_mapping_used": false
+  },
+  "source_ci": {
+    "run_id": 31698054125,
+    "job_id": 94440280441,
+    "artifact_id": 9180162231,
+    "artifact_zip_sha256": "cea4ae6512e4093b4af92267fc2e8a4370a3ed4c757fc9a09554c4c0b2bf3d38",
+    "full_generated_benchmark_sha256": "4991f89450a47480a8ed71df33799bb9da60451770a9471cc182db7ab288fdbe"
+  },
+  "interpretation_boundary": [
+    "The strict decrease proves only that the frozen two-radial-p active subspace is not stationary along the tested active-external p direction.",
+    "The best sampled point is an interior grid point near theta=-0.29 rad; it is not yet a converged continuous optimum.",
+    "State-average variational improvement is not equivalent to global spectroscopic improvement: the 1D relative gap decreases slightly while the 1S relative gap increases.",
+    "This is not full MCSCF/CASSCF and does not validate knot, conformal, TIR, PhaseNav, or affective physics."
+  ]
+}

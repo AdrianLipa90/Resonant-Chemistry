@@ -1,0 +1,28 @@
+{
+  "schema": "RESCHEM_SHELL_NBODY_TOPOLOGY_V0_1",
+  "status": "CANDIDATE_FORMALISM_IMPLEMENTED_LOCAL_TESTS_PASS",
+  "scope": "shell-level N-body topology with explicit nuclear Coulomb centres",
+  "epistemic_boundary": {
+    "standard_coulomb_control": "ESTABLISHED",
+    "3d_identical_particle_exchange": "PERMUTATION_GROUP_NOT_BRAID_GROUP",
+    "braid_language": "ONLY_EFFECTIVE_2D_OR_CONSTRAINED_PROJECTION",
+    "projected_winding": "REPRESENTATION_OBSERVABLE_NOT_NEW_FORCE",
+    "conformal_anchor_half": "MODEL_PARAMETER_UNTIL_IDENTIFIABILITY_TESTS_PASS"
+  },
+  "p_shell_duality": [
+    {"occupation":0,"holes":6,"partner":6,"self_dual":false},
+    {"occupation":1,"holes":5,"partner":5,"self_dual":false},
+    {"occupation":2,"holes":4,"partner":4,"self_dual":false},
+    {"occupation":3,"holes":3,"partner":3,"self_dual":true},
+    {"occupation":4,"holes":2,"partner":2,"self_dual":false},
+    {"occupation":5,"holes":1,"partner":1,"self_dual":false},
+    {"occupation":6,"holes":0,"partner":0,"self_dual":false}
+  ],
+  "local_validation": {"tests": 6, "passed": 6, "failed": 0},
+  "next_gates": [
+    "derive observables from actual SCF/CI orbital trajectories or current-density proxies",
+    "test n-invariance across 2p and 3p without label fitting",
+    "test particle-hole symmetry p^k versus p^(6-k)",
+    "only then compare shell topology classes with knot/conformal families"
+  ]
+}

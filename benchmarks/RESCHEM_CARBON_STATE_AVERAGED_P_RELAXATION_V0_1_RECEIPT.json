@@ -1,0 +1,49 @@
+{
+  "schema": "RESCHEM_CARBON_STATE_AVERAGED_P_RELAXATION_V0_1_RECEIPT",
+  "created_date": "2026-08-13",
+  "branch": "shell-nbody-topology-v0.1",
+  "status": "PASS_PRODUCTION_VARIATIONAL_GATE_CANDIDATE_NOT_CANON",
+  "implementation": "reschem/carbon_state_averaged_orbital_relaxation.py",
+  "runner": "scripts/benchmark_carbon_state_averaged_p_relaxation.py",
+  "benchmark": "benchmarks/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json",
+  "validation": {
+    "github_actions_run_id": 31698054125,
+    "github_actions_job_id": 94440280441,
+    "github_actions_conclusion": "success",
+    "python_test_discovery": "PASS_106_TESTS_1_SKIPPED",
+    "production_benchmark": "PASS_VARIATIONAL_DIRECTION",
+    "repository_structure_audit": "PASS_NO_MISSING_NO_EMPTY_NO_GITKEEP",
+    "full_textbook_build": "PASS",
+    "undefined_reference_gate": "PASS",
+    "visual_pdf_gate": "PASS_66_OF_66_PAGES_CURRENT_ARTIFACT",
+    "python_version": "3.12.13",
+    "numpy_version": "2.5.2",
+    "scipy_version": "1.18.0"
+  },
+  "hashes": {
+    "artifact_zip_sha256": "cea4ae6512e4093b4af92267fc2e8a4370a3ed4c757fc9a09554c4c0b2bf3d38",
+    "generated_full_benchmark_sha256": "4991f89450a47480a8ed71df33799bb9da60451770a9471cc182db7ab288fdbe",
+    "textbook_pdf_sha256": "e0cfa0b9b568404aa13d4b9c60fd9521b6001bb212d049cdf5a0e65f1b1679d4",
+    "textbook_main_tex_sha256_at_validated_build": "2094d84bf9ece84f38c5000943d41283a867e6047456b35dad3d245473e125c1"
+  },
+  "headline": {
+    "baseline_theta_rad": 0.0,
+    "best_sampled_theta_rad": -0.29000000000000004,
+    "baseline_state_average_hartree": -5.243337544666472,
+    "best_sampled_state_average_hartree": -5.246907956250559,
+    "variational_gain_hartree": 0.0035704115840866635,
+    "best_is_interior_to_refinement_interval": true
+  },
+  "epistemic_boundary": {
+    "full_mcscf_casscf": "NOT_IMPLEMENTED_BY_THIS_GATE",
+    "continuous_theta_optimum": "NOT_YET_CONVERGED",
+    "basis_grid_convergence_of_theta_and_gain": "OPEN",
+    "spectroscopy_improvement_claim": "DENIED",
+    "tir": "NOT_APPLIED_CONTROL_BASELINE",
+    "phasenav": "NOT_APPLIED_TO_HAMILTONIAN",
+    "knot_conformal": "NOT_APPLIED_TO_HAMILTONIAN",
+    "affective_mapping": "RESERVED_UNASSIGNED",
+    "canon": "CANDIDATE_NOT_PROMOTED"
+  },
+  "next_gate": "LOCAL_CONTINUOUS_OR_DENSE_THETA_REFINEMENT_PLUS_BASIS_GRID_CONVERGENCE_THEN_MULTIDIMENSIONAL_STATE_AVERAGED_MCSCF_IF_STABLE"
+}

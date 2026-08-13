@@ -1,0 +1,83 @@
+\section{First State-Averaged Active--External Orbital Relaxation Gate}
+\label{sec:carbon-state-averaged-p-relaxation}
+
+The frozen-orbital diagnostics of Sec.~\ref{sec:carbon-sparse-multichannel} identify a structural limitation rather than a missing isolated channel: the $^3P$, $^1D$, and $^1S$ terms do not prefer the same fixed orbital representation.  The next admissible step must therefore vary the orbital subspace itself while keeping experimental term energies outside the objective.
+
+\subsection{Why an internal active-space rotation is insufficient}
+A full configuration interaction calculation in a fixed active orbital span is invariant under unitary rotations within that complete span.  Consequently, rotating two already active radial $p$ functions cannot constitute orbital optimization: it changes the representation but not the variational space.  A genuine first orbital-relaxation test must mix an active direction with a direction that was previously external to the CI space.
+
+\subsection{Three-radial-$p$ reference and two-radial-$p$ active space}
+Let $\{u_{p0},u_{p1},u_{p2}\}$ be three mutually orthonormal radial $p$ functions obtained from the same closed $1s^2 2s^2$ reference field.  The first radial is retained and the second active radial is allowed to rotate into the external third direction,
+\begin{equation}
+\widetilde u_{p1}(\theta)=\cos\theta\,u_{p1}+\sin\theta\,u_{p2}.
+\end{equation}
+The active $p$ span is therefore
+\begin{equation}
+\mathcal A_p(\theta)=\operatorname{span}\{u_{p0},\widetilde u_{p1}(\theta)\}.
+\end{equation}
+At $\theta=0$ this reproduces the frozen two-radial-$p$ reference.  For $\theta\neq0$, $\mathcal A_p(\theta)$ is a different two-dimensional subspace of the three-dimensional reference span.  The excluded orthogonal complement changes accordingly, so this transformation is not a gauge rotation of a fixed full-CI space.
+
+\subsection{Internal state-average objective}
+For each $\theta$, the even-parity four-valence-electron Hamiltonian is rebuilt in the physical $2s$ plus two-active-$p$ space, diagonalized, and classified by $L^2$ and $S^2$.  Define the equal-weight state-average
+\begin{equation}
+\overline E(\theta)
+=\frac{1}{3}\left[E(^3P;\theta)+E(^1D;\theta)+E(^1S;\theta)\right].
+\label{eq:carbon-state-average-objective}
+\end{equation}
+All three quantities in Eq.~\eqref{eq:carbon-state-average-objective} are absolute CI eigenenergies from the same Hamiltonian.  Experimental term centers do not enter the objective, the orbital generator, or the stopping rule.
+
+More generally, for non-negative normalized weights $w_T$,
+\begin{equation}
+\overline E_w(\theta)=\sum_{T\in\{^3P,^1D,^1S\}}w_T E(T;\theta),
+\qquad \sum_T w_T=1.
+\end{equation}
+The present gate fixes equal weights before evaluation to avoid post-hoc preference for whichever term improves most.
+
+\subsection{Variational acceptance rule}
+Let $\Theta$ be a symmetric scan containing $\theta=0$.  The candidate passes the minimal variational gate when
+\begin{equation}
+\min_{\theta\in\Theta}\overline E(\theta)
+\leq \overline E(0)+\varepsilon_{\rm num},
+\end{equation}
+with finite classified $^3P$, $^1D$, and $^1S$ states throughout the accepted scan.  A strict decrease demonstrates that the frozen active subspace was not stationary against the tested external $p$ direction.  Equality within numerical tolerance is a valid negative result: it would mean that this particular external direction does not supply the missing relaxation.
+
+\subsection{Production numerical gate}
+The production benchmark used 18 radial basis functions, 800 radial grid points, a $10^{-9}$~Ha SCF tolerance, a 21-point coarse scan over $\theta\in[-1.45,1.45]$, and an 11-point refinement over the preselected neighboring coarse interval $[-0.435,-0.145]$.  The equal $^3P/^1D/^1S$ weights were fixed before the run.  The complete generated benchmark was recorded by GitHub Actions run 31698054125 and its SHA-256 digest is \texttt{4991f89450a47480a8ed71df33799bb9da60451770a9471cc182db7ab288fdbe}.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Quantity & Frozen $\theta=0$ & Best sampled $\theta=-0.290$ \\
+\midrule
+$\overline E$ (Ha) & $-5.243337545$ & $-5.246907956$ \\
+$E(^3P)$ (Ha) & $-5.284039512$ & $-5.287703975$ \\
+$E(^1D)$ (Ha) & $-5.235812345$ & $-5.239533714$ \\
+$E(^1S)$ (Ha) & $-5.210160777$ & $-5.213486180$ \\
+$^1D-{}^3P$ (cm$^{-1}$) & $10584.64$ & $10572.15$ \\
+$^1S-{}^3P$ (cm$^{-1}$) & $16214.51$ & $16288.92$ \\
+\bottomrule
+\end{tabular}
+\caption{Production one-coordinate state-averaged radial-$p$ relaxation benchmark.  Experimental term energies are absent from the objective.}
+\label{tab:carbon-state-average-production}
+\end{table}
+
+The sampled state-average decreases by
+\begin{equation}
+\Delta\overline E
+=\overline E(0)-\overline E(-0.290)
+=0.0035704116\ \mathrm{Ha}>0.
+\end{equation}
+The refined sampled values around the minimum are $-5.246893018$~Ha at $\theta=-0.319$, $-5.246907956$~Ha at $\theta=-0.290$, and $-5.246860274$~Ha at $\theta=-0.261$.  Thus the best sampled point is interior to the refinement interval, rather than an edge artifact of the earlier small scan.
+
+This is a \emph{variational} improvement, not a claim of globally improved spectroscopy.  Relative to the frozen point, the $^1D$ gap changes by approximately $-12.49$~cm$^{-1}$ whereas the $^1S$ gap changes by approximately $+74.42$~cm$^{-1}$.  All three \emph{absolute} target-state energies decrease sufficiently to lower the fixed state-average, but the two excitation gaps do not move in the same direction.  The distinction is essential: the optimization objective is the internal variational energy, not agreement with experimental term centers.
+
+The production verdict is therefore \textbf{PASS\_VARIATIONAL\_DIRECTION}.  It establishes that the frozen two-radial-$p$ active space is not stationary along the tested active--external $p$ direction.  It does not yet establish a continuously converged optimum or basis/grid convergence of the optimum angle and energy gain.
+
+\subsection{Implementation boundary}
+The reference implementation is \code{reschem/carbon\_state\_averaged\_orbital\_relaxation.py}.  It constructs the common closed-reference radial basis, evaluates the valence one-body operator in the frozen-$1s^2$ field, rebuilds two-body Coulomb integrals after each active--external rotation, and classifies the resulting CI eigenstates.
+
+This is deliberately labelled a \emph{first orbital-relaxation gate}, not full MCSCF or CASSCF.  Only one radial-$p$ active--external coordinate is varied; the $1s^2$ core remains frozen; $s$ and $d$ orbital relaxation are not yet simultaneous; and spin--orbit coupling is outside this electrostatic optimization layer.  A successful gate therefore justifies expansion to a multidimensional state-averaged orbital optimizer, not promotion to a complete carbon solver.
+
+No TIR, PhaseNav, conformal, knot, or affective term enters the Hamiltonian or objective in this section.

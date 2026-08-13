@@ -1,0 +1,70 @@
+\chapter{Conformal Knot Diagnostics as a Shell-Level Candidate}
+\label{ch:knot-shell-diagnostics}
+
+\section{Correction of the comparison object}
+The exploratory knot study originally compared knot-derived descriptors with atom-level feature vectors.  That is not the correct structural level for the intended chemistry programme.  Chemical bonding and open-shell structure are mediated by electronic subshells, while the nucleus remains an explicit attractive Coulomb centre.  The corrected hypothesis therefore has the form
+\begin{equation}
+\text{topological/conformal class}\quad\longleftrightarrow\quad\text{subshell occupation class }(n,l,k),
+\end{equation}
+not ``knot equals atom''.  Element names may provide examples of a given occupation, but they are not allowed to define the mapping.
+
+\section{Knot-side conformal construction}
+Let $V_K(q)$ be the Jones polynomial of a knot $K$ and parameterize the unit circle by $q=e^{i\theta}$.  Define
+\begin{equation}
+\Phi_K(\theta)=V_K(e^{i\theta}),\qquad
+\eta_K(\theta)=\frac{1}{\Phi_K(\theta)-z_\star}.
+\end{equation}
+For the exploratory sweep $z_\star=1/2$.  A diagnostic feature record is
+\begin{equation}
+\Sigma_K=\left(c_K,b_K,|\operatorname{wind}_{z_\star}K|,d_{\min},N_{z_\star}\right),
+\end{equation}
+where $c_K$ is crossing number, $b_K$ Jones breadth, $d_{\min}=\min_\theta|\Phi_K(\theta)-z_\star|$, and $N_{z_\star}$ counts numerically detected roots of $V_K(q)-z_\star$ on $|q|=1$.  Signed winding is retained in provenance; its absolute value is used for mirror-robust diagnostics.
+
+The sweep through prime knots up to eight crossings produced the numerical candidate family
+\begin{equation}
+4_1,\;6_3,\;8_3,\;8_9,\;8_{12},\;8_{17},\;8_{18},
+\end{equation}
+for which roots of $V_K(q)-1/2$ were detected on the unit circle within the numerical tolerance of the experiment.  This is a numerical observation, not an analytic theorem; exact unit-circle membership remains a symbolic gate.
+
+\section{The rejected direct spectral match}
+For each candidate singular knot, the root angles were converted into normalized cyclic gaps.  These gap spectra were compared with normalized atomic multiplet gaps from the period-2 control layer.  The visually closest first comparison, $8_{18}$ against oxygen, had empirical null probability of approximately $0.36$ under random four-gap partitions.  The direct knot-gap versus atom-gap association therefore does not beat a simple null model.
+
+This negative result is retained explicitly:
+\begin{equation}
+\boxed{\text{direct knot-gap}\leftrightarrow\text{atom-gap matching: NOT PROMOTED}.}
+\end{equation}
+No relabelling, parameter tuning or choice of a different atom after seeing the null result is admitted as a rescue.
+
+\section{Shell particle--hole involution}
+For a subshell of capacity $C_l=2(2l+1)$, define the particle--hole involution
+\begin{equation}
+\mathcal P_h:(l,k)\mapsto(l,C_l-k).
+\end{equation}
+The $p$ shell therefore has the intrinsic pairs
+\begin{equation}
+p^1\leftrightarrow p^5,\qquad p^2\leftrightarrow p^4,\qquad p^3\leftrightarrow p^3.
+\end{equation}
+The middle occupation is self-dual because $k=C_l/2=2l+1$.  The same rule yields the self-dual centres $d^5$ and $f^7$.
+
+The equivalent-shell multiplet calculations in Part~III already supply a strong control fact: the $p^k$ and $p^{6-k}$ ground-term sequence is paired by occupation independently of whether the radial shell is $2p$, $3p$ or $4p$.  This makes shell duality a physically motivated comparison object that exists before any knot feature is introduced.
+
+\section{Corrected hypothesis and non-fitting rule}
+The next candidate question is whether a frozen topological symmetry class has a relation to the intrinsic shell involution, particularly to self-dual half filling.  A valid test must be specified before knot labels and shell labels are jointly inspected.  At minimum it must satisfy:
+\begin{enumerate}
+\item shell features are generated from $(l,k)$ and independently calculated control observables;
+\item knot features are generated from a frozen canonical knot table;
+\item the comparison rule is invariant under mirror convention where intended;
+\item particle--hole partners are fixed by $k\mapsto C_l-k$, never by post-hoc element pairing;
+\item permutation and replacement-anchor null controls are run before interpretation;
+\item failure is retained without changing $z_\star$ or the selected knot family to improve a score.
+\end{enumerate}
+
+\section{Relation to the N-body shell formalism}
+Chapter~\ref{ch:shell-nbody-topology} defines the dynamical shell record $\Sigma_{nlk}$ with explicit electron--nucleus and electron--electron coordinates.  The knot diagnostic does not replace that record.  Instead, a future map would have to be a derived functional
+\begin{equation}
+\mathcal K:\Sigma_{nlk}[\gamma]\longrightarrow\mathcal C_{\rm topo}
+\end{equation}
+whose domain, projection dependence and invariance properties are stated before physical interpretation.  In unrestricted three-dimensional electron dynamics, exchange topology remains permutation-based; braid invariants require an effective two-dimensional or otherwise constrained sector.
+
+\section{Current verdict}
+The conformal knot machinery is implemented as an exploratory diagnostic and has produced one useful negative control and one better-posed shell-level hypothesis.  No knot--shell physical law is validated.  The next gate is a shell-only particle--hole test across principal quantum number, followed by a pre-registered symmetry-class comparison against the frozen knot descriptors.

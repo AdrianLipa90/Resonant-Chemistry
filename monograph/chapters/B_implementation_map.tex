@@ -1,0 +1,47 @@
+\chapter{Equation-to-Code Map}
+\label{app:implementation-map}
+
+The purpose of this appendix is to make the textbook executable in the scientific sense: a reader should be able to locate the code that realizes each major model class and the tests that constrain it.  Paths refer to the repository root.
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}}
+\toprule
+Model layer & Implementation & Primary verification \\
+\midrule
+\endfirsthead
+\toprule
+Model layer & Implementation & Primary verification \\
+\midrule
+\endhead
+Atomic identity and configurations & \path{reschem/atom.py} and associated configuration helpers & hydrogenic/atom constructor tests and H--Kr manifest \\
+Hydrogenic radial control & radial Schr\"odinger/atom foundation modules & analytic $E_n\propto-Z^2/n^2$ comparison \\
+Helium variational & \path{reschem/helium.py} & variational-energy and virial tests \\
+Helium RHF & \path{reschem/rhf_helium.py} & RHF regression and post-hoc HF-limit comparison \\
+Helium CI & \path{reschem/ci_helium.py} & finite-CI energy lowering and state-invariant tests \\
+Lithium open shell & \path{reschem/uhf_lithium.py} & energy, $S^2$ and spin-contamination tests \\
+Blind $s$-shell batch & \path{reschem/mass_solver_s_shell.py} & blind batch benchmark and convergence tests \\
+Multi-$l$ atomic HF & \path{reschem/atomic_hf_average.py} & H--Ne reference-isolated checkpoint \\
+Global SCF stabilization & \path{reschem/atomic_hf_diis.py} & Na--Ar and K--Kr quality gates \\
+H--Kr batch interface & \path{reschem/atomic_mass_h_to_kr.py} & coverage manifest and virial/convergence ledger \\
+Equivalent-shell multiplets & angular multiplet solver modules & $p^n$/$d^n$ microstate dimensions and $LS$ term tests \\
+Spin--orbit $J$ ordering & spin--orbit angular solver modules & frozen $J$ sequences for $p$ and $d$ shells \\
+Period-2 spectroscopy & atom-specific radial spectroscopy modules & $F^k$, $\zeta$ and B--Ne spectrum benchmark \\
+Period-2 active CI & \path{reschem/period2_active_ci.py} & active-space CI tests and benchmark \\
+Correlated spectrum & \path{reschem/period2_correlated_spectrum.py} & correlated spin--orbit regression \\
+Carbon channel diagnostics & \path{reschem/carbon_*ci.py} family & convergence/channel/sparse benchmark suite \\
+Carbon state-average $p$ relaxation & \path{reschem/carbon_state_averaged_orbital_relaxation.py} & active--external orthonormality, fixed equal-weight $^3P/^1D/^1S$ objective, and variational scan gate \\
+Knot conformal exploration & \path{reschem/knot_conformal_analysis.py} & conformal utility tests; direct spectral interpretation rejected by null control \\
+Shell N-body topology & \path{reschem/shell_nbody_topology.py} & shell-capacity, duality, winding, parity and conformal-inverse tests \\
+Shell symmetry v0.2 & \path{reschem/shell_symmetry.py} & particle--hole involution tests independent of atom labels \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\section{No hidden physical authority}
+A function name, semantic-card field or 36D encoding is not granted physical authority by appearing in this map.  The equation in the textbook and the benchmark acceptance rule jointly define what the implementation is supposed to compute.  If code and documentation diverge, the discrepancy is a defect to be resolved rather than permission to reinterpret the equation silently.
+
+\section{Reproducibility convention}
+Every new solver module should ship with: a deterministic or tolerance-bounded test; a machine-readable benchmark when numerical output is scientifically discussed; a monograph section giving the governing equations and approximations; and a receipt or commit reference sufficient to identify the tested implementation.  Exploratory notebooks or dashboards may visualize results, but they are not the sole repository of a scientific claim.

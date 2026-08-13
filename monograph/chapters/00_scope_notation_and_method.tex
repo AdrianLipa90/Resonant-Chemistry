@@ -1,0 +1,52 @@
+\chapter{Scope, Notation, and Method}
+\label{ch:scope-method}
+
+\section{Purpose of this textbook}
+Resonant Chemistry is developed here as a layered research programme rather than as a replacement name for ordinary quantum chemistry.  The first obligation of every new layer is to recover a conventional physical control calculation with enough provenance that a later relational hypothesis can be tested against it.  The book therefore begins with one- and two-electron control problems, expands to shell-resolved Hartree--Fock, angular multiplets and configuration interaction, and only then introduces shell-level topological and conformal diagnostics.
+
+The primary comparison object of the topological extension is an electronic shell or subshell, not an element label.  An atom is a composite system containing a nucleus and a many-electron state; a molecule is a multicentre extension of the same control problem.  The text consequently distinguishes
+\begin{equation}
+\text{nuclear centres}\;\oplus\;\text{electronic shells}\;\oplus\;\text{many-body couplings}\;\oplus\;\text{candidate relational diagnostics}.
+\end{equation}
+No knot is identified with an atom, and no topological correction is inserted into a Hamiltonian merely because a visual analogy is suggestive.
+
+\section{Epistemic states}
+Every substantive statement is classified by the strongest status actually supported by the corresponding derivation or receipt:
+\begin{description}
+\item[Established control.] Standard physical or mathematical structure used as a baseline.
+\item[Model-defined.] A quantity defined by the Resonant-Chemistry/TIR formalism but not thereby established as a new physical law.
+\item[Candidate.] A proposed relation with an explicit validation gate.
+\item[Implemented.] Executable code exists for the declared model.
+\item[Tested.] The implementation has passed the stated software or numerical regression tests.
+\item[Validated control.] A conventional calculation has passed a frozen acceptance criterion and, where applicable, post-hoc external comparison.
+\item[Promoted canon.] A project-level promotion has been made explicitly; absence of promotion means the result remains at its lower status.
+\end{description}
+The implications are one-way: implementation is not validation, numerical agreement is not ontology, and a historical receipt is not evidence that a runtime is live now.
+
+\section{Atomic units and symbols}
+Unless stated otherwise, atomic calculations use $\hbar=m_e=e=4\pi\varepsilon_0=1$.  We use $Z$ for nuclear charge, $N_e$ for electron number, $n$ and $l$ for principal and orbital angular-momentum quantum numbers, and $k$ for subshell occupation when discussing particle--hole symmetry.  The capacity of a subshell with orbital angular momentum $l$ is
+\begin{equation}
+C_l=2(2l+1).
+\end{equation}
+The many-electron operators $L^2$, $S^2$ and $J^2$ have their conventional meanings.  $F^k$ denotes radial Slater integrals and $\zeta$ an explicitly stated spin--orbit scale.
+
+For the candidate topology layer, $\pi_{\rm exch}\in\{+1,-1\}$ denotes permutation parity in three dimensions, while $w_{iA}$ and $w_{ij}$ denote winding observables only after an oriented projection to an effective plane has been declared.  A conformal coordinate is written
+\begin{equation}
+\eta=\frac{1}{\Phi-z_\star},
+\end{equation}
+where the current exploratory anchor $z_\star=1/2$ is a falsifiable model choice rather than an experimentally established constant of atomic structure.
+
+\section{Control-first computational contract}
+A numerical result enters the textbook only together with four questions: what equations were solved, what data were available to the solver, what acceptance gate was frozen, and what remains open.  The repository follows the corresponding chain
+\begin{equation}
+\text{formalism}\rightarrow\text{implementation}\rightarrow\text{tests}\rightarrow\text{benchmark}\rightarrow\text{interpretation}.
+\end{equation}
+Reference data opened after a blind or reference-isolated run are labelled post-hoc.  A failed or null result is retained.  In particular, the direct knot-gap versus atomic-gap experiment described later did not beat its null model and is preserved as a negative control rather than tuned into a positive association.
+
+\section{Code, benchmark and semantic layers}
+The executable package lives under \texttt{reschem/}; tests under \texttt{tests/}; frozen or replayable numerical checkpoints under \texttt{benchmarks/}; and semantic cards under \texttt{semantic\_cards/}.  The physical layer of a semantic card is derived from control calculations.  TIR and affective mappings may consume those immutable observables only after a separately defined map with provenance is supplied; they may not rewrite an energy, occupation, multiplet or convergence receipt.
+
+The monograph is the primary formalization surface of the project.  Markdown notes may record working discussion, but an equation, assumption, validation rule or negative result that matters to the scientific architecture must also appear in this LaTeX textbook or be cross-referenced from it.
+
+\section{Book map}
+Part~I constructs the conventional atomic control ladder.  Part~II scales that ladder from hydrogen through krypton.  Part~III resolves shell angular structure and atom-specific spectroscopy.  Part~IV develops finite active-space and sparse correlation controls.  Part~V introduces shell-level many-body topology, conformal diagnostics and multicentre extensions.  Part~VI states the admission contract for a future TIR/PhaseNav relational layer without silently inserting it into the validated control Hamiltonians.  The appendices bind equations to code, benchmarks, tests and reproducibility gates.
