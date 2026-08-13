@@ -1,0 +1,31 @@
+\chapter{Validation, Reproducibility, and Repository Contract}
+\label{app:validation}
+
+\section{Validation hierarchy}
+Software correctness and scientific validity are recorded separately.  A useful minimum hierarchy is
+\begin{equation}
+\text{syntax/build}\rightarrow\text{unit test}\rightarrow\text{numerical regression}\rightarrow\text{control benchmark}\rightarrow\text{external comparison}\rightarrow\text{prospective test}.
+\end{equation}
+A PASS at one level does not imply a PASS at the next.  For example, the shell-topology unit tests verify algebraic implementation primitives but not a physical knot--shell relation.
+
+\section{Reference isolation}
+Whenever the target quantity can influence model design, the repository records whether the reference was available to the solver.  A blind or reference-isolated calculation freezes its Hamiltonian, basis policy and convergence gate before the external value is opened.  If reference data were already known to the researchers, the implementation may still be reference-isolated, but the text does not call the human process blind.
+
+\section{Negative results}
+A negative result is part of the state of the theory.  The direct knot-gap/atom-gap comparison failed a random-partition null test and remains recorded.  Carbon active-space growth shows that a larger fixed CI can improve one term and worsen another.  The robust atomic solver shows that a numerically larger fallback stage can degrade virial quality for a system that already passed an earlier stage.  These failures constrain the next model and are not erased by later successes.
+
+\section{LaTeX as the formal source of the project}
+The scientific architecture is maintained as this single LaTeX textbook.  Every major code path, benchmark and candidate formalism must be represented here at its actual epistemic status.  Supplemental Markdown can contain operational detail, but a scientific definition or validation rule that affects interpretation may not exist only in a chat transcript or dashboard.
+
+The continuous-integration build compiles \texttt{monograph/main.tex} with \texttt{latexmk}, checks for undefined references and runs the relevant Python test stack.  The compiled full-project PDF is an artifact of that build; standalone notes are auxiliary and do not substitute for the textbook.
+
+\section{Directory completeness}
+Git does not represent genuinely empty directories.  Therefore the repository cannot prove the existence of an intended-but-empty folder merely from a tree listing.  The project policy is stronger: every required directory should contain a real artifact or a descriptive \texttt{README.md} specifying purpose, owner/status and the gate that will populate it.  Silent placeholder-only directories are not considered complete.
+
+At the shell-N-body checkpoint the expected top-level content areas are populated: \texttt{THEORY/}, \texttt{benchmarks/}, \texttt{docs/}, \texttt{monograph/}, \texttt{reschem/}, \texttt{tests/}, \texttt{semantic\_cards/}, \texttt{web/}, and \texttt{.github/workflows/}.  Repository-structure audits are retained in \texttt{docs/}.
+
+\section{Branch and promotion discipline}
+Research increments are developed on dedicated branches.  A branch may contain implemented and tested candidates without changing project canon.  Merge to the default branch and promotion of a physical interpretation are separate decisions.  A commit hash proves the identity of repository content; it does not by itself promote the scientific status of the result.
+
+\section{PDF acceptance}
+A release-quality textbook build requires more than a successful TeX exit code.  The PDF must be rendered and inspected for clipping, overlapping text, broken glyphs, malformed tables and unresolved references.  The page count, build log and hashes should be recorded with the release artifact.  If the rendered document and the source disagree visually, the rendered document controls the acceptance decision.
