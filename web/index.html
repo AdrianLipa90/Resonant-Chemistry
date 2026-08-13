@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive companion to the Resonant Chemistry research textbook.">
+  <title>Resonant Chemistry — Interactive Laboratory</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">RESONANT CHEMISTRY / INTERACTIVE COMPANION</p>
+      <h1>From validated atomic controls to shell-level relational candidates</h1>
+      <p class="lede">The web surface mirrors the textbook's epistemic boundary: conventional controls, numerical candidates, and speculative relational diagnostics are never silently mixed.</p>
+    </div>
+    <div class="header-actions">
+      <a class="button primary" href="../monograph/main.tex">Textbook source</a>
+      <a class="button" href="https://github.com/AdrianLipa90/Resonant-Chemistry">Repository</a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Interactive laboratory sections">
+    <button class="tab active" data-panel="overview">Overview</button>
+    <button class="tab" data-panel="controls">Control Atlas</button>
+    <button class="tab" data-panel="shell">Shell Lab</button>
+    <button class="tab" data-panel="carbon">Carbon Relaxation</button>
+    <button class="tab" data-panel="topology">Topology / Conformal</button>
+  </nav>
+
+  <main>
+    <section id="overview" class="panel active">
+      <div class="status-grid">
+        <article class="metric"><span>Control physics</span><strong>SCF / HF / CI</strong><small>Established methods; project implementations separately validated.</small></article>
+        <article class="metric"><span>Shell symmetry</span><strong>Candidate</strong><small>Particle-hole structure is exact algebra; physical topology mapping remains open.</small></article>
+        <article class="metric"><span>Carbon frontier</span><strong id="overview-carbon">Loading…</strong><small>State-averaged active↔external orbital relaxation.</small></article>
+        <article class="metric"><span>Knot / conformal layer</span><strong>Candidate</strong><small>Never interpreted as atom↔knot identity.</small></article>
+      </div>
+      <div class="callout">
+        <strong>Primary comparison object:</strong> electronic shell / subshell <code>(n,l,k)</code>, not an atom label. Nuclei remain explicit Coulomb attractive centres.
+      </div>
+      <div class="legacy-links">
+        <h2>Existing interactive modules</h2>
+        <div class="link-grid">
+          <a href="atom_builder.html">Atom builder</a>
+          <a href="h_to_kr_control_atlas.html">H→Kr control atlas</a>
+          <a href="angular_multiplet_explorer.html">Angular multiplet explorer</a>
+          <a href="period2_active_ci_dashboard.html">Period-2 active CI</a>
+          <a href="period2_correlated_spectrum_dashboard.html">Correlated spectrum</a>
+          <a href="carbon_correlation_channel_map.html">Carbon channel map</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="controls" class="panel">
+      <div class="section-head"><div><p class="eyebrow">CONTROL ATLAS</p><h2>Validated and candidate numerical records</h2></div><span class="badge control">CONTROL / BENCHMARK</span></div>
+      <p>The atlas does not recompute heavy SCF/CI in JavaScript. It exposes repository benchmark records and links to existing solver dashboards.</p>
+      <div id="control-cards" class="status-grid"></div>
+    </section>
+
+    <section id="shell" class="panel">
+      <div class="section-head"><div><p class="eyebrow">SHELL LAB</p><h2>Particle–hole duality</h2></div><span class="badge candidate">CANDIDATE REPRESENTATION</span></div>
+      <div class="controls-row">
+        <label>Principal shell n <input id="shell-n" type="number" min="1" max="12" value="2"></label>
+        <label>Subshell <select id="shell-kind"><option value="0">s</option><option value="1" selected>p</option><option value="2">d</option><option value="3">f</option></select></label>
+        <label>Occupation k <input id="shell-k" type="range" min="0" max="6" value="3"><output id="shell-k-output">3</output></label>
+      </div>
+      <div id="shell-result" class="result-grid" aria-live="polite"></div>
+      <div class="callout muted"><strong>Invariant boundary:</strong> equal <code>(l,k)</code> at different <code>n</code> does not imply equal radial wavefunctions, energies, screening, or spectroscopy.</div>
+    </section>
+
+    <section id="carbon" class="panel">
+      <div class="section-head"><div><p class="eyebrow">CARBON RELAXATION</p><h2>State-averaged active↔external p rotation</h2></div><span class="badge numerical">NUMERICAL CANDIDATE</span></div>
+      <div id="carbon-summary" class="status-grid"></div>
+      <div class="carbon-scan">
+        <label>θ (rad) <input id="theta" type="range" min="-0.435" max="-0.145" step="0.001" value="-0.290"><output id="theta-output">-0.290</output></label>
+        <div id="theta-result" class="callout"></div>
+      </div>
+      <p class="fineprint">The browser interpolation is only a visualization of the recorded local bracket. It is not a new CI solve and cannot replace the benchmark.</p>
+    </section>
+
+    <section id="topology" class="panel">
+      <div class="section-head"><div><p class="eyebrow">TOPOLOGY / CONFORMAL LAB</p><h2>Explicitly diagnostic transforms</h2></div><span class="badge candidate">NOT CANON</span></div>
+      <div class="controls-row">
+        <label>Re Φ <input id="phi-re" type="number" step="0.05" value="1"></label>
+        <label>Im Φ <input id="phi-im" type="number" step="0.05" value="0"></label>
+        <label>Anchor z* <input id="anchor" type="number" step="0.05" value="0.5"></label>
+      </div>
+      <div id="conformal-result" class="result-grid" aria-live="polite"></div>
+      <div class="callout warning"><strong>Falsification rule:</strong> <code>z*=1/2</code> is a model parameter, not an established physical constant of this mapping. Anchor sweeps and alternative Möbius transforms are required controls.</div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Resonant Chemistry interactive companion v0.1</span>
+    <span id="data-status">Benchmark data: loading…</span>
+  </footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
