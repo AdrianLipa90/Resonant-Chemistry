@@ -1,8 +1,8 @@
 # Resonant Chemistry Status
 
-## 2026-08-13 - shell topology / compound relation checkpoint
+## 2026-08-14 - shell topology / compound relation checkpoint
 
-State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / CANON NOT PROMOTED**
+State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / 3C-HYPERRELATION CANDIDATE / CANON NOT PROMOTED**
 
 Integration source: `compound-relations-v0.3`.
 
@@ -45,7 +45,7 @@ The previous direct knot-gap versus atom-gap association remains **REJECTED / NO
 
 ## Compound relation candidate
 
-A non-energetic main-group bridge from the atomic bookkeeping to compounds is now implemented as a candidate layer.
+A non-energetic main-group bridge from the atomic bookkeeping to compounds is implemented as a candidate layer.
 
 Frozen v0.1 rule:
 
@@ -60,7 +60,28 @@ Post-blind v0.2 diagnostic screening is recorded separately from the prediction 
 v0.3 adds connected integer two-centre relation graphs with
 `sum_j b_ij=d_i`, `b_ij in {0,1,2,3}`. Software controls recover the expected coarse relation-order patterns for H2, F2, O2, N2, H2O, NH3, CH4, CO2, HCN, C2H2, C2H4 and C2H6. Negative controls B2H6, PCl5, SF6 and KrF2 remain explicit failures rather than post-hoc fits.
 
-This layer is **MODEL-DEFINED / SOFTWARE-TESTED / NOT AN ENERGETIC MOLECULAR SOLVER**.
+## Three-centre hyperrelation candidate v0.4
+
+The B2H6 falsifier is addressed by a separate minimal-augmentation gate without changing the frozen two-centre degree law.
+
+- relation load is represented in integer half-units;
+- atom target load is `2*d_i`;
+- ordinary pair bond order `b` consumes `2*b` half-units on each endpoint;
+- symmetric three-centre bridge consumes `1:2:1` half-units on outer:bridge:outer;
+- candidates are searched in increasing augmentation order, so a valid 2c graph always wins before any 3c primitive is admitted;
+- bridge eligibility is shell-defined: bridge degree `1`, each outer degree `>=2`, with one 3c primitive per bridge centre in v0.4.
+
+Local prototype behavior before branch-CI execution:
+
+- CH4 and H2O remain at augmentation order `0`;
+- B2H6 first closes at augmentation order `2`, producing two bridge centres plus four terminal pair bonds;
+- the same topology transfers without rule changes to Al2Cl6, Al2Br6 and Ga2Cl6, consistent with independent bridged-dimer structural literature;
+- PCl5 and SF6 remain unresolved coordination/reorganization cases;
+- KrF2 remains an unresolved closed-shell excitation/polarization case.
+
+`benchmarks/HYPERRELATION_BRIDGE_BENCHMARK_V0_4.json` is explicitly marked `LOCAL_PROTOTYPE_PASS_BRANCH_CI_NOT_RUN`: the external checkout attempt failed because the isolated execution container could not resolve `github.com`. This infrastructure failure is not counted as a model or software PASS/FAIL.
+
+This compound layer remains **MODEL-DEFINED / STRUCTURAL-CANDIDATE / NOT AN ENERGETIC MOLECULAR SOLVER**.
 
 ## Molecular extension
 
@@ -93,6 +114,8 @@ Release gate: complete Python test discovery -> repository-structure audit -> fu
 
 The first full-suite textbook CI exposed a real cross-version numerical regression: the historical fixed single-stage Na-Ar DIIS recipe left Al outside the convergence criterion with the current NumPy/SciPy stack. The test and textbook were corrected to make the later **global non-element-specific robust quality ladder** the normative release gate; the old single-stage numbers remain a historical frozen benchmark, not a cross-version contract.
 
+The current `compound-relations-v0.3` branch has no automatic GitHub Actions run recorded yet for the compound relation commits. Branch-level implementation status must therefore not be conflated with CI validation.
+
 ## Not claimed
 
 - a validated knot-shell law;
@@ -101,5 +124,6 @@ The first full-suite textbook CI exposed a real cross-version numerical regressi
 - high-precision spectroscopy across all H-Kr species;
 - a validated TIR correction to atomic or molecular energies;
 - a validated energetic molecular solver for the compound relation layer;
+- literal fractional-electron meaning of the v0.4 half-unit bookkeeping;
 - complete transition-metal, hypervalent, radical or electron-deficient chemistry;
 - canonical promotion of the candidate compound-relation layer.
