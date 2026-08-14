@@ -4,34 +4,16 @@ on:
   push:
     branches:
       - main
-    paths:
-      - README.md
-      - STATUS.md
-      - monograph/**
-      - docs/**
-      - reschem/**
-      - tests/**
-      - benchmarks/**
-      - scripts/**
-      - pyproject.toml
-      - requirements.txt
-      - .github/workflows/monograph-ci.yml
+    paths-ignore:
+      - Resonant_Chemistry.pdf
+      - TEXTBOOK_BUILD_PROVENANCE.json
   pull_request:
     branches:
       - main
-    paths:
-      - README.md
-      - STATUS.md
-      - monograph/**
-      - docs/**
-      - reschem/**
-      - tests/**
-      - benchmarks/**
-      - scripts/**
-      - pyproject.toml
-      - requirements.txt
-      - .github/workflows/monograph-ci.yml
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   validate-and-build-textbook:
@@ -56,6 +38,12 @@ jobs:
 
       - name: Run complete Python test discovery
         run: python -m unittest discover -s tests -v
+
+      - name: Audit semantic-card coverage
+        run: python -m scripts.audit_semantic_card_coverage
+
+      - name: Audit semantic THEORY web parity
+        run: python -m scripts.audit_semantic_surface_sync
 
       - name: Run production carbon state-averaged p-relaxation benchmark
         run: |
@@ -115,11 +103,41 @@ jobs:
           sha256sum ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json > ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
           cat ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
 
+      - name: Prepare canonical root textbook
+        run: |
+          cp monograph/main.pdf Resonant_Chemistry.pdf
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          def sha256(path):
+              return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+          payload = {
+              "schema": "RESCHEM_ROOT_TEXTBOOK_BUILD_PROVENANCE_V1",
+              "source_of_truth": "repository main",
+              "source_commit": os.environ["GITHUB_SHA"],
+              "source_tree": subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], text=True).strip(),
+              "source_main_tex_sha256": sha256("monograph/main.tex"),
+              "semantic_coverage_sha256": sha256("semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json"),
+              "root_pdf": "Resonant_Chemistry.pdf",
+              "root_pdf_sha256": sha256("Resonant_Chemistry.pdf"),
+              "epistemic_status": "BUILD_ARTIFACT_ONLY_NO_SCIENTIFIC_PROMOTION",
+          }
+          Path("TEXTBOOK_BUILD_PROVENANCE.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print(json.dumps(payload, indent=2, sort_keys=True))
+          PY
+
       - name: Upload complete textbook
         uses: actions/upload-artifact@v4
         with:
           name: Resonant-Chemistry-Textbook-current
           path: |
+            Resonant_Chemistry.pdf
+            TEXTBOOK_BUILD_PROVENANCE.json
             monograph/main.pdf
             monograph/main.log
             monograph/main.bbl
@@ -128,3 +146,16 @@ jobs:
             ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
             ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
           if-no-files-found: error
+
+      - name: Publish current textbook at repository root
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Resonant_Chemistry.pdf TEXTBOOK_BUILD_PROVENANCE.json
+          if git diff --cached --quiet; then
+            echo "Root textbook is already current"
+            exit 0
+          fi
+          git commit -m "Update canonical root textbook PDF [skip ci]"
+          git push origin HEAD:main

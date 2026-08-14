@@ -14,6 +14,8 @@ Build target:
 monograph/main.tex -> full project textbook PDF
 ```
 
+The latest validated textbook is also published at repository root as **`Resonant_Chemistry.pdf`**. Its machine-readable source commit, source tree and SHA-256 values are recorded in `TEXTBOOK_BUILD_PROVENANCE.json`. On every meaningful push to `main`, textbook CI rebuilds the manuscript, runs the maintained scientific/semantic gates, and updates the root PDF only after the complete build passes. The generated PDF/provenance commit is excluded from retriggering the build loop.
+
 The repository keeps separate software, numerical, bibliography, manuscript, and semantic-card coverage gates. A successful build or unit test is not a scientific promotion.
 
 ## Implemented control and candidate ladder
@@ -111,6 +113,8 @@ For molecular `XY2` candidates, **stoichiometry and geometry seed are not electr
 
 ## Repository map
 
+- `Resonant_Chemistry.pdf` - latest validated textbook built from `main` and published by CI.
+- `TEXTBOOK_BUILD_PROVENANCE.json` - source commit/tree and hashes for the root textbook artifact.
 - `monograph/` - primary LaTeX textbook and full-PDF build target.
 - `reschem/` - executable physical, candidate-representation, semantic-projection, and card-registry modules.
 - `tests/` - deterministic/regression tests.
