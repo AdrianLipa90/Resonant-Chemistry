@@ -30,6 +30,14 @@ def _load_records(path: Path) -> list[dict]:
     return []
 
 
+def _append_overlay(base: dict, *, source: str, record: dict) -> dict:
+    enriched = dict(base)
+    overlays = list(enriched.get("evidence_overlays", []))
+    overlays.append({"source": source, "record": record})
+    enriched["evidence_overlays"] = overlays
+    return enriched
+
+
 def _load_atom_bases_and_overlays(root: Path) -> tuple[list[dict], list[dict]]:
     index_path = root / "semantic_cards" / "ATOM_CARD_INDEX_CURRENT.json"
     index = json.loads(index_path.read_text(encoding="utf-8"))
@@ -51,24 +59,24 @@ def _load_atom_bases_and_overlays(root: Path) -> tuple[list[dict], list[dict]]:
             f"canonical atom coverage drift: {len(base_by_id)} != {index['expected_neutral_symbol_coverage']}"
         )
 
-    independent_overlays: list[dict] = []
+    independent_by_id: dict[str, dict] = {}
     for relpath in index["overlay_sources"]:
         path = root / relpath
         for record in _load_records(path):
             card_id = record.get("card_id")
+            if not card_id:
+                continue
             if card_id in base_by_id:
-                enriched = dict(base_by_id[card_id])
-                overlays = list(enriched.get("evidence_overlays", []))
-                overlays.append({"source": relpath, "record": record})
-                enriched["evidence_overlays"] = overlays
-                base_by_id[card_id] = enriched
-            elif card_id:
+                base_by_id[card_id] = _append_overlay(base_by_id[card_id], source=relpath, record=record)
+            elif card_id in independent_by_id:
+                independent_by_id[card_id] = _append_overlay(independent_by_id[card_id], source=relpath, record=record)
+            else:
                 independent = dict(record)
                 independent.setdefault("source_artifacts", {})
                 independent["repository_overlay_source"] = relpath
-                independent_overlays.append(independent)
+                independent_by_id[card_id] = independent
 
-    return list(base_by_id.values()), independent_overlays
+    return list(base_by_id.values()), list(independent_by_id.values())
 
 
 def _load_model_overlay_cards(root: Path) -> list[dict]:
