@@ -1,0 +1,61 @@
+{
+  "schema": "RESCHEM_ENERGETIC_ADMISSION_PREREG_V0_8",
+  "branch": "compound-relations-v0.3",
+  "status": "CHANNELS_AND_SCORING_FROZEN_BEFORE_ENERGY_RESULTS",
+  "purpose": "Replace existence lookup with one common calculable stability target for the frozen v0.7 ligand-family panel.",
+  "model_roles": {
+    "M0": "parity-only admission; predicts all listed higher-coordination parents",
+    "M1": "v0.5 shell gate; rejects second-period N/O higher-coordination parents and admits P/As/S/Se parents",
+    "M2": "reserved name for M1 plus the independent conventional energetic admission control; M2 is not a new Hamiltonian or fitted energy term"
+  },
+  "energy_target": {
+    "channel": "XY_n -> XY_(n-2) + Y2",
+    "delta_E_pair": "E(XY_(n-2)) + E(Y2) - E(XY_n)",
+    "positive_label": "parent and both products are harmonic local minima under one identical method policy AND delta_E_pair > frozen tolerance",
+    "negative_label": "parent is not a local minimum OR parent is a local minimum and delta_E_pair < -frozen tolerance",
+    "unresolved": "missing energy/Hessian, method-policy mismatch, product not a local minimum, or near-degeneracy within tolerance",
+    "tolerance_hartree": 1e-6
+  },
+  "method_policy": {
+    "status": "NOT_SELECTED_NO_ENERGY_RESULTS_ALLOWED_YET",
+    "rule": "Before the first energy record is admitted, create one immutable method-policy amendment fixing method, basis, relativistic treatment, dispersion, environment, geometry optimization, Hessian policy, energy kind, charge, and multiplicity policy for the full panel.",
+    "anti_fit": "The method policy may not be selected after inspecting candidate-specific energy results."
+  },
+  "channels": [
+    {"parent":"NCl5","lower":"NCl3","ligand_dimer":"Cl2","M0":true,"M1":false,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"NBr5","lower":"NBr3","ligand_dimer":"Br2","M0":true,"M1":false,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"PCl5","lower":"PCl3","ligand_dimer":"Cl2","M0":true,"M1":true,"score_role":"MOTIVATING_CASE_EXCLUDED_FROM_MODEL_COMPARISON"},
+    {"parent":"PBr5","lower":"PBr3","ligand_dimer":"Br2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"AsCl5","lower":"AsCl3","ligand_dimer":"Cl2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"AsBr5","lower":"AsBr3","ligand_dimer":"Br2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"OCl4","lower":"OCl2","ligand_dimer":"Cl2","M0":true,"M1":false,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"OCl6","lower":"OCl4","ligand_dimer":"Cl2","M0":true,"M1":false,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"OBr4","lower":"OBr2","ligand_dimer":"Br2","M0":true,"M1":false,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"OBr6","lower":"OBr4","ligand_dimer":"Br2","M0":true,"M1":false,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SCl4","lower":"SCl2","ligand_dimer":"Cl2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SCl6","lower":"SCl4","ligand_dimer":"Cl2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SBr4","lower":"SBr2","ligand_dimer":"Br2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SBr6","lower":"SBr4","ligand_dimer":"Br2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SeCl4","lower":"SeCl2","ligand_dimer":"Cl2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SeCl6","lower":"SeCl4","ligand_dimer":"Cl2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SeBr4","lower":"SeBr2","ligand_dimer":"Br2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"},
+    {"parent":"SeBr6","lower":"SeBr4","ligand_dimer":"Br2","M0":true,"M1":true,"score_role":"HELDOUT_ENERGY_TARGET"}
+  ],
+  "scoring": {
+    "exclude_roles": ["MOTIVATING_CASE_EXCLUDED_FROM_MODEL_COMPARISON"],
+    "primary": "balanced accuracy on resolved held-out energy labels if both classes are present",
+    "secondary": ["accuracy", "coverage fraction", "continuous delta_E_pair distribution by model class"],
+    "unknowns": "retained visibly and excluded from the accuracy denominator"
+  },
+  "primary_methodology_context": [
+    {"doi":"10.1021/jp901949b","note":"High-level SFn study reports sequential dissociation energies and explicitly follows structural/electronic reorganization across the series."},
+    {"doi":"10.1021/jp710373e","note":"Coupled-cluster thermochemistry study emphasizes that adiabatic bond dissociation energies include product reorganization and can differ strongly between sequential ligand-loss steps."}
+  ],
+  "anti_fit_rules": [
+    "Do not change pair-loss channels after energy results are visible.",
+    "Do not substitute a different decomposition product for one candidate only.",
+    "Do not convert missing or unconverged calculations into negative labels.",
+    "Do not mix method/basis/relativistic/environment policies inside one scored panel.",
+    "Do not promote the structural relation model merely because conventional quantum chemistry supplies the correct energy label."
+  ]
+}
