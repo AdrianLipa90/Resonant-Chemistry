@@ -1,0 +1,72 @@
+{
+  "schema": "RESCHEM_MOLECULAR_BACKEND_SMOKE_V0_14A",
+  "generated_utc": "2026-08-14T11:22:46.882520+00:00",
+  "status": "PASS",
+  "software": {
+    "python": "3.12.13",
+    "pyscf": "2.14.0",
+    "geometric": "1.1.1"
+  },
+  "method_policy": {
+    "xc": "b97m_v",
+    "nlc": "vv10",
+    "basis": "def2-tzvpd",
+    "charge": 0,
+    "spin": 0,
+    "scf_conv_tol_hartree": 1e-10,
+    "scf_max_cycle": 200,
+    "grid_atom": [99, 590],
+    "grid_prune": "nwchem_prune",
+    "nlc_grid_atom": [50, 194],
+    "nlc_grid_prune": "nwchem_prune",
+    "optimizer_maxsteps": 120,
+    "convergence_energy_hartree": 1e-06,
+    "convergence_grms_hartree_per_bohr": 0.0003,
+    "convergence_gmax_hartree_per_bohr": 0.00045,
+    "convergence_drms_angstrom": 0.0012,
+    "convergence_dmax_angstrom": 0.0018
+  },
+  "steps": [
+    {"step":"import_pyscf","status":"PASS","value":{"module":"pyscf","version":"2.14.0"}},
+    {"step":"import_geometric","status":"PASS","value":{"module":"geometric","version":"1.1.1"}},
+    {"step":"verify_pyscf_version","status":"PASS","value":"2.14.0"},
+    {"step":"verify_geometric_version","status":"PASS","value":"1.1.1"},
+    {"step":"F2:build_molecule_and_basis","status":"PASS","value":"<pyscf.gto.mole.Mole object>"},
+    {"step":"F2:configure_rks","status":"PASS","value":"<pyscf.dft.rks.RKS object>"},
+    {"step":"F2:scf_kernel","status":"PASS","value":-199.5271425375333},
+    {"step":"F2:analytic_gradient","status":"PASS","value":"finite 2x3 analytic gradient"},
+    {"step":"KrF2:build_molecule_and_basis","status":"PASS","value":"<pyscf.gto.mole.Mole object>"},
+    {"step":"KrF2:configure_rks","status":"PASS","value":"<pyscf.dft.rks.RKS object>"},
+    {"step":"KrF2:scf_kernel","status":"PASS","value":-2952.792784558998},
+    {"step":"KrF2:analytic_gradient","status":"PASS","value":"finite 3x3 analytic gradient"}
+  ],
+  "cases": [
+    {
+      "label": "F2",
+      "basis_functions": 80,
+      "energy_hartree": -199.5271425375333,
+      "scf_converged": true,
+      "energy_finite": true,
+      "gradient_finite": true,
+      "gradient_shape": [2,3]
+    },
+    {
+      "label": "KrF2",
+      "basis_functions": 137,
+      "energy_hartree": -2952.792784558998,
+      "scf_converged": true,
+      "energy_finite": true,
+      "gradient_finite": true,
+      "gradient_shape": [3,3]
+    }
+  ],
+  "workflow_provenance": {
+    "run_id": 31795895241,
+    "head_sha": "db756f5aa8598a24004f056aeb09b18034a08e5b",
+    "artifact_id": 9217365331,
+    "artifact_zip_sha256": "774ee70aa3b0a3a65948348f3f0fffd1a1623127b664fd1827a80a8e6a8ad0e9"
+  },
+  "parent_preregistration": "benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json",
+  "numerical_amendment": "benchmarks/MOLECULAR_STATE_RELAXATION_AMENDMENT_V0_14A1.json",
+  "nonclaim": "structured smoke diagnoses backend compatibility only; it does not alter or validate the frozen molecular screening method"
+}
