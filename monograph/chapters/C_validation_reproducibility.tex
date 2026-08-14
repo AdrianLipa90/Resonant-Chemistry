@@ -6,26 +6,56 @@ Software correctness and scientific validity are recorded separately.  A useful 
 \begin{equation}
 \text{syntax/build}\rightarrow\text{unit test}\rightarrow\text{numerical regression}\rightarrow\text{control benchmark}\rightarrow\text{external comparison}\rightarrow\text{prospective test}.
 \end{equation}
-A PASS at one level does not imply a PASS at the next.  For example, the shell-topology unit tests verify algebraic implementation primitives but not a physical knot--shell relation.
+A PASS at one level does not imply a PASS at the next.  For example, the shell-topology unit tests verify algebraic implementation primitives but not a physical knot--shell relation, and a converged molecular geometry optimization is not by itself a harmonic-minimum or electronic-topology validation.
 
 \section{Reference isolation}
 Whenever the target quantity can influence model design, the repository records whether the reference was available to the solver.  A blind or reference-isolated calculation freezes its Hamiltonian, basis policy and convergence gate before the external value is opened.  If reference data were already known to the researchers, the implementation may still be reference-isolated, but the text does not call the human process blind.
 
-\section{Negative results}
-A negative result is part of the state of the theory.  The direct knot-gap/atom-gap comparison failed a random-partition null test and remains recorded.  Carbon active-space growth shows that a larger fixed CI can improve one term and worsen another.  The robust atomic solver shows that a numerically larger fallback stage can degrade virial quality for a system that already passed an earlier stage.  These failures constrain the next model and are not erased by later successes.
+The same rule applies to molecular state enumeration.  Already-opened knowledge about KrF$_2$ or rare-gas--halogen van-der-Waals complexes may motivate a falsifiable architecture, but it is not converted retrospectively into a prior rank for v0.13 states.
 
-\section{LaTeX as the formal source of the project}
+\section{Negative, partial, and missing results}
+A negative result is part of the state of the theory.  The direct knot-gap/atom-gap comparison failed a random-partition null test and remains recorded.  Carbon active-space growth shows that a larger fixed CI can improve one term and worsen another.  The robust atomic solver shows that a numerically larger fallback stage can degrade virial quality for a system that already passed an earlier stage.  The v0.11/v0.12 atomic finite-difference route is retained even though it is not admitted as a molecular chemistry classifier.
+
+Partial execution is a separate status class.  In v0.14A1, eight of nine $XY_2$ formula jobs produced durable first-attempt receipts, yielding 40 of 45 frozen starts.  The missing ArBr$_2$ job is labelled \code{MISSING\_EXECUTION}.  A missing or cancelled calculation is not converted into a negative chemical result.
+
+Likewise, a returned stationary geometry in the relaxation screen is not labelled a local minimum before an independently frozen Hessian gate.  The lowest successful electronic energy among the sampled starts is called a screening result, not a validated ground state.
+
+\section{First-attempt and rerun provenance}
+A rerun is not allowed silently to replace frozen first-attempt evidence.  The v0.14A1 recovery illustrates this rule: a GitHub matrix rerun executed a broader scope than the missing ArBr$_2$ job alone.  The project therefore retains the original first-attempt receipts for the eight already-completed formulae and records the rerun scope separately.  A future ArBr$_2$ result may fill the missing slot, but does not rewrite the earlier eight receipts in that checkpoint.
+
+This convention separates reproducibility from cherry-picking.  Repetition may test stability, but the first declared result remains identifiable.
+
+\section{Preregistration amendments}
+A frozen protocol may require a technical amendment before scientific outputs exist.  Such a change is not rewritten into history.  The v0.14A backend smoke exposed an SG-1 grid-pruning implementation boundary for krypton before a KrF$_2$ energy was produced.  The v0.14A1 amendment changed the pruning algorithm globally on both regular and nonlocal grids, retained all other method and seed settings, and was recorded as \emph{post-smoke / pre-screening-output}.  The original preregistration and the amendment therefore remain separately auditable.
+
+Target-specific rescue is distinct and remains forbidden.  A change made only because one composition gives an inconvenient scientific result would require a new declared experiment rather than a silent repair of the frozen gate.
+
+\section{LaTeX as the formal scientific surface}
 The scientific architecture is maintained as this single LaTeX textbook.  Every major code path, benchmark and candidate formalism must be represented here at its actual epistemic status.  Supplemental Markdown can contain operational detail, but a scientific definition or validation rule that affects interpretation may not exist only in a chat transcript or dashboard.
 
-The continuous-integration build compiles \texttt{monograph/main.tex} with \texttt{latexmk}, checks for undefined references and runs the relevant Python test stack.  The compiled full-project PDF is an artifact of that build; standalone notes are auxiliary and do not substitute for the textbook.
+A successful PDF build proves that the LaTeX source is buildable; it does not prove that the source is current relative to the repository.  Therefore documentation reconciliation is a separate requirement: when a merged change alters implementation status, benchmark evidence, nonclaims or the next open gate, \texttt{README.md}, \texttt{STATUS.md}, the relevant textbook chapter and its appendices must be reviewed against the new \texttt{main} state.
+
+\section{Repository Source of Truth}
+The GitHub repository default branch \texttt{main} is the project Source of Truth.  Research branches may contain candidate work and reconciliation patches, but a branch name from an earlier workstream is not current canon merely because an older workflow still references it.
+
+Continuous-integration triggers for the maintained textbook, bibliography and compound/molecular regression surfaces must therefore validate \texttt{main} and pull requests targeting \texttt{main}.  Manual dispatch may be retained for reproducibility, but historical branch-only triggers are not an adequate release contract.
+
+\section{Continuous-integration build}
+The maintained textbook gate runs Python test discovery, repository-structure checks, the live bibliography audit, LaTeX/BibTeX compilation, unresolved-reference rejection, hashes and PDF artifact upload.  The dedicated bibliography gate independently compiles the modular bibliography when manuscript/bibliography files change.  The compound/molecular regression gate parses the relevant JSON ledgers and verifies the current v0.13/v0.14 surfaces.
+
+A CI infrastructure or account/billing failure is reported separately from software/scientific failure.  Absence of a workflow run is not a PASS.
 
 \section{Directory completeness}
 Git does not represent genuinely empty directories.  Therefore the repository cannot prove the existence of an intended-but-empty folder merely from a tree listing.  The project policy is stronger: every required directory should contain a real artifact or a descriptive \texttt{README.md} specifying purpose, owner/status and the gate that will populate it.  Silent placeholder-only directories are not considered complete.
 
-At the shell-N-body checkpoint the expected top-level content areas are populated: \texttt{THEORY/}, \texttt{benchmarks/}, \texttt{docs/}, \texttt{monograph/}, \texttt{reschem/}, \texttt{tests/}, \texttt{semantic\_cards/}, \texttt{web/}, and \texttt{.github/workflows/}.  Repository-structure audits are retained in \texttt{docs/}.
+The expected top-level content areas are populated: \texttt{THEORY/}, \texttt{benchmarks/}, \texttt{docs/}, \texttt{monograph/}, \texttt{reschem/}, \texttt{tests/}, \texttt{semantic\_cards/}, \texttt{web/}, and \texttt{.github/workflows/}.  The modular bibliography under \texttt{monograph/bibliography/} is also part of the required manuscript surface.
 
 \section{Branch and promotion discipline}
 Research increments are developed on dedicated branches.  A branch may contain implemented and tested candidates without changing project canon.  Merge to the default branch and promotion of a physical interpretation are separate decisions.  A commit hash proves the identity of repository content; it does not by itself promote the scientific status of the result.
 
+The same distinction applies after merge: code or evidence may be canonical repository state while the physical interpretation remains only candidate, partial, negative, or UNKNOWN.
+
 \section{PDF acceptance}
 A release-quality textbook build requires more than a successful TeX exit code.  The PDF must be rendered and inspected for clipping, overlapping text, broken glyphs, malformed tables and unresolved references.  The page count, build log and hashes should be recorded with the release artifact.  If the rendered document and the source disagree visually, the rendered document controls the acceptance decision.
+
+A PDF is considered a current project snapshot only when both conditions hold: it builds from the declared repository state and the manuscript has been reconciled against the merged code/benchmark state it claims to describe.
