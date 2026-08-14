@@ -51,10 +51,13 @@ jobs:
       - name: Audit semantic-card coverage and epistemic separation
         run: python -m scripts.audit_semantic_card_coverage
 
+      - name: Audit semantic THEORY web parity
+        run: python -m scripts.audit_semantic_surface_sync
+
       - name: Audit live compound bibliography
         run: python scripts/audit_compound_bibliography.py
 
-      - name: Verify current compound molecular and semantic surfaces
+      - name: Verify current compound molecular semantic theory and web surfaces
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -79,8 +82,18 @@ jobs:
               'semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json',
               'semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl',
               'semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl',
+              'semantic_cards/SURFACE_SYNC_CURRENT.json',
               'semantic_cards/schema_repository_overlay_v0_1.json',
               'scripts/audit_semantic_card_coverage.py',
+              'scripts/audit_semantic_surface_sync.py',
+              'THEORY/README.md',
+              'THEORY/02_ATOM_FORMALISM.md',
+              'THEORY/03_SHELL_NBODY_TOPOLOGY.md',
+              'THEORY/04_COMPOUND_RELATIONAL_ARCHITECTURE.md',
+              'THEORY/05_SEMANTIC_ENTITY_GRAPH.md',
+              'web/index.html',
+              'web/semantic_card_atlas.html',
+              'web/semantic_cards.js',
               'docs/semantic_card_reconciliation_v0_14a1.md',
               'docs/molecular_state_relaxation_v0_14a.md',
               'docs/molecular_state_relaxation_v0_14a1_amendment.md',
