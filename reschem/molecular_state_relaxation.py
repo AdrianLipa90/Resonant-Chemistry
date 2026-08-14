@@ -7,6 +7,11 @@ PySCF/geomeTRIC only when the dedicated v0.14A workflow executes.
 v0.14A is deliberately a relaxation screen, not a local-minimum or electronic-
 topology admission result: no Hessian is run and geometry alone never assigns
 3c4e versus van-der-Waals topology.
+
+Numerical amendment v0.14A1 replaces the preregistered SG-1 pruning on the NLC
+grid with PySCF's general-purpose NWChem pruning on both DFT grids.  The change
+is global for every dimer and XY2 seed and was made after backend smoke failure
+but before any molecular relaxation-screen output was admitted.
 """
 from __future__ import annotations
 
@@ -23,7 +28,9 @@ METHOD_POLICY = {
     "scf_conv_tol_hartree": 1.0e-10,
     "scf_max_cycle": 200,
     "grid_atom": (99, 590),
+    "grid_prune": "nwchem_prune",
     "nlc_grid_atom": (50, 194),
+    "nlc_grid_prune": "nwchem_prune",
     "optimizer_maxsteps": 120,
     "convergence_energy_hartree": 1.0e-6,
     "convergence_grms_hartree_per_bohr": 3.0e-4,
@@ -190,8 +197,19 @@ def _atom_string(seed: MolecularSeed) -> str:
 
 
 def _configure_rks(mol):
-    """Create one PySCF RKS object under the frozen v0.14A policy."""
+    """Create one PySCF RKS object under the amended global v0.14A1 policy."""
     from pyscf import dft
+
+    prune_map = {
+        "nwchem_prune": dft.gen_grid.nwchem_prune,
+        "treutler_prune": dft.gen_grid.treutler_prune,
+        "none": None,
+    }
+    try:
+        grid_prune = prune_map[METHOD_POLICY["grid_prune"]]
+        nlc_grid_prune = prune_map[METHOD_POLICY["nlc_grid_prune"]]
+    except KeyError as exc:
+        raise ValueError(f"unsupported frozen grid pruning policy: {exc.args[0]}") from exc
 
     mf = dft.RKS(mol)
     mf.xc = METHOD_POLICY["xc"]
@@ -199,14 +217,14 @@ def _configure_rks(mol):
     mf.conv_tol = METHOD_POLICY["scf_conv_tol_hartree"]
     mf.max_cycle = METHOD_POLICY["scf_max_cycle"]
     mf.grids.atom_grid = METHOD_POLICY["grid_atom"]
-    mf.grids.prune = None
+    mf.grids.prune = grid_prune
     mf.nlcgrids.atom_grid = METHOD_POLICY["nlc_grid_atom"]
-    mf.nlcgrids.prune = dft.gen_grid.sg1_prune
+    mf.nlcgrids.prune = nlc_grid_prune
     return mf
 
 
 def run_pyscf_relaxation(seed: MolecularSeed) -> dict:
-    """Execute one frozen B97M-V/def2-TZVPD relaxation.
+    """Execute one amended B97M-V/def2-TZVPD v0.14A1 relaxation.
 
     Scientific failure is returned as structured data.  No SCF or geometry
     rescue is attempted.
