@@ -1,0 +1,79 @@
+{
+  "schema": "RESCHEM_ELECTRONIC_TOPOLOGY_LOOKUP_V0_10_PARTIAL",
+  "branch": "compound-relations-v0.3",
+  "preregister_source": "benchmarks/ELECTRONIC_TOPOLOGY_PREREG_V0_10.json",
+  "status": "POST_PREREG_PARTIAL_REFERENCE_CONFLICT_FORMAL_MULTI_DIAGNOSTIC_SCORE_UNRESOLVED",
+  "principle": "External literature labels and the stricter v0.10 multi-diagnostic admission status are recorded separately.",
+  "entries": [
+    {
+      "formula": "NeCl2",
+      "v0_9_structural_prediction": "3C4E",
+      "external_reference_class": "VAN_DER_WAALS_MOLECULE",
+      "reference_sources": [
+        {"key":"evard_thommen_cline_janda_1987_necl2","doi":"10.1021/j100294a014","evidence":"molecular-beam laser spectroscopy explicitly identifies NeCl2 as a van der Waals molecule"},
+        {"key":"rohrbacher_janda_beneventi_casavecchia_volpi_1997_rgcl2","doi":"10.1021/jp970738b","evidence":"experimental/scattering constrained van der Waals potential-energy surfaces for NeCl2 and ArCl2"}
+      ],
+      "admitted_v0_10_family_evidence": {
+        "FRAGMENTATION_ISOMER_ENERGY": "SUPPORT_VDW",
+        "ORBITAL_SUBSPACE": "NOT_RUN",
+        "REAL_SPACE_FORCE": "NOT_RUN"
+      },
+      "formal_v0_10_status": "UNKNOWN_INSUFFICIENT_INDEPENDENT_EVIDENCE",
+      "interpretation": "Reference classification conflicts with the v0.9 3c4e structural label, but the preregistered 2-of-3 electronic-topology gate is not yet satisfied."
+    },
+    {
+      "formula": "NeBr2",
+      "v0_9_structural_prediction": "3C4E",
+      "external_reference_class": "VAN_DER_WAALS_MOLECULE",
+      "reference_sources": [
+        {"key":"hernandez_lamoneda_sanz_sanz_roncero_pio_taylor_janda_2012_nebr2","doi":"10.1016/j.chemphys.2011.09.015","evidence":"ab initio potential-energy surfaces and predissociation dynamics explicitly treat Ne-Br2 as a van der Waals molecule"}
+      ],
+      "admitted_v0_10_family_evidence": {
+        "FRAGMENTATION_ISOMER_ENERGY": "SUPPORT_VDW",
+        "ORBITAL_SUBSPACE": "NOT_RUN",
+        "REAL_SPACE_FORCE": "NOT_RUN"
+      },
+      "formal_v0_10_status": "UNKNOWN_INSUFFICIENT_INDEPENDENT_EVIDENCE",
+      "interpretation": "Reference classification conflicts with v0.9, but one independent diagnostic family is insufficient under v0.10."
+    },
+    {
+      "formula": "ArBr2",
+      "v0_9_structural_prediction": "3C4E",
+      "external_reference_class": "VAN_DER_WAALS_MOLECULE",
+      "reference_sources": [
+        {"key":"cabrera_et_al_2007_arbr2","doi":"10.1063/1.2794332","evidence":"time/frequency-resolved spectroscopy and theory of T-shaped and linear ArBr2 van der Waals isomers"}
+      ],
+      "admitted_v0_10_family_evidence": {
+        "FRAGMENTATION_ISOMER_ENERGY": "SUPPORT_VDW",
+        "ORBITAL_SUBSPACE": "NOT_RUN",
+        "REAL_SPACE_FORCE": "NOT_RUN"
+      },
+      "formal_v0_10_status": "UNKNOWN_INSUFFICIENT_INDEPENDENT_EVIDENCE",
+      "interpretation": "Reference classification conflicts with v0.9, but v0.10 deliberately withholds a resolved label pending a second independent family."
+    },
+    {
+      "formula": "KrBr2",
+      "v0_9_structural_prediction": "3C4E",
+      "external_reference_class": "UNKNOWN_IN_CURRENT_FOCUSED_LOOKUP",
+      "reference_sources": [],
+      "admitted_v0_10_family_evidence": {
+        "FRAGMENTATION_ISOMER_ENERGY": "NOT_RUN",
+        "ORBITAL_SUBSPACE": "NOT_RUN",
+        "REAL_SPACE_FORCE": "NOT_RUN"
+      },
+      "formal_v0_10_status": "UNKNOWN_INSUFFICIENT_INDEPENDENT_EVIDENCE",
+      "interpretation": "No reliable primary-source topology label was resolved in this focused lookup; absence of a report is not a negative label."
+    }
+  ],
+  "formal_score": {
+    "resolved_multi_diagnostic_count": 0,
+    "accuracy": null,
+    "reason": "No held-out candidate yet has two independent admitted diagnostic families under the frozen v0.10 contract."
+  },
+  "reference_level_result": {
+    "v0_9_conflicts": ["NeCl2", "NeBr2", "ArBr2"],
+    "unresolved": ["KrBr2"],
+    "warning": "Reference-level VDW classification is scientifically informative but is not substituted for the stricter preregistered multi-diagnostic score."
+  },
+  "next_gate": "Run or source one independent ORBITAL_SUBSPACE or REAL_SPACE_FORCE analysis for the three VDW-reference cases using frozen provenance requirements; retain KrBr2 as UNKNOWN until evidence exists."
+}
