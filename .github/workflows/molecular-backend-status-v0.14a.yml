@@ -1,13 +1,7 @@
 name: molecular-backend-status-v0.14a
 
+# Frozen experiment replay: no automatic branch trigger.
 on:
-  push:
-    branches:
-      - compound-relations-v0.3
-    paths:
-      - scripts/smoke_molecular_backend_v0_14a.py
-      - reschem/molecular_state_relaxation.py
-      - .github/workflows/molecular-backend-status-v0.14a.yml
   workflow_dispatch:
 
 permissions:
