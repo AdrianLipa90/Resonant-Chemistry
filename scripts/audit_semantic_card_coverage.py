@@ -2,12 +2,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from reschem.entity_registry import CardRegistry
 from reschem.molecular_semantic_projection import project_molecular_screen_readout
 from reschem.semantic_projection import generate_compound_candidate_cards, generate_relational_state_cards
 
-ROOT = Path(__file__).resolve().parents[1]
 CARDS = ROOT / "semantic_cards"
 COVERAGE = CARDS / "SEMANTIC_CARD_COVERAGE_V0_14A1.json"
 COMPOUND_OVERLAYS = CARDS / "COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl"
@@ -156,7 +160,7 @@ def main():
 
     generated = generated_compounds + generated_states + generated_molecular
     audit_relations_and_holonomy(generated)
-    CardRegistry(generated)  # duplicate card ids are a hard failure
+    CardRegistry(generated)
 
     dynamic_formula = {
         record["identity"]["formula"]: record
