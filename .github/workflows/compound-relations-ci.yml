@@ -48,6 +48,9 @@ jobs:
               raise SystemExit(2)
           PY
 
+      - name: Audit semantic-card coverage and epistemic separation
+        run: python scripts/audit_semantic_card_coverage.py
+
       - name: Audit live compound bibliography
         run: python scripts/audit_compound_bibliography.py
 
@@ -65,6 +68,10 @@ jobs:
               'reschem/electronic_topology.py',
               'reschem/compound_state_ensemble.py',
               'reschem/molecular_state_relaxation.py',
+              'semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json',
+              'semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl',
+              'semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl',
+              'scripts/audit_semantic_card_coverage.py',
               'docs/molecular_state_relaxation_v0_14a.md',
               'docs/molecular_state_relaxation_v0_14a1_amendment.md',
               'docs/molecular_state_relaxation_v0_14a1_partial_readout.md',
