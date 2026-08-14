@@ -1,0 +1,59 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_ACTIVATION_V0_9",
+  "branch": "compound-relations-v0.3",
+  "status": "STRUCTURAL_CANDIDATE_ATLAS_FROZEN_MOTIVATING_KRF2_NOT_BLIND_VALIDATION",
+  "rule": {
+    "centre": "full outer s/p shell, frozen relation degree 0, principal_n >= 2",
+    "ligand": "frozen relation degree 1 and ABOVE_HALF shell branch",
+    "activation": "q_cs=1; activated_relation_degree=2; symmetric linear 3c4e candidate",
+    "energetics": "no stability claim; evaluate separately with conventional local-minimum and dissociation controls"
+  },
+  "derived_domain": {
+    "centres": ["Ne", "Ar", "Kr"],
+    "ligands": ["F", "Cl", "Br"],
+    "candidate_count": 9
+  },
+  "candidates": [
+    {"formula":"NeF2","centre":"Ne","ligand":"F","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"},
+    {"formula":"NeCl2","centre":"Ne","ligand":"Cl","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"},
+    {"formula":"NeBr2","centre":"Ne","ligand":"Br","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"},
+    {"formula":"ArF2","centre":"Ar","ligand":"F","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"},
+    {"formula":"ArCl2","centre":"Ar","ligand":"Cl","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"},
+    {"formula":"ArBr2","centre":"Ar","ligand":"Br","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"},
+    {"formula":"KrF2","centre":"Kr","ligand":"F","status":"KNOWN_MOTIVATING_REALIZATION_EXCLUDED_FROM_BLIND_SCORE"},
+    {"formula":"KrCl2","centre":"Kr","ligand":"Cl","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"},
+    {"formula":"KrBr2","centre":"Kr","ligand":"Br","status":"UNVALIDATED_STRUCTURAL_CANDIDATE"}
+  ],
+  "motivating_primary_sources": [
+    {
+      "key": "brundle_jones_1971_krf2_photoelectron",
+      "doi": "10.1039/C29710001198",
+      "role": "valence photoelectron spectrum and molecular-orbital ordering"
+    },
+    {
+      "key": "collins_cruickshank_breeze_1974_krf2_bonding",
+      "doi": "10.1039/F29747000393",
+      "role": "ab initio orbital analysis explicitly illustrating the three-centre bond"
+    },
+    {
+      "key": "hoffman_swafford_cave_1998_krf2",
+      "doi": "10.1063/1.477768",
+      "role": "CCSD(T) treatment of linear ground-state KrF2 and dissociation energetics"
+    },
+    {
+      "key": "lehmann_dixon_schrobilgen_2001_krf2",
+      "doi": "10.1021/ic001167w",
+      "role": "low-temperature X-ray structures plus theoretical studies"
+    }
+  ],
+  "heldout_policy": {
+    "not_looked_up_for_v0_9_score": ["NeF2","NeCl2","NeBr2","ArF2","ArCl2","ArBr2","KrCl2","KrBr2"],
+    "anti_fit": "Do not delete a candidate after external energetic evidence is opened. Append energetic/local-minimum labels in a new artifact."
+  },
+  "nonclaims": [
+    "q_cs is not an excitation energy or oxidation state",
+    "3c4e candidate generation does not imply thermodynamic stability",
+    "KrF2 is a motivating known case and is not counted as blind validation",
+    "Ne/Ar candidates are not asserted to exist merely because the structural gate generates them"
+  ]
+}
