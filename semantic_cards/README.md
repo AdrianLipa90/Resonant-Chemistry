@@ -100,10 +100,21 @@ In particular, current v0.14A1 cards preserve `ArBr2 = MISSING_EXECUTION_NOT_CHE
 - `SEMANTIC_CARD_COVERAGE_V0_14A1.json` — model/gate coverage ledger through v0.14A1.
 - `COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl` — persisted compound/control model projections through v0.13.
 - `MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl` — persisted v0.14A1 model/formula projection.
+- `SURFACE_SYNC_CURRENT.json` — semantic ↔ THEORY ↔ web parity contract for the current scientific checkpoint.
 - `schema_repository_overlay_v0_1.json` — repository-overlay schema.
+
+## THEORY and web parity
+
+Semantic state is not considered fully surfaced merely because Python can load the registry. The current cycle also requires:
+
+- `THEORY/04_COMPOUND_RELATIONAL_ARCHITECTURE.md` to state the compound/molecular architecture and admission boundary;
+- `THEORY/05_SEMANTIC_ENTITY_GRAPH.md` to state card/relation/holonomy semantics;
+- `web/semantic_card_atlas.html` to expose the persisted semantic coverage and molecular checkpoint without inventing new semantics.
+
+The web atlas consumes repository JSON/JSONL directly. It is a visualization layer and cannot promote any status beyond the underlying cards/benchmarks.
 
 ## Anti-drift gate
 
-`scripts/audit_semantic_card_coverage.py` is the maintained CI enforcement surface. It checks atomic coverage, model/gate projection coverage, dynamic entity cardinalities, relation/holonomy provenance, v0.14A1 execution-state agreement, and absence of silent semantic promotion.
+`scripts/audit_semantic_card_coverage.py` is the maintained CI enforcement surface. It checks atomic coverage, model/gate projection coverage, dynamic entity cardinalities, relation/holonomy provenance, v0.14A1 execution-state agreement, absence of silent semantic promotion, and existence/current-boundary tokens for the semantic, THEORY and web surfaces.
 
-New model/benchmark/entity surfaces must be represented in the semantic layer before the maintained compound/molecular CI can pass.
+New model/benchmark/entity surfaces must be represented in the semantic layer and mirrored into the declared current THEORY/web surfaces before the maintained compound/molecular CI can pass.
