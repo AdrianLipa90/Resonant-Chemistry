@@ -2,7 +2,7 @@
 \label{ch:relational-admission}
 
 \section{Why a separate admission layer is necessary}
-The control chapters deliberately keep TIR, PhaseNav and affective semantics out of the atomic Hamiltonians.  This is not a rejection of the relational programme; it is the condition that makes a later test identifiable.  If a candidate correction is introduced before the conventional control is frozen, agreement with experiment cannot distinguish the new mechanism from ordinary orbital relaxation, exchange, correlation or numerical tuning.
+The control chapters deliberately keep TIR, PhaseNav and affective semantics out of the atomic and molecular control Hamiltonians.  This is not a rejection of the relational programme; it is the condition that makes a later test identifiable.  If a candidate correction is introduced before the conventional control is frozen, agreement with experiment cannot distinguish the new mechanism from ordinary orbital relaxation, exchange, correlation, basis/grid effects or numerical tuning.
 
 The admission rule is therefore
 \begin{equation}
@@ -12,12 +12,14 @@ The admission rule is therefore
 \end{equation}
 It does not imply physical promotion.
 
+The same discipline applies when the conventional control itself is partial.  A missing runtime result, such as the current ArBr$_2$ slot in v0.14A1, remains UNKNOWN/MISSING EXECUTION and is not filled by a relational prediction.
+
 \section{TIR metadata and the information quantum}
 The project carries
 \begin{equation}
 \kappa=\frac{\ln 2}{24\pi}
 \end{equation}
-as a TIR-defined quantity.  In the atomic control calculations presented in this book, $\kappa$ is metadata: it does not alter hydrogenic, Hartree--Fock, CI, spin--orbit or shell-topology control energies.  Any future energy or transition formula containing $\kappa$ must state the dimensional map that makes the term admissible and must be tested against a control that did not use the target value in its construction.
+as a TIR-defined quantity.  In the atomic and molecular control calculations presented in this book, $\kappa$ is metadata: it does not alter hydrogenic, Hartree--Fock, CI, DFT, spin--orbit, geometry-optimization or shell-topology control energies.  Any future energy or transition formula containing $\kappa$ must state the dimensional map that makes the term admissible and must be tested against a control that did not use the target value in its construction.
 
 \section{Relation operators}
 For active electronic subspaces $\mathcal E_A$ and $\mathcal E_B$, a general relational operator may be written
@@ -26,7 +28,7 @@ W_{AB}:\mathcal E_B\rightarrow\mathcal E_A.
 \end{equation}
 This notation alone does not determine a physical interaction.  An admissible $W_{AB}$ must provide: a domain and codomain, covariance or transformation rule, dimensional units where applicable, a construction from control observables, and a falsification criterion.  A semantic label or learned similarity score is not sufficient to promote $W_{AB}$ into the physical Hamiltonian.
 
-\section{PhaseNav/36D as a representation interface}
+\section{PhaseNav/36D as representation and orchestration interface}
 A PhaseNav vector may be useful as a deterministic representation of a structured record.  For a shell state we write abstractly
 \begin{equation}
 \mathcal V_{36}:\Sigma_{nlk}\longrightarrow\mathbb T^{36}
@@ -35,11 +37,26 @@ only after the encoder is frozen.  The dimension 36 is treated here as a project
 
 A valid encoder must therefore satisfy at least deterministic replay, explicit feature provenance, stable treatment of missing values, and tests showing which transformations of the physical state should or should not leave the representation invariant.
 
-\section{NOEMA as provenance and continuity substrate}
-NOEMA may store versioned pointers, semantic cards, receipts, validation states and project continuity information.  That role is operational rather than a new physical interaction.  A NOEMA receipt can establish what calculation, data and code state were used; it cannot by itself establish an external physical effect.  The scientific manuscript must remain reproducible from the equations, code and frozen benchmark inputs independently of the conversational runtime that helped assemble it.
+PhaseNav may also provide the native command, gate and receipt surface for project execution.  The intended layering is
+\begin{equation}
+\text{command}\rightarrow\text{concept}\rightarrow\text{gate}\rightarrow
+\text{36D state}\rightarrow\text{backend adapter}\rightarrow\text{receipt}.
+\end{equation}
+This is an operational architecture, not permission for the representation layer to alter a conventional result.  If PySCF, a Hartree--Fock solver, a Hessian calculation or another control backend returns an energy, convergence failure or exception, a PhaseNav command must preserve that outcome and its provenance.  Backend-specific code is therefore isolated behind adapters rather than allowed to define the relational semantics.
+
+\section{Repository authority, NOEMA and Library mirrors}
+For Resonant Chemistry, the GitHub repository default branch \texttt{main} is the project Source of Truth for canonical code, manuscript, benchmark and gate state.  A research branch may contain newer candidate work, but it is not canonical merely because it exists.
+
+NOEMA/Library may store mirrors, recovery copies, semantic cards, receipts, validation states, pointers and project continuity information.  Those roles are operational and provenance-oriented.  They must not become a runtime dependency that prevents checkout, build, test or recovery of the canonical repository when Library access is absent.  The normal persistence direction for canonical repository state is therefore
+\begin{equation}
+\text{repo canon}\longrightarrow\text{Library/NOEMA mirror and index}.
+\end{equation}
+A Library-to-repo recovery is exceptional: it must verify artifact identity/provenance before reintroducing missing material and must not silently overwrite newer repository state.
+
+A NOEMA or Library receipt can establish what calculation, data and code state were used; it cannot by itself establish an external physical effect.  The scientific manuscript must remain reproducible from equations, repository code and frozen benchmark inputs independently of the conversational runtime that helped assemble it.
 
 \section{Affective semantics}
-Affective mappings are explicitly outside the atomic control Hamiltonian.  If a future map
+Affective mappings are explicitly outside the atomic and molecular control Hamiltonians.  If a future map
 \begin{equation}
 \mathcal F_{\rm aff}:\mathcal I(\Psi)\rightarrow\mathcal A
 \end{equation}
@@ -57,5 +74,12 @@ A candidate relational observable $R$ should be developed in the following order
 \end{enumerate}
 A successful retrospective reconstruction can motivate a candidate, but it is not equivalent to a prospective test.
 
+\section{Compound-state admission example}
+The v0.13/v0.14 trajectory illustrates the separation in executable form.  v0.13 enumerates competing activated and weak-complex states without ranking them.  v0.14A/A1 supplies a common conventional DFT relaxation screen.  The screen may reveal distinct basins or failed starts, but it does not assign electronic topology.  A later Hessian gate must establish local-minimum status, and the v0.10 electronic-topology contract still requires independent diagnostic families before a 3c4e/VDW label is admitted.
+
+Thus a relation-state name is a candidate coordinate, not a physical verdict.  Physical controls may select one state, several metastable states, or reject all currently enumerated states.
+
 \section{Current admission status}
-The atom and shell control layers through this book are sufficiently explicit to host candidate relational observables, but no TIR or affective correction is promoted into their Hamiltonians.  The conformal shell programme remains a candidate diagnostic.  The next admissible physics step is a no-refit shell or molecular observable whose prediction differs from the conventional control in a pre-declared way.
+The atom, shell, compound and partial molecular-control layers through this book are sufficiently explicit to host candidate relational observables, but no TIR, PhaseNav or affective correction is promoted into their Hamiltonians or molecular energies.  The conformal shell programme remains a candidate diagnostic.  The compound-state ensemble is implemented but unranked.  The v0.14A1 molecular screen is partial at eight of nine formulae and has no Hessian/topology admission.
+
+The next admissible relational-physics step remains a no-refit observable whose prediction differs from the conventional control in a pre-declared way.  Operational improvements to PhaseNav commands, receipts or 36D encoding are valuable software work, but they are not substitutes for that scientific admission test.
