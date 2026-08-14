@@ -1,0 +1,111 @@
+{
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_PREREG_V0_14A",
+  "branch": "compound-relations-v0.3",
+  "status": "COMMON_METHOD_RELAXATION_SCREEN_FROZEN_BEFORE_RESULTS",
+  "source_state_ensemble": "benchmarks/COMPOUND_STATE_ENSEMBLE_V0_13.json",
+  "purpose": "Relax all competing closed-shell XY2 relational-state seeds under one conventional low-cost molecular method before any Hessian/topology admission.",
+  "epistemic_role": "PRELIMINARY_CONVENTIONAL_RELAXATION_SCREEN_NOT_V0_8_HIGH_LEVEL_ADMISSION",
+  "software": {
+    "pyscf": "2.14.0",
+    "geometric": "1.1.1",
+    "python": "3.12",
+    "backend_policy": "same pinned software versions for every ligand dimer and XY2 seed"
+  },
+  "electronic_structure": {
+    "method": "B97M-V",
+    "pyscf_xc": "b97m_v",
+    "nonlocal_correlation": "VV10",
+    "basis": "def2-TZVPD",
+    "charge": 0,
+    "spin": 0,
+    "environment": "gas phase",
+    "relativity": "none in v0.14A; this is a screening limitation, not a high-level admission result",
+    "symmetry": false,
+    "scf_conv_tol_hartree": 1e-10,
+    "scf_max_cycle": 200,
+    "grid": {"atom_grid": [99,590], "prune": null},
+    "nlc_grid": {"atom_grid": [50,194], "prune": "sg1_prune"},
+    "scf_rescue": "none; a failed SCF remains failed"
+  },
+  "geometry_optimizer": {
+    "engine": "geomeTRIC through PySCF",
+    "maxsteps": 120,
+    "convergence_energy_hartree": 1e-6,
+    "convergence_grms_hartree_per_bohr": 3e-4,
+    "convergence_gmax_hartree_per_bohr": 4.5e-4,
+    "convergence_drms_angstrom": 1.2e-3,
+    "convergence_dmax_angstrom": 1.8e-3,
+    "constraints": "none",
+    "hessian": "NOT_RUN_IN_V0_14A"
+  },
+  "ligand_dimer_prepass": {
+    "ligands": ["F","Cl","Br"],
+    "formulae": ["F2","Cl2","Br2"],
+    "common_initial_distance_angstrom": 2.0,
+    "method": "identical B97M-V/def2-TZVPD policy",
+    "use": "the optimized r_YY only seeds the subsequent XY2 geometries; it is not an external fitted bond length"
+  },
+  "xy2_formulae": [
+    "NeF2","NeCl2","NeBr2",
+    "ArF2","ArCl2","ArBr2",
+    "KrF2","KrCl2","KrBr2"
+  ],
+  "seed_policy": {
+    "activated_linear_multistart": {
+      "state_kind": "ACTIVATED_LINEAR_3C4E",
+      "r_XY_over_r_YY": [1.0,1.3,1.6],
+      "geometry": "Y-X-Y linear with equal X-Y distances"
+    },
+    "weak_complex_linear_end_on": {
+      "state_kind": "WEAK_COMPLEX_LINEAR_END_ON",
+      "X_to_near_Y_over_r_YY": 1.8,
+      "geometry": "X...Y-Y linear; Y-Y fixed only in the seed to the dimer-prepass r_YY"
+    },
+    "weak_complex_t_shaped": {
+      "state_kind": "WEAK_COMPLEX_T_SHAPED",
+      "X_to_YY_midpoint_over_r_YY": 1.8,
+      "geometry": "X approaches the midpoint of Y-Y perpendicular to the dimer axis"
+    }
+  },
+  "job_count": {
+    "ligand_dimer_prepass": 3,
+    "xy2_relaxations": 45,
+    "formulae": 9,
+    "starts_per_formula": 5
+  },
+  "raw_outputs_per_relaxation": [
+    "initial Cartesian geometry",
+    "final Cartesian geometry if optimizer returns",
+    "initial SCF convergence/energy",
+    "final SCF convergence/energy",
+    "final nuclear-gradient RMS and maximum component",
+    "X-Y1, X-Y2, Y-Y distances and Y-X-Y angle",
+    "optimizer exception text if any",
+    "PySCF/geomeTRIC/Python versions"
+  ],
+  "aggregate_without_topology_threshold": [
+    "relative final energy within each stoichiometry among successful relaxation starts",
+    "which seed families converge or fail",
+    "whether multiple seeds collapse to numerically similar geometries, reported descriptively without an automatic clustering threshold"
+  ],
+  "explicit_nonclaims": [
+    "v0.14A does not establish harmonic local minima because no Hessian is run",
+    "v0.14A does not replace the frozen v0.8 r2SCAN-3c plus DLPNO-CCSD(T1) high-level admission policy",
+    "v0.14A does not assign 3c4e versus VDW topology from geometry alone",
+    "seed distances are numerical search starts, not predicted bond lengths",
+    "no state-specific method, basis, grid, optimizer, or rescue branch is permitted",
+    "no relativistic correction is included in this preliminary screen"
+  ],
+  "bibliography": [
+    {"key":"mardirossian_headgordon_2015_b97mv","doi":"10.1063/1.4907719","role":"B97M-V functional"},
+    {"key":"sun_et_al_2020_pyscf","doi":"10.1063/5.0006074","role":"PySCF program/method framework"},
+    {"key":"rappoport_furche_2010_diffuse_def2","doi":"10.1063/1.3484283","role":"diffuse property-optimized def2 basis augmentation"},
+    {"key":"wang_song_2016_geometric","doi":"10.1063/1.4952956","role":"geomeTRIC optimizer"}
+  ],
+  "anti_fit_rules": [
+    "Do not remove a seed because its topology is already known from literature.",
+    "Do not change a failed seed geometry or SCF settings for one formula only.",
+    "Do not interpret the lowest v0.14A electronic energy as a validated ground-state assignment without the later Hessian/admission gates.",
+    "Do not use known KrF2 or VDW reference labels to change the common seed scale factors after this preregistration."
+  ]
+}
