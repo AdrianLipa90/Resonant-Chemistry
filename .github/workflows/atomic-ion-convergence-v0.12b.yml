@@ -1,0 +1,197 @@
+name: atomic-ion-convergence-v0.12b
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+    paths:
+      - reschem/atomic_ion_convergence_continuation.py
+      - scripts/run_atomic_ion_convergence_v0_12b.py
+      - benchmarks/ATOMIC_ION_CONVERGENCE_PREREG_V0_12B.json
+      - benchmarks/ATOMIC_ION_CONVERGENCE_V0_12A_EXECUTION.json
+      - .github/workflows/atomic-ion-convergence-v0.12b.yml
+  workflow_dispatch:
+
+jobs:
+  state-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        include:
+          - {z: 10, charge: 0, label: Ne}
+          - {z: 10, charge: 1, label: Ne_plus}
+          - {z: 18, charge: 0, label: Ar}
+          - {z: 18, charge: 1, label: Ar_plus}
+          - {z: 36, charge: 0, label: Kr}
+          - {z: 36, charge: 1, label: Kr_plus}
+          - {z: 9, charge: 0, label: F}
+          - {z: 9, charge: -1, label: F_minus}
+          - {z: 17, charge: 0, label: Cl}
+          - {z: 17, charge: -1, label: Cl_minus}
+          - {z: 35, charge: 0, label: Br}
+          - {z: 35, charge: -1, label: Br_minus}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Execute frozen L3 continuation
+        run: >-
+          python scripts/run_atomic_ion_convergence_v0_12b.py
+          --z ${{ matrix.z }}
+          --charge ${{ matrix.charge }}
+          --output-dir benchmarks/v0_12b_states
+
+      - name: Validate state receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          files = list(Path('benchmarks/v0_12b_states').glob('*.json'))
+          if len(files) != 1:
+              raise SystemExit(f'expected one L3 receipt; got {files}')
+          payload = json.loads(files[0].read_text(encoding='utf-8'))
+          assert payload['schema'] == 'RESCHEM_ATOMIC_ION_CONVERGENCE_V0_12B_STATE'
+          assert payload['level'] == 'L3'
+          assert payload['parameters']['basis_size'] == 32
+          assert payload['parameters']['grid_points'] == 2200
+          assert payload['parameters']['zeta_min'] == 0.0025
+          assert payload['parameters']['radial_grid_max_bohr'] == 300.0
+          print({'symbol': payload['symbol'], 'charge': payload['charge'], 'converged': payload['converged']})
+          PY
+
+      - name: Upload L3 state receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: atomic-ion-convergence-v0.12b-${{ matrix.label }}
+          path: benchmarks/v0_12b_states/*.json
+          if-no-files-found: error
+
+  aggregate:
+    needs: state-scan
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all L3 state receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: atomic-ion-convergence-v0.12b-*
+          path: collected
+          merge-multiple: true
+
+      - name: Aggregate L3 and compare with frozen L2
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          files = sorted(Path('collected').glob('*.json'))
+          if len(files) != 12:
+              raise SystemExit(f'expected 12 L3 receipts; found {len(files)}: {[p.name for p in files]}')
+          l3_states = [json.loads(path.read_text(encoding='utf-8')) for path in files]
+
+          def label(symbol, charge):
+              return symbol + ('+' if charge == 1 else ('-' if charge == -1 else ''))
+
+          l3 = {label(x['symbol'], x['charge']): x for x in l3_states}
+          if len(l3) != 12:
+              raise SystemExit('duplicate/missing L3 atom-charge state')
+
+          previous = json.loads(Path('benchmarks/ATOMIC_ION_CONVERGENCE_V0_12A_EXECUTION.json').read_text(encoding='utf-8'))
+          l2 = {}
+          for state in previous['states']:
+              row = next(x for x in state['levels'] if x['level'] == 'L2')
+              l2[state['state']] = row
+          if set(l2) != set(l3):
+              raise SystemExit(f'L2/L3 state mismatch: L2={sorted(l2)}, L3={sorted(l3)}')
+
+          per_state = {}
+          for key in sorted(l3):
+              delta = l3[key]['energy_hartree'] - l2[key]['energy_hartree']
+              per_state[key] = {
+                  'L2_energy_hartree': l2[key]['energy_hartree'],
+                  'L3_energy_hartree': l3[key]['energy_hartree'],
+                  'signed_L3_minus_L2_hartree': delta,
+                  'absolute_L3_minus_L2_hartree': abs(delta),
+                  'L2_converged': l2[key]['converged'],
+                  'L3_converged': l3[key]['converged'],
+                  'L2_virial_abs_hartree': abs(l2[key]['virial_residual_hartree']),
+                  'L3_virial_abs_hartree': l3[key]['virial_abs_hartree'],
+                  'L3_iterations': l3[key]['iterations'],
+              }
+
+          def ion(symbol):
+              return l3[symbol + '+']['energy_hartree'] - l3[symbol]['energy_hartree']
+          def ion_l2(symbol):
+              return l2[symbol + '+']['energy_hartree'] - l2[symbol]['energy_hartree']
+          def attach(symbol):
+              return l3[symbol]['energy_hartree'] - l3[symbol + '-']['energy_hartree']
+          def attach_l2(symbol):
+              return l2[symbol]['energy_hartree'] - l2[symbol + '-']['energy_hartree']
+
+          ionization = {}
+          for symbol in ('Ne','Ar','Kr'):
+              old, new = ion_l2(symbol), ion(symbol)
+              ionization[symbol] = {
+                  'L2_hartree': old,
+                  'L3_hartree': new,
+                  'signed_L3_minus_L2_hartree': new-old,
+                  'absolute_L3_minus_L2_hartree': abs(new-old),
+              }
+
+          attachment = {}
+          for symbol in ('F','Cl','Br'):
+              old, new = attach_l2(symbol), attach(symbol)
+              attachment[symbol] = {
+                  'L2_hartree': old,
+                  'L3_hartree': new,
+                  'signed_L3_minus_L2_hartree': new-old,
+                  'absolute_L3_minus_L2_hartree': abs(new-old),
+              }
+
+          payload = {
+              'schema': 'RESCHEM_ATOMIC_ION_CONVERGENCE_V0_12B',
+              'generated_utc': datetime.now(timezone.utc).isoformat(),
+              'preregister_source': 'benchmarks/ATOMIC_ION_CONVERGENCE_PREREG_V0_12B.json',
+              'status': 'GLOBAL_L3_CONTINUATION_COMPLETE_NO_CONVERGENCE_THRESHOLD',
+              'state_count': 12,
+              'l3_states': sorted(l3_states, key=lambda x: (x['Z'], x['charge'])),
+              'L3_minus_L2_per_state': per_state,
+              'ionization_cost_L3_vs_L2': ionization,
+              'attachment_gain_L3_vs_L2': attachment,
+              'nonclaims': [
+                  'no numerical convergence threshold is selected',
+                  'L3 is not automatically a converged reference',
+                  'no chemistry classifier or molecular energy is fit',
+              ],
+          }
+          out = Path('ATOMIC_ION_CONVERGENCE_V0_12B.json')
+          out.write_text(json.dumps(payload, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps({
+              'state_count': 12,
+              'ionization_cost_L3_vs_L2': ionization,
+              'attachment_gain_L3_vs_L2': attachment,
+          }, indent=2))
+          PY
+
+      - name: Upload combined v0.12B continuation
+        uses: actions/upload-artifact@v4
+        with:
+          name: atomic-ion-convergence-v0.12b-combined
+          path: ATOMIC_ION_CONVERGENCE_V0_12B.json
+          if-no-files-found: error
