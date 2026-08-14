@@ -1,7 +1,7 @@
-\chapter{State Invariants as the Physical Backbone of Semantic Atom Cards}
+\chapter{State Invariants and Semantic Entity Cards}
 
 \section{From labels to state-derived semantics}
-A semantic atom card must not be a list of human associations attached to an element name. Its physical backbone should be generated from state variables and invariants that survive a change of orbital representation. For the correlated helium control state, the first such object is the spin-summed one-particle reduced density matrix
+A semantic card must not be a list of human associations attached to an element or molecule name. Its physical backbone should be generated from state variables and invariants, with every derived field tied to explicit repository evidence. For the correlated helium control state, the first such object is the spin-summed one-particle reduced density matrix
 \begin{equation}
 \gamma_{ij}=\sum_{\sigma}\langle\Psi|a^\dagger_{i\sigma}a_{j\sigma}|\Psi\rangle.
 \end{equation}
@@ -43,19 +43,72 @@ S_1\approx 0.00425445,\qquad L_1\approx 9.87444\times10^{-4}.
 These quantities are not emotions and are not introduced as TIR postulates. They are standard state-derived descriptors that quantify departure from a rank-one normalized one-body spectrum.
 
 \section{Semantic-card contract}
-The semantic card therefore separates four layers:
+A calculation card separates at least the following layers:
 \begin{enumerate}
-\item identity and stoichiometric data $(Z,N,A,q)$;
-\item conventional physical control data such as configuration, energy and correlation;
-\item basis-invariant state descriptors such as natural occupations and one-body entropy;
-\item interpretive TIR and affective mappings, which remain unassigned until an explicit rule with provenance is supplied.
+\item identity and stoichiometric data;
+\item conventional physical-control properties and machine-readable source artifacts;
+\item state invariants and derived descriptors;
+\item explicit relations to other cards or deterministic selectors over the card registry;
+\item provenance holonomy recording how the entity was generated from parent cards and operations;
+\item physical holonomy, which remains \code{NOT\_COMPUTED} unless winding, phase or topology observables have actually been evaluated with provenance;
+\item interpretive TIR and affective mappings, which remain unassigned until an explicit rule with provenance is supplied;
+\item epistemic state distinguishing input, model-defined object, emergent candidate, tested control, validated result and promoted canon.
 \end{enumerate}
 
 This ordering prevents reverse fitting. An affective or relational interpretation may consume the invariant descriptor vector, but it may not rewrite the underlying control observables.
 
+\section{Cards as calculation objects}
+The card layer is not only documentation.  The current repository exposes an addressable registry in which a downstream calculation can request one or more card identifiers and receive a deterministic context containing their properties, invariants and relation targets.  The complete context is canonically serialized and hashed.  A calculation can therefore record not only the code and method that ran, but the exact semantic/entity state it consumed.
+
+This gives the calculation boundary the form
+\begin{equation}
+\mathcal C=\bigl(\{C_i\},\,\mathcal R,\,H_{\mathrm{ctx}}\bigr),
+\end{equation}
+where $C_i$ are entity cards, $\mathcal R$ is the selected relation neighbourhood and $H_{\mathrm{ctx}}$ is the context hash.  Equality of context hashes establishes equality of the serialized card context; it does not establish physical equivalence of two chemical states.
+
+The current registry includes canonical neutral atomic cards through Kr, nondestructive evidence overlays, persisted model/gate cards, deterministic compound-relation candidates, competing relational-state candidates and molecular-screen cards.  High-cardinality candidate populations are regenerated from the same frozen scientific generators rather than maintained as manually copied tables.
+
+\section{Relation graph}
+Relations are first-class records.  A relation contains a source card, predicate, target and provenance.  The target may be an exact card identifier or a deterministic selector such as a neutral atomic card with a specified element symbol.  Typical predicates include
+\begin{equation}
+\texttt{HAS\_ATOMIC\_COMPONENT},\quad
+\texttt{DERIVED\_BY\_MODEL},\quad
+\texttt{HAS\_CENTRE},\quad
+\texttt{HAS\_LIGAND},\quad
+\texttt{SCREENED\_STATE\_CANDIDATE}.
+\end{equation}
+These graph edges organize computation and provenance.  They are not automatically identified with the TIR operator $W_{ij}$; that operator remains reserved until a separately defined physical/semantic admission rule is supplied.
+
+\section{Provenance holonomy versus physical holonomy}
+The term holonomy is used in two deliberately separated senses.
+
+\paragraph{Provenance holonomy.}
+Every generated card records its parent-card identifiers, generating operation and a deterministic lineage hash.  This answers the operational question ``through which path in model/state space did this entity enter the calculation registry?''  For example, a v0.13 relational state records descent from the closed-shell activation and competing-state ensemble gates, and a v0.14A1 molecular-screen card records descent from the three frozen v0.13 state candidates for the same composition.
+
+\paragraph{Physical holonomy.}
+A physical-holonomy field may contain projected winding, Berry/connection phase, pair winding or another explicitly defined topology observable only when that quantity has actually been computed and its source artifact is named.  The existence of a provenance loop, a semantic relation cycle or a topology-family label is not sufficient.  Thus
+\begin{equation}
+\text{provenance holonomy}\;\not\Rightarrow\;\text{physical holonomy}.
+\end{equation}
+This boundary is especially important for the shell-topology diagnostics of later chapters.
+
+\section{Emergent entities}
+A model may generate an entity that was not entered manually.  Examples include the 231 v0.1 binary relation candidates and the 27 v0.13 competing relational states.  Such an object receives an ordinary card with properties, invariants, parents and relations, but its emergence status is
+\begin{equation}
+\texttt{MODEL\_DEFINED\_EMERGENT\_CANDIDATE}.
+\end{equation}
+Registry membership means that the candidate is addressable for calculation; it does not promote the candidate to a physically realized molecule, local minimum, ground state or canonical ontology.  Independent admission gates remain mandatory.
+
+The same rule applies to future entities that emerge from graph composition, symmetry reduction, topology diagnostics or other deterministic transformations.  A new entity should be carded at the point it becomes an addressable computational object, and its generating parents and operation should remain recoverable.
+
+\section{Current coverage invariant}
+The repository now treats semantic-card coverage as a maintained gate.  Every newly introduced atomic species, compound model, state-ensemble layer or molecular screening/admission gate must receive a card or overlay in the same development cycle.  CI checks that the current H--Kr atom coverage exists, that the compound/model trajectory through v0.14A1 has projections, that dynamic high-cardinality entity counts agree with their frozen generators, and that the molecular card set agrees exactly with the machine-readable expected/completed formulae.
+
+The same gate rejects silent semantic promotion.  In particular, the current ArBr$_2$ state remains missing execution rather than chemical failure, and the v0.14A1 cards cannot claim a Hessian minimum, ground-state ranking or geometry-only electronic topology.
+
 \section{Entry point for a future TIR map}
 A future map may be written abstractly as
 \begin{equation}
-\mathcal F_{\mathrm{TIR}}:\mathcal I(\Psi)\longrightarrow\mathcal S,
+\mathcal F_{\mathrm{TIR}}:\mathcal I(C,\mathcal R)\longrightarrow\mathcal S,
 \end{equation}
-where $\mathcal I(\Psi)$ is a vector of state invariants and $\mathcal S$ is a semantic coordinate space. The map itself is a candidate model and must have a transformation law, provenance and falsification criterion. The current chapter establishes only the physical domain of that future map.
+where $\mathcal I(C,\mathcal R)$ is a provenance-preserving vector of card invariants and relations and $\mathcal S$ is a semantic coordinate space. The map itself is a candidate model and must have a transformation law, provenance and falsification criterion. The current card registry establishes the physical/computational domain of such a future map; it does not pre-assign its semantic coordinates.
