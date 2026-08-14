@@ -6,14 +6,26 @@ on:
       - main
     paths:
       - web/**
+      - THEORY/**
+      - semantic_cards/ENTITY_REGISTRY_CURRENT.json
+      - semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json
+      - semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl
+      - semantic_cards/SURFACE_SYNC_CURRENT.json
       - benchmarks/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
+      - benchmarks/MOLECULAR_STATE_RELAXATION_ACTIVATED_SURVIVAL_MATRIX_V0_14A1_PARTIAL.json
       - .github/workflows/web-ci.yml
   pull_request:
     branches:
       - main
     paths:
       - web/**
+      - THEORY/**
+      - semantic_cards/ENTITY_REGISTRY_CURRENT.json
+      - semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json
+      - semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl
+      - semantic_cards/SURFACE_SYNC_CURRENT.json
       - benchmarks/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
+      - benchmarks/MOLECULAR_STATE_RELAXATION_ACTIVATED_SURVIVAL_MATRIX_V0_14A1_PARTIAL.json
       - .github/workflows/web-ci.yml
   workflow_dispatch:
 
@@ -28,6 +40,7 @@ jobs:
         run: |
           node --check web/app.js
           node --check web/phasenav36d.js
+          node --check web/semantic_cards.js
 
       - name: Static contract
         run: |
@@ -35,9 +48,15 @@ jobs:
           test -s web/styles.css
           test -s web/app.js
           test -s web/phasenav36d.js
+          test -s web/semantic_card_atlas.html
+          test -s web/semantic_cards.js
+          test -s semantic_cards/SURFACE_SYNC_CURRENT.json
           grep -q 'id="shell"' web/index.html
           grep -q 'id="carbon"' web/index.html
           grep -q 'id="topology"' web/index.html
+          grep -q 'Semantic Card Atlas' web/index.html
+          grep -q 'semantic_cards.js' web/semantic_card_atlas.html
+          grep -q 'MISSING_EXECUTION_NOT_CHEMICAL_FAIL' web/semantic_cards.js
           grep -q 'length!==36' web/app.js
           grep -q 'length !== 36' web/phasenav36d.js
 
@@ -53,7 +72,14 @@ jobs:
               'index': 'http://127.0.0.1:8000/web/',
               'app': 'http://127.0.0.1:8000/web/app.js',
               'phase36': 'http://127.0.0.1:8000/web/phasenav36d.js',
+              'semantic_atlas': 'http://127.0.0.1:8000/web/semantic_card_atlas.html',
+              'semantic_js': 'http://127.0.0.1:8000/web/semantic_cards.js',
+              'semantic_coverage': 'http://127.0.0.1:8000/semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json',
+              'entity_registry': 'http://127.0.0.1:8000/semantic_cards/ENTITY_REGISTRY_CURRENT.json',
+              'molecular_cards': 'http://127.0.0.1:8000/semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl',
+              'surface_sync': 'http://127.0.0.1:8000/semantic_cards/SURFACE_SYNC_CURRENT.json',
               'carbon_benchmark': 'http://127.0.0.1:8000/benchmarks/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json',
+              'molecular_survival': 'http://127.0.0.1:8000/benchmarks/MOLECULAR_STATE_RELAXATION_ACTIVATED_SURVIVAL_MATRIX_V0_14A1_PARTIAL.json',
           }
           for name, url in checks.items():
               with urlopen(url, timeout=5) as response:
