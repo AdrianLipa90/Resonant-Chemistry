@@ -1,15 +1,7 @@
 name: atomic-ion-convergence-v0.12b
 
+# Frozen experiment replay: no automatic branch trigger.
 on:
-  push:
-    branches:
-      - compound-relations-v0.3
-    paths:
-      - reschem/atomic_ion_convergence_continuation.py
-      - scripts/run_atomic_ion_convergence_v0_12b.py
-      - benchmarks/ATOMIC_ION_CONVERGENCE_PREREG_V0_12B.json
-      - benchmarks/ATOMIC_ION_CONVERGENCE_V0_12A_EXECUTION.json
-      - .github/workflows/atomic-ion-convergence-v0.12b.yml
   workflow_dispatch:
 
 jobs:
