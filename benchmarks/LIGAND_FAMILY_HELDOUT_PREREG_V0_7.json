@@ -1,0 +1,51 @@
+{
+  "schema": "RESCHEM_LIGAND_FAMILY_HELDOUT_PREREG_V0_7",
+  "branch": "compound-relations-v0.3",
+  "status": "PREDICTIONS_FROZEN_BEFORE_LABEL_LOOKUP_IN_THIS_EXECUTION",
+  "purpose": "Test whether the explicit principal_n>=3 shell gate discriminates higher coordination beyond a parity-only null across Cl/Br ligand families.",
+  "models": {
+    "M0": "parity-only shell bounds with no principal-shell gate",
+    "M1": "v0.5 shell gate: M0 bounds plus principal_n>=3 admission"
+  },
+  "selection_rule": {
+    "centres": ["N", "P", "As", "O", "S", "Se"],
+    "ligands": ["Cl", "Br"],
+    "include": "higher-coordination rungs above frozen d0 only",
+    "exclude_from_score_if_preknown": true,
+    "no_candidate_deletion_after_lookup": true
+  },
+  "predictions": [
+    {"formula": "NCl5", "centre": "N", "ligand": "Cl", "coordination": 5, "M0": true, "M1": false, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "NBr5", "centre": "N", "ligand": "Br", "coordination": 5, "M0": true, "M1": false, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+
+    {"formula": "PCl5", "centre": "P", "ligand": "Cl", "coordination": 5, "M0": true, "M1": true, "label_state": "PREKNOWN_EXCLUDED_FROM_SCORE"},
+    {"formula": "PBr5", "centre": "P", "ligand": "Br", "coordination": 5, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+
+    {"formula": "AsCl5", "centre": "As", "ligand": "Cl", "coordination": 5, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "AsBr5", "centre": "As", "ligand": "Br", "coordination": 5, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+
+    {"formula": "OCl4", "centre": "O", "ligand": "Cl", "coordination": 4, "M0": true, "M1": false, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "OCl6", "centre": "O", "ligand": "Cl", "coordination": 6, "M0": true, "M1": false, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "OBr4", "centre": "O", "ligand": "Br", "coordination": 4, "M0": true, "M1": false, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "OBr6", "centre": "O", "ligand": "Br", "coordination": 6, "M0": true, "M1": false, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+
+    {"formula": "SCl4", "centre": "S", "ligand": "Cl", "coordination": 4, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "SCl6", "centre": "S", "ligand": "Cl", "coordination": 6, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "SBr4", "centre": "S", "ligand": "Br", "coordination": 4, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "SBr6", "centre": "S", "ligand": "Br", "coordination": 6, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+
+    {"formula": "SeCl4", "centre": "Se", "ligand": "Cl", "coordination": 4, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "SeCl6", "centre": "Se", "ligand": "Cl", "coordination": 6, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "SeBr4", "centre": "Se", "ligand": "Br", "coordination": 4, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"},
+    {"formula": "SeBr6", "centre": "Se", "ligand": "Br", "coordination": 6, "M0": true, "M1": true, "label_state": "UNLOOKED_UP_THIS_EXECUTION"}
+  ],
+  "scoring_contract": {
+    "positive": "independently supported neutral stoichiometric species under a stated gas/condensed-phase criterion",
+    "negative": "reliable primary-source evidence of instability/nonexistence under the same criterion",
+    "unresolved": "insufficient primary-source evidence; excluded from accuracy denominator but retained visibly",
+    "preknown": "excluded from scoring",
+    "primary_metric": "accuracy on resolved non-preknown entries",
+    "secondary_metric": "balanced accuracy if both classes are present"
+  },
+  "anti_fit_rule": "Predictions and candidate list are immutable after this commit; only labels/evidence may be appended in a new result artifact."
+}
