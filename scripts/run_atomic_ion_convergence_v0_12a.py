@@ -36,8 +36,14 @@ def main() -> int:
     }
     output = args.output_dir / f"{_safe_label(args.z, args.charge)}.json"
     output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+    try:
+        output_display = str(output.resolve().relative_to(ROOT))
+    except ValueError:
+        output_display = str(output)
+
     print(json.dumps({
-        "output": str(output.relative_to(ROOT)),
+        "output": output_display,
         "state": state_label(args.z, args.charge),
         "level_converged": {row["level"]: row["converged"] for row in scan["levels"]},
         "virial_abs": {row["level"]: row["virial_abs_hartree"] for row in scan["levels"]},
