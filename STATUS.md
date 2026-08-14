@@ -2,7 +2,7 @@
 
 ## 2026-08-14 - shell topology / compound relation checkpoint
 
-State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / 3C-HYPERRELATION CANDIDATE / CANON NOT PROMOTED**
+State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / 3C-HYPERRELATION CANDIDATE / COORDINATION-LADDER CANDIDATE / CANON NOT PROMOTED**
 
 Integration source: `compound-relations-v0.3`.
 
@@ -81,6 +81,31 @@ Local prototype behavior before branch-CI execution:
 
 `benchmarks/HYPERRELATION_BRIDGE_BENCHMARK_V0_4.json` is explicitly marked `LOCAL_PROTOTYPE_PASS_BRANCH_CI_NOT_RUN`: the external checkout attempt failed because the isolated execution container could not resolve `github.com`. This infrastructure failure is not counted as a model or software PASS/FAIL.
 
+## Coordination / reorganization ladder candidate v0.5
+
+PCl5 and SF6 motivate a distinct heavier-main-group coordination gate. The frozen ground-state relation degree is not overwritten.
+
+For outer s/p occupation `v` and capacity `C`:
+
+- `d0=min(v,C-v)` remains the base state;
+- `d*=max(v,C-v)` defines the dual endpoint of the representation interval;
+- for `n>=3`, `v>C/2`, and `d0>0`, candidate states are `d_q=d0+2q` up to `d*`;
+- second-period N/O/F remain unexpanded in v0.5;
+- closed-shell centres remain fail-closed.
+
+Frozen ladders:
+
+- N `(3)`, O `(2)`, F `(1)`;
+- P `(3,5)`, S `(2,4,6)`, Cl `(1,3,5,7)`;
+- As `(3,5)`, Se `(2,4,6)`, Br `(1,3,5,7)`;
+- Kr `(0)`.
+
+For frozen degree-one ligands this produces PCl3/PCl5, SF2/SF4/SF6 and BrF/BrF3/BrF5/BrF7. PCl5 and SF6 are motivating known cases rather than blind validation. BrF5 provides an independent structural cross-check. Unsupported top rungs such as ClF7/BrF7 remain visible `UNVALIDATED_CANDIDATE`s rather than being deleted post hoc.
+
+The next registered comparison is the parity-ladder model against a null that allows every integer coordination from `d0` through `d*`. The `+2` ladder earns promotion only if it outperforms that null on a frozen held-out realization set.
+
+`q` is **MODEL-DEFINED REORGANIZATION METADATA**: it is not oxidation state, orbital occupation, a literal expanded-octet mechanism, or an energy level.
+
 This compound layer remains **MODEL-DEFINED / STRUCTURAL-CANDIDATE / NOT AN ENERGETIC MOLECULAR SOLVER**.
 
 ## Molecular extension
@@ -125,5 +150,6 @@ The current `compound-relations-v0.3` branch has no automatic GitHub Actions run
 - a validated TIR correction to atomic or molecular energies;
 - a validated energetic molecular solver for the compound relation layer;
 - literal fractional-electron meaning of the v0.4 half-unit bookkeeping;
+- literal expanded-octet or d-orbital mechanism for the v0.5 coordination ladder;
 - complete transition-metal, hypervalent, radical or electron-deficient chemistry;
 - canonical promotion of the candidate compound-relation layer.
