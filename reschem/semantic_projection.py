@@ -5,11 +5,13 @@ from typing import Iterable
 
 from .compound_shell_relations import BinaryShellRelation, generate_main_group_binary_atlas
 from .compound_state_ensemble import RelationalStateCandidate, generate_closed_shell_state_ensemble_atlas
-from .entity_registry import make_emergent_candidate_card, make_entity_card, make_relation
+from .entity_registry import make_emergent_candidate_card, make_relation
 
 
 def _element_selector(symbol: str) -> dict:
-    return {"entity_level": "atomic_species", "identity.symbol": symbol, "identity.charge": 0}
+    # Historical atom-card generations are not uniform about entity_level, but
+    # identity.symbol and neutral charge are stable across the canonical index.
+    return {"identity.symbol": symbol, "identity.charge": 0}
 
 
 def project_binary_shell_relation(relation: BinaryShellRelation | dict) -> dict:
@@ -138,9 +140,9 @@ def generate_relational_state_cards() -> tuple[dict, ...]:
 
 
 def generate_calculation_entity_cards() -> tuple[dict, ...]:
-    """Current deterministic entity population consumed by calculations.
+    """Current deterministic high-cardinality entity population.
 
-    Stable atomic cards remain stored under semantic_cards/.  This function adds
+    Stable atomic cards remain stored under semantic_cards/. This function adds
     model-derived/emergent compound and relational-state entities without
     changing the underlying scientific generators.
     """
