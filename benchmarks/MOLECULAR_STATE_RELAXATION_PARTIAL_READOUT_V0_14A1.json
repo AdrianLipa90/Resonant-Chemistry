@@ -1,0 +1,466 @@
+{
+  "completed_formulae": [
+    "ArCl2",
+    "ArF2",
+    "KrBr2",
+    "KrCl2",
+    "KrF2",
+    "NeBr2",
+    "NeCl2",
+    "NeF2"
+  ],
+  "completed_starts": 40,
+  "expected_formulae": [
+    "NeF2",
+    "NeCl2",
+    "NeBr2",
+    "ArF2",
+    "ArCl2",
+    "ArBr2",
+    "KrF2",
+    "KrCl2",
+    "KrBr2"
+  ],
+  "expected_starts": 45,
+  "formulae": {
+    "ArCl2": {
+      "artifact_digest": "sha256:0d6cc77ce8c217c975f56547de15b7af1718669cd7f954e34bc464f838996f6b",
+      "artifact_id": 9217818140,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 2,
+          "successful_final_energies_hartree": [
+            -1447.4366724610225,
+            -1447.4366724611314
+          ],
+          "successful_relative_energies_kcal_mol": [
+            70.83419997601131,
+            70.83419990769183
+          ]
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -1447.5495539380078
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -1447.5493182877264
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.14787318720413158
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -1447.5495539380078,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 3.5730841085423035,
+          "X_Y2_angstrom": 5.557390925898362,
+          "X_to_YY_midpoint_angstrom": 4.565237517220333,
+          "Y_X_Y_angle_degrees": 180.0,
+          "Y_Y_angstrom": 1.9843068173560585
+        },
+        "seed_id": "ArCl2_weak_linear",
+        "state_kind": "WEAK_COMPLEX_LINEAR_END_ON"
+      },
+      "raw_json_sha256": "7285d59954fb48ce8068c1c37d50d7cb7f86fa29e949478abc462e6b9e829aa5",
+      "raw_json_size_bytes": 13348,
+      "start_count": 5,
+      "successful_relaxation_count": 4
+    },
+    "ArF2": {
+      "artifact_digest": "sha256:90e33c91c7f5b08f297e56dc0eb4fe6a558053b48d49d984b48f5617b9fc8d1f",
+      "artifact_id": 9217935897,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 3,
+          "successful_final_energies_hartree": [
+            -726.8657439855429,
+            -726.8657439855443,
+            -726.8657439855434
+          ],
+          "successful_relative_energies_kcal_mol": [
+            37.98772933036647,
+            37.98772932950862,
+            37.98772933008027
+          ]
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -726.9262812914309
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -726.9261514694457
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.08145981972566711
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -726.9262812914309,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 2.6155429637852424,
+          "X_Y2_angstrom": 4.008311440014071,
+          "X_to_YY_midpoint_angstrom": 3.3119272018994086,
+          "Y_X_Y_angle_degrees": 180.0,
+          "Y_Y_angstrom": 1.3927684762288286
+        },
+        "seed_id": "ArF2_weak_linear",
+        "state_kind": "WEAK_COMPLEX_LINEAR_END_ON"
+      },
+      "raw_json_sha256": "0197611f43973f496372703d55277763e99c7d4d5919c2f26138f1e8c2956122",
+      "raw_json_size_bytes": 14012,
+      "start_count": 5,
+      "successful_relaxation_count": 5
+    },
+    "KrBr2": {
+      "artifact_digest": "sha256:520efd5f5d793a6684950a688c70dd5c0a34a85e533cc5e1e8952608ab999c4a",
+      "artifact_id": 9218395972,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -7900.569347898135
+          ],
+          "successful_relative_energies_kcal_mol": [
+            55.17826311034648
+          ]
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -7900.657280049535
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -7900.656646593278
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.3974979289211634
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -7900.657280049535,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 4.111181326146844,
+          "X_Y2_angstrom": 6.393849324832796,
+          "X_to_YY_midpoint_angstrom": 5.252515325489819,
+          "Y_X_Y_angle_degrees": 180.0,
+          "Y_Y_angstrom": 2.2826679986859524
+        },
+        "seed_id": "KrBr2_weak_linear",
+        "state_kind": "WEAK_COMPLEX_LINEAR_END_ON"
+      },
+      "raw_json_sha256": "ab86b977c3deacbf67ef8694baf27401b39349ef49d90756518985940fa01835",
+      "raw_json_size_bytes": 13966,
+      "start_count": 5,
+      "successful_relaxation_count": 3
+    },
+    "KrCl2": {
+      "artifact_digest": "sha256:ff43ee71cd081393d658f0ed4dfcea76ef61219c728ad4564e316a3d8ad2b04c",
+      "artifact_id": 9218025672,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 2,
+          "successful_final_energies_hartree": [
+            -3673.3446718145143,
+            -3673.3446718145143
+          ],
+          "successful_relative_energies_kcal_mol": [
+            54.28608722950964,
+            54.28608722950964
+          ]
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -3673.431182213197
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -3673.4307351152703
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.2805572451299929
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -3673.431182213197,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 3.5725360217734535,
+          "X_Y2_angstrom": 5.556852839472621,
+          "X_to_YY_midpoint_angstrom": 4.564694430623037,
+          "Y_X_Y_angle_degrees": 180.0,
+          "Y_Y_angstrom": 1.9843168176991675
+        },
+        "seed_id": "KrCl2_weak_linear",
+        "state_kind": "WEAK_COMPLEX_LINEAR_END_ON"
+      },
+      "raw_json_sha256": "79c36bd089e23667a78a0be06e47f9c5fb8af1bc129d183cd33c2397d8eb1613",
+      "raw_json_size_bytes": 14631,
+      "start_count": 5,
+      "successful_relaxation_count": 4
+    },
+    "KrF2": {
+      "artifact_digest": "sha256:4af5ab301d067d272315b18a2510b5876ce159b74a42d607a89d6f00fb12f654",
+      "artifact_id": 9218101269,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 3,
+          "successful_final_energies_hartree": [
+            -2952.7929562895723,
+            -2952.7929562896537,
+            -2952.79295628959
+          ],
+          "successful_relative_energies_kcal_mol": [
+            9.288129133914072,
+            9.288129082812713,
+            9.28812912282577
+          ]
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -2952.8077578684646
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -2952.807434278091
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.2030580664199149
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -2952.8077578684646,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 2.6145244283416094,
+          "X_Y2_angstrom": 4.007297738709996,
+          "X_to_YY_midpoint_angstrom": 3.310911083525803,
+          "Y_X_Y_angle_degrees": 180.0,
+          "Y_Y_angstrom": 1.3927733103683866
+        },
+        "seed_id": "KrF2_weak_linear",
+        "state_kind": "WEAK_COMPLEX_LINEAR_END_ON"
+      },
+      "raw_json_sha256": "131fe9e8eec7a5de67b3a9a0df527e253301f005d02ac8f66733c09ae9301fa8",
+      "raw_json_size_bytes": 14002,
+      "start_count": 5,
+      "successful_relaxation_count": 5
+    },
+    "NeBr2": {
+      "artifact_digest": "sha256:941a52fc6175f6976d58a3b1d5efe167b7cb0c446b3f09c3e221a42f27528ecc",
+      "artifact_id": 9218077004,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 0,
+          "successful_final_energies_hartree": [],
+          "successful_relative_energies_kcal_mol": []
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -5276.299954820268
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.038459121241363775
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -5276.300016106631
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -5276.300016106631,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 4.251540394723215,
+          "X_Y2_angstrom": 4.166322672495984,
+          "X_to_YY_midpoint_angstrom": 4.054773901703886,
+          "Y_X_Y_angle_degrees": 31.49722496189398,
+          "Y_Y_angstrom": 2.283990879131515
+        },
+        "seed_id": "NeBr2_weak_t",
+        "state_kind": "WEAK_COMPLEX_T_SHAPED"
+      },
+      "raw_json_sha256": "a384e455b38249c891f8b0fdc1864224ba4210e9241214cc176733367ef7fe89",
+      "raw_json_size_bytes": 13272,
+      "start_count": 5,
+      "successful_relaxation_count": 2
+    },
+    "NeCl2": {
+      "artifact_digest": "sha256:f39142ffd691cc28d0e4949990270959884d87fad134c0fcbd29942e86bd8a66",
+      "artifact_id": 9217832760,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 0,
+          "successful_final_energies_hartree": [],
+          "successful_relative_energies_kcal_mol": []
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -1049.0742500381714
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.008266166365890283
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -1049.0742632107494
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -1049.0742632107494,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 3.6935586695498985,
+          "X_Y2_angstrom": 3.6034475793681713,
+          "X_to_YY_midpoint_angstrom": 3.5718736870271985,
+          "Y_X_Y_angle_degrees": 31.245942144392713,
+          "Y_Y_angstrom": 1.9853664118336232
+        },
+        "seed_id": "NeCl2_weak_t",
+        "state_kind": "WEAK_COMPLEX_T_SHAPED"
+      },
+      "raw_json_sha256": "cb1fa5c06f391b7e1726970ca7f82be811dadd1830fbb8090baf96b3f9c6f76b",
+      "raw_json_size_bytes": 13277,
+      "start_count": 5,
+      "successful_relaxation_count": 2
+    },
+    "NeF2": {
+      "artifact_digest": "sha256:245bddaaf77da820d53b57e666d86a5e52230731b91c666aabed44661c51abf2",
+      "artifact_id": 9217855911,
+      "families": {
+        "ACTIVATED_LINEAR_3C4E": {
+          "starts": 3,
+          "successful": 2,
+          "successful_final_energies_hartree": [
+            -328.29853961306524,
+            -328.29853961371064
+          ],
+          "successful_relative_energies_kcal_mol": [
+            95.92800805725172,
+            95.92800765226003
+          ]
+        },
+        "WEAK_COMPLEX_LINEAR_END_ON": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -328.45141062159344
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.0
+          ]
+        },
+        "WEAK_COMPLEX_T_SHAPED": {
+          "starts": 1,
+          "successful": 1,
+          "successful_final_energies_hartree": [
+            -328.4513486851087
+          ],
+          "successful_relative_energies_kcal_mol": [
+            0.03886809412677352
+          ]
+        }
+      },
+      "lowest_successful_screening": {
+        "final_energy_hartree": -328.45141062159344,
+        "geometry_descriptors": {
+          "X_Y1_angstrom": 2.614709357980393,
+          "X_Y2_angstrom": 4.007481400263314,
+          "X_to_YY_midpoint_angstrom": 3.3110953791218536,
+          "Y_X_Y_angle_degrees": 180.0,
+          "Y_Y_angstrom": 1.3927720422829215
+        },
+        "seed_id": "NeF2_weak_linear",
+        "state_kind": "WEAK_COMPLEX_LINEAR_END_ON"
+      },
+      "raw_json_sha256": "659879ea9730527931df7216eafb7c58b100f718c8499f7fe5003cf82f4ef4e2",
+      "raw_json_size_bytes": 13342,
+      "start_count": 5,
+      "successful_relaxation_count": 4
+    }
+  },
+  "missing_formulae": [
+    "ArBr2"
+  ],
+  "nonclaims": [
+    "no topology assignment from geometry alone",
+    "no harmonic local-minimum claim without Hessian",
+    "no ground-state claim from screening energy",
+    "no post-result threshold",
+    "ArBr2 missing execution is not a chemical failure"
+  ],
+  "readout_contract": "benchmarks/MOLECULAR_STATE_RELAXATION_READOUT_V0_14A1.json",
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_PARTIAL_READOUT_V0_14A1",
+  "source_workflow": {
+    "head_sha": "db756f5aa8598a24004f056aeb09b18034a08e5b",
+    "run_id": 31795895258
+  },
+  "status": "PARTIAL_8_OF_9_FORMULAE_PERSISTED_NO_TOPOLOGY_ADMISSION"
+}

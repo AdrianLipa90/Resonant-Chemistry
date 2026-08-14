@@ -1,0 +1,28 @@
+{
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_RERUN_SCOPE_V0_14A1",
+  "status": "PROVENANCE_GUARD_ACTIVE",
+  "original_run_id": 31795895258,
+  "original_head_sha": "db756f5aa8598a24004f056aeb09b18034a08e5b",
+  "requested_rerun_job": {
+    "job_id": 94753584267,
+    "name": "formula-relaxation (Ar, Br, ArBr2)",
+    "intent": "complete the single missing formula under the unchanged frozen v0.14A1 policy"
+  },
+  "observed_github_behavior": "rerun_workflow_job re-executed upstream dependencies and additional matrix formula jobs as part of the new workflow attempt",
+  "authority_rule": {
+    "ArBr2": "accept the successful rerun receipt if and only if it uses the unchanged original workflow head and frozen method policy",
+    "ArCl2": "retain original first-attempt receipt",
+    "ArF2": "retain original first-attempt receipt",
+    "KrBr2": "retain original first-attempt receipt",
+    "KrCl2": "retain original first-attempt receipt",
+    "KrF2": "retain original first-attempt receipt",
+    "NeBr2": "retain original first-attempt receipt",
+    "NeCl2": "retain original first-attempt receipt",
+    "NeF2": "retain original first-attempt receipt"
+  },
+  "no_rescue": true,
+  "method_change": false,
+  "seed_change": false,
+  "post_result_threshold_change": false,
+  "epistemic_note": "Repeated jobs may later be used only as separately labelled reproducibility observations. They do not replace the frozen first-attempt v0.14A1 readout for already completed formulae."
+}
