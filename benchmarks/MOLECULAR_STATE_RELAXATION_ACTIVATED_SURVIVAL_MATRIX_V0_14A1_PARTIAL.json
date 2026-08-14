@@ -1,0 +1,27 @@
+{
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_ACTIVATED_SURVIVAL_MATRIX_V0_14A1_PARTIAL",
+  "status": "DESCRIPTIVE_ONLY_NO_FIT_NO_THRESHOLD",
+  "source": "first-attempt receipts from workflow 31795895258",
+  "readout_contract": "benchmarks/MOLECULAR_STATE_RELAXATION_READOUT_V0_14A1.json",
+  "columns": ["F", "Cl", "Br"],
+  "rows": ["Ne", "Ar", "Kr"],
+  "cells": {
+    "NeF2": {"activated_successful": 2, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": 95.92800625923967, "mean_XY_angstrom_lowest_successful_activated": 1.8593493037923847},
+    "NeCl2": {"activated_successful": 0, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": null, "mean_XY_angstrom_lowest_successful_activated": null},
+    "NeBr2": {"activated_successful": 0, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": null, "mean_XY_angstrom_lowest_successful_activated": null},
+    "ArF2": {"activated_successful": 3, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": 37.98773242597238, "mean_XY_angstrom_lowest_successful_activated": 1.8090433996830373},
+    "ArCl2": {"activated_successful": 2, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": 70.83419645276916, "mean_XY_angstrom_lowest_successful_activated": 2.3747696300347068},
+    "ArBr2": {"activated_successful": null, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": null, "mean_XY_angstrom_lowest_successful_activated": null, "status": "MISSING_EXECUTION"},
+    "KrF2": {"activated_successful": 3, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": 9.288130410712597, "mean_XY_angstrom_lowest_successful_activated": 1.8825932472765845},
+    "KrCl2": {"activated_successful": 2, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": 54.28609440245848, "mean_XY_angstrom_lowest_successful_activated": 2.4098192556610023},
+    "KrBr2": {"activated_successful": 1, "activated_starts": 3, "activated_to_lowest_weak_gap_kcal_mol": 55.17825796316037, "mean_XY_angstrom_lowest_successful_activated": 2.631979537862107}
+  },
+  "allowed_observation": "The F-ligand column shows decreasing activated-to-weak screening gap from Ne to Ar to Kr under the common frozen control method.",
+  "forbidden_inference": [
+    "no activation law is fitted",
+    "no threshold is selected",
+    "no topology label is assigned",
+    "no local-minimum or ground-state claim is made",
+    "missing ArBr2 is not imputed"
+  ]
+}
