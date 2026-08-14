@@ -2,7 +2,7 @@
 
 ## 2026-08-14 - shell topology / compound relation checkpoint
 
-State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / 3C-HYPERRELATION CANDIDATE / COORDINATION-LADDER CANDIDATE / CANON NOT PROMOTED**
+State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / 3C-HYPERRELATION CANDIDATE / COORDINATION-LADDER CANDIDATE / PARITY-MATCHED VALIDATION ACTIVE / CANON NOT PROMOTED**
 
 Integration source: `compound-relations-v0.3`.
 
@@ -114,6 +114,24 @@ Promotion requires M1 or M2 to outperform M0 on frozen held-out energetic/struct
 
 `q` is **MODEL-DEFINED REORGANIZATION METADATA**: it is not oxidation state, orbital occupation, a literal expanded-octet mechanism, or an energy level.
 
+## Parity-matched validation v0.6
+
+`reschem/parity_validation.py` now implements the strong M0 null explicitly rather than crediting v0.5 for parity information it does not add.
+
+Using the primary SF_n sequential dissociation energies from Woon and Dunning (J. Phys. Chem. A 2009, DOI `10.1021/jp901949b`):
+
+- SF2 -> SF + F: 89.5 kcal/mol;
+- SF3 -> SF2 + F: 54.5 kcal/mol;
+- SF4 -> SF3 + F: 96.2 kcal/mol;
+- SF5 -> SF4 + F: 39.2 kcal/mol;
+- SF6 -> SF5 + F: 105.6 kcal/mol.
+
+On this sequence M0 parity labels and M1 sulfur-rung labels are identical: `(2,4,6)` are the positive class. Both models give rank AUC `1.0`; `Delta AUC(M1-M0)=0.0`. Therefore **SF_n provides no incremental validation of the shell gate over parity alone**. Mean D0 is 97.1 kcal/mol in the even/rung class versus 46.85 kcal/mol in the odd/intermediate class, but that separation belongs equally to M0 and M1.
+
+A separate four-entry period-gate sanity panel is explicitly retrospective, not blind: the motivating literature states stable PF5/SF6 and unobserved corresponding NF5/OF6. M0 parity-only predicts all four and scores `2/4`; M1 with `n>=3` blocks the second-period expansions and scores `4/4`. This is logical discrimination only and is **not** a promotion result because those labels were already known.
+
+Next required gate: freeze a genuinely held-out ligand-family panel before label lookup, then compare M0 vs M1; M2 remains undefined until an independent energetic/reorganization observable is specified.
+
 This compound layer remains **MODEL-DEFINED / STRUCTURAL-CANDIDATE / NOT AN ENERGETIC MOLECULAR SOLVER**.
 
 ## Molecular extension
@@ -160,5 +178,6 @@ The current `compound-relations-v0.3` branch has no automatic GitHub Actions run
 - literal fractional-electron meaning of the v0.4 half-unit bookkeeping;
 - literal expanded-octet or d-orbital mechanism for the v0.5 coordination ladder;
 - independent novelty of the v0.5 `+2` parity ladder by itself;
+- blind validation from the v0.6 retrospective period panel;
 - complete transition-metal, hypervalent, radical or electron-deficient chemistry;
 - canonical promotion of the candidate compound-relation layer.
