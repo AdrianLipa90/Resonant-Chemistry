@@ -1,0 +1,94 @@
+{
+  "schema": "RESCHEM_HYPERRELATION_BRIDGE_BENCHMARK_V0_4",
+  "branch": "compound-relations-v0.3",
+  "status": "LOCAL_PROTOTYPE_PASS_BRANCH_CI_NOT_RUN",
+  "model_rule": {
+    "target_half_units": "2*d_i",
+    "pair_bond_load": "2*b on each endpoint",
+    "three_centre_bridge_load": "1:2:1 outer:bridge:outer",
+    "selection": "minimum augmentation order q admitting a connected load-conserving graph"
+  },
+  "software_expectations": {
+    "CH4": {
+      "candidate_count": 1,
+      "augmentation_order": 0,
+      "three_centre_bridges": 0,
+      "pair_bonds": 4
+    },
+    "H2O": {
+      "candidate_count": 1,
+      "augmentation_order": 0,
+      "three_centre_bridges": 0,
+      "pair_bonds": 2
+    },
+    "B2H6": {
+      "candidate_count": 1,
+      "augmentation_order": 2,
+      "three_centre_bridges": 2,
+      "pair_bonds": 4,
+      "external_structure_class": "HYDROGEN_BRIDGED_3C"
+    },
+    "Al2Cl6": {
+      "candidate_count": 1,
+      "augmentation_order": 2,
+      "three_centre_bridges": 2,
+      "pair_bonds": 4,
+      "external_structure_class": "HALOGEN_BRIDGED_DIMER"
+    },
+    "Al2Br6": {
+      "candidate_count": 1,
+      "augmentation_order": 2,
+      "three_centre_bridges": 2,
+      "pair_bonds": 4,
+      "external_structure_class": "HALOGEN_BRIDGED_DIMER"
+    },
+    "Ga2Cl6": {
+      "candidate_count": 1,
+      "augmentation_order": 2,
+      "three_centre_bridges": 2,
+      "pair_bonds": 4,
+      "external_structure_class": "HALOGEN_BRIDGED_DIMER"
+    },
+    "PCl5": {
+      "candidate_count": 0,
+      "expected_unresolved_gate": "COORDINATION_REORGANIZATION"
+    },
+    "SF6": {
+      "candidate_count": 0,
+      "expected_unresolved_gate": "COORDINATION_REORGANIZATION"
+    },
+    "KrF2": {
+      "candidate_count": 0,
+      "expected_unresolved_gate": "CLOSED_SHELL_EXCITATION_POLARIZATION"
+    }
+  },
+  "primary_external_checks": [
+    {
+      "system": "B2H6",
+      "doi": "10.1021/ct500490b",
+      "role": "three-centre diborane bonding cross-check"
+    },
+    {
+      "system": "B2H6",
+      "doi": "10.1021/acs.jpca.4c03492",
+      "role": "terminal versus bridging B-H electronic-structure cross-check"
+    },
+    {
+      "system": "Al2Cl6/Al2Br6",
+      "doi": "10.1021/jp9842042",
+      "role": "gas-phase electron-diffraction dimer structure cross-check"
+    },
+    {
+      "system": "Al2Cl6/Al2Br6/Ga2Cl6",
+      "doi": "10.1039/F29767200539",
+      "role": "halogen-bridged dimer electronic-structure cross-check"
+    }
+  ],
+  "nonclaims": [
+    "No energetic validation",
+    "No equilibrium geometry prediction",
+    "No literal fractional-electron interpretation of half-unit bookkeeping",
+    "No claim that every degree-one centre is chemically capable of bridging",
+    "No resolution of higher coordination or closed-shell activation"
+  ]
+}
