@@ -1,0 +1,49 @@
+name: closed-shell-ligand-quality-v0.11c
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+    paths:
+      - scripts/run_closed_shell_ligand_quality_v0_11c.py
+      - benchmarks/CLOSED_SHELL_LIGAND_QUALITY_PREREG_V0_11C.json
+      - .github/workflows/closed-shell-ligand-quality-v0.11c.yml
+  workflow_dispatch:
+
+jobs:
+  ligand-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Execute four-state localization
+        run: python scripts/run_closed_shell_ligand_quality_v0_11c.py
+
+      - name: Validate and print localization
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('benchmarks/CLOSED_SHELL_LIGAND_QUALITY_V0_11C.json')
+          payload = json.loads(path.read_text(encoding='utf-8'))
+          assert len(payload['states']) == 4
+          assert set(payload['quality_map']) == {'F', 'F-', 'Br', 'Br-'}
+          print({'quality_map': payload['quality_map'], 'interpretation': payload['interpretation']})
+          PY
+
+      - name: Upload targeted diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: closed-shell-ligand-quality-v0.11c
+          path: benchmarks/CLOSED_SHELL_LIGAND_QUALITY_V0_11C.json
+          if-no-files-found: error
