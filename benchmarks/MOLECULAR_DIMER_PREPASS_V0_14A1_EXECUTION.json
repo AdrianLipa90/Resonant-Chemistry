@@ -1,0 +1,60 @@
+{
+  "schema": "RESCHEM_MOLECULAR_DIMER_PREPASS_EXECUTION_V0_14A1",
+  "status": "THREE_OF_THREE_COMMON_DIMER_PREPASSES_AVAILABLE",
+  "parent_preregistration": "benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json",
+  "numerical_amendment": "benchmarks/MOLECULAR_STATE_RELAXATION_AMENDMENT_V0_14A1.json",
+  "workflow": {
+    "run_id": 31795895258,
+    "head_sha": "db756f5aa8598a24004f056aeb09b18034a08e5b"
+  },
+  "method_policy": {
+    "xc": "b97m_v",
+    "nlc": "vv10",
+    "basis": "def2-tzvpd",
+    "grid_atom": [99, 590],
+    "grid_prune": "nwchem_prune",
+    "nlc_grid_atom": [50, 194],
+    "nlc_grid_prune": "nwchem_prune"
+  },
+  "dimers": [
+    {
+      "formula": "F2",
+      "status": "DIMER_PREPASS_AVAILABLE",
+      "optimized_r_YY_angstrom": 1.3929993576885964,
+      "final_energy_hartree": -199.5271769900076,
+      "final_gradient_rms_hartree_per_bohr": 5.503712076459304e-06,
+      "final_gradient_max_abs_hartree_per_bohr": 9.532708949322455e-06,
+      "wall_seconds": 76.063830324,
+      "artifact_id": 9217409748,
+      "artifact_zip_sha256": "bfb7f5056e05983745fd542f2ab684e2a77632abb96346a3303c9dab000cd306"
+    },
+    {
+      "formula": "Cl2",
+      "status": "DIMER_PREPASS_AVAILABLE",
+      "optimized_r_YY_angstrom": 1.984944601209488,
+      "final_energy_hartree": -920.1498744632909,
+      "final_gradient_rms_hartree_per_bohr": 9.270969530313078e-07,
+      "final_gradient_max_abs_hartree_per_bohr": 1.6057790404033767e-06,
+      "wall_seconds": 43.90011868900001,
+      "artifact_id": 9217394893,
+      "artifact_zip_sha256": "f9f411d3d33ef9ef8beee776237494f67c98b9e24df2721df3b621d598ebb439"
+    },
+    {
+      "formula": "Br2",
+      "status": "DIMER_PREPASS_AVAILABLE",
+      "optimized_r_YY_angstrom": 2.2842324866344543,
+      "final_energy_hartree": -5147.375642043794,
+      "final_gradient_rms_hartree_per_bohr": 1.4496282414755242e-06,
+      "final_gradient_max_abs_hartree_per_bohr": 2.5108298586928868e-06,
+      "wall_seconds": 122.33898655899999,
+      "artifact_id": 9217426658,
+      "artifact_zip_sha256": "98379b5527657df1cd782c37f84f580a6405711e9ad730271615760abd5751e4"
+    }
+  ],
+  "use": "These three distances are numerical seed scales for the frozen XY2 starts only.",
+  "nonclaims": [
+    "No comparison to experimental dimer bond lengths is used to modify v0.14A1.",
+    "The dimer prepass does not assign or validate any XY2 bonding topology.",
+    "No dimer-specific rescue or method branch was used."
+  ]
+}
