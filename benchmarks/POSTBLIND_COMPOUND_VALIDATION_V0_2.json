@@ -1,0 +1,50 @@
+{
+  "schema": "RESCHEM_POSTBLIND_COMPOUND_VALIDATION_V0_2",
+  "date_utc": "2026-08-13",
+  "prediction_source": {
+    "schema": "RESCHEM_COMPOUND_SHELL_RELATION_ATLAS_V0_1",
+    "source_main_sha": "7368dca57c5e523e813607b2b7af6221b7b6b594",
+    "rule": "d=min(v,C-v); n_A*d_A=n_B*d_B",
+    "frozen_before_database_lookup": true
+  },
+  "validation_status": "POSTBLIND_SCREENING_NOT_CANONICAL_PHYSICAL_VALIDATION",
+  "important_limitation": "The validation panel is a diagnostic panel, not a statistically random sample of all binary chemistry. Formula existence is weaker than predicting stability, dominant phase, geometry, bond order, or energetics.",
+  "pair_count": 18,
+  "counts": {
+    "predicted_primary_formula_present": 17,
+    "exact_simple_hits": 13,
+    "exact_but_coordination_extension_known": 2,
+    "aggregation_or_structure_warnings": 2,
+    "false_negatives": 1,
+    "dumb_1_to_1_null_primary_hits": 4
+  },
+  "fractions": {
+    "predicted_primary_formula_present": 0.9444444444444444,
+    "dumb_1_to_1_null_primary_hits": 0.2222222222222222
+  },
+  "inference": {
+    "supported": "Nearest-closed-shell endpoint balance is a useful low-coordinate stoichiometric skeleton for many main-group binary pairs in this diagnostic panel.",
+    "not_supported": "It is not a complete molecular generator and does not rank thermodynamic stability or uniqueness.",
+    "next_required_coordinate": "Discrete coordination/excitation/reorganization state of the shell relation, with nuclei remaining explicit and integer-Z."
+  },
+  "records": [
+    {"pair":"C-H","prediction":"CH4","observed_primary":"CH4","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 297","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Methane","notes":"Simple molecular hit."},
+    {"pair":"N-H","prediction":"NH3","observed_primary":"NH3","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 222","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/222","notes":"Simple molecular hit."},
+    {"pair":"B-H","prediction":"BH3","observed_primary":"BH3","classification":"EXACT_EXISTS_AGGREGATION_WARNING","secondary_observed":["B2H6"],"source":"PubChem CID 167170 + PubChem diborane record","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/167170","secondary_source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/19287-45-7","notes":"BH3 exists as a database species; diborane B2H6 exposes electron-deficient aggregation not represented by endpoint balance."},
+    {"pair":"Na-Cl","prediction":"NaCl","observed_primary":"NaCl","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"NIST Chemistry WebBook SRD 69","source_url":"https://webbook.nist.gov/cgi/cbook.cgi?ID=C7647145","notes":"1:1 ionic formula hit."},
+    {"pair":"Mg-Cl","prediction":"MgCl2","observed_primary":"MgCl2","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 5360315","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Magnesium%20Chloride","notes":"Simple stoichiometric hit."},
+    {"pair":"Al-Cl","prediction":"AlCl3","observed_primary":"AlCl3","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 24012 / 6451240","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Aluminum-Chloride","notes":"Empirical stoichiometric hit; aggregation/dimerization not modeled."},
+    {"pair":"Si-Cl","prediction":"SiCl4","observed_primary":"SiCl4","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"NIST Chemistry WebBook SRD 69","source_url":"https://webbook.nist.gov/cgi/cbook.cgi?ID=10026-04-7","notes":"Exact molecular formula hit."},
+    {"pair":"B-Cl","prediction":"BCl3","observed_primary":"BCl3","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 25135","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Boron-trichloride","notes":"Exact molecular formula hit."},
+    {"pair":"P-Cl","prediction":"PCl3","observed_primary":"PCl3","classification":"EXACT_NONEXCLUSIVE_COORDINATION_EXTENSION","secondary_observed":["PCl5"],"source":"PubChem CID 24387 + CID 24819","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/24387","secondary_source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Phosphorus-pentachloride","notes":"Low-coordinate skeleton hits, but PCl5 proves the pair supports an additional coordination state."},
+    {"pair":"S-Cl","prediction":"SCl2","observed_primary":"SCl2","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 25353","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Sulfur-dichloride","notes":"Exact molecular formula hit."},
+    {"pair":"O-F","prediction":"OF2","observed_primary":"OF2","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 24547","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/OXYFLUORIDE","notes":"Exact molecular formula hit."},
+    {"pair":"S-F","prediction":"SF2","observed_primary":"SF2","classification":"EXACT_NONEXCLUSIVE_COORDINATION_EXTENSION","secondary_observed":["SF6"],"source":"PubChem CID 139605 + CID 17358","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Sulfur-fluoride","secondary_source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/sulfur_hexafluoride","notes":"Endpoint skeleton exists, but SF6 shows a much higher coordination state not generated by v0.1."},
+    {"pair":"Si-O","prediction":"SiO2","observed_primary":"SiO2","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 24261","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Silica","notes":"Exact empirical formula hit; network structure is outside v0.1."},
+    {"pair":"P-O","prediction":"P2O3","observed_primary":"P2O3","classification":"EXACT_EMPIRICAL_HIT_STRUCTURE_UNRESOLVED","secondary_observed":[],"source":"PubChem CID 14810","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Phosphorus-trioxide","notes":"Formula hit only; v0.1 does not resolve actual aggregation/structure."},
+    {"pair":"Ga-P","prediction":"GaP","observed_primary":"GaP","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 82901","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/82901","notes":"1:1 semiconductor stoichiometry hit."},
+    {"pair":"Ga-As","prediction":"GaAs","observed_primary":"GaAs","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"NIST Chemistry WebBook SRD 69","source_url":"https://webbook.nist.gov/cgi/inchi/InChI%3D1S/As.Ga","notes":"1:1 semiconductor stoichiometry hit."},
+    {"pair":"Ca-Se","prediction":"CaSe","observed_primary":"CaSe","classification":"EXACT_SIMPLE_HIT","secondary_observed":[],"source":"PubChem CID 102107","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Calcium-selenide","notes":"1:1 binary solid stoichiometry hit."},
+    {"pair":"Kr-F","prediction":null,"observed_primary":"KrF2","classification":"FALSE_NEGATIVE_CLOSED_SHELL_REACTIVITY","secondary_observed":[],"source":"PubChem CID 83721","source_url":"https://pubchem.ncbi.nlm.nih.gov/compound/Krypton-difluoride","notes":"Critical falsifier for the rule 'closed shell => no relation'. Requires an excitation/polarization/coordination gate, not fractional Z."}
+  ]
+}
