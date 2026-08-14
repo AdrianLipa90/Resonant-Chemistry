@@ -1,0 +1,84 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_LIGAND_QUALITY_V0_11C",
+  "workflow_run": 31782403531,
+  "workflow_head_sha": "6665aff2d76681a2e594d8f9ee8ce39a9f9854dc",
+  "artifact_id": 9212227533,
+  "artifact_sha256": "f78755d8d81d26f933f3930b654792c5a02006f9dcf3117459dcca43c9dc37b2",
+  "generated_utc": "2026-08-14T08:06:05.015525+00:00",
+  "preregister_source": "benchmarks/CLOSED_SHELL_LIGAND_QUALITY_PREREG_V0_11C.json",
+  "status": "TARGETED_DIAGNOSTIC_EXECUTED_NO_SOLVER_CHANGE",
+  "states": [
+    {
+      "Z": 9,
+      "symbol": "F",
+      "charge": 0,
+      "configuration": "1s^2 2s^2 2p^5",
+      "stage": 1,
+      "quality_pass": true,
+      "converged": true,
+      "iterations": 62,
+      "energy_hartree": -99.14903899351158,
+      "virial_residual_hartree": 0.004750477154273014,
+      "virial_gate_hartree": 2.0,
+      "basis_size": 16,
+      "grid_points": 700
+    },
+    {
+      "Z": 9,
+      "symbol": "F",
+      "charge": -1,
+      "configuration": "1s^2 2s^2 2p^6",
+      "stage": 4,
+      "quality_pass": false,
+      "converged": true,
+      "iterations": 42,
+      "energy_hartree": -96.05665686236028,
+      "virial_residual_hartree": 18.09323265062769,
+      "virial_gate_hartree": 2.0,
+      "basis_size": 20,
+      "grid_points": 1000
+    },
+    {
+      "Z": 35,
+      "symbol": "Br",
+      "charge": 0,
+      "configuration": "1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^5",
+      "stage": 1,
+      "quality_pass": true,
+      "converged": true,
+      "iterations": 67,
+      "energy_hartree": -2571.693232087956,
+      "virial_residual_hartree": 0.20921548648593102,
+      "virial_gate_hartree": 2.0,
+      "basis_size": 16,
+      "grid_points": 700
+    },
+    {
+      "Z": 35,
+      "symbol": "Br",
+      "charge": -1,
+      "configuration": "1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^6",
+      "stage": 4,
+      "quality_pass": false,
+      "converged": false,
+      "iterations": 700,
+      "energy_hartree": -2566.9960052656584,
+      "virial_residual_hartree": -9.544301795635036,
+      "virial_gate_hartree": 2.0,
+      "basis_size": 20,
+      "grid_points": 1000
+    }
+  ],
+  "quality_map": {"F":true,"F-":false,"Br":true,"Br-":false},
+  "interpretation": {"F":"anion_only_failure","Br":"anion_only_failure"},
+  "admission_consequence": [
+    "F and Br neutral radial descriptors pass the frozen broad quality gate in this execution.",
+    "F-/Br- derived attachment gains and charge-transfer margins are quantitatively inadmissible in v0.11.",
+    "The separate canonical-fidelity audit still prevents promotion of first-passing-stage energy differences as precision descriptors."
+  ],
+  "nonclaims": [
+    "diagnostic does not repair v0.11",
+    "no experimental affinity is substituted",
+    "no classifier is fit"
+  ]
+}
