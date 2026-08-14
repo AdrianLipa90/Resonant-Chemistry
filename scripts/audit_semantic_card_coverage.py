@@ -3,6 +3,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from reschem.entity_registry import CardRegistry
+from reschem.molecular_semantic_projection import project_molecular_screen_readout
+from reschem.semantic_projection import generate_compound_candidate_cards, generate_relational_state_cards
+
 ROOT = Path(__file__).resolve().parents[1]
 CARDS = ROOT / "semantic_cards"
 COVERAGE = CARDS / "SEMANTIC_CARD_COVERAGE_V0_14A1.json"
@@ -65,6 +69,21 @@ def collect_atomic_symbols():
     return symbols
 
 
+def audit_relations_and_holonomy(records):
+    for record in records:
+        assert_unassigned(record, "generated entity")
+        holonomy = record.get("provenance_holonomy", {})
+        if holonomy.get("status") != "MODEL_DEFINED_LINEAGE" or not holonomy.get("lineage_sha256"):
+            raise SystemExit(f"missing provenance holonomy: {record.get('card_id')}")
+        physical = record.get("physical_holonomy", {})
+        if physical.get("status") != "NOT_COMPUTED" and not physical.get("source_artifacts"):
+            raise SystemExit(f"physical holonomy without provenance: {record.get('card_id')}")
+        for relation in record.get("relations", []):
+            modes = bool(relation.get("target_card_id")) + bool(relation.get("target_selector"))
+            if modes != 1:
+                raise SystemExit(f"relation target ambiguity: {record.get('card_id')}")
+
+
 def main():
     required_files = [COVERAGE, COMPOUND_OVERLAYS, MOLECULAR_OVERLAYS, MOLECULAR_BENCHMARK]
     missing = [str(p.relative_to(ROOT)) for p in required_files if not p.is_file()]
@@ -76,7 +95,6 @@ def main():
     stage_ids = {stage["card_id"] for stage in stages}
     if len(stage_ids) != len(stages):
         raise SystemExit("duplicate card_id in semantic coverage ledger")
-
     for stage in stages:
         for key in ("implementation", "benchmark", "documentation"):
             path = ROOT / stage[key]
@@ -90,9 +108,8 @@ def main():
     uncovered = sorted(stage_ids - projection_ids)
     if uncovered:
         raise SystemExit(f"model/gate semantic coverage missing: {uncovered}")
-
     for record in projection_records:
-        assert_unassigned(record, "projection")
+        assert_unassigned(record, "persisted projection")
 
     atomic_symbols = collect_atomic_symbols()
     missing_atoms = [symbol for symbol in H_TO_KR if symbol not in atomic_symbols]
@@ -108,23 +125,14 @@ def main():
         if record.get("entity_level") == "molecular_formula_screen"
     }
     if set(formula_records) != expected:
-        raise SystemExit(
-            f"molecular semantic-card formula mismatch: expected={sorted(expected)} got={sorted(formula_records)}"
-        )
-
+        raise SystemExit(f"molecular semantic-card formula mismatch: expected={sorted(expected)} got={sorted(formula_records)}")
     for formula in sorted(expected):
         status = formula_records[formula]["physical_control"]["execution_status"]
-        if formula in completed:
-            if status != "EXECUTED_5_OF_5_FROZEN_STARTS":
-                raise SystemExit(f"completed formula has wrong semantic execution status: {formula}={status}")
-        else:
-            if status != "MISSING_EXECUTION_NOT_CHEMICAL_FAIL":
-                raise SystemExit(f"missing formula was semantically promoted or misclassified: {formula}={status}")
+        wanted = "EXECUTED_5_OF_5_FROZEN_STARTS" if formula in completed else "MISSING_EXECUTION_NOT_CHEMICAL_FAIL"
+        if status != wanted:
+            raise SystemExit(f"molecular semantic execution status drift: {formula}={status}, wanted={wanted}")
 
-    model_record = next(
-        record for record in molecular_records
-        if record.get("card_id") == "MODEL:MOLECULAR_STATE_RELAXATION:v0.14A1"
-    )
+    model_record = next(record for record in molecular_records if record.get("card_id") == "MODEL:MOLECULAR_STATE_RELAXATION:v0.14A1")
     if model_record["physical_control"]["completed_formulae"] != len(completed):
         raise SystemExit("molecular model card completed_formulae drift")
     if model_record["physical_control"]["completed_starts"] != benchmark["completed_starts"]:
@@ -136,11 +144,38 @@ def main():
     if model_record["epistemic_status"].get("geometry_only_topology_assignment") != "NOT_PROMOTED":
         raise SystemExit("semantic layer attempted topology promotion")
 
+    generated_compounds = generate_compound_candidate_cards()
+    generated_states = generate_relational_state_cards()
+    generated_molecular = project_molecular_screen_readout(benchmark)
+    if len(generated_compounds) != 231:
+        raise SystemExit(f"compound entity-card count drift: {len(generated_compounds)} != 231")
+    if len(generated_states) != 27:
+        raise SystemExit(f"relational-state entity-card count drift: {len(generated_states)} != 27")
+    if len(generated_molecular) != 10:
+        raise SystemExit(f"molecular entity-card count drift: {len(generated_molecular)} != 10")
+
+    generated = generated_compounds + generated_states + generated_molecular
+    audit_relations_and_holonomy(generated)
+    CardRegistry(generated)  # duplicate card ids are a hard failure
+
+    dynamic_formula = {
+        record["identity"]["formula"]: record
+        for record in generated_molecular
+        if record.get("entity_level") == "molecular_formula_screen"
+    }
+    for formula in sorted(expected):
+        persisted = formula_records[formula]["physical_control"]["execution_status"]
+        generated_status = dynamic_formula[formula]["properties"]["execution_status"]
+        if persisted != generated_status:
+            raise SystemExit(f"persisted/dynamic molecular card drift: {formula}")
+
     print(json.dumps({
         "semantic_card_audit": "PASS",
         "atomic_symbols_h_to_kr": len(atomic_symbols.intersection(H_TO_KR)),
         "model_gate_cards": len(stage_ids),
-        "molecular_formula_cards": len(formula_records),
+        "generated_compound_candidate_cards": len(generated_compounds),
+        "generated_relational_state_cards": len(generated_states),
+        "generated_molecular_cards": len(generated_molecular),
         "completed_formulae": len(completed),
         "missing_formulae": sorted(expected - completed),
     }, sort_keys=True))
