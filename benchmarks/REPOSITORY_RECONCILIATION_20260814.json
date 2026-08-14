@@ -1,0 +1,104 @@
+{
+  "schema": "RESCHEM_REPOSITORY_RECONCILIATION_V1",
+  "date": "2026-08-14",
+  "repository": "AdrianLipa90/Resonant-Chemistry",
+  "source_of_truth_branch": "main",
+  "base_main_sha": "346fd8790846d776cbb826a540e6a27e20b653aa",
+  "reconciliation_branch": "docs/reconcile-v0.14a1",
+  "status": "REPOSITORY_STATE_ALIGNMENT_PENDING_PR_VALIDATION",
+  "scope": [
+    "root README and project status",
+    "docs current index and molecular v0.14A/A1 status",
+    "LaTeX molecular and relational chapters",
+    "benchmark, implementation, validation and open-gate appendices",
+    "textbook title/current-status checkpoint",
+    "bibliography policy",
+    "maintained CI branch/PR triggers",
+    "historical experiment workflow trigger classification"
+  ],
+  "scientific_state_preserved": {
+    "compound_state_ensemble_v0_13": "27_UNRANKED_STATE_CANDIDATES_OVER_9_XY2_FORMULAE",
+    "molecular_v0_14a1": "PARTIAL_8_OF_9_FORMULAE_40_OF_45_STARTS",
+    "missing_formula": "ArBr2",
+    "missing_formula_status": "MISSING_EXECUTION_NOT_CHEMICAL_FAIL",
+    "hessian_admission": "NOT_RUN",
+    "ground_state_ranking": "NOT_VALIDATED",
+    "electronic_topology_admission": "NOT_ASSIGNED_FROM_GEOMETRY_SCREEN",
+    "tir_phasenav_energy_correction": "NOT_PROMOTED"
+  },
+  "authority_contract": {
+    "repository_main": "SOURCE_OF_TRUTH",
+    "library_noema": "MIRROR_RECOVERY_INDEX_PROVENANCE",
+    "normal_sync_direction": "REPOSITORY_TO_MIRROR",
+    "library_required_for_repo_reproduction": false
+  },
+  "phase_nav_boundary": {
+    "allowed_role": "NATIVE_COMMAND_CONCEPT_GATE_36D_ORCHESTRATION_RECEIPT_SURFACE",
+    "external_quantum_chemistry_role": "ISOLATED_CONVENTIONAL_BACKEND_ADAPTER",
+    "may_rewrite_conventional_energy_or_failure": false
+  },
+  "maintained_ci": [
+    ".github/workflows/compound-relations-ci.yml",
+    ".github/workflows/bibliography-ci.yml",
+    ".github/workflows/monograph-ci.yml",
+    ".github/workflows/period2-active-ci.yml",
+    ".github/workflows/web-ci.yml"
+  ],
+  "frozen_manual_replay_workflows": [
+    ".github/workflows/closed-shell-atomic-control.yml",
+    ".github/workflows/closed-shell-ligand-quality-v0.11c.yml",
+    ".github/workflows/atomic-ion-convergence-v0.12a.yml",
+    ".github/workflows/atomic-ion-convergence-v0.12b.yml",
+    ".github/workflows/molecular-backend-smoke-v0.14a.yml",
+    ".github/workflows/molecular-backend-status-v0.14a.yml",
+    ".github/workflows/molecular-state-relaxation-v0.14a.yml"
+  ],
+  "changed_surfaces_before_this_receipt": [
+    ".github/workflows/atomic-ion-convergence-v0.12a.yml",
+    ".github/workflows/atomic-ion-convergence-v0.12b.yml",
+    ".github/workflows/bibliography-ci.yml",
+    ".github/workflows/closed-shell-atomic-control.yml",
+    ".github/workflows/closed-shell-ligand-quality-v0.11c.yml",
+    ".github/workflows/compound-relations-ci.yml",
+    ".github/workflows/molecular-backend-smoke-v0.14a.yml",
+    ".github/workflows/molecular-backend-status-v0.14a.yml",
+    ".github/workflows/molecular-state-relaxation-v0.14a.yml",
+    ".github/workflows/monograph-ci.yml",
+    ".github/workflows/period2-active-ci.yml",
+    ".github/workflows/web-ci.yml",
+    "README.md",
+    "STATUS.md",
+    "docs/README.md",
+    "docs/molecular_state_relaxation_v0_14a.md",
+    "docs/molecular_state_relaxation_v0_14a1_amendment.md",
+    "docs/repository_reconciliation_20260814.md",
+    "monograph/bibliography/README.md",
+    "monograph/chapters/20_multicentre_shell_dynamics.tex",
+    "monograph/chapters/21_relational_admission_contract.tex",
+    "monograph/chapters/A_benchmark_ledger.tex",
+    "monograph/chapters/B_implementation_map.tex",
+    "monograph/chapters/C_validation_reproducibility.tex",
+    "monograph/chapters/D_open_gates.tex",
+    "monograph/main.tex"
+  ],
+  "intentionally_unchanged": [
+    "physical Hamiltonians",
+    "compound relation algorithms",
+    "v0.13 state generator semantics",
+    "v0.14A/A1 method parameters and seeds",
+    "frozen numerical benchmark values",
+    "raw first-attempt molecular receipts",
+    "historical preregistration chronology",
+    "scientific promotion state"
+  ],
+  "required_premerge_gates": [
+    "full Python regression",
+    "compound/molecular JSON and current-surface validation",
+    "bibliography DOI/key/wiring audit",
+    "LaTeX/BibTeX build with unresolved-reference rejection",
+    "period-2 subsystem CI when triggered",
+    "web CI when triggered",
+    "final diff inspection for unintended scientific mutations"
+  ],
+  "epistemic_status": "REPOSITORY_STATE_ALIGNMENT_NOT_SCIENTIFIC_PROMOTION"
+}
