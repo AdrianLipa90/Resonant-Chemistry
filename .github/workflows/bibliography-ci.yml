@@ -1,0 +1,55 @@
+name: resonant-chemistry-bibliography-ci
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+    paths:
+      - monograph/main.tex
+      - monograph/chapters/**
+      - monograph/bibliography/**
+      - .github/workflows/bibliography-ci.yml
+  workflow_dispatch:
+
+jobs:
+  bibliography-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install LaTeX/BibTeX toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended poppler-utils
+
+      - name: Build textbook with live modular bibliography
+        working-directory: monograph
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+
+      - name: Reject unresolved bibliography or cross-references
+        working-directory: monograph
+        run: |
+          if grep -E "LaTeX Warning: (Reference|Citation).*undefined|There were undefined references|There were undefined citations|I couldn't open database file" main.log; then
+            echo "Unresolved bibliography or cross-reference state remains"
+            exit 3
+          fi
+          test -s main.pdf
+          test -s main.bbl
+          pdfinfo main.pdf | tee bibliography_pdfinfo.txt
+
+      - name: Record bibliography build hashes
+        run: |
+          sha256sum monograph/main.tex monograph/bibliography/*.bib monograph/main.bbl monograph/main.pdf > monograph/BIBLIOGRAPHY_BUILD_SHA256.txt
+          cat monograph/BIBLIOGRAPHY_BUILD_SHA256.txt
+
+      - name: Upload bibliography-validated textbook
+        uses: actions/upload-artifact@v4
+        with:
+          name: Resonant-Chemistry-Bibliography-Validated
+          path: |
+            monograph/main.pdf
+            monograph/main.log
+            monograph/main.bbl
+            monograph/bibliography_pdfinfo.txt
+            monograph/BIBLIOGRAPHY_BUILD_SHA256.txt

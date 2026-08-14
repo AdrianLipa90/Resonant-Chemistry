@@ -1,0 +1,30 @@
+{
+  "schema": "RESCHEM_BIBLIOGRAPHY_BUILD_RECEIPT_V1",
+  "date": "2026-08-14",
+  "branch": "compound-relations-v0.3",
+  "status": "PASS_LATEX_BIBTEX_PDF_BUILD",
+  "workflow": {
+    "name": "resonant-chemistry-bibliography-ci",
+    "run_id": 31782078753,
+    "head_sha": "a3f407a6d9744a3ca07cf6d14fbef8b82b83315a",
+    "job_id": 94709828159,
+    "conclusion": "success"
+  },
+  "verified_steps": [
+    "LaTeX/BibTeX toolchain installed",
+    "working textbook built through latexmk",
+    "undefined citation/reference rejection passed",
+    "main.pdf exists and is non-empty",
+    "main.bbl exists and is non-empty",
+    "bibliography build hashes recorded"
+  ],
+  "artifact": {
+    "id": 9212116917,
+    "name": "Resonant-Chemistry-Bibliography-Validated",
+    "size_bytes": 549638,
+    "sha256": "a13e51975702c7a80f6c3febd8841886dce28002ff8b033877338c7cea46e86c",
+    "expires_at": "2026-11-12T07:59:15Z"
+  },
+  "bibliography_policy": "source-used -> bibliography entry in same development iteration; DOI/key/wiring audit plus real PDF compile",
+  "epistemic_status": "VERIFIED_BUILD_RECEIPT_NOT_SCIENTIFIC_VALIDATION"
+}

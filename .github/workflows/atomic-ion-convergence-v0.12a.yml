@@ -1,0 +1,130 @@
+name: atomic-ion-convergence-v0.12a
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+    paths:
+      - reschem/atomic_ion_convergence.py
+      - scripts/run_atomic_ion_convergence_v0_12a.py
+      - benchmarks/ATOMIC_ION_CONVERGENCE_PREREG_V0_12A.json
+      - .github/workflows/atomic-ion-convergence-v0.12a.yml
+  workflow_dispatch:
+
+jobs:
+  state-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        include:
+          - {z: 10, charge: 0, label: Ne}
+          - {z: 10, charge: 1, label: Ne_plus}
+          - {z: 18, charge: 0, label: Ar}
+          - {z: 18, charge: 1, label: Ar_plus}
+          - {z: 36, charge: 0, label: Kr}
+          - {z: 36, charge: 1, label: Kr_plus}
+          - {z: 9, charge: 0, label: F}
+          - {z: 9, charge: -1, label: F_minus}
+          - {z: 17, charge: 0, label: Cl}
+          - {z: 17, charge: -1, label: Cl_minus}
+          - {z: 35, charge: 0, label: Br}
+          - {z: 35, charge: -1, label: Br_minus}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Execute frozen three-level scan
+        run: >-
+          python scripts/run_atomic_ion_convergence_v0_12a.py
+          --z ${{ matrix.z }}
+          --charge ${{ matrix.charge }}
+          --output-dir benchmarks/v0_12a_states
+
+      - name: Validate state receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          files = list(Path('benchmarks/v0_12a_states').glob('*.json'))
+          if len(files) != 1:
+              raise SystemExit(f'expected exactly one state receipt, got {files}')
+          payload = json.loads(files[0].read_text(encoding='utf-8'))
+          assert payload['schema'] == 'RESCHEM_ATOMIC_ION_CONVERGENCE_V0_12A_STATE'
+          assert len(payload['levels']) == 3
+          assert [row['level'] for row in payload['levels']] == ['L0', 'L1', 'L2']
+          assert len(payload['adjacent_energy_drift']) == 2
+          print({'state': payload['symbol'], 'charge': payload['charge'], 'converged': [row['converged'] for row in payload['levels']]})
+          PY
+
+      - name: Upload state receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: atomic-ion-convergence-v0.12a-${{ matrix.label }}
+          path: benchmarks/v0_12a_states/*.json
+          if-no-files-found: error
+
+  aggregate:
+    needs: state-scan
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all state receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: atomic-ion-convergence-v0.12a-*
+          path: collected
+          merge-multiple: true
+
+      - name: Aggregate frozen scan receipts
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          files = sorted(Path('collected').glob('*.json'))
+          if len(files) != 12:
+              raise SystemExit(f'expected 12 state receipts; found {len(files)}: {[p.name for p in files]}')
+          states = [json.loads(path.read_text(encoding='utf-8')) for path in files]
+          labels = {(x['symbol'], x['charge']) for x in states}
+          if len(labels) != 12:
+              raise SystemExit('duplicate or missing atom/charge state receipts')
+          payload = {
+              'schema': 'RESCHEM_ATOMIC_ION_CONVERGENCE_V0_12A',
+              'generated_utc': datetime.now(timezone.utc).isoformat(),
+              'preregister_source': 'benchmarks/ATOMIC_ION_CONVERGENCE_PREREG_V0_12A.json',
+              'status': 'RAW_GLOBAL_NUMERICAL_SCAN_COMPLETE_NO_CONVERGENCE_THRESHOLD',
+              'state_count': 12,
+              'states': sorted(states, key=lambda x: (x['Z'], x['charge'])),
+              'nonclaims': [
+                  'no numerical convergence threshold is selected in v0.12A',
+                  'scientific SCF non-convergence is preserved as data',
+                  'no chemistry classifier or molecular energy is fitted',
+              ],
+          }
+          out = Path('ATOMIC_ION_CONVERGENCE_V0_12A.json')
+          out.write_text(json.dumps(payload, indent=2) + '\n', encoding='utf-8')
+          print({'state_count': len(states), 'output': str(out)})
+          PY
+
+      - name: Upload combined v0.12A scan
+        uses: actions/upload-artifact@v4
+        with:
+          name: atomic-ion-convergence-v0.12a-combined
+          path: ATOMIC_ION_CONVERGENCE_V0_12A.json
+          if-no-files-found: error

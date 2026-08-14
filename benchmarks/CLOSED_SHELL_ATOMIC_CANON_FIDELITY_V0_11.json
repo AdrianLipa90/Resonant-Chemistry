@@ -1,0 +1,28 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_ATOMIC_CANON_FIDELITY_V0_11",
+  "branch": "compound-relations-v0.3",
+  "status": "POST_EXECUTION_CONTROL_FIDELITY_AUDIT_NO_NEW_THRESHOLD",
+  "v0_11_execution_source": "benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11_EXECUTION.json",
+  "frozen_neutral_sources": {
+    "F_and_Ne": "benchmarks/BLIND_MULTI_L_H_TO_NE_V0_1.json",
+    "Cl_and_Ar": "benchmarks/NA_TO_AR_DIIS_V0_1.json",
+    "Br_and_Kr": "benchmarks/K_TO_KR_ROBUST_QUALITY_V0_1.json"
+  },
+  "comparison": [
+    {"symbol":"F","frozen_neutral_hartree":-99.16235508219151,"v0_11_neutral_hartree":-99.14895260405314,"signed_difference_hartree":0.013402478138374363,"absolute_difference_hartree":0.013402478138374363},
+    {"symbol":"Ne","frozen_neutral_hartree":-128.54388747299046,"v0_11_neutral_hartree":-128.525411713559,"signed_difference_hartree":0.018475759431453298,"absolute_difference_hartree":0.018475759431453298},
+    {"symbol":"Cl","frozen_neutral_hartree":-459.224088514925,"v0_11_neutral_hartree":-459.26398177649594,"signed_difference_hartree":-0.03989326157096684,"absolute_difference_hartree":0.03989326157096684},
+    {"symbol":"Ar","frozen_neutral_hartree":-526.682914987924,"v0_11_neutral_hartree":-526.7281321177608,"signed_difference_hartree":-0.045217129836714776,"absolute_difference_hartree":0.045217129836714776},
+    {"symbol":"Br","frozen_neutral_hartree":-2572.122817163593,"v0_11_neutral_hartree":-2571.6932361977347,"signed_difference_hartree":0.4295809658583494,"absolute_difference_hartree":0.4295809658583494},
+    {"symbol":"Kr","frozen_neutral_hartree":-2751.8469168705574,"v0_11_neutral_hartree":-2751.363766829678,"signed_difference_hartree":0.4831500408795364,"absolute_difference_hartree":0.4831500408795364}
+  ],
+  "verdict": "V0_11_FIRST_PASSING_ROBUST_STAGE_IS_NOT_NUMERICALLY_IDENTICAL_TO_THE_FROZEN_NEUTRAL_CONTROL_CHECKPOINTS",
+  "interpretation": [
+    "No arbitrary post-hoc difference threshold is introduced in this audit.",
+    "The broad SCF+virial quality gate does not establish basis/stage convergence of energies tightly enough for a new finite-difference descriptor by itself.",
+    "This does not invalidate the historical neutral control checkpoints; it limits quantitative interpretation of the separate v0.11 first-passing-stage execution.",
+    "Ionization/attachment finite differences could in principle show error cancellation, but that cancellation is not established by the current evidence and must not be assumed."
+  ],
+  "admission_consequence": "Do not fit or promote a quantitative classifier from the v0.11 energy components. Preserve v0.11 as a failed/diagnostic control attempt.",
+  "next_methodological_option": "If atomic energy-difference descriptors remain scientifically useful, define a new globally converged atomic-ion policy with explicit basis/stage convergence criteria and preregister it before execution."
+}

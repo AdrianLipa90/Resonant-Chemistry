@@ -1,0 +1,64 @@
+{
+  "schema": "RESCHEM_ATOMIC_ION_CONVERGENCE_PREREG_V0_12B",
+  "branch": "compound-relations-v0.3",
+  "status": "GLOBAL_L3_CONTINUATION_FROZEN_BEFORE_RESULTS",
+  "source_scan": "benchmarks/ATOMIC_ION_CONVERGENCE_V0_12A_EXECUTION.json",
+  "source_descriptive_readout": "benchmarks/ATOMIC_ION_CONVERGENCE_DESCRIPTIVE_V0_12A.json",
+  "motivation": [
+    "v0.12A intentionally defined no numerical convergence threshold",
+    "F- and Br- entered a qualitatively different, low-virial converged branch only at the terminal L2 level",
+    "a threshold selected before observing persistence beyond L2 would be underdetermined",
+    "one additional common numerical level is therefore required before any global convergence-admission rule is considered"
+  ],
+  "states": [
+    "Ne", "Ne+", "Ar", "Ar+", "Kr", "Kr+",
+    "F", "F-", "Cl", "Cl-", "Br", "Br-"
+  ],
+  "previous_levels": [
+    {"name":"L0","basis_size":20,"grid_points":1000,"zeta_min":0.02,"radial_grid_max_bohr":120.0},
+    {"name":"L1","basis_size":24,"grid_points":1400,"zeta_min":0.01,"radial_grid_max_bohr":180.0},
+    {"name":"L2","basis_size":28,"grid_points":1800,"zeta_min":0.005,"radial_grid_max_bohr":240.0}
+  ],
+  "new_level": {
+    "name": "L3",
+    "basis_size": 32,
+    "grid_points": 2200,
+    "zeta_min": 0.0025,
+    "radial_grid_max_bohr": 300.0,
+    "damping": 0.06,
+    "diis_start": 12,
+    "diis_size": 8,
+    "max_iterations": 1500,
+    "tolerance_hartree": 1e-6
+  },
+  "continuation_rule": {
+    "basis_size": "+4 from each preceding level",
+    "grid_points": "+400 from each preceding level",
+    "zeta_min": "halved at every step",
+    "radial_grid_max_bohr": "+60 bohr at every step",
+    "late_stage_damping_and_diis": "carry forward the frozen L2 values",
+    "max_iterations": "+300 relative to L2; scientific non-convergence remains data rather than an infrastructure failure"
+  },
+  "raw_outputs": [
+    "energy_hartree",
+    "converged",
+    "iterations",
+    "virial_residual_hartree",
+    "configuration",
+    "exact numerical parameters"
+  ],
+  "derived_after_complete_execution": [
+    "E(L3)-E(L2) for every state",
+    "same-level ionization cost at L3",
+    "same-level attachment gain at L3",
+    "L3-minus-L2 drift of each matched finite difference"
+  ],
+  "explicit_non_decisions": [
+    "No numerical convergence tolerance is selected in v0.12B.",
+    "L3 is not declared a converged reference value merely because it is larger than L2.",
+    "No chemistry classifier or molecular energy is fitted.",
+    "No state receives a target-specific numerical rescue.",
+    "The original v0.11 FAIL remains in the ledger."
+  ],
+  "next_decision": "Only after all twelve L3 receipts and the L2-to-L3 matched-difference drift are available may a separate global convergence-admission rule be proposed."
+}

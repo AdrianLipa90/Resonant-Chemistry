@@ -1,0 +1,64 @@
+{
+  "schema": "RESCHEM_ELECTRONIC_TOPOLOGY_JOB_MATRIX_V0_10A",
+  "branch": "compound-relations-v0.3",
+  "status": "RAW_ANALYSIS_MATRIX_FROZEN_BEFORE_SECOND_FAMILY_RESULTS",
+  "targets": ["NeCl2", "NeBr2", "ArBr2", "KrBr2"],
+  "common_environment": "gas phase unless an entry is explicitly excluded from the common score",
+  "geometry_stage": {
+    "policy_source": "benchmarks/ENERGETIC_METHOD_POLICY_V0_8A.json",
+    "method": "r2SCAN-3c",
+    "requirements": [
+      "unconstrained optimization from every preregistered linear and T-shaped seed",
+      "harmonic Hessian for every converged stationary point",
+      "retain all distinct harmonic minima, not only the lowest one",
+      "do not add a target-specific rescue geometry after seeing results"
+    ]
+  },
+  "real_space_force_stage": {
+    "family": "REAL_SPACE_FORCE",
+    "wavefunction_density_source": "same r2SCAN-3c stationary-point calculation unless a replacement method is frozen for the full panel before any result",
+    "raw_outputs_required": [
+      "full stationary-point geometry and symmetry",
+      "all harmonic frequencies",
+      "electron-density critical-point connectivity if QTAIM is run",
+      "rho and laplacian at every reported bond critical point",
+      "local stretching force constants or equivalent raw Hessian-derived interaction measures when available",
+      "method/program/version and analysis-program/version"
+    ],
+    "automatic_verdict": "NONE",
+    "reason": "v0.10 forbids converting one QTAIM BCP or one arbitrary numeric threshold directly into a topology label"
+  },
+  "orbital_subspace_stage": {
+    "family": "ORBITAL_SUBSPACE",
+    "status": "NOT_RUN_UNTIL_ONE_COMMON_LOCALIZATION_OR_PROJECTOR_IMPLEMENTATION_IS_FROZEN",
+    "required_before_execution": [
+      "one implementation for all four targets",
+      "explicit orbital/subspace definition",
+      "raw occupations/delocalization measures",
+      "no visual canonical-MO-only verdict",
+      "no target-specific localization choice"
+    ]
+  },
+  "fragmentation_isomer_stage": {
+    "family": "FRAGMENTATION_ISOMER_ENERGY",
+    "policy_source": "benchmarks/ENERGETIC_METHOD_POLICY_V0_8A.json",
+    "comparisons": [
+      "linear activated XY2 candidate versus all retained weak-complex/isomer minima of the same stoichiometry",
+      "XY2 versus X + Y2 whole-pair dissociation",
+      "record energy and ZPE consistently under one method policy"
+    ],
+    "literature_reference_status": {
+      "NeCl2": "external primary literature supports VDW reference class",
+      "NeBr2": "external primary literature supports VDW reference class",
+      "ArBr2": "external primary literature supports VDW reference class",
+      "KrBr2": "UNKNOWN"
+    }
+  },
+  "anti_fit_rules": [
+    "No new diagnostic family may be added to v0.10 after target-specific results are visible.",
+    "No single QTAIM BCP, canonical MO diagram, bond order, or optimized formula can resolve the topology by itself.",
+    "If a common analysis implementation cannot be applied to one target, that family is NOT_RUN/INCONCLUSIVE for that target rather than replaced by a bespoke method.",
+    "Environment-specific high-pressure results are not mixed into the gas-phase score.",
+    "All raw outputs used to make a family verdict must be preserved with provenance."
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "RESCHEM_ATOMIC_ION_CONVERGENCE_V0_12A_EXECUTION",
+  "branch": "compound-relations-v0.3",
+  "preregister_source": "benchmarks/ATOMIC_ION_CONVERGENCE_PREREG_V0_12A.json",
+  "workflow": {
+    "run_id": 31783012784,
+    "head_sha": "71175b86c98fcec6f775ace798c130ad144ba541",
+    "conclusion": "success",
+    "combined_artifact_id": 9212497906,
+    "combined_artifact_sha256": "105954c3a8372f956b4f581f99cf25e44505df00222f6df6f257ac0cd64b60ad"
+  },
+  "status": "RAW_GLOBAL_NUMERICAL_SCAN_COMPLETE_NO_CONVERGENCE_THRESHOLD",
+  "levels": [
+    {"name":"L0","basis_size":20,"grid_points":1000,"zeta_min":0.02,"radial_grid_max_bohr":120.0},
+    {"name":"L1","basis_size":24,"grid_points":1400,"zeta_min":0.01,"radial_grid_max_bohr":180.0},
+    {"name":"L2","basis_size":28,"grid_points":1800,"zeta_min":0.005,"radial_grid_max_bohr":240.0}
+  ],
+  "states": [
+    {"state":"F","levels":[
+      {"level":"L0","energy_hartree":-99.15706572284597,"converged":true,"iterations":17,"virial_residual_hartree":0.004030808500637306},
+      {"level":"L1","energy_hartree":-99.16067492561749,"converged":true,"iterations":17,"virial_residual_hartree":-0.003298266614480738},
+      {"level":"L2","energy_hartree":-99.16220668165694,"converged":true,"iterations":19,"virial_residual_hartree":0.006158880352547413}
+    ],"absolute_energy_drift_hartree":[0.00360920277151866,0.0015317560394512152]},
+    {"state":"F-","levels":[
+      {"level":"L0","energy_hartree":-96.05665686236028,"converged":true,"iterations":42,"virial_residual_hartree":18.09323265062769},
+      {"level":"L1","energy_hartree":-96.0619511204541,"converged":true,"iterations":52,"virial_residual_hartree":18.091306673347958},
+      {"level":"L2","energy_hartree":-99.45664941234824,"converged":true,"iterations":19,"virial_residual_hartree":0.00541641103163748}
+    ],"absolute_energy_drift_hartree":[0.005294258093818672,3.394698291894137]},
+    {"state":"Ne","levels":[
+      {"level":"L0","energy_hartree":-128.53667877647496,"converged":true,"iterations":17,"virial_residual_hartree":-0.0028606071893921836},
+      {"level":"L1","energy_hartree":-128.54160062456103,"converged":true,"iterations":21,"virial_residual_hartree":-0.009326840414887627},
+      {"level":"L2","energy_hartree":-128.5436927942417,"converged":true,"iterations":18,"virial_residual_hartree":0.00038483831029090254}
+    ],"absolute_energy_drift_hartree":[0.004921848086070879,0.002092169680677268]},
+    {"state":"Ne+","levels":[
+      {"level":"L0","energy_hartree":-127.50048277380468,"converged":true,"iterations":17,"virial_residual_hartree":0.005713256287927848},
+      {"level":"L1","energy_hartree":-127.50479884525699,"converged":true,"iterations":15,"virial_residual_hartree":0.001818771760058624},
+      {"level":"L2","energy_hartree":-127.5066289013698,"converged":true,"iterations":18,"virial_residual_hartree":0.003056518693361099}
+    ],"absolute_energy_drift_hartree":[0.004316071452310944,0.0018300561128146156]},
+    {"state":"Cl","levels":[
+      {"level":"L0","energy_hartree":-459.30603605750434,"converged":true,"iterations":18,"virial_residual_hartree":0.007019198420639583},
+      {"level":"L1","energy_hartree":-459.3218876942944,"converged":true,"iterations":19,"virial_residual_hartree":-0.0009077527609697711},
+      {"level":"L2","energy_hartree":-459.3286193993765,"converged":true,"iterations":23,"virial_residual_hartree":-0.0069483503676970315}
+    ],"absolute_energy_drift_hartree":[0.01585163679005497,0.006731705082106298]},
+    {"state":"Cl-","levels":[
+      {"level":"L0","energy_hartree":-459.54221071812657,"converged":true,"iterations":31,"virial_residual_hartree":-0.00997639579913212},
+      {"level":"L1","energy_hartree":-459.55860245390255,"converged":true,"iterations":38,"virial_residual_hartree":0.00955965103831602},
+      {"level":"L2","energy_hartree":-459.56559578293223,"converged":true,"iterations":40,"virial_residual_hartree":0.007718173828941133}
+    ],"absolute_energy_drift_hartree":[0.016391735775980604,0.006993329029681528]},
+    {"state":"Ar","levels":[
+      {"level":"L0","energy_hartree":-526.7789561620816,"converged":true,"iterations":16,"virial_residual_hartree":-0.0030177771503012707},
+      {"level":"L1","energy_hartree":-526.7971972748627,"converged":true,"iterations":17,"virial_residual_hartree":0.009467295080945348},
+      {"level":"L2","energy_hartree":-526.8049420277961,"converged":true,"iterations":20,"virial_residual_hartree":-0.0005685578569547545}
+    ],"absolute_energy_drift_hartree":[0.018241112781058397,0.007744752933400712]},
+    {"state":"Ar+","levels":[
+      {"level":"L0","energy_hartree":-526.0675725704715,"converged":true,"iterations":18,"virial_residual_hartree":0.006099612876347749},
+      {"level":"L1","energy_hartree":-526.0850624864726,"converged":true,"iterations":17,"virial_residual_hartree":-0.007001188158344718},
+      {"level":"L2","energy_hartree":-526.0924896761629,"converged":true,"iterations":20,"virial_residual_hartree":-0.015036949444183989}
+    ],"absolute_energy_drift_hartree":[0.01748991600109462,0.007427189690252467]},
+    {"state":"Br","levels":[
+      {"level":"L0","energy_hartree":-2572.122817174237,"converged":true,"iterations":34,"virial_residual_hartree":-0.05475015347448675},
+      {"level":"L1","energy_hartree":-2572.2154144722167,"converged":true,"iterations":37,"virial_residual_hartree":-0.033394772088570335},
+      {"level":"L2","energy_hartree":-2572.2545104203728,"converged":true,"iterations":88,"virial_residual_hartree":0.026207445352767422}
+    ],"absolute_energy_drift_hartree":[0.09259729797974715,0.03909594815615169]},
+    {"state":"Br-","levels":[
+      {"level":"L0","energy_hartree":-2571.773046712023,"converged":false,"iterations":700,"virial_residual_hartree":12.626118512175836},
+      {"level":"L1","energy_hartree":-2571.557131838858,"converged":false,"iterations":900,"virial_residual_hartree":13.393560525224018},
+      {"level":"L2","energy_hartree":-2572.472669705703,"converged":true,"iterations":39,"virial_residual_hartree":0.11382408055533233}
+    ],"absolute_energy_drift_hartree":[0.2159148731652749,0.9155378668451704]},
+    {"state":"Kr","levels":[
+      {"level":"L0","energy_hartree":-2751.846916870556,"converged":true,"iterations":19,"virial_residual_hartree":0.014874434123882452},
+      {"level":"L1","energy_hartree":-2751.945979767502,"converged":true,"iterations":52,"virial_residual_hartree":0.1623223283244215},
+      {"level":"L2","energy_hartree":-2751.987623678451,"converged":true,"iterations":26,"virial_residual_hartree":0.1277571448583501}
+    ],"absolute_energy_drift_hartree":[0.09906289694593995,0.041643910949034525]},
+    {"state":"Kr+","levels":[
+      {"level":"L0","energy_hartree":-2751.2189786903145,"converged":true,"iterations":33,"virial_residual_hartree":-0.05302174961242656},
+      {"level":"L1","energy_hartree":-2751.3167006365884,"converged":true,"iterations":33,"virial_residual_hartree":0.18110407663883166},
+      {"level":"L2","energy_hartree":-2751.3579745786324,"converged":true,"iterations":30,"virial_residual_hartree":0.01043378142880158}
+    ],"absolute_energy_drift_hartree":[0.09772194627382147,0.041273942043764]}
+  ],
+  "observations_without_threshold": [
+    "All twelve states produced complete L0/L1/L2 receipts.",
+    "Every state is SCF-converged at L2.",
+    "F- and Br- change numerical branch qualitatively at L2: their virial residuals collapse from order 10 hartree to small residuals and Br- changes from nonconverged at L0/L1 to converged at L2.",
+    "For ordinary neutral/cation states and Cl-, the magnitude of L2-L1 energy drift is smaller than L1-L0; F- and Br- are exceptions because their anion solutions reorganize at L2."
+  ],
+  "nonclaims": [
+    "L2 is not declared numerically converged by v0.12A.",
+    "No energy-drift tolerance is selected.",
+    "No chemistry classifier or molecular binding energy is fitted.",
+    "The v0.11 failed execution remains failed and is not relabeled by this scan."
+  ]
+}

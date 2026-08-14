@@ -1,0 +1,81 @@
+name: closed-shell-atomic-control-v0.11
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+    paths:
+      - reschem/closed_shell_atomic_control.py
+      - scripts/run_closed_shell_atomic_control_v0_11.py
+      - scripts/run_closed_shell_atomic_quality_v0_11b.py
+      - benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_PREREG_V0_11.json
+      - .github/workflows/closed-shell-atomic-control.yml
+  workflow_dispatch:
+
+jobs:
+  atomic-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Execute frozen v0.11 atomic control vector
+        id: control
+        continue-on-error: true
+        run: python scripts/run_closed_shell_atomic_control_v0_11.py
+
+      - name: Execute v0.11B per-state quality diagnostic
+        if: always()
+        run: python scripts/run_closed_shell_atomic_quality_v0_11b.py
+
+      - name: Validate output JSON files
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control_path = Path('benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11.json')
+          diagnostic_path = Path('benchmarks/CLOSED_SHELL_ATOMIC_QUALITY_V0_11B.json')
+          if not control_path.is_file():
+              raise SystemExit('v0.11 output JSON was not produced')
+          if not diagnostic_path.is_file():
+              raise SystemExit('v0.11B diagnostic JSON was not produced')
+
+          control = json.loads(control_path.read_text(encoding='utf-8'))
+          diagnostic = json.loads(diagnostic_path.read_text(encoding='utf-8'))
+          assert control['candidate_count'] == 9
+          assert len(control['vectors']) == 9
+          assert len(diagnostic['states']) == 12
+          print({
+              'control_status': control['status'],
+              'candidate_count': control['candidate_count'],
+              'all_quality_pass': all(v['all_atomic_quality_pass'] for v in control['vectors']),
+              'failed_atomic_states': diagnostic['failed_states'],
+          })
+          PY
+
+      - name: Upload v0.11 raw control and quality diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: closed-shell-atomic-control-v0.11
+          path: |
+            benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11.json
+            benchmarks/CLOSED_SHELL_ATOMIC_QUALITY_V0_11B.json
+          if-no-files-found: error
+
+      - name: Enforce physical quality result
+        if: steps.control.outcome != 'success'
+        run: |
+          echo 'The frozen atomic-control runner reported one or more quality failures.'
+          exit 2

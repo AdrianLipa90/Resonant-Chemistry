@@ -1,0 +1,24 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_LIGAND_QUALITY_PREREG_V0_11C",
+  "branch": "compound-relations-v0.3",
+  "status": "TARGETED_DIAGNOSTIC_FROZEN_BEFORE_FOUR_STATE_READOUT",
+  "source_execution": "benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11_EXECUTION.json",
+  "logical_reduction": {
+    "proven_pass_from_Cl_pair_conjunctions": ["Ne", "Ne+", "Ar", "Ar+", "Kr", "Kr+", "Cl", "Cl-"],
+    "unresolved_states": ["F", "F-", "Br", "Br-"],
+    "reason": "all three centre+Cl pair vectors passed, while all F and Br pair vectors failed independently of centre"
+  },
+  "solver": "exact same reschem.atomic_hf_diis.solve_atom_average_hf_robust call and frozen global stage ladder",
+  "outcomes": {
+    "neutral_only_failure": "retire neutral-derived ligand radius/energy for that ligand from quantitative v0.11 use",
+    "anion_only_failure": "retire attachment_gain and charge_transfer_margin for that ligand; neutral radial descriptors may remain admissible",
+    "both_failure": "all v0.11 ligand-side descriptors for that ligand remain quantitatively inadmissible",
+    "both_pass": "flag inconsistency with pair-level execution and investigate provenance/runtime rather than changing chemistry"
+  },
+  "forbidden": [
+    "changing basis/grid/DIIS/virial gate for F or Br",
+    "substituting experimental electron affinity",
+    "using the localization result to fit a classifier",
+    "relabeling the original v0.11 FAIL as PASS"
+  ]
+}

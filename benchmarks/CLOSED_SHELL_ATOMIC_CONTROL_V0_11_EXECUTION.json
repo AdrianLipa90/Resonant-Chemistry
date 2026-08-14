@@ -1,0 +1,33 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_ATOMIC_CONTROL_V0_11_EXECUTION",
+  "source_workflow_run": 31781583863,
+  "source_artifact_id": 9211970960,
+  "source_artifact_sha256": "3561db6e5307f81f156025357639f1e3de8d08090a3fc4cc709f1a0c92b20941",
+  "source_head_sha": "d11a17d4f5152a704ad51d7aecdd83520320724f",
+  "generated_utc": "2026-08-14T07:55:00.313729+00:00",
+  "status": "EXECUTED_FAIL_CLOSED_ATOMIC_QUALITY_FAILURES",
+  "candidate_count": 9,
+  "observed_quality_pattern": {
+    "F_ligand_pairs": "FAIL_ALL_CENTRES",
+    "Cl_ligand_pairs": "PASS_ALL_CENTRES",
+    "Br_ligand_pairs": "FAIL_ALL_CENTRES",
+    "inference": "failure localizes to a ligand-side neutral/anion control shared across centres, but the exact charge state is not identified by the v0.11 pair-level schema"
+  },
+  "vectors": [
+    {"centre":"Ne","ligand":"F","centre_ionization_cost_hartree":1.0345939318878834,"ligand_attachment_gain_hartree":-3.092295742259097,"charge_transfer_margin_hartree":4.12688967414698,"centre_outer_p_mean_radius_bohr":0.9669304057948195,"ligand_outer_p_mean_radius_bohr":1.1132387009621045,"centre_outer_p_radial_sigma_bohr":0.5459630826283258,"ligand_outer_p_radial_sigma_bohr":0.6330086896431377,"all_atomic_quality_pass":false},
+    {"centre":"Ne","ligand":"Cl","centre_ionization_cost_hartree":1.0345939318878834,"ligand_attachment_gain_hartree":0.23489901662003376,"charge_transfer_margin_hartree":0.7996949152678496,"centre_outer_p_mean_radius_bohr":0.9669304057948195,"ligand_outer_p_mean_radius_bohr":1.8708587377200647,"centre_outer_p_radial_sigma_bohr":0.5459630826283258,"ligand_outer_p_radial_sigma_bohr":0.8399550972885474,"all_atomic_quality_pass":true},
+    {"centre":"Ne","ligand":"Br","centre_ionization_cost_hartree":1.0345939318878834,"ligand_attachment_gain_hartree":0.0798105142885106,"charge_transfer_margin_hartree":0.9547834175993728,"centre_outer_p_mean_radius_bohr":0.9669304057948195,"ligand_outer_p_mean_radius_bohr":2.141650276630595,"centre_outer_p_radial_sigma_bohr":0.5459630826283258,"ligand_outer_p_radial_sigma_bohr":0.900296181809877,"all_atomic_quality_pass":false},
+    {"centre":"Ar","ligand":"F","centre_ionization_cost_hartree":0.7099893367459345,"ligand_attachment_gain_hartree":-3.092295742259097,"charge_transfer_margin_hartree":3.8022850790050313,"centre_outer_p_mean_radius_bohr":1.6643451393733777,"ligand_outer_p_mean_radius_bohr":1.1132387009621045,"centre_outer_p_radial_sigma_bohr":0.739640207195931,"ligand_outer_p_radial_sigma_bohr":0.6330086896431377,"all_atomic_quality_pass":false},
+    {"centre":"Ar","ligand":"Cl","centre_ionization_cost_hartree":0.7099893367459345,"ligand_attachment_gain_hartree":0.23489901662003376,"charge_transfer_margin_hartree":0.4750903201259007,"centre_outer_p_mean_radius_bohr":1.6643451393733777,"ligand_outer_p_mean_radius_bohr":1.8708587377200647,"centre_outer_p_radial_sigma_bohr":0.739640207195931,"ligand_outer_p_radial_sigma_bohr":0.8399550972885474,"all_atomic_quality_pass":true},
+    {"centre":"Ar","ligand":"Br","centre_ionization_cost_hartree":0.7099893367459345,"ligand_attachment_gain_hartree":0.0798105142885106,"charge_transfer_margin_hartree":0.6301788224574238,"centre_outer_p_mean_radius_bohr":1.6643451393733777,"ligand_outer_p_mean_radius_bohr":2.141650276630595,"centre_outer_p_radial_sigma_bohr":0.739640207195931,"ligand_outer_p_radial_sigma_bohr":0.900296181809877,"all_atomic_quality_pass":false},
+    {"centre":"Kr","ligand":"F","centre_ionization_cost_hartree":0.6268628134203027,"ligand_attachment_gain_hartree":-3.092295742259097,"charge_transfer_margin_hartree":3.7191585556793996,"centre_outer_p_mean_radius_bohr":1.9546500353264697,"ligand_outer_p_mean_radius_bohr":1.1132387009621045,"centre_outer_p_radial_sigma_bohr":0.8059110645911148,"ligand_outer_p_radial_sigma_bohr":0.6330086896431377,"all_atomic_quality_pass":false},
+    {"centre":"Kr","ligand":"Cl","centre_ionization_cost_hartree":0.6268628134203027,"ligand_attachment_gain_hartree":0.23489901662003376,"charge_transfer_margin_hartree":0.39196379680026894,"centre_outer_p_mean_radius_bohr":1.9546500353264697,"ligand_outer_p_mean_radius_bohr":1.8708587377200647,"centre_outer_p_radial_sigma_bohr":0.8059110645911148,"ligand_outer_p_radial_sigma_bohr":0.8399550972885474,"all_atomic_quality_pass":true},
+    {"centre":"Kr","ligand":"Br","centre_ionization_cost_hartree":0.6268628134203027,"ligand_attachment_gain_hartree":0.0798105142885106,"charge_transfer_margin_hartree":0.5470522991317921,"centre_outer_p_mean_radius_bohr":1.9546500353264697,"ligand_outer_p_mean_radius_bohr":2.141650276630595,"centre_outer_p_radial_sigma_bohr":0.8059110645911148,"ligand_outer_p_radial_sigma_bohr":0.900296181809877,"all_atomic_quality_pass":false}
+  ],
+  "nonclaims": [
+    "pair-level failure does not identify which neutral/charged atomic solve failed",
+    "raw HF attachment values from failed controls are not admitted quantitative descriptors",
+    "no scalar classifier or molecular binding claim is derived from this failed execution"
+  ],
+  "next_diagnostic": "v0.11B reports each unique atom/charge robust-HF quality result without changing solver settings"
+}

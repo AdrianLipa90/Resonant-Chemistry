@@ -1,0 +1,43 @@
+{
+  "schema": "RESCHEM_COMPOUND_STATE_ENSEMBLE_V0_13",
+  "branch": "compound-relations-v0.3",
+  "status": "UNRANKED_COMPETING_STATE_ENSEMBLE_FROZEN",
+  "source_structural_gate": "benchmarks/CLOSED_SHELL_ACTIVATION_V0_9.json",
+  "motivation": "Post-freeze evidence showed that identical XY2 stoichiometry can correspond to activated 3c4e or weak-complex topology; a composition must therefore carry competing relational states until physical admission.",
+  "formula_count": 9,
+  "states_per_formula": 3,
+  "state_count": 27,
+  "state_kinds": [
+    {"kind":"ACTIVATED_LINEAR_3C4E","topology_family":"ACTIVATED_THREE_CENTRE_FOUR_ELECTRON","geometry_seed":"LINEAR_LIGAND_CENTRE_LIGAND"},
+    {"kind":"WEAK_COMPLEX_LINEAR_END_ON","topology_family":"WEAK_COMPLEX_X_DOT_LIGAND_DIMER","geometry_seed":"LINEAR_CENTRE_LIGAND_LIGAND"},
+    {"kind":"WEAK_COMPLEX_T_SHAPED","topology_family":"WEAK_COMPLEX_X_DOT_LIGAND_DIMER","geometry_seed":"T_SHAPED_CENTRE_TO_LIGAND_DIMER"}
+  ],
+  "formulae": [
+    "NeF2", "NeCl2", "NeBr2",
+    "ArF2", "ArCl2", "ArBr2",
+    "KrF2", "KrCl2", "KrBr2"
+  ],
+  "ranking": {
+    "prior_rank": null,
+    "prior_probability": null,
+    "rule": "no state receives a geometric/shell-only ranking before conventional energetic/local-minimum and v0.10 electronic-topology admission"
+  },
+  "known_reference_context_not_used_as_generator_rank": [
+    {"formula":"KrF2","reference_context":"established activated/three-centre bonding literature"},
+    {"formula":"KrCl2","reference_context":"primary van der Waals isomer literature"},
+    {"formula":"NeCl2","reference_context":"primary van der Waals molecule literature"},
+    {"formula":"NeBr2","reference_context":"primary van der Waals molecule literature"},
+    {"formula":"ArBr2","reference_context":"primary van der Waals isomer literature"}
+  ],
+  "admission_interfaces": [
+    "v0.8 conventional energetic/local-minimum controls",
+    "v0.10 multi-diagnostic electronic-topology admission"
+  ],
+  "anti_fit_rules": [
+    "Do not delete a competing branch because a reference class is already known.",
+    "Do not assign prior probabilities from the already-opened KrF2/VDW examples.",
+    "Do not treat state enumeration as stability prediction.",
+    "A physical solver may reject all listed states; the ensemble is a candidate set, not an exhaustive theorem."
+  ],
+  "epistemic_status": "MODEL_ARCHITECTURE_CANDIDATE_SOFTWARE_TEST_REQUIRED_PHYSICAL_RANKING_NOT_ASSIGNED"
+}

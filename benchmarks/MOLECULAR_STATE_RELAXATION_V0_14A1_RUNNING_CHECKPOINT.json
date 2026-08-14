@@ -1,0 +1,38 @@
+{
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_RUNNING_CHECKPOINT_V0_14A1",
+  "status": "EXECUTION_IN_PROGRESS_NO_FORMULA_RESULT_ADMITTED",
+  "parent_preregistration": "benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json",
+  "numerical_amendment": "benchmarks/MOLECULAR_STATE_RELAXATION_AMENDMENT_V0_14A1.json",
+  "readout_contract": "benchmarks/MOLECULAR_STATE_RELAXATION_READOUT_V0_14A1.json",
+  "workflow": {
+    "run_id": 31795895258,
+    "head_sha": "db756f5aa8598a24004f056aeb09b18034a08e5b"
+  },
+  "verified_completed_gates": {
+    "backend_smoke": "PASS",
+    "ligand_dimer_F2": "PASS",
+    "ligand_dimer_Cl2": "PASS",
+    "ligand_dimer_Br2": "PASS",
+    "dimer_prepass_check_3_of_3": "PASS"
+  },
+  "seed_scales_angstrom": {
+    "F2_r_YY": 1.3929993576885964,
+    "Cl2_r_YY": 1.984944601209488,
+    "Br2_r_YY": 2.2842324866344543
+  },
+  "formula_execution": {
+    "expected_formulae": ["NeF2","NeCl2","NeBr2","ArF2","ArCl2","ArBr2","KrF2","KrCl2","KrBr2"],
+    "formula_jobs_in_progress": 9,
+    "formula_receipts_completed_at_checkpoint": 0,
+    "expected_starts_per_formula": 5,
+    "expected_total_starts": 45,
+    "combined_aggregate_available": false
+  },
+  "epistemic_state": {
+    "molecular_screen_result": "UNKNOWN",
+    "topology_assignment": "NOT_PERMITTED_BY_V0_14A1",
+    "harmonic_local_minimum_status": "UNKNOWN_NO_HESSIAN",
+    "ground_state_assignment": "NOT_PERMITTED_BY_V0_14A1"
+  },
+  "nonclaim": "This is a historical running-state receipt only. It must not be used as evidence that any formula relaxation succeeded, failed, or selected a bonding topology."
+}

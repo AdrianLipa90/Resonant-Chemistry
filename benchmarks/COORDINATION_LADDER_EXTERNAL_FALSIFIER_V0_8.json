@@ -1,0 +1,35 @@
+{
+  "schema": "RESCHEM_COORDINATION_LADDER_EXTERNAL_FALSIFIER_V0_8",
+  "branch": "compound-relations-v0.3",
+  "status": "POST_PREDICTION_EXTERNAL_ENERGETIC_FALSIFIER_RECORDED",
+  "prediction_source": "benchmarks/COORDINATION_LADDER_V0_5.json",
+  "important_provenance": "ClF7 and BrF7 were retained as explicit UNVALIDATED_CANDIDATE top rungs before this source was consulted in the current continuation.",
+  "primary_source": {
+    "citation": "Structural and Energetic Properties of Closed Shell XFn (X = Cl, Br, and I; n = 1-7) and XOnFm ... Leading to Stability Predictions for Yet Unknown Compounds, Inorg. Chem. 2012.",
+    "doi": "10.1021/ic301438b",
+    "evidence": "The paper reports calculated heats of formation and F2 binding/loss energetics and states that BrF7 and ClF7 are unstable against spontaneous F2 loss by a very wide margin."
+  },
+  "results": [
+    {
+      "formula": "ClF7",
+      "v0_5_status_before_lookup": "UNVALIDATED_CANDIDATE",
+      "external_energy_status": "UNSTABLE_AGAINST_F2_LOSS",
+      "updated_epistemic_status": "STRUCTURALLY_GENERATED_BUT_ENERGETICALLY_FALSIFIED_AS_STABLE",
+      "candidate_deleted": false
+    },
+    {
+      "formula": "BrF7",
+      "v0_5_status_before_lookup": "UNVALIDATED_CANDIDATE",
+      "external_energy_status": "UNSTABLE_AGAINST_F2_LOSS",
+      "updated_epistemic_status": "STRUCTURALLY_GENERATED_BUT_ENERGETICALLY_FALSIFIED_AS_STABLE",
+      "candidate_deleted": false
+    }
+  ],
+  "interpretation": {
+    "supports": "A structural coordination ladder must be separated from an energetic admission layer. Pair-loss energetics are a meaningful discriminator for high-q candidates.",
+    "falsifies": "The inference that every structurally generated v0.5 rung should correspond to a thermodynamically stable compound.",
+    "does_not_falsify": "The bookkeeping fact that v0.5 generates the rung; the rung remains in the immutable prediction ledger with a negative energetic label.",
+    "does_not_validate": "The full v0.8 Cl/Br held-out panel or any new Resonant-Chemistry Hamiltonian."
+  },
+  "anti_fit_action": "No change to d0, d*, q, the +2 ladder, or the frozen v0.8 decomposition channels is made in response to this falsifier."
+}

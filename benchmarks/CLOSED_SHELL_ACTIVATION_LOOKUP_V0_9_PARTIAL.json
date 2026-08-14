@@ -1,0 +1,58 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_ACTIVATION_LOOKUP_V0_9_PARTIAL",
+  "branch": "compound-relations-v0.3",
+  "prediction_source": "benchmarks/CLOSED_SHELL_ACTIVATION_V0_9.json",
+  "status": "POST_FREEZE_PARTIAL_LOOKUP_REVEALS_STOICHIOMETRY_TOPOLOGY_AMBIGUITY",
+  "principle": "A reported or calculated XY2 stoichiometry does not by itself validate the v0.9 3c4e topology label.",
+  "entries": [
+    {
+      "formula": "KrF2",
+      "lookup_role": "PREKNOWN_MOTIVATING_CASE_EXCLUDED_FROM_BLIND_SCORE",
+      "structural_formula_status": "SUPPORTED",
+      "electronic_topology_status": "PRIMARY_LITERATURE_SUPPORTS_THREE_CENTRE_BONDING_DESCRIPTION",
+      "environment": "gas/condensed conventional KrF2 literature",
+      "bibliography_keys": [
+        "brundle_jones_1971_krf2_photoelectron",
+        "collins_cruickshank_breeze_1974_krf2_bonding",
+        "hoffman_swafford_cave_1998_krf2",
+        "lehmann_dixon_schrobilgen_2001_krf2"
+      ]
+    },
+    {
+      "formula": "ArF2",
+      "lookup_role": "POST_FREEZE_CROSSCHECK_NOT_V0_10_BLIND",
+      "structural_formula_status": "CONDITIONAL_THEORETICAL_SUPPORT",
+      "electronic_topology_status": "UNRESOLVED_FOR_COMMON_GAS_PHASE_3C4E_CRITERION",
+      "environment": "HSE06 high-pressure molecular crystals above about 60 GPa",
+      "bibliography_keys": ["kurzydlowski_zaleski_ejgierd_2016_argon_fluorides"],
+      "note": "Environment-specific high-pressure stabilization must not be converted into ambient/gas-phase validation."
+    },
+    {
+      "formula": "KrCl2",
+      "lookup_role": "POST_FREEZE_TOPOLOGY_COUNTEREXAMPLE_PREKNOWN_FOR_V0_10",
+      "structural_formula_status": "SUPPORTED_AS_VAN_DER_WAALS_ISOMERS",
+      "electronic_topology_status": "STOICHIOMETRY_DOES_NOT_ESTABLISH_3C4E",
+      "environment": "molecular-beam/van-der-Waals complex study",
+      "bibliography_keys": ["bieler_spence_janda_1991_krcl2"],
+      "note": "KrCl2 provides a direct warning that the same XY2 formula can represent a weak X...Y2 complex rather than the v0.9 activated topology."
+    },
+    {
+      "formula": "NeF2",
+      "lookup_role": "POST_FREEZE_THEORETICAL_CROSSCHECK_NOT_V0_10_BLIND",
+      "structural_formula_status": "CONFLICTING_OR_METHOD_DEPENDENT_THEORETICAL_LITERATURE",
+      "electronic_topology_status": "UNRESOLVED",
+      "bibliography_keys": ["landis_weinhold_2013_long_bonding", "wu_2024_hef2_arf2"],
+      "note": "The literature itself illustrates method/descriptor sensitivity; no simple existence label is assigned."
+    }
+  ],
+  "remaining_without_resolved_topology_label_in_this_lookup": [
+    "NeCl2", "NeBr2", "ArCl2", "ArBr2", "KrBr2"
+  ],
+  "verdict": "FORMULA_OR_LOCAL_MINIMUM_ALONE_IS_INSUFFICIENT_TO_VALIDATE_THE_3C4E_TOPOLOGY_CANDIDATE",
+  "next_gate": {
+    "name": "v0.10 electronic-topology admission",
+    "requirement": "Use at least two independent electronic/energetic diagnostic families; retain raw metrics and method provenance; no single QTAIM bond critical point, orbital picture, or formula is sufficient by itself.",
+    "preknown_exclusions": ["KrF2", "KrCl2", "ArF2", "NeF2"],
+    "anti_fit": "The v0.10 aggregator must be frozen before opening topology labels for the remaining candidates."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_ATOMIC_CONTROL_PREREG_V0_11",
+  "branch": "compound-relations-v0.3",
+  "status": "RAW_ATOMIC_CONTROL_VECTOR_FROZEN_BEFORE_RUNTIME_VALUES",
+  "purpose": "Ask whether conventional atom-only controls contain explanatory information about closed-shell activation versus weak-complex behavior, without adding a molecular energy term.",
+  "prediction_source": "benchmarks/CLOSED_SHELL_ACTIVATION_V0_9.json",
+  "solver": {
+    "implementation": "reschem.atomic_hf_diis.solve_atom_average_hf_robust",
+    "same_global_quality_ladder_for_all_species": true,
+    "reference_values_available_to_solver": false,
+    "element_specific_rescue": false
+  },
+  "raw_vector": {
+    "centre_ionization_cost_hartree": "E_HF(X+) - E_HF(X)",
+    "ligand_attachment_gain_hartree": "E_HF(Y) - E_HF(Y-)",
+    "charge_transfer_margin_hartree": "centre_ionization_cost - ligand_attachment_gain",
+    "centre_outer_p_mean_radius_bohr": "occupancy-weighted mean radius of neutral centre outermost p channel",
+    "ligand_outer_p_mean_radius_bohr": "occupancy-weighted mean radius of neutral ligand outermost p channel",
+    "centre_outer_p_radial_sigma_bohr": "occupancy-weighted radial sigma of neutral centre outermost p channel",
+    "ligand_outer_p_radial_sigma_bohr": "occupancy-weighted radial sigma of neutral ligand outermost p channel"
+  },
+  "candidates": [
+    "NeF2", "NeCl2", "NeBr2",
+    "ArF2", "ArCl2", "ArBr2",
+    "KrF2", "KrCl2", "KrBr2"
+  ],
+  "anti_fit_rules": [
+    "No scalar score or weighted combination is defined in v0.11.",
+    "No threshold is selected from known KrF2/VDW labels.",
+    "HF anion attachment gain is a control-model finite difference, not asserted experimental electron affinity.",
+    "Charge-transfer margin is not asserted to be a literal 3c4e mechanism.",
+    "Any atomic solver quality failure remains visible and invalidates the corresponding vector for quantitative comparison rather than triggering an element-specific rescue."
+  ],
+  "analysis_after_execution": {
+    "status": "EXPLORATORY_POST_FALSIFIER_ONLY",
+    "allowed": [
+      "inspect raw ordering and Pareto structure",
+      "compare with already-known reference classes without calling the comparison blind validation",
+      "use failures to design a future preregistered transfer test"
+    ],
+    "forbidden": [
+      "fit weights to KrF2/NeCl2/NeBr2/ArBr2 labels and report the fitted separator as validation",
+      "replace a failed HF anion calculation with experimental affinity for only one ligand"
+    ]
+  }
+}

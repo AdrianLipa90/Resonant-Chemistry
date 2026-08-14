@@ -1,0 +1,37 @@
+{
+  "schema": "RESCHEM_CLOSED_SHELL_ATOMIC_QUALITY_PREREG_V0_11B",
+  "branch": "compound-relations-v0.3",
+  "status": "DIAGNOSTIC_INTERPRETATION_FROZEN_BEFORE_PER_STATE_RESULT_READOUT",
+  "source_failure": "benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11_EXECUTION.json",
+  "purpose": "Localize the v0.11 pair-level quality failure to exact atom/charge states without changing the atomic solver.",
+  "states": [
+    "Ne", "Ne+", "Ar", "Ar+", "Kr", "Kr+",
+    "F", "F-", "Cl", "Cl-", "Br", "Br-"
+  ],
+  "quality_definition": "quality_pass = converged AND finite(energy_hartree) AND abs(virial_residual_hartree) < frozen virial_gate_hartree",
+  "recorded_fields": [
+    "global stage index",
+    "quality_pass",
+    "converged",
+    "iterations",
+    "energy_hartree",
+    "virial_residual_hartree",
+    "virial_gate_hartree",
+    "basis_size",
+    "grid_points",
+    "configuration"
+  ],
+  "interpretation_rules": {
+    "convergence_failure": "converged=false is recorded as an SCF-quality failure; no fallback outside the existing global ladder is introduced",
+    "virial_failure": "converged=true but abs(virial)>=gate is recorded as a false/low-quality stationary control and remains failed",
+    "passed_state": "may contribute to later control analysis only under the already-frozen caveats",
+    "failed_state": "its derived v0.11 finite-difference descriptor is quantitatively inadmissible in the current control model"
+  },
+  "forbidden_after_readout": [
+    "element- or charge-specific changes to basis, grid, damping, DIIS or virial threshold inside v0.11",
+    "substitution of experimental ionization/electron-affinity values only for failed states",
+    "calling a repaired calculation the original v0.11 blind result",
+    "fitting a classifier on the failed pair-level output"
+  ],
+  "next_step_after_failure": "If a state fails, either retire the descriptor from the common v0.11 vector or define a new globally applicable control method and preregister it as a new version before execution."
+}

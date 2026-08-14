@@ -1,0 +1,58 @@
+{
+  "schema": "RESCHEM_ENERGETIC_METHOD_POLICY_V0_8A",
+  "branch": "compound-relations-v0.3",
+  "status": "METHOD_POLICY_FROZEN_BEFORE_FIRST_CANDIDATE_ENERGY_RESULT",
+  "applies_to": "all species required by ENERGY_ADMISSION_PREREG_V0_8",
+  "stage_A_geometry_hessian_screen": {
+    "method": "r2SCAN-3c",
+    "environment": "gas phase",
+    "charge": 0,
+    "multiplicity_policy": "for every even-electron stoichiometry run multiplicities 1, 3, and 5 from the same coordination-number seed library; retain the lowest-energy harmonic local minimum; if no local minimum is found the species is unresolved/rejected according to the v0.8 contract",
+    "optimization": "full unconstrained optimization except overall translation/rotation",
+    "hessian": "harmonic frequency analysis at the optimized geometry",
+    "screen_energy": "r2SCAN-3c electronic energy plus harmonic ZPE",
+    "role": "uniform geometry/Hessian screening only; not sufficient for model promotion"
+  },
+  "geometry_seed_library": {
+    "rule": "same seed set for every element at a given coordination number; no candidate-specific rescue geometry after results are visible",
+    "coordination_2": ["linear", "bent"],
+    "coordination_3": ["trigonal_planar", "trigonal_pyramidal"],
+    "coordination_4": ["tetrahedral", "square_planar"],
+    "coordination_5": ["trigonal_bipyramidal", "square_pyramidal"],
+    "coordination_6": ["octahedral", "trigonal_prismatic"],
+    "ligand_dimer": ["linear_diatomic"]
+  },
+  "stage_B_energy_confirmation": {
+    "method": "DLPNO-CCSD(T1)",
+    "pno": "TightPNO",
+    "basis_policy": "two-point CBS extrapolation from def2-TZVPP and def2-QZVPP where supported by the selected backend",
+    "geometry": "lowest-energy stage-A harmonic local minimum for the same formula and multiplicity",
+    "zpe": "stage-A r2SCAN-3c harmonic ZPE added consistently to all parent/product energies",
+    "environment": "gas phase",
+    "role": "conventional high-level confirmation of the preregistered pair-loss sign; no Resonant-Chemistry correction term"
+  },
+  "reaction_energy": {
+    "definition": "DeltaE_pair = E_high(XY_(n-2)) + E_high(Y2) - E_high(XY_n)",
+    "positive": "DeltaE_pair > 1e-6 hartree and all required stage-A stationary-point gates pass",
+    "negative": "parent has no harmonic local minimum OR DeltaE_pair < -1e-6 hartree with valid product minima",
+    "near_zero": "unresolved within +/-1e-6 hartree",
+    "invalid_product": "if a preregistered product is not a local minimum, the specific channel is invalid/unresolved rather than scored negative"
+  },
+  "software_policy": {
+    "backend": "not fixed by brand; implementation must reproduce the frozen methods/settings and record program name/version in every datum",
+    "current_execution": "no compatible quantum-chemistry backend is installed in the current container; therefore no physical energy result is claimed here"
+  },
+  "primary_method_sources": [
+    {"doi": "10.1063/5.0040021", "role": "r2SCAN-3c method paper"},
+    {"doi": "10.1021/acs.jpca.9b05734", "role": "comprehensive DLPNO-CCSD(T) benchmark including open- and closed-shell systems"},
+    {"doi": "10.1021/ct501129s", "role": "DLPNO accuracy and TightPNO threshold benchmark"}
+  ],
+  "anti_fit_rules": [
+    "No candidate-specific method, basis, multiplicity list, or geometry rescue branch.",
+    "Do not alter v0.8 pair-loss channels after any stage-A or stage-B result is visible.",
+    "Do not mix screen-only energies with high-level-confirmed energies in one final score.",
+    "If the frozen method fails for a candidate, record UNKNOWN/UNRESOLVED rather than changing the method for that candidate.",
+    "A favorable conventional quantum-chemistry result does not validate a new Hamiltonian term because none is present."
+  ],
+  "epistemic_status": "PREREGISTERED_METHOD_POLICY_NOT_YET_EXECUTED"
+}

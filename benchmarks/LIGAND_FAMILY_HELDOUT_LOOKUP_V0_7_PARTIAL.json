@@ -1,0 +1,90 @@
+{
+  "schema": "RESCHEM_LIGAND_FAMILY_HELDOUT_LOOKUP_V0_7_PARTIAL",
+  "branch": "compound-relations-v0.3",
+  "preregister_commit": "ba8cee858f8d17945a8e8069990ff1e59c4d5213",
+  "status": "PARTIAL_LOOKUP_NONDISCRIMINATING_TARGET_DESIGN_FAILURE",
+  "principle": "Failure to locate a primary-source report is not converted into a negative existence label.",
+  "resolved_entries": [
+    {
+      "formula": "PBr5",
+      "label": "SUPPORTED_STOICHIOMETRIC_SOLID",
+      "M0": true,
+      "M1": true,
+      "M0_correct": true,
+      "M1_correct": true,
+      "evidence": "X-ray crystal structure; solid formulated as [PBr4]+ Br- rather than a trigonal-bipyramidal neutral molecule.",
+      "doi": "10.1038/145971a0"
+    },
+    {
+      "formula": "AsCl5",
+      "label": "SUPPORTED_STOICHIOMETRIC_COMPOUND",
+      "M0": true,
+      "M1": true,
+      "M0_correct": true,
+      "M1_correct": true,
+      "evidence": "Primary literature reports arsenic pentachloride; later solid-state work resolves a trigonal-bipyramidal structure.",
+      "doi": "10.1021/ja02025a008"
+    },
+    {
+      "formula": "SCl4",
+      "label": "SUPPORTED_BUT_THERMALLY_UNSTABLE_AND_REPRODUCIBILITY_SENSITIVE",
+      "M0": true,
+      "M1": true,
+      "M0_correct": true,
+      "M1_correct": true,
+      "evidence": "Primary experimental literature treats reported SCl4 as thermally unstable; a later study states its reported synthesis could not be reproduced. 2026 electrochemical work independently supports reversible S/SCl4 chemistry in situ.",
+      "doi_primary_instability_context": "10.1021/ic802320s",
+      "doi_in_situ_2026": "10.1038/s41586-025-09867-2"
+    },
+    {
+      "formula": "SeCl4",
+      "label": "SUPPORTED_STOICHIOMETRIC_SOLID",
+      "M0": true,
+      "M1": true,
+      "M0_correct": true,
+      "M1_correct": true,
+      "evidence": "Experimental solid-state studies show SeCl4 stoichiometry with ionic/tetrameric organization rather than a simple isolated EX4 molecule.",
+      "doi": "10.1107/S2053229624010428"
+    },
+    {
+      "formula": "SeBr4",
+      "label": "SUPPORTED_STOICHIOMETRIC_SPECIES_IN_SOLUTION_STUDIES",
+      "M0": true,
+      "M1": true,
+      "M0_correct": true,
+      "M1_correct": true,
+      "evidence": "Primary spectrophotometric and solution studies explicitly investigate selenium tetrabromide and its dissociation/speciation.",
+      "doi": "10.1021/ja01594a025"
+    }
+  ],
+  "negative_evidence_not_promoted_to_false": [
+    {
+      "formula": "SBr4",
+      "evidence": "One primary synthetic study states SBr4 was synthetically inaccessible in that work.",
+      "doi": "10.1021/ic802320s",
+      "label": "UNRESOLVED_NEGATIVE_EVIDENCE_ONLY"
+    }
+  ],
+  "remaining_unresolved": [
+    "NCl5", "NBr5", "AsBr5", "OCl4", "OCl6", "OBr4", "OBr6",
+    "SCl6", "SBr6", "SeCl6", "SeBr6"
+  ],
+  "score": {
+    "resolved_nonpreknown_count": 5,
+    "M0_correct": 5,
+    "M1_correct": 5,
+    "balanced_accuracy": null,
+    "delta_accuracy_M1_minus_M0": 0.0,
+    "interpretation": "Resolved labels are all positives predicted by both models, so the panel does not discriminate M1 from M0. Missing-report searches cannot supply reliable negative labels."
+  },
+  "verdict": "EXISTENCE_LOOKUP_IS_A_POOR_PRIMARY_TARGET_FOR_THIS MODEL_COMPARISON",
+  "next_gate": {
+    "target": "common calculable stability/energy observable for every candidate",
+    "preferred_examples": [
+      "dissociation energy against lower-halide + X2/X fragments",
+      "optimized stationary-point existence plus harmonic stability",
+      "relative energy of candidate vs lowest decomposition channel"
+    ],
+    "requirement": "same electronic-structure method and basis policy across the frozen panel; no candidate-specific fitting"
+  }
+}

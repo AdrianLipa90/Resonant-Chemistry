@@ -1,0 +1,61 @@
+name: molecular-backend-smoke-v0.14a
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+    paths:
+      - scripts/smoke_molecular_backend_v0_14a.py
+      - reschem/molecular_state_relaxation.py
+      - .github/workflows/molecular-backend-smoke-v0.14a.yml
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install exact frozen backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyscf==2.14.0" "geometric==1.1.1"
+
+      - name: Run structured smoke
+        id: smoke
+        continue-on-error: true
+        run: python scripts/smoke_molecular_backend_v0_14a.py
+
+      - name: Validate structured receipt
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('benchmarks/MOLECULAR_BACKEND_SMOKE_V0_14A.json')
+          if not path.is_file():
+              raise SystemExit('structured smoke receipt missing')
+          payload = json.loads(path.read_text(encoding='utf-8'))
+          print({'status': payload['status'], 'software': payload['software'], 'steps': [(x['step'], x['status']) for x in payload['steps']]})
+          PY
+
+      - name: Upload structured smoke receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-backend-smoke-v0.14a
+          path: benchmarks/MOLECULAR_BACKEND_SMOKE_V0_14A.json
+          if-no-files-found: error
+
+      - name: Enforce frozen backend compatibility
+        if: steps.smoke.outcome != 'success'
+        run: exit 2
