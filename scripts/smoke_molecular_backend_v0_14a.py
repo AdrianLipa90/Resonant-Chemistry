@@ -23,10 +23,25 @@ from reschem.molecular_state_relaxation import METHOD_POLICY, _configure_rks
 OUT = ROOT / "benchmarks" / "MOLECULAR_BACKEND_SMOKE_V0_14A.json"
 
 
+def _jsonable_summary(value):
+    """Return a compact JSON-safe provenance summary without changing execution."""
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    if isinstance(value, (list, tuple)):
+        return [_jsonable_summary(item) for item in value]
+    if isinstance(value, dict):
+        return {str(key): _jsonable_summary(item) for key, item in value.items()}
+    module_name = getattr(value, "__name__", None)
+    module_version = getattr(value, "__version__", None)
+    if module_name is not None:
+        return {"module": str(module_name), "version": None if module_version is None else str(module_version)}
+    return repr(value)
+
+
 def _step(name, fn, steps):
     try:
         value = fn()
-        steps.append({"step": name, "status": "PASS", "value": value})
+        steps.append({"step": name, "status": "PASS", "value": _jsonable_summary(value)})
         return value
     except Exception as exc:
         steps.append({
