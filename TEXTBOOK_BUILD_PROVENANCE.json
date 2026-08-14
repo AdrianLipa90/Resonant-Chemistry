@@ -1,0 +1,11 @@
+{
+  "epistemic_status": "BUILD_ARTIFACT_ONLY_NO_SCIENTIFIC_PROMOTION",
+  "root_pdf": "Resonant_Chemistry.pdf",
+  "root_pdf_sha256": "5cafd4b5a5f2534bce4945c93928102f3c9fb45cca11819d76b32b683b914df6",
+  "schema": "RESCHEM_ROOT_TEXTBOOK_BUILD_PROVENANCE_V1",
+  "semantic_coverage_sha256": "fed31534e0eb6b1514bd542a0102e03ce3f30f4b5916ec6235e87698985abdfc",
+  "source_commit": "647e1f6f2241eabcf2120516968dee627662e297",
+  "source_main_tex_sha256": "dec22e9f96533bfa624d3a3780fb934f787a94eade7b3e385dd9d8289b858ee3",
+  "source_of_truth": "repository main",
+  "source_tree": "3a7e76f8f0756711882c58d7041fbd6e6a278ecb"
+}
