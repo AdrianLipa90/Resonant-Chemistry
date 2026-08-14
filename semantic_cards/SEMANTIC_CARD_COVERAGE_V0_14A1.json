@@ -2,12 +2,14 @@
   "schema": "RESCHEM_SEMANTIC_CARD_COVERAGE_V0_14A1",
   "status": "REPOSITORY_DERIVED_SEMANTIC_COVERAGE",
   "authority": "REPOSITORY_MAIN_SOURCE_OF_TRUTH",
+  "latest_repository_checkpoint": "v0.14A1",
   "invariants": [
     "physical/control values derive only from named repository artifacts",
     "TIR semantic axes remain unassigned unless explicit provenance is supplied",
     "affective mapping remains unassigned unless explicit provenance is supplied",
     "missing execution is never converted to chemical failure",
-    "screening output is never promoted to minimum, ground-state or topology validation"
+    "screening output is never promoted to minimum, ground-state or topology validation",
+    "descriptive molecular overlays must match their named benchmark values exactly"
   ],
   "stages": [
     {"version":"v0.1","card_id":"MODEL:COMPOUND_SHELL_RELATIONS:v0.1","entity_level":"compound_relation_model","implementation":"reschem/compound_shell_relations.py","benchmark":"benchmarks/COMPOUND_SHELL_RELATION_ATLAS_V0_1.json","documentation":"docs/compound_shell_relations_v0_1.md","epistemic_status":"IMPLEMENTED_TESTED_STRUCTURAL_GENERATOR"},
@@ -27,6 +29,10 @@
   ],
   "required_projection_files": [
     "semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl",
-    "semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl"
+    "semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl",
+    "semantic_cards/MOLECULAR_ACTIVATED_SURVIVAL_V0_14A1.jsonl"
+  ],
+  "descriptive_sources": [
+    "benchmarks/MOLECULAR_STATE_RELAXATION_ACTIVATED_SURVIVAL_MATRIX_V0_14A1_PARTIAL.json"
   ]
 }
