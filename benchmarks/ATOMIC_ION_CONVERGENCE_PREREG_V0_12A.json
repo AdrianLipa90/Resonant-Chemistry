@@ -1,0 +1,44 @@
+{
+  "schema": "RESCHEM_ATOMIC_ION_CONVERGENCE_PREREG_V0_12A",
+  "branch": "compound-relations-v0.3",
+  "status": "GLOBAL_NUMERICAL_SCAN_FROZEN_BEFORE_RESULTS",
+  "motivation": [
+    "v0.11 F- and Br- failed the frozen robust quality gate while neutral F/Br passed",
+    "v0.11 first-passing neutral energies were not numerically identical to the frozen H-Kr neutral checkpoints",
+    "energy-difference descriptors therefore require an explicit common numerical-convergence study rather than first-passing-stage selection"
+  ],
+  "states": [
+    "Ne", "Ne+", "Ar", "Ar+", "Kr", "Kr+",
+    "F", "F-", "Cl", "Cl-", "Br", "Br-"
+  ],
+  "solver": "reschem.atomic_hf_diis.solve_atom_average_hf_diis with explicit common parameters; no robust early-stop wrapper",
+  "levels": [
+    {"name":"L0","basis_size":20,"grid_points":1000,"zeta_min":0.02,"radial_grid_max_bohr":120.0,"damping":0.08,"diis_start":10,"diis_size":6,"max_iterations":700,"tolerance_hartree":1e-6},
+    {"name":"L1","basis_size":24,"grid_points":1400,"zeta_min":0.01,"radial_grid_max_bohr":180.0,"damping":0.08,"diis_start":10,"diis_size":8,"max_iterations":900,"tolerance_hartree":1e-6},
+    {"name":"L2","basis_size":28,"grid_points":1800,"zeta_min":0.005,"radial_grid_max_bohr":240.0,"damping":0.06,"diis_start":12,"diis_size":8,"max_iterations":1200,"tolerance_hartree":1e-6}
+  ],
+  "raw_outputs_per_state": [
+    "configuration",
+    "energy_hartree",
+    "converged",
+    "iterations",
+    "virial_residual_hartree",
+    "basis_size",
+    "grid_points",
+    "zeta_min",
+    "radial_grid_max_bohr"
+  ],
+  "derived_without_threshold": [
+    "signed and absolute energy drift L1-L0",
+    "signed and absolute energy drift L2-L1",
+    "virial trajectory across L0/L1/L2"
+  ],
+  "explicit_non_decisions": [
+    "No new numerical-convergence tolerance is selected in v0.12A.",
+    "No scalar chemistry classifier is fit.",
+    "No experimental atomic ionization or electron-affinity value is used by the solver.",
+    "No state receives a different numerical level sequence.",
+    "No v0.11 FAIL is relabeled as PASS by this scan."
+  ],
+  "next_gate": "Only after the frozen L0/L1/L2 trajectories are visible may a separate v0.12B convergence/admission criterion be preregistered; it must be global across all states."
+}
