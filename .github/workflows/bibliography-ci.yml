@@ -3,7 +3,15 @@ name: resonant-chemistry-bibliography-ci
 on:
   push:
     branches:
-      - compound-relations-v0.3
+      - main
+    paths:
+      - monograph/main.tex
+      - monograph/chapters/**
+      - monograph/bibliography/**
+      - .github/workflows/bibliography-ci.yml
+  pull_request:
+    branches:
+      - main
     paths:
       - monograph/main.tex
       - monograph/chapters/**
