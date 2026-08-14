@@ -1,0 +1,30 @@
+{
+  "schema": "RESCHEM_COMPOUND_SHELL_RELATION_ATLAS_V0_1",
+  "status": "MODEL_DEFINED_TESTED_SOFTWARE_GATE_NOT_PHYSICALLY_VALIDATED",
+  "source_repository": "AdrianLipa90/Resonant-Chemistry",
+  "source_branch": "main",
+  "source_main_sha": "7368dca57c5e523e813607b2b7af6221b7b6b594",
+  "source_atom_blob_sha": "1e1654aa01e6e4184ca46f701eeb1b3212bb2863",
+  "source_shell_symmetry_blob_sha": "991b19b6edd81e53941fe9c49339ea218e75538b",
+  "domain": "MAIN_GROUP_H_TO_KR_EXCLUDING_SC_TO_ZN",
+  "candidate_count": 231,
+  "rule": "d=min(v,C-v); n_A*d_A=n_B*d_B",
+  "generator": "reschem.compound_shell_relations.generate_main_group_binary_atlas",
+  "canonical_atlas_encoding": "json.dumps(atlas, sort_keys=True, separators=(\",\",\":\"))",
+  "canonical_atlas_sha256": "ec1f0058b3a1c9a818aa2d0886c3c0ae245367d7d06fb021527cea9e9c149959",
+  "note": "Full 231-entry atlas is deterministic from the frozen generator; this compact receipt stores the pre-lookup count/hash rather than duplicating generated data.",
+  "representative_controls": [
+    "CH4",
+    "NH3",
+    "OH2",
+    "CO2",
+    "B2O3",
+    "Al2O3",
+    "SiO2",
+    "NaCl",
+    "MgCl2",
+    "AlCl3",
+    "SiCl4",
+    "GaAs"
+  ]
+}
