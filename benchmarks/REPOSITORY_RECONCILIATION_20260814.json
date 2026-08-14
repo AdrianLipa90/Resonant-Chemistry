@@ -5,7 +5,8 @@
   "source_of_truth_branch": "main",
   "base_main_sha": "346fd8790846d776cbb826a540e6a27e20b653aa",
   "reconciliation_branch": "docs/reconcile-v0.14a1",
-  "status": "REPOSITORY_STATE_ALIGNMENT_PENDING_PR_VALIDATION",
+  "draft_pull_request": 7,
+  "status": "REPOSITORY_STATE_ALIGNMENT_DRAFT_PR_VALIDATION_ACTIVE",
   "scope": [
     "root README and project status",
     "docs current index and molecular v0.14A/A1 status",
@@ -13,6 +14,7 @@
     "benchmark, implementation, validation and open-gate appendices",
     "textbook title/current-status checkpoint",
     "bibliography policy",
+    "Python package dependency metadata",
     "maintained CI branch/PR triggers",
     "historical experiment workflow trigger classification"
   ],
@@ -37,6 +39,14 @@
     "external_quantum_chemistry_role": "ISOLATED_CONVENTIONAL_BACKEND_ADAPTER",
     "may_rewrite_conventional_energy_or_failure": false
   },
+  "package_metadata": {
+    "package_version": "0.1.0",
+    "package_version_semantics": "PACKAGE_SEMVER_INDEPENDENT_OF_RESEARCH_GATE_VERSION",
+    "core_dependencies": ["numpy>=1.26", "scipy>=1.11"],
+    "optional_molecular_v014": ["pyscf==2.14.0", "geometric==1.1.1"],
+    "molecular_backend_is_core_dependency": false,
+    "ci_install_gate": "pip install . && pip check"
+  },
   "maintained_ci": [
     ".github/workflows/compound-relations-ci.yml",
     ".github/workflows/bibliography-ci.yml",
@@ -53,7 +63,7 @@
     ".github/workflows/molecular-backend-status-v0.14a.yml",
     ".github/workflows/molecular-state-relaxation-v0.14a.yml"
   ],
-  "changed_surfaces_before_this_receipt": [
+  "changed_surfaces": [
     ".github/workflows/atomic-ion-convergence-v0.12a.yml",
     ".github/workflows/atomic-ion-convergence-v0.12b.yml",
     ".github/workflows/bibliography-ci.yml",
@@ -68,6 +78,7 @@
     ".github/workflows/web-ci.yml",
     "README.md",
     "STATUS.md",
+    "pyproject.toml",
     "docs/README.md",
     "docs/molecular_state_relaxation_v0_14a.md",
     "docs/molecular_state_relaxation_v0_14a1_amendment.md",
@@ -92,6 +103,7 @@
     "scientific promotion state"
   ],
   "required_premerge_gates": [
+    "package metadata install and pip check",
     "full Python regression",
     "compound/molecular JSON and current-surface validation",
     "bibliography DOI/key/wiring audit",
