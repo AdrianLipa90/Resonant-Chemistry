@@ -4,10 +4,14 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from reschem.closed_shell_atomic_control import generate_atomic_activation_control_atlas
 
-ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "benchmarks" / "CLOSED_SHELL_ATOMIC_CONTROL_V0_11.json"
 
 
