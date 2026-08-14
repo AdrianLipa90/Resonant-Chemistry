@@ -1,13 +1,7 @@
 name: closed-shell-ligand-quality-v0.11c
 
+# Frozen experiment replay: no automatic branch trigger.
 on:
-  push:
-    branches:
-      - compound-relations-v0.3
-    paths:
-      - scripts/run_closed_shell_ligand_quality_v0_11c.py
-      - benchmarks/CLOSED_SHELL_LIGAND_QUALITY_PREREG_V0_11C.json
-      - .github/workflows/closed-shell-ligand-quality-v0.11c.yml
   workflow_dispatch:
 
 jobs:
