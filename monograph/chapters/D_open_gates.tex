@@ -1,12 +1,12 @@
 \chapter{Open Gates and Next Experiments}
 \label{app:open-gates}
 
-This appendix is deliberately a list of unresolved scientific gates rather than a roadmap written as if completion were guaranteed.
+This appendix is deliberately a list of unresolved scientific gates rather than a roadmap written as if completion were guaranteed.  The order below follows the current repository state on \texttt{main}; it is not a promise that every candidate will survive its next control.
 
 \section{Atomic correlation}
 \begin{enumerate}
-\item Validate the implemented first state-averaged active--external radial-$p$ relaxation gate for carbon over the fixed common $^3P$, $^1D$, $^1S$ objective, including a finite numerical scan and a machine-readable benchmark.
-\item If the one-coordinate gate is variationally informative, generalize it to multidimensional state-averaged MCSCF/CASSCF with simultaneous admissible active--external $s$, $p$, and $d$ orbital rotations; do not use experimental term energies in the objective.
+\item Generalize the already informative one-coordinate carbon state-averaged active--external radial-$p$ relaxation gate to a multidimensional state-averaged orbital optimizer/MCSCF-type control with simultaneous admissible active--external $s$, $p$, and $d$ rotations.  Experimental term energies remain excluded from the objective.
+\item Establish basis/grid convergence of the state-averaged optimum rather than treating the best sampled one-coordinate point as a continuously converged solution.
 \item Re-evaluate correlated spin--orbit structure only after the orbital-optimization layer is frozen.
 \item Extend systematic correlation controls beyond the second period and separate core--valence from valence correlation.
 \item Tighten the H--Kr control quality gate where high-precision comparison is intended; the present coarse virial gate is a coverage criterion, not a precision theorem.
@@ -29,15 +29,45 @@ This appendix is deliberately a list of unresolved scientific gates rather than 
 \item Retain the existing failed direct spectral match as a negative control.
 \end{enumerate}
 
-\section{Molecular extension}
+\section{Compound and molecular state admission}
+The current molecular frontier is the incomplete v0.14A1 common relaxation screen, not a new fitted bond rule.
+
 \begin{enumerate}
-\item Implement an $\mathrm{H}_2^+$ two-centre electronic control with the topological diagnostic disabled by default.
-\item Add $\mathrm{H}_2$ and test whether the diagnostic contributes information beyond energy, density and one-body invariants without changing them.
-\item Only after simple two-centre controls consider multi-centre ring systems where loop language is visually compelling and therefore especially vulnerable to confirmation bias.
+\item Complete only the missing ArBr$_2$ execution under the already frozen v0.14A1 B97M-V/VV10/def2-TZVPD, grid, SCF, optimizer and seed policy.  A further timeout/cancellation/failure remains explicit evidence and does not license an ArBr$_2$-specific rescue.
+\item Freeze the complete $9/9$ formula and $45/45$ start ledger before opening a new physical admission layer.  Original first-attempt receipts for the eight completed formulae remain identifiable and are not replaced by broader reruns.
+\item Only after the full relaxation ledger exists, preregister v0.14B as a Hessian/local-minimum gate.  Do not choose frequency thresholds, rescue branches or candidate exclusions after inspecting which states are convenient.
+\item For states admitted as local minima, compare conventional energies under one common policy.  Keep the lower-cost v0.14 screen distinct from the higher-level v0.8 energetic-admission contract.
+\item Apply the v0.10 electronic-topology contract separately.  A 3c4e/VDW label requires the declared independent diagnostic families and may remain UNKNOWN even when a stationary geometry exists.
+\item Retain all competing v0.13 state branches that survive their declared gates; a composition may have multiple metastable states or none of the enumerated candidates.
 \end{enumerate}
 
-\section{Relational/TIR admission}
-The first admitted relational physics test must define a no-refit observable whose prediction is not already encoded in the control target.  Until that exists, $\kappa$, $W_{AB}$, 36D encodings and affective semantics remain metadata, representation machinery or candidate maps rather than corrections to the validated Hamiltonians.
+\section{Simple-system molecular controls}
+The H$_2^+$/H$_2$/HeH$^+$/LiH ladder remains a required conventional validation track, although v0.14A/A1 means it is no longer accurate to call H$_2^+$ the repository's first molecular implementation target.
+
+\begin{enumerate}
+\item Implement/replay H$_2^+$ as a one-electron two-centre control with all candidate topological/relational diagnostics disableable without changing the control solution.
+\item Add H$_2$ and test exchange/correlation and density reorganization under the same control-first discipline.
+\item Add HeH$^+$ and LiH as asymmetric and core--valence transfer tests.
+\item Only after these simple controls and the present $XY_2$ admission work consider more complex multi-centre ring systems where loop language is visually compelling and therefore especially vulnerable to confirmation bias.
+\end{enumerate}
+
+\section{Atomic activation-control path}
+The v0.11/v0.12 atomic finite-difference route is not the next molecular classifier.  Its numerical scans remain useful controls, but further diffuse-basis escalation is not launched automatically after the L3 krypton counterexample.  Any renewed atomic descriptor programme must first define a new global numerical objective and prospective admission rule rather than tune the existing path to reproduce the molecular screen.
+
+\section{Relational/TIR/PhaseNav admission}
+The first admitted relational physics test must define a no-refit observable whose prediction is not already encoded in the control target.  Until that exists, $\kappa$, $W_{AB}$, 36D encodings and affective semantics remain metadata, representation machinery or candidate maps rather than corrections to validated Hamiltonians.
+
+PhaseNav may provide the native command/gate/orchestration surface for new project functions.  Conventional external electronic-structure packages, where used, remain isolated numerical control backends.  A PhaseNav command or receipt may preserve provenance and gate logic, but it may not change a conventional energy, convergence failure or Hessian result to obtain a desired relational verdict.
+
+\section{Documentation and release gate}
+A scientific increment is not complete merely because code and benchmark files were merged.  Before a release-quality PDF is called current:
+\begin{enumerate}
+\item reconcile \texttt{README.md} and \texttt{STATUS.md} with the merged \texttt{main} state;
+\item update the relevant manuscript chapter, benchmark ledger, implementation map, validation contract and open-gate list;
+\item run the maintained main/PR software, bibliography and textbook gates;
+\item render-inspect the resulting PDF and record hashes/page count.
+\end{enumerate}
+This prevents a build-correct but scientifically stale manuscript from being mistaken for the repository snapshot.
 
 \section{Promotion rule}
-An open gate is closed by a derivation, implementation and declared validation result, not by narrative plausibility.  Any failure that changes the next hypothesis remains part of the permanent validation history.
+An open gate is closed by a derivation, implementation and declared validation result, not by narrative plausibility.  Any failure or partial result that changes the next hypothesis remains part of the permanent validation history.  Repository merge and physical promotion remain separate decisions.
