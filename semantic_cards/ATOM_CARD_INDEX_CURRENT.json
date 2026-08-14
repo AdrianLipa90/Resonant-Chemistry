@@ -1,0 +1,42 @@
+{
+  "schema": "RESCHEM_ATOM_CARD_INDEX_CURRENT_V0_1",
+  "status": "CANONICAL_BASE_PLUS_NONDESTRUCTIVE_OVERLAYS",
+  "canonical_groups": [
+    {
+      "range": "H-Ne",
+      "sources": [
+        "semantic_cards/H-1_neutral.json",
+        "semantic_cards/He-4_neutral.json",
+        "semantic_cards/Li-7_neutral.json",
+        "semantic_cards/Be-9_neutral.json",
+        "semantic_cards/B-11_neutral.json",
+        "semantic_cards/C-12_neutral.json",
+        "semantic_cards/N-14_neutral.json",
+        "semantic_cards/O-16_neutral.json",
+        "semantic_cards/F-19_neutral.json",
+        "semantic_cards/Ne-20_neutral.json"
+      ]
+    },
+    {
+      "range": "Na-Ar",
+      "sources": ["semantic_cards/PERIOD3_NA_AR_V0_1.jsonl"]
+    },
+    {
+      "range": "K-Kr",
+      "sources": ["semantic_cards/K_TO_KR_ROBUST_V0_1.jsonl"]
+    }
+  ],
+  "overlay_sources": [
+    "semantic_cards/ION_BATCH_S_SHELL_V0_1.jsonl",
+    "semantic_cards/J_GROUND_OVERLAY_V0_1.jsonl",
+    "semantic_cards/PERIOD2_SPECTROSCOPY_OVERLAY_V0_1.jsonl",
+    "semantic_cards/PERIOD2_ACTIVE_CI_OVERLAY_V0_1.jsonl",
+    "semantic_cards/PERIOD2_CORRELATED_SPECTRUM_OVERLAY_V0_1.jsonl",
+    "semantic_cards/P_SHELL_LS_MULTIPLETS_V0_1.jsonl",
+    "semantic_cards/D_SHELL_LS_MULTIPLETS_V0_1.jsonl",
+    "semantic_cards/CARBON_CORRELATION_CHANNEL_DIAGNOSTIC_V0_1.json",
+    "semantic_cards/CARBON_SPARSE_MULTICHANNEL_DIAGNOSTIC_V0_1.json"
+  ],
+  "rule": "Canonical base cards are never silently overwritten by later overlays; overlays are attached as separately provenance-tagged evidence records.",
+  "expected_neutral_symbol_coverage": 36
+}

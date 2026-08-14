@@ -14,7 +14,7 @@ Build target:
 monograph/main.tex -> full project textbook PDF
 ```
 
-The repository keeps separate software, numerical, bibliography, and manuscript gates. A successful build or unit test is not a scientific promotion.
+The repository keeps separate software, numerical, bibliography, manuscript, and semantic-card coverage gates. A successful build or unit test is not a scientific promotion.
 
 ## Implemented control and candidate ladder
 
@@ -35,7 +35,8 @@ The repository currently contains:
 - conformal knot diagnostics retained as a candidate, with the failed direct knot-gap/atom-gap comparison preserved as a negative control;
 - compound-relation gates v0.1-v0.12 with explicit nulls, falsifiers, energetic contracts, and failed/non-promoted paths retained;
 - v0.13 competing-state architecture, in which a composition carries an **unranked ensemble** of relational-state candidates until conventional physical admission;
-- v0.14A/A1 common molecular relaxation screening under one frozen B97M-V/VV10/def2-TZVPD policy, with the numerical grid amendment recorded separately from the original preregistration.
+- v0.14A/A1 common molecular relaxation screening under one frozen B97M-V/VV10/def2-TZVPD policy, with the numerical grid amendment recorded separately from the original preregistration;
+- a semantic entity-card graph that projects atomic, compound, relational-state, and molecular-screen state into addressable calculation objects without strengthening their scientific status.
 
 ## Current molecular checkpoint: v0.14A1
 
@@ -53,6 +54,40 @@ Current durable execution state:
 - no lowest-screening-energy result is called a validated ground state.
 
 The next molecular gate is therefore to complete the missing `ArBr2` execution under the same frozen policy. Only after **9/9 formula receipts and 45/45 starts** are durably present may a separately preregistered Hessian/local-minimum gate be opened.
+
+## Semantic cards as calculation state
+
+Semantic cards are a required computational layer, not decorative metadata. The current calculation entry point is:
+
+```text
+reschem.repository_cards.load_current_card_registry()
+```
+
+and a calculation can request a hash-stable context with:
+
+```text
+reschem.repository_cards.calculation_context([...])
+```
+
+The current card graph combines:
+
+- 36 explicitly indexed neutral atomic base cards through Kr;
+- nondestructive atomic evidence overlays;
+- model/gate cards through the compound/molecular trajectory;
+- 231 deterministic v0.1 compound-relation candidate cards;
+- 27 deterministic v0.13 competing relational-state cards;
+- the v0.14A1 molecular model card plus nine formula-screen cards derived directly from the machine-readable partial readout.
+
+Every generated entity carries properties, state invariants, source artifacts, relations, provenance lineage and an epistemic status. Emergent model outputs are addressable as `MODEL_DEFINED_EMERGENT_CANDIDATE`; registry membership is not physical validation.
+
+Holonomy is split deliberately:
+
+- **provenance holonomy** records parent cards, the generating operation, and a deterministic lineage hash;
+- **physical holonomy** remains `NOT_COMPUTED` unless winding/phase/topology observables were actually evaluated and have named source artifacts.
+
+Thus a semantic relation cycle or an emergent graph path cannot silently become a physical holonomy claim. TIR semantic axes and affective mappings remain unassigned unless an explicit provenance-bearing mapping is introduced and tested.
+
+Maintained CI now treats semantic-card coverage as an invariant. New atom/model/state/molecular entities must receive a card or deterministic projection in the same development cycle, and the gate fails if semantic execution status diverges from the underlying benchmark.
 
 ## Current atomic/correlation frontier
 
@@ -77,10 +112,10 @@ For molecular `XY2` candidates, **stoichiometry and geometry seed are not electr
 ## Repository map
 
 - `monograph/` - primary LaTeX textbook and full-PDF build target.
-- `reschem/` - executable physical and candidate-representation modules.
+- `reschem/` - executable physical, candidate-representation, semantic-projection, and card-registry modules.
 - `tests/` - deterministic/regression tests.
 - `benchmarks/` - machine-readable numerical checkpoints, preregistrations, and receipts.
-- `semantic_cards/` - state-derived physical records plus explicitly separated interpretive fields.
+- `semantic_cards/` - canonical/derived entity cards, coverage ledgers, relation/holonomy metadata, and explicitly separated interpretive fields.
 - `THEORY/` and `docs/` - supplemental formal/operational notes.
 - `web/` - interactive dashboards and explorers.
 - `.github/workflows/` - CI, execution, and reproducibility gates.
@@ -97,4 +132,4 @@ The live bibliography is modular under `monograph/bibliography/` and currently i
 - **VALIDATED CONTROL** - conventional model passed its frozen control benchmark.
 - **CANON** - promoted only by an explicit project decision with provenance.
 
-Implementation does not imply validation; a numerical match does not establish ontology; a historical receipt is not current runtime evidence; an execution timeout or missing receipt is not a chemical falsification.
+Implementation does not imply validation; a numerical match does not establish ontology; a historical receipt is not current runtime evidence; an execution timeout or missing receipt is not a chemical falsification; a semantic-card lineage is not evidence of physical holonomy.

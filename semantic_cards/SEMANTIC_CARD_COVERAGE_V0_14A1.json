@@ -1,0 +1,32 @@
+{
+  "schema": "RESCHEM_SEMANTIC_CARD_COVERAGE_V0_14A1",
+  "status": "REPOSITORY_DERIVED_SEMANTIC_COVERAGE",
+  "authority": "REPOSITORY_MAIN_SOURCE_OF_TRUTH",
+  "invariants": [
+    "physical/control values derive only from named repository artifacts",
+    "TIR semantic axes remain unassigned unless explicit provenance is supplied",
+    "affective mapping remains unassigned unless explicit provenance is supplied",
+    "missing execution is never converted to chemical failure",
+    "screening output is never promoted to minimum, ground-state or topology validation"
+  ],
+  "stages": [
+    {"version":"v0.1","card_id":"MODEL:COMPOUND_SHELL_RELATIONS:v0.1","entity_level":"compound_relation_model","implementation":"reschem/compound_shell_relations.py","benchmark":"benchmarks/COMPOUND_SHELL_RELATION_ATLAS_V0_1.json","documentation":"docs/compound_shell_relations_v0_1.md","epistemic_status":"IMPLEMENTED_TESTED_STRUCTURAL_GENERATOR"},
+    {"version":"v0.2","card_id":"MODEL:POSTBLIND_COMPOUND_VALIDATION:v0.2","entity_level":"validation_panel","implementation":"reschem/compound_shell_relations.py","benchmark":"benchmarks/POSTBLIND_COMPOUND_VALIDATION_V0_2.json","documentation":"docs/postblind_compound_validation_v0_2.md","epistemic_status":"DIAGNOSTIC_NOT_ACCURACY_CLAIM"},
+    {"version":"v0.3","card_id":"MODEL:RELATION_GRAPH:v0.3","entity_level":"relation_graph_model","implementation":"reschem/relation_graph.py","benchmark":"benchmarks/RELATION_GRAPH_BENCHMARK_V0_3.json","documentation":"docs/relation_graph_gate_v0_3.md","epistemic_status":"IMPLEMENTED_TESTED"},
+    {"version":"v0.4","card_id":"MODEL:HYPERRELATION:v0.4","entity_level":"three_centre_bookkeeping_model","implementation":"reschem/hyperrelation.py","benchmark":"benchmarks/HYPERRELATION_BRIDGE_BENCHMARK_V0_4.json","documentation":"docs/hyperrelation_bridge_gate_v0_4.md","epistemic_status":"IMPLEMENTED_TESTED_BOOKKEEPING_NOT_LITERAL_ELECTRON_SPLIT"},
+    {"version":"v0.5","card_id":"MODEL:COORDINATION_LADDER:v0.5","entity_level":"coordination_candidate_generator","implementation":"reschem/coordination_ladder.py","benchmark":"benchmarks/COORDINATION_LADDER_V0_5.json","documentation":"docs/coordination_ladder_v0_5.md","epistemic_status":"IMPLEMENTED_CANDIDATE_GENERATOR"},
+    {"version":"v0.6","card_id":"MODEL:PARITY_MATCHED_VALIDATION:v0.6","entity_level":"validation_model","implementation":"reschem/parity_validation.py","benchmark":"benchmarks/PARITY_MATCHED_VALIDATION_V0_6.json","documentation":"docs/parity_matched_validation_v0_6.md","epistemic_status":"VALIDATION_DIAGNOSTIC"},
+    {"version":"v0.7","card_id":"MODEL:LIGAND_FAMILY_HELDOUT:v0.7","entity_level":"heldout_panel","implementation":"reschem/coordination_ladder.py","benchmark":"benchmarks/LIGAND_FAMILY_HELDOUT_LOOKUP_V0_7_PARTIAL.json","documentation":"docs/heldout_ligand_lookup_v0_7.md","epistemic_status":"PARTIAL_NONDISTINGUISHING_TARGET"},
+    {"version":"v0.8","card_id":"MODEL:ENERGETIC_ADMISSION:v0.8","entity_level":"energetic_admission_gate","implementation":"reschem/energetic_admission.py","benchmark":"benchmarks/ENERGETIC_ADMISSION_SOFTWARE_V0_8.json","documentation":"docs/energetic_admission_v0_8.md","epistemic_status":"IMPLEMENTED_TESTED_CONVENTIONAL_ENERGY_GATE"},
+    {"version":"v0.9","card_id":"MODEL:CLOSED_SHELL_ACTIVATION:v0.9","entity_level":"closed_shell_activation_model","implementation":"reschem/closed_shell_activation.py","benchmark":"benchmarks/CLOSED_SHELL_ACTIVATION_V0_9.json","documentation":"docs/closed_shell_activation_v0_9.md","epistemic_status":"IMPLEMENTED_CANDIDATE_ACTIVATION"},
+    {"version":"v0.10","card_id":"MODEL:ELECTRONIC_TOPOLOGY:v0.10","entity_level":"electronic_topology_gate","implementation":"reschem/electronic_topology.py","benchmark":"benchmarks/ELECTRONIC_TOPOLOGY_PREREG_V0_10.json","documentation":"docs/electronic_topology_v0_10.md","epistemic_status":"PREREGISTERED_PARTIAL_EVIDENCE"},
+    {"version":"v0.11","card_id":"MODEL:CLOSED_SHELL_ATOMIC_CONTROL:v0.11","entity_level":"atomic_control_gate","implementation":"reschem/closed_shell_atomic_control.py","benchmark":"benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11_EXECUTION.json","documentation":"docs/closed_shell_atomic_control_v0_11.md","epistemic_status":"EXECUTED_CONTROL"},
+    {"version":"v0.12","card_id":"MODEL:ATOMIC_ION_CONVERGENCE:v0.12","entity_level":"atomic_ion_convergence_gate","implementation":"reschem/atomic_ion_convergence.py","benchmark":"benchmarks/ATOMIC_ION_CONVERGENCE_V0_12B_EXECUTION.json","documentation":"docs/atomic_ion_convergence_v0_12b.md","epistemic_status":"EXECUTED_CONTROL"},
+    {"version":"v0.13","card_id":"MODEL:COMPOUND_STATE_ENSEMBLE:v0.13","entity_level":"compound_state_ensemble","implementation":"reschem/compound_state_ensemble.py","benchmark":"benchmarks/COMPOUND_STATE_ENSEMBLE_V0_13.json","documentation":"docs/compound_state_ensemble_v0_13.md","epistemic_status":"IMPLEMENTED_STATE_ENSEMBLE"},
+    {"version":"v0.14A1","card_id":"MODEL:MOLECULAR_STATE_RELAXATION:v0.14A1","entity_level":"molecular_screening_gate","implementation":"reschem/molecular_state_relaxation.py","benchmark":"benchmarks/MOLECULAR_STATE_RELAXATION_PARTIAL_READOUT_V0_14A1.json","documentation":"docs/molecular_state_relaxation_v0_14a1_partial_readout.md","epistemic_status":"PARTIAL_8_OF_9_40_OF_45_SCREENING_ONLY"}
+  ],
+  "required_projection_files": [
+    "semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl",
+    "semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl"
+  ]
+}

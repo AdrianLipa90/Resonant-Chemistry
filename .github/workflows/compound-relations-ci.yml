@@ -37,7 +37,7 @@ jobs:
           prefixes = (
               'COMPOUND_', 'COORDINATION_', 'HYPERRELATION_', 'POSTBLIND_',
               'RELATION_GRAPH_', 'PARITY_', 'LIGAND_FAMILY_', 'ENERGETIC_',
-              'CLOSED_SHELL_', 'ELECTRONIC_TOPOLOGY_', 'MOLECULAR_'
+              'CLOSED_SHELL_', 'ELECTRONIC_TOPOLOGY_', 'MOLECULAR_', 'SEMANTIC_'
           )
           files = [p for p in Path('benchmarks').glob('*.json') if p.name.startswith(prefixes)]
           for path in sorted(files):
@@ -48,10 +48,13 @@ jobs:
               raise SystemExit(2)
           PY
 
+      - name: Audit semantic-card coverage and epistemic separation
+        run: python -m scripts.audit_semantic_card_coverage
+
       - name: Audit live compound bibliography
         run: python scripts/audit_compound_bibliography.py
 
-      - name: Verify current compound and molecular surfaces
+      - name: Verify current compound molecular and semantic surfaces
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -65,11 +68,28 @@ jobs:
               'reschem/electronic_topology.py',
               'reschem/compound_state_ensemble.py',
               'reschem/molecular_state_relaxation.py',
+              'reschem/semantic_cards.py',
+              'reschem/entity_registry.py',
+              'reschem/semantic_projection.py',
+              'reschem/molecular_semantic_projection.py',
+              'reschem/repository_cards.py',
+              'semantic_cards/README.md',
+              'semantic_cards/ATOM_CARD_INDEX_CURRENT.json',
+              'semantic_cards/ENTITY_REGISTRY_CURRENT.json',
+              'semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json',
+              'semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl',
+              'semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl',
+              'semantic_cards/schema_repository_overlay_v0_1.json',
+              'scripts/audit_semantic_card_coverage.py',
+              'docs/semantic_card_reconciliation_v0_14a1.md',
               'docs/molecular_state_relaxation_v0_14a.md',
               'docs/molecular_state_relaxation_v0_14a1_amendment.md',
               'docs/molecular_state_relaxation_v0_14a1_partial_readout.md',
               'benchmarks/COMPOUND_STATE_ENSEMBLE_V0_13.json',
               'benchmarks/MOLECULAR_STATE_RELAXATION_PARTIAL_READOUT_V0_14A1.json',
+              'monograph/chapters/05_state_observables_and_semantic_cards.tex',
+              'monograph/chapters/B_implementation_map.tex',
+              'monograph/chapters/C_validation_reproducibility.tex',
               'monograph/bibliography/references.bib',
               'monograph/bibliography/compound_legacy.bib',
               'monograph/bibliography/molecular_screening.bib',

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "RESCHEM_REPOSITORY_SEMANTIC_OVERLAY_V0_1",
+  "title": "Resonant Chemistry repository-derived semantic overlay v0.1",
+  "type": "object",
+  "required": ["schema", "card_id", "entity_level", "model_version", "identity", "source_artifacts", "physical_control", "tir", "affective_mapping", "epistemic_status"],
+  "properties": {
+    "schema": {"const": "RESCHEM_REPOSITORY_SEMANTIC_OVERLAY_V0_1"},
+    "card_id": {"type": "string"},
+    "entity_level": {"type": "string"},
+    "model_version": {"type": "string"},
+    "identity": {"type": "object"},
+    "source_artifacts": {
+      "type": "object",
+      "properties": {
+        "implementation": {"type": "array", "items": {"type": "string"}},
+        "benchmarks": {"type": "array", "items": {"type": "string"}},
+        "documentation": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "physical_control": {"type": "object"},
+    "tir": {"type": "object"},
+    "affective_mapping": {"type": "object"},
+    "epistemic_status": {"type": "object"}
+  },
+  "additionalProperties": true
+}

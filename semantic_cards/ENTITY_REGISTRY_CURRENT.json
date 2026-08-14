@@ -1,0 +1,35 @@
+{
+  "schema": "RESCHEM_ENTITY_REGISTRY_CURRENT_V0_1",
+  "status": "CALCULATION_READY_SEMANTIC_GRAPH",
+  "source_of_truth": "repository main state plus deterministic projections",
+  "loader": "reschem.repository_cards.load_current_card_registry",
+  "calculation_context": "reschem.repository_cards.calculation_context",
+  "canonical_atom_index": "semantic_cards/ATOM_CARD_INDEX_CURRENT.json",
+  "persisted_model_gate_coverage": "semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json",
+  "generated_entity_populations": {
+    "compound_relation_candidates_v0_1": 231,
+    "relational_state_candidates_v0_13": 27,
+    "molecular_v0_14A1": 10
+  },
+  "holonomy_contract": {
+    "provenance_holonomy": "required deterministic lineage for generated entities",
+    "physical_holonomy": "NOT_COMPUTED unless explicit winding/phase/topology observables and source artifacts are present",
+    "no_equivalence": "provenance lineage is not evidence of physical holonomy"
+  },
+  "emergence_contract": {
+    "generated_entities": "MODEL_DEFINED_EMERGENT_CANDIDATE until independent physical admission",
+    "registry_membership": "does not imply physical validation or canon promotion"
+  },
+  "relation_contract": {
+    "exact_links": "target_card_id",
+    "selector_links": "deterministic dotted-field equality selectors",
+    "calculation_use": "relation targets can be pulled into a hashed calculation context"
+  },
+  "current_scientific_boundary": {
+    "molecular_screen": "v0.14A1 PARTIAL_8_OF_9_40_OF_45",
+    "ArBr2": "MISSING_EXECUTION_NOT_CHEMICAL_FAIL",
+    "hessian_admission": "NOT_RUN",
+    "ground_state_ranking": "NOT_VALIDATED",
+    "geometry_only_topology_assignment": "NOT_PROMOTED"
+  }
+}
