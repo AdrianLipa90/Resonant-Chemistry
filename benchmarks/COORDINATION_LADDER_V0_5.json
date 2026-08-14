@@ -1,0 +1,65 @@
+{
+  "schema": "RESCHEM_COORDINATION_LADDER_V0_5",
+  "branch": "compound-relations-v0.3",
+  "status": "MODEL_DEFINED_MOTIVATED_BY_KNOWN_FALSIFIERS_BRANCH_CI_NOT_RUN",
+  "rule": {
+    "base": "d0=min(v,C-v)",
+    "dual": "d*=max(v,C-v)",
+    "eligible": "principal_n>=3 and v>C/2 and d0>0",
+    "ladder": "d_q=d0+2q up to d*",
+    "closed_shell": "fail_closed"
+  },
+  "frozen_ladders": {
+    "N": [3],
+    "O": [2],
+    "F": [1],
+    "P": [3, 5],
+    "S": [2, 4, 6],
+    "Cl": [1, 3, 5, 7],
+    "As": [3, 5],
+    "Se": [2, 4, 6],
+    "Br": [1, 3, 5, 7],
+    "Kr": [0]
+  },
+  "monovalent_ligand_examples": {
+    "P_Cl": ["PCl3", "PCl5"],
+    "S_F": ["SF2", "SF4", "SF6"],
+    "Br_F": ["BrF", "BrF3", "BrF5", "BrF7"]
+  },
+  "external_crosschecks": [
+    {
+      "candidate": "PCl5",
+      "status": "KNOWN_MOTIVATING_REALIZATION",
+      "doi": "10.1016/0022-2860(71)80038-8",
+      "evidence": "gas-phase electron diffraction structure"
+    },
+    {
+      "candidate_family": "SF2/SF4/SF6",
+      "status": "KNOWN_MOTIVATING_AND_THEORETICAL_CROSSCHECK",
+      "doi": "10.1021/jp901949b",
+      "evidence": "multireference treatment of sequential S-F bonding and hypercoordination"
+    },
+    {
+      "candidate": "BrF5",
+      "status": "INDEPENDENT_STRUCTURE_CROSSCHECK",
+      "doi": "10.1039/C29710001567",
+      "evidence": "electron diffraction plus rotational constants"
+    }
+  ],
+  "explicit_unvalidated_candidates": [
+    "ClF7",
+    "BrF7"
+  ],
+  "next_null_test": {
+    "null": "allow every integer coordination d0..d*",
+    "candidate_model": "allow only d0,d0+2,...,d*",
+    "promotion_condition": "candidate parity ladder must outperform null on a frozen held-out realization set"
+  },
+  "nonclaims": [
+    "q is not oxidation state",
+    "q is not an orbital occupation",
+    "no d-orbital expansion mechanism is asserted",
+    "no formation energy or stability is predicted",
+    "known motivating molecules are not counted as blind validation"
+  ]
+}
