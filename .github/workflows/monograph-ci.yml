@@ -3,7 +3,32 @@ name: resonant-chemistry-textbook
 on:
   push:
     branches:
-      - shell-nbody-topology-v0.1
+      - main
+    paths:
+      - README.md
+      - STATUS.md
+      - monograph/**
+      - docs/**
+      - reschem/**
+      - tests/**
+      - benchmarks/**
+      - scripts/**
+      - requirements.txt
+      - .github/workflows/monograph-ci.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - README.md
+      - STATUS.md
+      - monograph/**
+      - docs/**
+      - reschem/**
+      - tests/**
+      - benchmarks/**
+      - scripts/**
+      - requirements.txt
+      - .github/workflows/monograph-ci.yml
   workflow_dispatch:
 
 jobs:
@@ -42,7 +67,8 @@ jobs:
           from pathlib import Path
           required = [
               Path('THEORY'), Path('benchmarks'), Path('docs'), Path('monograph/chapters'),
-              Path('reschem'), Path('tests'), Path('semantic_cards'), Path('web'), Path('.github/workflows')
+              Path('monograph/bibliography'), Path('reschem'), Path('tests'), Path('semantic_cards'),
+              Path('web'), Path('.github/workflows')
           ]
           missing = [str(p) for p in required if not p.is_dir()]
           empty = [str(p) for p in required if p.is_dir() and not any(x.is_file() for x in p.rglob('*'))]
@@ -51,6 +77,9 @@ jobs:
           if missing or empty:
               raise SystemExit(2)
           PY
+
+      - name: Audit live bibliography
+        run: python scripts/audit_compound_bibliography.py
 
       - name: Install LaTeX toolchain
         run: |
@@ -61,19 +90,20 @@ jobs:
         working-directory: monograph
         run: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
 
-      - name: Reject unresolved cross-references
+      - name: Reject unresolved bibliography or cross-references
         working-directory: monograph
         run: |
-          if grep -E "LaTeX Warning: (Reference|Citation).*undefined|There were undefined references" main.log; then
-            echo "Undefined references remain in textbook"
+          if grep -E "LaTeX Warning: (Reference|Citation).*undefined|There were undefined references|There were undefined citations|I couldn't open database file" main.log; then
+            echo "Undefined bibliography or cross-reference state remains"
             exit 3
           fi
           test -s main.pdf
+          test -s main.bbl
           pdfinfo main.pdf | tee pdfinfo.txt
 
       - name: Record build hashes
         run: |
-          sha256sum monograph/main.tex monograph/main.pdf > monograph/TEXTBOOK_SHA256.txt
+          sha256sum monograph/main.tex monograph/bibliography/*.bib monograph/main.bbl monograph/main.pdf > monograph/TEXTBOOK_SHA256.txt
           cat monograph/TEXTBOOK_SHA256.txt
           sha256sum ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json > ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
           cat ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
@@ -81,10 +111,11 @@ jobs:
       - name: Upload complete textbook
         uses: actions/upload-artifact@v4
         with:
-          name: Resonant-Chemistry-Textbook-v0.2
+          name: Resonant-Chemistry-Textbook-current
           path: |
             monograph/main.pdf
             monograph/main.log
+            monograph/main.bbl
             monograph/pdfinfo.txt
             monograph/TEXTBOOK_SHA256.txt
             ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
