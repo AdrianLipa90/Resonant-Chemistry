@@ -1,0 +1,45 @@
+{
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_READOUT_V0_14A1",
+  "status": "FROZEN_BEFORE_45_STATE_RESULT_READOUT",
+  "parent_preregistration": "benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json",
+  "numerical_amendment": "benchmarks/MOLECULAR_STATE_RELAXATION_AMENDMENT_V0_14A1.json",
+  "execution_run_id": 31795895258,
+  "allowed_raw_fields": [
+    "formula",
+    "seed.seed_id",
+    "seed.state_kind",
+    "status",
+    "initial_scf_converged",
+    "initial_energy_hartree",
+    "optimizer_returned",
+    "final_scf_converged",
+    "final_energy_hartree",
+    "relative_energy_kcal_mol",
+    "final_coordinates_angstrom",
+    "final_gradient_rms_hartree_per_bohr",
+    "final_gradient_max_abs_hartree_per_bohr",
+    "geometry_descriptors",
+    "exception_type",
+    "exception_message",
+    "wall_seconds"
+  ],
+  "allowed_descriptive_derivations": [
+    "count successful and failed starts per formula and seed family",
+    "report the lowest electronic screening energy among successful starts within the same formula",
+    "report all within-formula relative electronic energies without a significance threshold",
+    "report whether multiple starting families terminate at numerically identical coordinates only when equality is exact at stored precision",
+    "report final X-Y1, X-Y2, Y-Y distances and Y-X-Y angle",
+    "report convergence/exception patterns without rescue"
+  ],
+  "forbidden_v0_14a1_inferences": [
+    "assign 3c4e or VDW electronic topology from geometry alone",
+    "claim a harmonic local minimum without a Hessian",
+    "claim a validated ground state from the lowest screening energy",
+    "introduce a post-result geometry-distance or energy threshold",
+    "reseed or rerun a failed formula with candidate-specific settings",
+    "remove a result because it conflicts with known chemistry",
+    "fit any PhaseNav/TIR descriptor to the molecular screening outputs"
+  ],
+  "next_gate_condition": "Only after the complete 9-formula/45-start raw execution is durably persisted may a separate v0.14B Hessian/local-minimum preregistration be designed. v0.14B must be frozen before Hessian results are read.",
+  "nonclaim": "This readout contract is an interpretation guard, not a chemical model or validation result."
+}
