@@ -5,9 +5,21 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "resonant-chemistry"
 version = "0.1.0"
-description = "Foundational relational chemistry with standard quantum-chemistry control layers"
+description = "Control-first atomic, shell, compound, and molecular candidate chemistry"
 requires-python = ">=3.10"
-dependencies = ["numpy>=2.0"]
+dependencies = [
+  "numpy>=1.26",
+  "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+# Frozen conventional backend used by the v0.14A/A1 molecular relaxation screen.
+# This extra is intentionally not a core dependency: PySCF/geomeTRIC remain
+# isolated numerical control backends rather than Resonant-Chemistry semantics.
+molecular-v014 = [
+  "pyscf==2.14.0",
+  "geometric==1.1.1",
+]
 
 [tool.setuptools.packages.find]
 include = ["reschem*"]
