@@ -21,6 +21,7 @@ Hydrogenic radial control & radial Schr\"odinger/atom foundation modules & analy
 Helium variational & \path{reschem/helium.py} & variational-energy and virial tests \\
 Helium RHF & \path{reschem/rhf_helium.py} & RHF regression and post-hoc HF-limit comparison \\
 Helium CI & \path{reschem/ci_helium.py} & finite-CI energy lowering and state-invariant tests \\
+Semantic atom cards & \path{reschem/semantic_cards.py}, \path{semantic_cards/ATOM_CARD_INDEX_CURRENT.json} & H--Kr indexed coverage; interpretive fields remain unassigned without provenance \\
 Lithium open shell & \path{reschem/uhf_lithium.py} & energy, $S^2$ and spin-contamination tests \\
 Blind $s$-shell batch & \path{reschem/mass_solver_s_shell.py} & blind batch benchmark and convergence tests \\
 Multi-$l$ atomic HF & \path{reschem/atomic_hf_average.py} & H--Ne reference-isolated checkpoint \\
@@ -43,7 +44,11 @@ Energetic admission contract & \path{reschem/energetic_admission.py} & fail-clos
 Closed-shell activation & \path{reschem/closed_shell_activation.py} & v0.9 nine-composition atlas and no-element-special-case tests \\
 Electronic topology admission & \path{reschem/electronic_topology.py} & independent diagnostic-family aggregation tests; insufficient evidence remains UNKNOWN \\
 Competing compound-state ensemble & \path{reschem/compound_state_ensemble.py} & \path{benchmarks/COMPOUND_STATE_ENSEMBLE_V0_13.json}; 27 unranked states and no prior scores \\
+Semantic entity projection & \path{reschem/semantic_projection.py}, \path{reschem/entity_registry.py} & deterministic 231 compound cards + 27 emergent state cards; relation, lineage and physical-holonomy boundary tests \\
+Current repository card loader & \path{reschem/repository_cards.py} & indexed 36 atom bases, nondestructive overlays, model/state entities and hashed calculation contexts \\
 Common molecular-state relaxation & \path{reschem/molecular_state_relaxation.py} & v0.14A preregistration, v0.14A1 backend/dimer receipts, and partial eight-of-nine formula readout \\
+Molecular semantic projection & \path{reschem/molecular_semantic_projection.py} & model + nine formula cards must agree exactly with machine-readable v0.14A1 execution status \\
+Semantic-card coverage gate & \path{scripts/audit_semantic_card_coverage.py} & H--Kr coverage, model/gate coverage, generated entity counts, relation/holonomy provenance and no silent semantic promotion \\
 Molecular execution provenance wrapper & \path{scripts/wrap_molecular_relaxation_v0_14a1.py} & \path{tests/test_molecular_execution_wrapper.py} and rerun-scope provenance guard \\
 \bottomrule
 \end{longtable}
@@ -54,10 +59,15 @@ The v0.14 molecular relaxation module uses PySCF/geomeTRIC as conventional numer
 
 Future orchestration may expose the same operations through a PhaseNav-native command/gate surface.  Such orchestration must preserve the conventional results and provenance and may not rewrite a backend failure or energy to satisfy a relational hypothesis.
 
+\section{Semantic calculation boundary}
+The semantic entity registry is an input-organizing layer for calculations.  It records properties, state invariants, source artifacts, graph relations and provenance lineage.  A hashed card context can therefore be attached to a numerical run so that the semantic/entity state consumed by the run is reproducible.
+
+Registry membership does not change the scientific status of a card.  In particular, a model-derived emergent entity remains a candidate until an independent physical admission gate is satisfied.  Provenance holonomy is a lineage record; physical holonomy requires separately computed winding/phase/topology observables with provenance.
+
 \section{No hidden physical authority}
 A function name, semantic-card field or 36D encoding is not granted physical authority by appearing in this map.  The equation in the textbook and the benchmark acceptance rule jointly define what the implementation is supposed to compute.  If code and documentation diverge, the discrepancy is a defect to be resolved rather than permission to reinterpret the equation silently.
 
 \section{Reproducibility convention}
-Every new solver or candidate module should ship with: a deterministic or tolerance-bounded test; a machine-readable benchmark/receipt when numerical output is scientifically discussed; a monograph section giving the governing equations and approximations; and provenance sufficient to identify the tested implementation.  Exploratory notebooks or dashboards may visualize results, but they are not the sole repository of a scientific claim.
+Every new solver or candidate module should ship with: a deterministic or tolerance-bounded test; a machine-readable benchmark/receipt when numerical output is scientifically discussed; a semantic-card projection for each newly addressable entity/model/state; a monograph section giving the governing equations and approximations; and provenance sufficient to identify the tested implementation.  Exploratory notebooks or dashboards may visualize results, but they are not the sole repository of a scientific claim.
 
-Merged changes that alter implementation status, validation state or the current open gate must trigger documentation reconciliation.  `main` is the project Source of Truth; historical research branch names are not a substitute for current repository state.
+Merged changes that alter implementation status, validation state, semantic-card coverage or the current open gate must trigger documentation reconciliation.  `main` is the project Source of Truth; historical research branch names are not a substitute for current repository state.
