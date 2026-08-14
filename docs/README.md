@@ -1,6 +1,6 @@
 # Resonant Chemistry documentation index
 
-This directory contains supplemental development and validation notes. The repository default branch `main` is the project Source of Truth, while `monograph/main.tex` is the primary formal scientific surface. A Markdown note may contain operational detail, but it does not supersede the manuscript, benchmark ledger, or machine-readable receipts.
+This directory contains supplemental development and validation notes. The repository default branch `main` is the project Source of Truth, while `monograph/main.tex` is the primary formal scientific surface. A Markdown note may contain operational detail, but it does not supersede the manuscript, benchmark ledger, machine-readable receipts, or semantic-card evidence projections.
 
 ## Current frontier
 
@@ -18,6 +18,8 @@ Current molecular execution status is **partial**:
 - no Hessian/local-minimum admission;
 - no validated ground-state ranking;
 - no geometry-only 3c4e/VDW topology label.
+
+The semantic projection layer is reconciled through the same v0.14A1 checkpoint. It is downstream of repository evidence and may not strengthen the scientific status of the source benchmark.
 
 The current carbon correlation frontier is multidimensional state-averaged orbital optimization after the already informative one-coordinate active-external radial-p gate.
 
@@ -41,8 +43,9 @@ Read these in trajectory order:
 14. `molecular_state_relaxation_v0_14a.md` — reconciled common molecular relaxation screen and current execution state.
 15. `molecular_state_relaxation_v0_14a1_amendment.md` — historical post-smoke/pre-screening numerical pruning amendment.
 16. `molecular_state_relaxation_v0_14a1_partial_readout.md` — constrained interpretation of the durable 8/9, 40/45 partial evidence.
+17. `semantic_card_reconciliation_v0_14a1.md` — semantic-card backlog repair, model/gate projection coverage, and CI anti-drift invariant.
 
-The machine-readable benchmark/receipt is authoritative when a Markdown summary and JSON disagree.
+The machine-readable benchmark/receipt is authoritative when a Markdown summary and JSON disagree. Semantic cards are derived projections and therefore cannot override their named source artifacts.
 
 ## Historical/candidate topology notes
 
@@ -52,7 +55,7 @@ The machine-readable benchmark/receipt is authoritative when a Markdown summary 
 
 These remain candidate diagnostics and do not define a new force term.
 
-## Documentation discipline
+## Documentation and semantic-card discipline
 
 A merged change that materially alters any of the following requires documentation reconciliation:
 
@@ -62,7 +65,8 @@ A merged change that materially alters any of the following requires documentati
 - current nonclaims;
 - Source-of-Truth or reproducibility contract;
 - next open scientific gate;
-- bibliography/method provenance.
+- bibliography/method provenance;
+- semantic-card projection coverage.
 
 Minimum reconciliation surface:
 
@@ -74,9 +78,10 @@ Minimum reconciliation surface:
 - appendix B equation-to-code map;
 - appendix C validation/reproducibility contract when methodology changed;
 - appendix D open gates;
-- bibliography module(s) if new sources were used.
+- bibliography module(s) if new sources were used;
+- `semantic_cards/` overlay/coverage ledger for every new atomic, compound, state, or molecular gate.
 
-A PDF may compile successfully while being scientifically stale. Build correctness and repository-state reconciliation are separate gates.
+A PDF may compile successfully while being scientifically stale. Build correctness, repository-state reconciliation, and semantic-card coverage are separate gates.
 
 ## CI classes
 
@@ -84,7 +89,7 @@ A PDF may compile successfully while being scientifically stale. Build correctne
 
 These validate the repository SoT and pull requests targeting it:
 
-- `compound-relations-ci.yml` — full Python regression, compound/molecular JSON, bibliography audit, current surfaces;
+- `compound-relations-ci.yml` — full Python regression, compound/molecular JSON, semantic-card coverage/epistemic audit, bibliography audit, current surfaces;
 - `bibliography-ci.yml` — modular bibliography + LaTeX/BibTeX build;
 - `monograph-ci.yml` — full tests, repository audit, bibliography audit, textbook build;
 - `period2-active-ci.yml` — period-2/carbon subsystem regression;
