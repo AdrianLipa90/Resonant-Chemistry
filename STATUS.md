@@ -102,7 +102,15 @@ Frozen ladders:
 
 For frozen degree-one ligands this produces PCl3/PCl5, SF2/SF4/SF6 and BrF/BrF3/BrF5/BrF7. PCl5 and SF6 are motivating known cases rather than blind validation. BrF5 provides an independent structural cross-check. Unsupported top rungs such as ClF7/BrF7 remain visible `UNVALIDATED_CANDIDATE`s rather than being deleted post hoc.
 
-The next registered comparison is the parity-ladder model against a null that allows every integer coordination from `d0` through `d*`. The `+2` ladder earns promotion only if it outperforms that null on a frozen held-out realization set.
+A parity reduction was identified after freezing v0.5: for neutral centres with monovalent odd-electron ligands, the `+2` sequence largely preserves the ordinary even-electron/paired-electron coordination parity. Therefore the earlier all-integer `d0..d*` null is **REJECTED AS TOO WEAK** and the `+2` ladder is not promoted as independent new physics.
+
+The potentially testable content is narrowed to the shell-derived bounds `d0,d*`, the `n>=3` admission gate, transfer across ligand families, and any independently defined ranking of allowed `q` states. Revised comparison:
+
+- `M0`: parity-only coordination set;
+- `M1`: M0 plus shell-derived `d0/d*` bounds and `n>=3` gate;
+- `M2`: M1 plus an independent ranking observable.
+
+Promotion requires M1 or M2 to outperform M0 on frozen held-out energetic/structural targets such as sequential bond energies, relative electronic energies, resolved coordination states, or equilibrium structure.
 
 `q` is **MODEL-DEFINED REORGANIZATION METADATA**: it is not oxidation state, orbital occupation, a literal expanded-octet mechanism, or an energy level.
 
@@ -151,5 +159,6 @@ The current `compound-relations-v0.3` branch has no automatic GitHub Actions run
 - a validated energetic molecular solver for the compound relation layer;
 - literal fractional-electron meaning of the v0.4 half-unit bookkeeping;
 - literal expanded-octet or d-orbital mechanism for the v0.5 coordination ladder;
+- independent novelty of the v0.5 `+2` parity ladder by itself;
 - complete transition-metal, hypervalent, radical or electron-deficient chemistry;
 - canonical promotion of the candidate compound-relation layer.
