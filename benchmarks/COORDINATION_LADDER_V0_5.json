@@ -1,7 +1,7 @@
 {
   "schema": "RESCHEM_COORDINATION_LADDER_V0_5",
   "branch": "compound-relations-v0.3",
-  "status": "MODEL_DEFINED_MOTIVATED_BY_KNOWN_FALSIFIERS_BRANCH_CI_NOT_RUN",
+  "status": "MODEL_DEFINED_PARITY_REDUCTION_IDENTIFIED_BRANCH_CI_NOT_RUN",
   "rule": {
     "base": "d0=min(v,C-v)",
     "dual": "d*=max(v,C-v)",
@@ -37,7 +37,7 @@
       "candidate_family": "SF2/SF4/SF6",
       "status": "KNOWN_MOTIVATING_AND_THEORETICAL_CROSSCHECK",
       "doi": "10.1021/jp901949b",
-      "evidence": "multireference treatment of sequential S-F bonding and hypercoordination"
+      "evidence": "multireference treatment of sequential S-F bonding and recoupled-pair hypercoordination"
     },
     {
       "candidate": "BrF5",
@@ -50,16 +50,29 @@
     "ClF7",
     "BrF7"
   ],
-  "next_null_test": {
-    "null": "allow every integer coordination d0..d*",
-    "candidate_model": "allow only d0,d0+2,...,d*",
-    "promotion_condition": "candidate parity ladder must outperform null on a frozen held-out realization set"
+  "parity_reduction": {
+    "finding": "For neutral centres with monovalent odd-electron ligands, the +2 coordination sequence preserves the closed-shell electron-count parity and is therefore not by itself an independent new physical law.",
+    "consequence": "The previously proposed all-integer d0..d* null is rejected as too weak because it mixes paired closed-shell candidates with odd-electron/radical coordination numbers.",
+    "epistemic_effect": "v0.5 is downgraded to structured reorganization bookkeeping until shell bounds or an independent ranking observable outperform a parity-matched null."
   },
+  "revised_model_comparison": {
+    "M0": "parity-only coordination set",
+    "M1": "M0 plus shell-derived d0/d* bounds and n>=3 admission gate",
+    "M2": "M1 plus independently defined ranking observable",
+    "promotion_condition": "M1 or M2 must outperform M0 on frozen held-out energetic/structural targets"
+  },
+  "recommended_targets": [
+    "sequential bond energies",
+    "relative electronic energies",
+    "experimentally resolved coordination states",
+    "equilibrium structural observables"
+  ],
   "nonclaims": [
     "q is not oxidation state",
     "q is not an orbital occupation",
     "no d-orbital expansion mechanism is asserted",
     "no formation energy or stability is predicted",
-    "known motivating molecules are not counted as blind validation"
+    "known motivating molecules are not counted as blind validation",
+    "the +2 parity ladder is not claimed as independently novel physics"
   ]
 }
