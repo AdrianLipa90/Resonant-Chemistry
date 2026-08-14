@@ -1,0 +1,70 @@
+name: compound-relations-ci
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+  workflow_dispatch:
+
+jobs:
+  validate-compound-relations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Run complete Python test discovery
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate compound benchmark JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          prefixes = (
+              'COMPOUND_', 'COORDINATION_', 'HYPERRELATION_', 'POSTBLIND_',
+              'RELATION_GRAPH_', 'PARITY_', 'LIGAND_FAMILY_', 'ENERGETIC_',
+              'CLOSED_SHELL_', 'ELECTRONIC_TOPOLOGY_'
+          )
+          files = [p for p in Path('benchmarks').glob('*.json') if p.name.startswith(prefixes)]
+          for path in sorted(files):
+              with path.open(encoding='utf-8') as handle:
+                  json.load(handle)
+          print({'validated_json_files': len(files)})
+          if not files:
+              raise SystemExit(2)
+          PY
+
+      - name: Audit live compound bibliography
+        run: python scripts/audit_compound_bibliography.py
+
+      - name: Verify branch-only compound surfaces
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          required = [
+              'reschem/compound_shell_relations.py',
+              'reschem/relation_graph.py',
+              'reschem/hyperrelation.py',
+              'reschem/coordination_ladder.py',
+              'reschem/energetic_admission.py',
+              'reschem/closed_shell_activation.py',
+              'reschem/electronic_topology.py',
+              'monograph/bibliography/references.bib',
+              'monograph/bibliography/README.md',
+          ]
+          missing = [p for p in required if not Path(p).is_file()]
+          print({'missing': missing})
+          if missing:
+              raise SystemExit(3)
+          PY
