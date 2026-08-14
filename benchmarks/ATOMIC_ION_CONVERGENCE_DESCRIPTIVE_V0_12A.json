@@ -1,0 +1,73 @@
+{
+  "schema": "RESCHEM_ATOMIC_ION_CONVERGENCE_DESCRIPTIVE_V0_12A",
+  "branch": "compound-relations-v0.3",
+  "execution_source": "benchmarks/ATOMIC_ION_CONVERGENCE_V0_12A_EXECUTION.json",
+  "status": "DESCRIPTIVE_ONLY_NO_CONVERGENCE_THRESHOLD_NO_CHEMISTRY_CLASSIFIER",
+  "ionization_cost_trajectories_hartree": {
+    "Ne": {
+      "definition": "E(Ne+)-E(Ne)",
+      "L0": 1.0361960026702803,
+      "L1": 1.0368017793040423,
+      "L2": 1.0370638928719131,
+      "absolute_drift_L1_minus_L0": 0.0006057766337620252,
+      "absolute_drift_L2_minus_L1": 0.0002621135678708033
+    },
+    "Ar": {
+      "definition": "E(Ar+)-E(Ar)",
+      "L0": 0.7113835916101152,
+      "L1": 0.7121347883901308,
+      "L2": 0.7124523516331465,
+      "absolute_drift_L1_minus_L0": 0.0007511967800155626,
+      "absolute_drift_L2_minus_L1": 0.00031756324301568317
+    },
+    "Kr": {
+      "definition": "E(Kr+)-E(Kr)",
+      "L0": 0.6279381802414719,
+      "L1": 0.629279130913801,
+      "L2": 0.6296490998188347,
+      "absolute_drift_L1_minus_L0": 0.0013409506723291997,
+      "absolute_drift_L2_minus_L1": 0.00036996890503360186
+    }
+  },
+  "attachment_gain_trajectories_hartree": {
+    "F": {
+      "definition": "E(F)-E(F-)",
+      "L0": -3.100408860485686,
+      "L1": -3.098723805163388,
+      "L2": 0.29444273069130134,
+      "absolute_drift_L1_minus_L0": 0.001685055322297791,
+      "absolute_drift_L2_minus_L1": 3.3931665358546894,
+      "interpretation": "not numerically stable across v0.12A because the F- solution changes branch at L2"
+    },
+    "Cl": {
+      "definition": "E(Cl)-E(Cl-)",
+      "L0": 0.23617466062222547,
+      "L1": 0.23671475960816224,
+      "L2": 0.2369763835557137,
+      "absolute_drift_L1_minus_L0": 0.0005400989859367653,
+      "absolute_drift_L2_minus_L1": 0.00026162394755147034,
+      "interpretation": "matched finite difference shows decreasing drift across L0/L1/L2, but v0.12A defines no admission threshold"
+    },
+    "Br": {
+      "definition": "E(Br)-E(Br-)",
+      "L0": -0.34977046221365526,
+      "L1": -0.6582826333587946,
+      "L2": 0.21815928533033002,
+      "absolute_drift_L1_minus_L0": 0.30851217114513935,
+      "absolute_drift_L2_minus_L1": 0.8764419186891246,
+      "interpretation": "not numerically stable across v0.12A because Br- is nonconverged at L0/L1 and changes branch at L2"
+    }
+  },
+  "observations": [
+    "All three noble-gas ionization finite differences have smaller L2-L1 drift than L1-L0 drift.",
+    "Cl attachment gain has smaller L2-L1 drift than L1-L0 drift.",
+    "F and Br attachment gains do not show a stable trajectory because the anion solutions change qualitatively at the terminal L2 level.",
+    "Absolute-energy convergence and finite-difference convergence are distinct questions; error cancellation is visible for some matched differences but is not assumed universally."
+  ],
+  "next_methodological_conclusion": "Do not preregister a numerical PASS tolerance yet. Extend the same global numerical ladder by at least one further level so that F-/Br- can be tested after entering the L2 solution branch.",
+  "nonclaims": [
+    "No L2 value is declared a converged reference value.",
+    "No experimental ionization energy or electron affinity is used.",
+    "No molecular activation classifier is inferred from these atomic trajectories."
+  ]
+}
