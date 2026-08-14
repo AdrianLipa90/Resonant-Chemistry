@@ -7,6 +7,7 @@ on:
     paths:
       - reschem/closed_shell_atomic_control.py
       - scripts/run_closed_shell_atomic_control_v0_11.py
+      - scripts/run_closed_shell_atomic_quality_v0_11b.py
       - benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_PREREG_V0_11.json
       - .github/workflows/closed-shell-atomic-control.yml
   workflow_dispatch:
@@ -32,31 +33,45 @@ jobs:
         continue-on-error: true
         run: python scripts/run_closed_shell_atomic_control_v0_11.py
 
-      - name: Validate output JSON if produced
+      - name: Execute v0.11B per-state quality diagnostic
+        if: always()
+        run: python scripts/run_closed_shell_atomic_quality_v0_11b.py
+
+      - name: Validate output JSON files
         if: always()
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          path = Path('benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11.json')
-          if not path.is_file():
+
+          control_path = Path('benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11.json')
+          diagnostic_path = Path('benchmarks/CLOSED_SHELL_ATOMIC_QUALITY_V0_11B.json')
+          if not control_path.is_file():
               raise SystemExit('v0.11 output JSON was not produced')
-          payload = json.loads(path.read_text(encoding='utf-8'))
-          assert payload['candidate_count'] == 9
-          assert len(payload['vectors']) == 9
+          if not diagnostic_path.is_file():
+              raise SystemExit('v0.11B diagnostic JSON was not produced')
+
+          control = json.loads(control_path.read_text(encoding='utf-8'))
+          diagnostic = json.loads(diagnostic_path.read_text(encoding='utf-8'))
+          assert control['candidate_count'] == 9
+          assert len(control['vectors']) == 9
+          assert len(diagnostic['states']) == 12
           print({
-              'status': payload['status'],
-              'candidate_count': payload['candidate_count'],
-              'all_quality_pass': all(v['all_atomic_quality_pass'] for v in payload['vectors']),
+              'control_status': control['status'],
+              'candidate_count': control['candidate_count'],
+              'all_quality_pass': all(v['all_atomic_quality_pass'] for v in control['vectors']),
+              'failed_atomic_states': diagnostic['failed_states'],
           })
           PY
 
-      - name: Upload v0.11 raw control receipt
+      - name: Upload v0.11 raw control and quality diagnostic
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: closed-shell-atomic-control-v0.11
-          path: benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11.json
+          path: |
+            benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_V0_11.json
+            benchmarks/CLOSED_SHELL_ATOMIC_QUALITY_V0_11B.json
           if-no-files-found: error
 
       - name: Enforce physical quality result
