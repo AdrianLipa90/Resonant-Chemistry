@@ -1,0 +1,41 @@
+{
+  "schema": "RESCHEM_SEMANTIC_SURFACE_SYNC_CURRENT_V0_1",
+  "status": "SEMANTIC_THEORY_WEB_PARITY_REQUIRED",
+  "source_of_truth": "repository main scientific state",
+  "scientific_checkpoint": "v0.14A1",
+  "semantic_surfaces": [
+    "semantic_cards/ATOM_CARD_INDEX_CURRENT.json",
+    "semantic_cards/ENTITY_REGISTRY_CURRENT.json",
+    "semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json",
+    "semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl",
+    "semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl"
+  ],
+  "theory_surfaces": [
+    "THEORY/02_ATOM_FORMALISM.md",
+    "THEORY/03_SHELL_NBODY_TOPOLOGY.md",
+    "THEORY/04_COMPOUND_RELATIONAL_ARCHITECTURE.md",
+    "THEORY/05_SEMANTIC_ENTITY_GRAPH.md"
+  ],
+  "web_surfaces": [
+    "web/index.html",
+    "web/semantic_card_atlas.html",
+    "web/semantic_cards.js"
+  ],
+  "current_boundary": {
+    "molecular_formulae": "8_OF_9_COMPLETED",
+    "molecular_starts": "40_OF_45_COMPLETED",
+    "ArBr2": "MISSING_EXECUTION_NOT_CHEMICAL_FAIL",
+    "hessian_admission": "NOT_RUN",
+    "ground_state_ranking": "NOT_VALIDATED",
+    "geometry_only_topology_assignment": "NOT_PROMOTED"
+  },
+  "invariants": [
+    "semantic projections are downstream of named repository evidence",
+    "THEORY and web may summarize but may not promote scientific status",
+    "TIR semantic axes remain unassigned without explicit provenance",
+    "affective mappings remain unassigned without explicit provenance",
+    "provenance holonomy is not physical holonomy",
+    "missing execution is not chemical failure"
+  ],
+  "anti_drift_gate": "scripts/audit_semantic_card_coverage.py"
+}
