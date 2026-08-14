@@ -2,7 +2,7 @@
 
 ## 2026-08-14 - shell topology / compound relation checkpoint
 
-State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / 3C-HYPERRELATION CANDIDATE / COORDINATION-LADDER CANDIDATE / PARITY-MATCHED VALIDATION ACTIVE / CANON NOT PROMOTED**
+State: **CONTROL STACK IMPLEMENTED / SHELL-TOPOLOGY CANDIDATE / COMPOUND-RELATION CANDIDATE / 3C-HYPERRELATION CANDIDATE / COORDINATION-LADDER CANDIDATE / PARITY-MATCHED VALIDATION ACTIVE / HELDOUT TARGET REDESIGN ACTIVE / CANON NOT PROMOTED**
 
 Integration source: `compound-relations-v0.3`.
 
@@ -130,7 +130,15 @@ On this sequence M0 parity labels and M1 sulfur-rung labels are identical: `(2,4
 
 A separate four-entry period-gate sanity panel is explicitly retrospective, not blind: the motivating literature states stable PF5/SF6 and unobserved corresponding NF5/OF6. M0 parity-only predicts all four and scores `2/4`; M1 with `n>=3` blocks the second-period expansions and scores `4/4`. This is logical discrimination only and is **not** a promotion result because those labels were already known.
 
-Next required gate: freeze a genuinely held-out ligand-family panel before label lookup, then compare M0 vs M1; M2 remains undefined until an independent energetic/reorganization observable is specified.
+## Held-out ligand-family gate v0.7
+
+The Cl/Br ligand-family panel was preregistered in commit `ba8cee858f8d17945a8e8069990ff1e59c4d5213` before lookup in that execution. The candidate list is immutable after preregistration.
+
+Primary-source lookup resolved positive support for PBr5, AsCl5, SCl4, SeCl4 and SeBr4. All five are predicted positive by both M0 and M1, so the resolved subset is `5/5` for both and `Delta accuracy = 0`. The lookup did **not** provide a defensible negative class: failure to find a primary report is not converted into chemical nonexistence, and even explicit synthetic inaccessibility in one study (for SBr4) is retained only as negative evidence, not a global `FALSE` label.
+
+Therefore v0.7 is recorded as **PARTIAL / NONDISCRIMINATING / TARGET DESIGN FAILURE** rather than as a model win or loss. Existence lookup is rejected as the primary M0-vs-M1 discriminator because positive reports are much easier to certify than rigorous nonexistence.
+
+Next gate: use one common computable target for every frozen candidate, such as a preregistered decomposition energy, stationary-point + harmonic-stability test, or relative energy against a common decomposition channel. Method, basis/ECP policy, spin policy and geometry protocol must be identical across the panel; no candidate-specific rescue branches.
 
 This compound layer remains **MODEL-DEFINED / STRUCTURAL-CANDIDATE / NOT AN ENERGETIC MOLECULAR SOLVER**.
 
@@ -179,5 +187,6 @@ The current `compound-relations-v0.3` branch has no automatic GitHub Actions run
 - literal expanded-octet or d-orbital mechanism for the v0.5 coordination ladder;
 - independent novelty of the v0.5 `+2` parity ladder by itself;
 - blind validation from the v0.6 retrospective period panel;
+- a negative chemical-existence label inferred only from missing literature in v0.7;
 - complete transition-metal, hypervalent, radical or electron-deficient chemistry;
 - canonical promotion of the candidate compound-relation layer.
