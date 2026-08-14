@@ -81,7 +81,7 @@ The TIR information quantum is recorded as
 
 At v0.1 `kappa` is metadata; it does not alter standard atomic energies.
 
-## 5. Solver policy
+## 5. Solver policy at the v0.1 foundation
 
 v0.1 computes:
 
@@ -91,7 +91,7 @@ v0.1 computes:
 4. analytic non-relativistic hydrogenic energy/radius for one-electron species;
 5. an independent finite-difference radial hydrogenic spectrum.
 
-v0.1 deliberately does **not** claim ab-initio multi-electron energies. Hartree-Fock/DFT/CI are later solver layers.
+The **v0.1 atom constructor itself** does not claim ab-initio multi-electron energies. Later repository layers add Hartree–Fock, CI, spectroscopy, convergence and correlation controls without changing this foundation.
 
 ## 6. Falsification / validation gates
 
@@ -103,3 +103,19 @@ v0.1 deliberately does **not** claim ab-initio multi-electron energies. Hartree-
 - Invalid negative particle counts must fail loudly.
 
 No new relational quantity may be promoted merely because it correlates retrospectively with known chemistry.
+
+## 7. Current repository checkpoint — v0.14A1
+
+This file remains the atomic foundation, but the repository has advanced beyond the original v0.1 execution scope. The maintained trajectory now includes:
+
+- neutral atomic semantic-card coverage H→Kr with nondestructive evidence overlays;
+- multi-channel Hartree–Fock and global DIIS controls;
+- angular multiplets, spin–orbit ordering and atom-specific spectroscopy;
+- active-space and correlated CI controls, including carbon state-averaged orbital relaxation;
+- shell/topology diagnostics kept outside the control Hamiltonian;
+- compound relation/state generators through v0.13;
+- conventional molecular relaxation screening v0.14A1.
+
+The current molecular checkpoint is **partial execution evidence**: 8/9 formulae and 40/45 frozen starts are durably represented; `ArBr2` remains `MISSING_EXECUTION_NOT_CHEMICAL_FAIL`. No Hessian admission, ground-state ranking, or geometry-only topology promotion has occurred.
+
+The semantic layer is downstream of these controls. Its current registry is described in `THEORY/05_SEMANTIC_ENTITY_GRAPH.md` and enforced by `scripts/audit_semantic_card_coverage.py`.
