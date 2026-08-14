@@ -37,5 +37,6 @@
     "provenance holonomy is not physical holonomy",
     "missing execution is not chemical failure"
   ],
-  "anti_drift_gate": "scripts/audit_semantic_card_coverage.py"
+  "semantic_coverage_gate": "scripts/audit_semantic_card_coverage.py",
+  "surface_parity_gate": "scripts/audit_semantic_surface_sync.py"
 }
