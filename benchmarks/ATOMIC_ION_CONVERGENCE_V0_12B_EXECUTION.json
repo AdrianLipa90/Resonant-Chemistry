@@ -1,0 +1,64 @@
+{
+  "schema": "RESCHEM_ATOMIC_ION_CONVERGENCE_V0_12B_EXECUTION",
+  "branch": "compound-relations-v0.3",
+  "preregister_source": "benchmarks/ATOMIC_ION_CONVERGENCE_PREREG_V0_12B.json",
+  "workflow": {
+    "run_id": 31783601291,
+    "head_sha": "7566987863f0b7a750e5c40fdb1747e3ab9d5b95",
+    "combined_artifact_id": 9212637239,
+    "combined_artifact_sha256": "1e8e4c44a29dbdb0ca67528688cca56279d4fcbb912125d6967ce3bf91245050"
+  },
+  "status": "GLOBAL_L3_CONTINUATION_COMPLETE_NO_CONVERGENCE_THRESHOLD",
+  "L3": {
+    "basis_size": 32,
+    "grid_points": 2200,
+    "zeta_min": 0.0025,
+    "radial_grid_max_bohr": 300.0,
+    "damping": 0.06,
+    "diis_start": 12,
+    "diis_size": 8,
+    "max_iterations": 1500,
+    "tolerance_hartree": 1e-6
+  },
+  "states": {
+    "Ne":{"L2":-128.5436927942417,"L3":-128.5447762226909,"abs_L3_minus_L2":0.0010834284491920698,"L3_converged":true,"L3_virial_abs_hartree":0.00038307151343275336,"L3_iterations":18},
+    "Ne+":{"L2":-127.5066289013698,"L3":-127.50757769051658,"abs_L3_minus_L2":0.0009487891467898635,"L3_converged":true,"L3_virial_abs_hartree":0.003068323488909286,"L3_iterations":18},
+    "Ar":{"L2":-526.8049420277961,"L3":-526.808942082082,"abs_L3_minus_L2":0.004000054285938859,"L3_converged":true,"L3_virial_abs_hartree":0.0005609428364792279,"L3_iterations":20},
+    "Ar+":{"L2":-526.0924896761629,"L3":-526.0963264305982,"abs_L3_minus_L2":0.0038367544352695404,"L3_converged":true,"L3_virial_abs_hartree":0.015219803614670013,"L3_iterations":20},
+    "Kr":{"L2":-2751.987623678451,"L3":-2751.9622518409865,"abs_L3_minus_L2":0.025371837464717828,"L3_converged":true,"L3_virial_abs_hartree":5.091243948577002,"L3_iterations":37},
+    "Kr+":{"L2":-2751.3579745786324,"L3":-2751.3791127499962,"abs_L3_minus_L2":0.02113817136387297,"L3_converged":true,"L3_virial_abs_hartree":0.09427691347242728,"L3_iterations":23},
+    "F":{"L2":-99.16220668165694,"L3":-99.1630019626964,"abs_L3_minus_L2":0.0007952810394584731,"L3_converged":true,"L3_virial_abs_hartree":0.00509177691318996,"L3_iterations":19},
+    "F-":{"L2":-99.45664941234824,"L3":-99.45754247145037,"abs_L3_minus_L2":0.0008930591021254486,"L3_converged":true,"L3_virial_abs_hartree":0.002780089067396574,"L3_iterations":21},
+    "Cl":{"L2":-459.3286193993765,"L3":-459.33209974787985,"abs_L3_minus_L2":0.003480348503330788,"L3_converged":true,"L3_virial_abs_hartree":0.0018998982093272332,"L3_iterations":25},
+    "Cl-":{"L2":-459.56559578293223,"L3":-459.5691882678792,"abs_L3_minus_L2":0.0035924849469779474,"L3_converged":true,"L3_virial_abs_hartree":0.03622042135673453,"L3_iterations":44},
+    "Br":{"L2":-2572.2545104203728,"L3":-2572.27455029674,"abs_L3_minus_L2":0.020039876367263787,"L3_converged":true,"L3_virial_abs_hartree":0.07374287342672403,"L3_iterations":98},
+    "Br-":{"L2":-2572.472669705703,"L3":-2572.492966763363,"abs_L3_minus_L2":0.02029705765971812,"L3_converged":true,"L3_virial_abs_hartree":0.09516760045706008,"L3_iterations":73}
+  },
+  "matched_finite_differences_hartree": {
+    "ionization": {
+      "Ne":{"L2":1.0370638928719131,"L3":1.0371985321743153,"abs_drift":0.00013463930240220634},
+      "Ar":{"L2":0.7124523516331465,"L3":0.7126156514838158,"abs_drift":0.0001632998506693184},
+      "Kr":{"L2":0.6296490998188347,"L3":0.5831390909902439,"abs_drift":0.0465100088285908}
+    },
+    "attachment": {
+      "F":{"L2":0.29444273069130134,"L3":0.2945405087539683,"abs_drift":0.00009777806266697553},
+      "Cl":{"L2":0.2369763835557137,"L3":0.23708851999936087,"abs_drift":0.00011213644364715947},
+      "Br":{"L2":0.21815928533033002,"L3":0.21841646662278436,"abs_drift":0.00025718129245433374}
+    }
+  },
+  "observations_without_new_threshold": [
+    "F- and Br- remain SCF-converged on L3 with small virial residuals; the viable anion branch found at L2 persists under one further global diffuse extension.",
+    "F, Cl, and Br matched attachment gains have small L3-minus-L2 drift compared with the qualitative branch changes observed earlier for F-/Br-.",
+    "Ne and Ar ionization differences continue to show small L3-minus-L2 drift.",
+    "Neutral Kr is the counterexample to monotonic global diffuse extension: its L3 virial residual rises to 5.091243948577002 hartree and the matched Kr ionization difference changes by 0.0465100088285908 hartree.",
+    "Therefore a single increasingly diffuse numerical ladder is not uniformly quality-improving across the full neutral/cation/anion set."
+  ],
+  "verdict": "DO_NOT_DEFINE_OR_FIT_A_CHEMICAL_CLASSIFIER_FROM_THE_V0_11_V0_12_ATOMIC_ENERGY_DIFFERENCE_PATH_AT_THIS_STAGE",
+  "reason": "The anion problem is substantially improved by global diffuse extension, but the same continuation destabilizes the neutral Kr control under the existing virial criterion; a uniform precision atomic-difference baseline is not established.",
+  "nonclaims": [
+    "L3 is not declared a converged reference for every state.",
+    "No post-hoc energy-drift threshold is selected.",
+    "The stable F/Cl/Br attachment trajectories are not converted into a molecular bonding law.",
+    "v0.11 remains a failed diagnostic attempt rather than being retroactively repaired."
+  ]
+}
