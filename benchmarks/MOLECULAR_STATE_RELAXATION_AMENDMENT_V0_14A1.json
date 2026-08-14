@@ -1,0 +1,57 @@
+{
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_AMENDMENT_V0_14A1",
+  "status": "POST_BACKEND_SMOKE_PRE_SCREENING_OUTPUT_NUMERICAL_AMENDMENT",
+  "parent_preregistration": "benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json",
+  "branch": "compound-relations-v0.3",
+  "reason": "The preregistered SG-1 pruning function on the VV10/NLC grid is not applicable to Kr under PySCF 2.14.0 because its SG1RADII table is shorter than nuclear charge Z=36, producing IndexError before the KrF2 SCF energy is evaluated.",
+  "failure_evidence": {
+    "workflow_run_id": 31785509824,
+    "workflow_job_id": 94720409449,
+    "commit": "72869198694a673413dbd7abb8c60acecec46df3",
+    "durable_status_context": "reschem/v0.14a-backend",
+    "durable_status": "failure",
+    "failed_step": "KrF2:scf_kernel",
+    "exception_type": "IndexError",
+    "exception_message": "index 36 is out of bounds for axis 0 with size 19",
+    "trace_location": "pyscf.dft.gen_grid.sg1_prune -> radii[nuc]"
+  },
+  "observations_available_before_amendment": {
+    "backend_smoke_only": true,
+    "F2_scf_and_gradient": "PASS",
+    "KrF2": "NO_SCF_ENERGY; GRID_BUILD_INDEX_ERROR",
+    "optimized_ligand_dimers": 0,
+    "completed_XY2_relaxations": 0,
+    "within_formula_rankings_seen": 0,
+    "topology_assignments_seen": 0
+  },
+  "original_policy_preserved_in_parent": {
+    "grid": {"atom_grid": [99, 590], "prune": null},
+    "nlc_grid": {"atom_grid": [50, 194], "prune": "sg1_prune"}
+  },
+  "amended_global_policy": {
+    "grid": {"atom_grid": [99, 590], "prune": "nwchem_prune"},
+    "nlc_grid": {"atom_grid": [50, 194], "prune": "nwchem_prune"},
+    "scope": "ALL ligand-dimer and XY2 jobs without element-specific overrides"
+  },
+  "unchanged_policy": [
+    "B97M-V functional",
+    "VV10 nonlocal correlation",
+    "def2-TZVPD basis",
+    "charge/spin/symmetry",
+    "SCF convergence tolerance and max cycles",
+    "99x590 primary atom grid size",
+    "50x194 NLC atom grid size",
+    "geomeTRIC optimizer and convergence settings",
+    "three ligand dimer starts at 2.0 A",
+    "all five XY2 seed rules and scale factors",
+    "no SCF rescue",
+    "no Hessian in v0.14A",
+    "no topology assignment from geometry"
+  ],
+  "anti_fit_statement": "The amendment is backend-wide and element-agnostic. No candidate-specific branch, rescue, seed, threshold, or known chemistry label is introduced.",
+  "epistemic_statement": "This amendment is a numerical implementation change made after a backend compatibility smoke failure but before any molecular relaxation-screen result was available. The original preregistration and failure receipt remain part of provenance and are not overwritten.",
+  "technical_source": {
+    "key": "pyscf_dft_grid_docs_2026",
+    "role": "Official PySCF documentation/source for Grids.prune options; nwchem_prune is the documented default general pruning scheme."
+  }
+}
