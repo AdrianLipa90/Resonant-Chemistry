@@ -1,7 +1,7 @@
 \chapter{Benchmark and Validation Ledger}
 \label{app:benchmark-ledger}
 
-This appendix summarizes the machine-readable checkpoints that support the narrative chapters.  The JSON files in \texttt{benchmarks/} remain the authoritative numerical records; the table below is an index, not a replacement for them.
+This appendix summarizes the machine-readable checkpoints that support the narrative chapters.  The JSON files in \texttt{benchmarks/} remain the authoritative numerical records; the table below is an index, not a replacement for them.  A benchmark name identifies a local gate and does not promote a broader physical interpretation.
 
 \begingroup
 \small
@@ -32,12 +32,25 @@ Artifact & Status class & Scientific role \\
 \path{CARBON_SPARSE_MULTICHANNEL_DIAGNOSTIC_V0_1.json} & diagnostic & Sparse multichannel CI with thousands of determinants; establishes the frozen-orbital boundary. \\
 \path{SHELL_NBODY_TOPOLOGY_P_SHELL_V0_1.json} & candidate implementation & Particle--hole duality and shell-level topology primitives; physical trajectory validation remains open. \\
 \path{KNOT_CONFORMAL_ATOM_SYMMETRY_V0_1.json} & historical candidate & Original exploratory knot/atom comparison retained for provenance; direct spectral matching was not promoted and the comparison object is superseded by shell-level v0.2. \\
+\path{COMPOUND_STATE_ENSEMBLE_V0_13.json} & candidate architecture & Nine closed-shell $XY_2$ compositions expanded into 27 unranked activated/weak-complex state candidates; enumeration is not stability or topology admission. \\
+\path{MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json} & preregistered control & Frozen common B97M-V/VV10/def2-TZVPD relaxation screen, five starts per $XY_2$ composition and no Hessian/topology verdict. \\
+\path{MOLECULAR_STATE_RELAXATION_AMENDMENT_V0_14A1.json} & numerical amendment & Post-smoke/pre-screening global replacement of SG-1 pruning by common NWChem pruning on regular and NLC grids; no element-specific rescue. \\
+\path{MOLECULAR_BACKEND_SMOKE_V0_14A1_EXECUTION.json} & execution receipt & Passing amended F$_2$+KrF$_2$ energy/gradient backend compatibility smoke; software/method compatibility only. \\
+\path{MOLECULAR_DIMER_PREPASS_V0_14A1_EXECUTION.json} & execution receipt & Same-method F$_2$/Cl$_2$/Br$_2$ relaxation prepass used only to generate internal seed scales. \\
+\path{MOLECULAR_STATE_RELAXATION_PARTIAL_READOUT_V0_14A1.json} & partial execution evidence & Durable first-attempt aggregate for eight of nine formulae and 40 of 45 frozen starts; ArBr$_2$ remains missing execution. \\
+\path{MOLECULAR_STATE_RELAXATION_ACTIVATED_SURVIVAL_MATRIX_V0_14A1_PARTIAL.json} & descriptive diagnostic & Threshold-free activated-start survival and activated-to-weak screening gaps; explicitly no fitted law or topology classifier. \\
+\path{MOLECULAR_STATE_RELAXATION_RERUN_SCOPE_V0_14A1.json} & provenance guard & Records that a rerun executed broader matrix scope than intended and preserves original first-attempt receipts as the checkpoint evidence. \\
 \bottomrule
 \end{longtable}
 \endgroup
 
 \section{Interpretation rule}
-A benchmark status is local to the declared model and gate.  For example, H--Kr coverage does not imply high-precision term-resolved spectroscopy for every element, and a passing shell-topology unit test does not validate a topological law of chemistry.  The most restrictive scientifically relevant caveat accompanies the result throughout the book.
+A benchmark status is local to the declared model and gate.  H--Kr coverage does not imply high-precision term-resolved spectroscopy for every element, a passing shell-topology unit test does not validate a topological law of chemistry, and a successful molecular relaxation does not establish a harmonic minimum or electronic topology.  The most restrictive scientifically relevant caveat accompanies the result throughout the book.
 
-\section{Current open numerical frontier}
-The most developed correlation branch ends at a clear diagnostic boundary: no tested fixed frozen-orbital carbon truncation balances both $^1D$ and $^1S$ simultaneously.  The next required control is state-averaged orbital optimization/MCSCF over a common $^3P$, $^1D$, $^1S$ objective without experimental term-energy fitting.  This gate is independent of the shell-topology candidate and should be completed even if the topological hypothesis later fails.
+A missing execution receipt is not a failed chemical hypothesis.  Conversely, a complete software workflow does not promote a scientific candidate.  Runtime cancellation, SCF failure, optimizer failure, negative controls and falsifiers are retained as distinct status classes.
+
+\section{Current correlation frontier}
+The first one-coordinate state-averaged active--external carbon gate has produced a strict decrease in its frozen equal-weight state-average objective and is therefore variationally informative along the tested direction.  The next correlation control is multidimensional state-averaged orbital optimization/MCSCF-type relaxation without experimental term-energy fitting, followed by correlated spin--orbit re-evaluation only after that orbital layer is frozen.
+
+\section{Current molecular frontier}
+The molecular state-ensemble architecture is implemented and the v0.14A1 common relaxation screen has durable partial execution evidence for eight of nine formulae.  The immediate gate is not a Hessian fit or a new topology rule: it is completion of the missing ArBr$_2$ execution under the same frozen method and seed policy.  Only after a complete $9/9$, $45/45$ relaxation ledger may a separately preregistered Hessian/local-minimum gate be opened.
