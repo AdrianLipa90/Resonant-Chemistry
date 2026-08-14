@@ -59,16 +59,73 @@ A minimal multicentre extension of Chapter~\ref{ch:shell-nbody-topology} is
 \end{equation}
 where $\mathcal P_{\rm shell}$ records the chosen shell/subshell projection and its provenance.  The density $\rho$, one-body density matrix $\gamma$ and natural occupations $n_k$ are control observables; the winding and conformal fields are candidate diagnostics.
 
-\section{First molecular validation ladder}
-The molecular programme should begin with systems whose conventional control structure is transparent:
+\section{From one structural candidate to a competing-state ensemble}
+The compound trajectory exposed a structural problem that a single molecular graph cannot represent safely.  The same stoichiometry may support qualitatively different electronic or intermolecular realizations.  In particular, the closed-shell $XY_2$ study contains an activated linear three-centre/four-electron candidate and weak $X\cdots Y_2$ complexes under the same empirical formula.
+
+Version v0.13 therefore replaces the mapping
+\begin{equation}
+\mathrm{composition}\longrightarrow\mathrm{one\ predicted\ graph}
+\end{equation}
+with
+\begin{equation}
+\mathrm{composition}\longrightarrow\mathrm{unranked\ state\ ensemble}
+\longrightarrow\mathrm{physical\ admission}.
+\end{equation}
+For each of the nine frozen Ne/Ar/Kr $\times$ F/Cl/Br compositions, the current ensemble contains
+\begin{enumerate}
+\item \code{ACTIVATED\_LINEAR\_3C4E},
+\item \code{WEAK\_COMPLEX\_LINEAR\_END\_ON},
+\item \code{WEAK\_COMPLEX\_T\_SHAPED}.
+\end{enumerate}
+This produces 27 state candidates.  Their prior rank and prior probability are explicitly absent.  Enumeration is not a stability prediction, and reference knowledge about KrF$_2$ or rare-gas--halogen van-der-Waals complexes is not converted into a prior score.
+
+\section{First common molecular-state relaxation control: v0.14A/A1}
+The first executable consumer of the v0.13 ensemble is a conventional low-cost relaxation screen.  It is not a new Resonant-Chemistry Hamiltonian.  The frozen electronic-structure policy uses B97M-V with VV10 nonlocal correlation, the def2-TZVPD basis, neutral singlets, PySCF and geomeTRIC, and one common SCF/optimizer policy.
+
+The original preregistration used a common numerical-grid policy.  A backend smoke then exposed a PySCF SG-1 pruning limitation while constructing the KrF$_2$ nonlocal-correlation grid.  No KrF$_2$ energy had yet been produced.  The v0.14A1 amendment therefore changed only the pruning algorithm, globally for both regular and nonlocal grids, to \code{nwchem\_prune}.  The functional, basis, grid sizes, charge/spin policy, optimizer, SCF thresholds and seed geometries remained frozen.  This amendment is retained separately rather than rewritten into the original preregistration.
+
+The amended backend smoke passed, and F$_2$, Cl$_2$ and Br$_2$ were then relaxed from the same 2.0~\AA{} starting separation.  Their same-method equilibrium distances are used only as numerical seed scales.  Each $XY_2$ composition receives five frozen starts: three symmetric activated-linear starts with $r_{XY}/r_{YY}=1.0,1.3,1.6$, one weak end-on start, and one weak T-shaped start.  The complete preregistered matrix therefore contains 45 $XY_2$ relaxations.
+
+\section{Partial v0.14A1 execution evidence}
+The first full workflow was cancelled after the common backend and ligand-dimer stages and after eight of the nine formula jobs had produced receipts.  Those first-attempt formula receipts were recovered and persisted unchanged.  The durable checkpoint is therefore
+\begin{equation}
+8/9\ \mathrm{formulae},\qquad 40/45\ \mathrm{frozen\ starts}.
+\end{equation}
+The missing composition is ArBr$_2$.  Its status is \code{MISSING\_EXECUTION}; no chemical negative label is inferred from cancellation or missing runtime evidence.
+
+For all eight completed compositions, the lowest successful \emph{screening} electronic energy belongs to one of the weak-complex seed families.  Because no Hessian has been evaluated, this does not establish a ground state or even harmonic local-minimum status.
+
+The activated-start survival pattern itself is retained as a threshold-free diagnostic.  Representative observations are:
+\begin{itemize}
+\item KrF$_2$: three of three activated starts complete and converge to the same stored-precision symmetric basin, with $r_{\rm Kr-F}\approx1.883$~\AA; this basin lies about $9.288$~kcal/mol above the lowest successful weak-linear screening state under the same method;
+\item ArF$_2$: three of three activated starts complete, with an activated-to-lowest-weak screening gap of about $37.99$~kcal/mol;
+\item NeF$_2$: two of three activated starts complete, with a corresponding gap of about $95.93$~kcal/mol;
+\item NeCl$_2$ and NeBr$_2$: none of the three activated starts complete, while both weak seed families complete;
+\item ArCl$_2$, KrCl$_2$ and KrBr$_2$ retain respectively two, two and one successful activated starts out of three.
+\end{itemize}
+These values are descriptive screen outputs only.  No activation law, threshold, topology classifier or seed-specific rescue rule is fitted from them.
+
+A later rerun request re-executed a broader GitHub matrix scope than intended.  To preserve provenance, the original first-attempt receipts remain the v0.14A1 evidence for the eight already-completed formulae.  Only a future ArBr$_2$ receipt may fill the missing slot without replacing those first-attempt records.
+
+\section{Electronic topology is a separate admission problem}
+A linear symmetric geometry is not by itself evidence for a three-centre/four-electron electronic topology, just as an $XY_2$ formula is not such evidence.  The v0.10 admission contract therefore keeps three independent diagnostic families separate: orbital-subspace evidence, real-space/force evidence, and fragmentation/isomer-energy evidence.  A topology label requires independent agreement under that contract; insufficient evidence remains UNKNOWN.
+
+The v0.14A/A1 relaxation screen supplies candidate geometries and energies to later controls, but it does not replace v0.10.
+
+\section{Simple-system molecular validation ladder}
+Simple systems remain necessary controls even though they are no longer the first molecular code implemented in the repository:
 \begin{enumerate}
 \item $\mathrm{H}_2^+$ as a one-electron two-centre control;
 \item $\mathrm{H}_2$ as the first exchange/correlation bond;
 \item HeH$^+$ as an asymmetric two-centre test;
-\item LiH as the first clear core--valence separation test;
-\item only then multi-centre or aromatic systems where loop descriptors are tempting.
+\item LiH as a core--valence separation test;
+\item only then more complicated multi-centre or ring systems where loop descriptors are especially vulnerable to confirmation bias.
 \end{enumerate}
-For every system, the control energy curve and density reorganization must be frozen before a topological interpretation is evaluated.
+This control ladder is complementary to the v0.14 closed-shell $XY_2$ screening trajectory rather than its historical predecessor in implementation order.
 
-\section{Current status}
-This chapter is a formal specification and validation plan.  The current repository implements the shell-level primitives and atomic controls but does not yet contain a validated molecular topology solver.  The first admissible implementation target is therefore $\mathrm{H}_2^+$ with an explicit two-centre Hamiltonian and a diagnostic layer that can be disabled without changing the control solution.
+\section{Current status and next gate}
+The repository now contains an implemented conventional molecular-state relaxation layer and partial v0.14A1 execution evidence, but it still does \emph{not} contain a validated Resonant-Chemistry molecular topology or molecular-energy law.
+
+The immediate gate is operationally narrow: complete the missing ArBr$_2$ execution under the same frozen v0.14A1 method and seed policy.  Only after all nine formula receipts and all 45 frozen starts are durably present may a separate v0.14B Hessian/local-minimum protocol be frozen.  A timeout, cancellation, SCF failure or optimizer failure remains explicit evidence and does not license target-specific rescue.
+
+After local-minimum admission, conventional energetic comparison and the independent v0.10 electronic-topology diagnostics may be applied.  TIR, PhaseNav and affective semantics remain outside the control electronic energies unless a separately defined no-refit observable passes its own admission gate.
