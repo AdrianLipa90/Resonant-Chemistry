@@ -1,6 +1,6 @@
 # Repository reconciliation — 2026-08-14
 
-Status: **DOCUMENTATION / CI / MANUSCRIPT RECONCILIATION; NO SCIENTIFIC MODEL OR NUMERICAL RESULT CHANGED**
+Status: **DOCUMENTATION / CI / MANUSCRIPT / PACKAGING RECONCILIATION; NO SCIENTIFIC MODEL OR NUMERICAL RESULT CHANGED**
 
 ## Scope
 
@@ -12,7 +12,9 @@ Working branch:
 
 `docs/reconcile-v0.14a1`
 
-The purpose is to remove drift between already-merged repository evidence and the surfaces that describe or validate it. The reconciliation does not alter the physical Hamiltonians, compound relation algorithms, v0.13 state generator, v0.14A/A1 molecular method, frozen seed geometries, benchmark numerical values, or scientific promotion state.
+Draft validation PR: `#7`.
+
+The purpose is to remove drift between already-merged repository evidence and the surfaces that describe, package, or validate it. The reconciliation does not alter the physical Hamiltonians, compound relation algorithms, v0.13 state generator, v0.14A/A1 molecular method, frozen seed geometries, benchmark numerical values, or scientific promotion state.
 
 ## Drift detected
 
@@ -28,6 +30,7 @@ The pre-reconciliation `main` state contained several stale surfaces:
 8. Maintained CI workflows were attached to historical research branches instead of `main`/pull requests targeting `main`.
 9. Versioned experiment workflows v0.11/v0.12/v0.14 still had automatic push triggers on completed historical branches even though their correct role is frozen/manual replay.
 10. The `docs/` directory had no current index distinguishing active trajectory notes from historical/candidate notes and maintained CI from replay workflows.
+11. `pyproject.toml` disagreed with the runtime/CI dependency contract: it declared only `numpy>=2.0` while the repository requirements and code also require SciPy. The frozen v0.14 molecular backend was not represented as an explicit optional package extra.
 
 ## Reconciled scientific state
 
@@ -59,6 +62,22 @@ PhaseNav may provide native commands, concepts, gates, 36D state records, orches
 
 Operational representation is not physical authority: PhaseNav may preserve and route conventional energies, gradients, Hessians, convergence failures, and exceptions, but may not rewrite them to obtain a desired relational result.
 
+## Packaging reconciliation
+
+Package semver remains `0.1.0`; this is deliberately independent of research-gate labels such as v0.13 or v0.14A1.
+
+Core install metadata is now aligned with the repository runtime contract:
+
+- `numpy>=1.26`;
+- `scipy>=1.11`.
+
+The frozen molecular control backend is exposed only as the optional extra `molecular-v014`:
+
+- `pyscf==2.14.0`;
+- `geometric==1.1.1`.
+
+This keeps conventional molecular backends out of the core semantic/runtime dependency set while making the exact v0.14 environment explicit and reproducible. The full textbook/repository gate now performs `pip install .` followed by `pip check` so package metadata cannot drift silently from CI requirements.
+
 ## CI reconciliation
 
 Maintained current gates now target `main` and pull requests targeting `main`:
@@ -69,7 +88,7 @@ Maintained current gates now target `main` and pull requests targeting `main`:
 - `period2-active-ci.yml`;
 - `web-ci.yml`.
 
-The compound/molecular gate now includes `MOLECULAR_*.json` and verifies v0.13/v0.14 current surfaces.
+The compound/molecular gate now includes `MOLECULAR_*.json` and verifies v0.13/v0.14 current surfaces. The textbook gate additionally validates package installation metadata before the full Python regression and manuscript build.
 
 Frozen versioned experiment workflows are retained as manual `workflow_dispatch` replay surfaces with their computational jobs unchanged:
 
@@ -89,13 +108,14 @@ The v0.14A1 amendment note received only an appended subsequent-execution sectio
 
 Before merge to `main`:
 
-1. branch must remain based on the exact current `main` without unrelated code changes;
-2. full Python regression must pass;
-3. compound/molecular JSON + current-surface checks must pass;
-4. bibliography DOI/key/wiring audit must pass;
-5. LaTeX/BibTeX textbook build must pass with no unresolved references/citations;
-6. subsystem period-2 and web gates must remain green where triggered;
-7. final diff must contain no unintended scientific model/benchmark mutation;
-8. merge itself remains a separate user decision.
+1. branch must remain based on the exact current `main` without unrelated scientific-code changes;
+2. package metadata install plus `pip check` must pass;
+3. full Python regression must pass;
+4. compound/molecular JSON + current-surface checks must pass;
+5. bibliography DOI/key/wiring audit must pass;
+6. LaTeX/BibTeX textbook build must pass with no unresolved references/citations;
+7. subsystem period-2 and web gates must remain green where triggered;
+8. final diff must contain no unintended scientific model/benchmark mutation;
+9. merge itself remains a separate user decision.
 
 Epistemic status of this reconciliation: **REPOSITORY_STATE_ALIGNMENT / NOT_SCIENTIFIC_PROMOTION**.
