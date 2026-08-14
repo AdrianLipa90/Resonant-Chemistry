@@ -1,0 +1,25 @@
+{
+  "schema": "RESCHEM_ENERGETIC_ADMISSION_SOFTWARE_V0_8",
+  "branch": "compound-relations-v0.3",
+  "status": "LOCAL_SOFTWARE_CONTROLS_PASS_BRANCH_CI_NOT_RUN",
+  "module": "reschem/energetic_admission.py",
+  "tests": "tests/test_energetic_admission.py",
+  "local_test_count": 11,
+  "local_test_pass": 11,
+  "covered_contracts": [
+    "positive pair-loss admission",
+    "negative pair-loss separation",
+    "parent imaginary-frequency rejection",
+    "missing parent Hessian -> UNKNOWN",
+    "missing energy -> UNKNOWN",
+    "method-policy mismatch -> INCOMPARABLE",
+    "near-zero tolerance gate",
+    "missing product Hessian -> UNKNOWN",
+    "nonminimum product invalidates specific channel rather than parent",
+    "UNKNOWN entries excluded from score",
+    "balanced accuracy only when both resolved classes are present"
+  ],
+  "physical_energy_results": 0,
+  "ci_claim": false,
+  "note": "The local controls validate bookkeeping and fail-closed semantics only. They do not validate any molecular energy or chemistry claim."
+}
