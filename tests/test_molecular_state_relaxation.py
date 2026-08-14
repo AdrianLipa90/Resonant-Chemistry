@@ -71,6 +71,14 @@ class MolecularStateRelaxationTests(unittest.TestCase):
         self.assertNotIn("hessian", METHOD_POLICY)
         self.assertNotIn("rescue", METHOD_POLICY)
 
+    def test_v0_14a1_pruning_is_global_and_not_element_specific(self):
+        self.assertEqual(METHOD_POLICY["grid_prune"], "nwchem_prune")
+        self.assertEqual(METHOD_POLICY["nlc_grid_prune"], "nwchem_prune")
+        # The method policy is one shared object for every centre/ligand pair;
+        # no element-symbol keyed pruning override is admitted.
+        for forbidden_key in ("Ne", "Ar", "Kr", "F", "Cl", "Br"):
+            self.assertNotIn(forbidden_key, METHOD_POLICY)
+
     def test_relative_energy_is_within_formula_and_threshold_free(self):
         rows = add_relative_energies([
             {"status":"RELAXATION_RETURNED_FINAL_SCF_CONVERGED_NO_HESSIAN","final_energy_hartree":-10.0},
