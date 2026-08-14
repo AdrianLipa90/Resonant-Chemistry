@@ -1,0 +1,257 @@
+name: molecular-state-relaxation-v0.14a
+
+on:
+  push:
+    branches:
+      - compound-relations-v0.3
+    paths:
+      - reschem/molecular_state_relaxation.py
+      - scripts/smoke_molecular_backend_v0_14a.py
+      - scripts/run_molecular_ligand_dimer_v0_14a.py
+      - scripts/run_molecular_formula_v0_14a.py
+      - benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json
+      - .github/workflows/molecular-state-relaxation-v0.14a.yml
+  workflow_dispatch:
+
+concurrency:
+  group: molecular-state-relaxation-v0.14a-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  backend-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen molecular backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyscf==2.14.0" "geometric==1.1.1"
+
+      - name: Smoke B97M-V/VV10/def2-TZVPD energy and gradient
+        run: python scripts/smoke_molecular_backend_v0_14a.py
+
+  ligand-dimer:
+    needs: backend-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        ligand: [F, Cl, Br]
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen molecular backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyscf==2.14.0" "geometric==1.1.1"
+
+      - name: Relax common ligand dimer prepass
+        run: >-
+          python scripts/run_molecular_ligand_dimer_v0_14a.py
+          --ligand ${{ matrix.ligand }}
+          --output-dir benchmarks/v0_14a_dimers
+
+      - name: Validate dimer receipt structure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          files = list(Path('benchmarks/v0_14a_dimers').glob('*.json'))
+          if len(files) != 1:
+              raise SystemExit(f'expected one dimer receipt, got {files}')
+          payload = json.loads(files[0].read_text(encoding='utf-8'))
+          assert payload['schema'] == 'RESCHEM_MOLECULAR_LIGAND_DIMER_V0_14A'
+          print({'formula': payload['formula'], 'status': payload['status'], 'r_YY': payload['optimized_r_YY_angstrom']})
+          PY
+
+      - name: Upload dimer prepass receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-dimer-v0.14a-${{ matrix.ligand }}
+          path: benchmarks/v0_14a_dimers/*.json
+          if-no-files-found: error
+
+  dimer-prepass-check:
+    needs: ligand-dimer
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: molecular-dimer-v0.14a-*
+          path: dimers
+          merge-multiple: true
+
+      - name: Require all three common dimer prepasses
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          files = sorted(Path('dimers').glob('*.json'))
+          if len(files) != 3:
+              raise SystemExit(f'expected 3 dimer receipts, got {[p.name for p in files]}')
+          data = [json.loads(p.read_text(encoding='utf-8')) for p in files]
+          bad = [(x['formula'], x['status']) for x in data if x['status'] != 'DIMER_PREPASS_AVAILABLE']
+          print({'dimers': [(x['formula'], x['status'], x['optimized_r_YY_angstrom']) for x in data]})
+          if bad:
+              raise SystemExit(f'common dimer prepass unavailable: {bad}')
+          PY
+
+  formula-relaxation:
+    needs: dimer-prepass-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 9
+      matrix:
+        include:
+          - {centre: Ne, ligand: F, formula: NeF2}
+          - {centre: Ne, ligand: Cl, formula: NeCl2}
+          - {centre: Ne, ligand: Br, formula: NeBr2}
+          - {centre: Ar, ligand: F, formula: ArF2}
+          - {centre: Ar, ligand: Cl, formula: ArCl2}
+          - {centre: Ar, ligand: Br, formula: ArBr2}
+          - {centre: Kr, ligand: F, formula: KrF2}
+          - {centre: Kr, ligand: Cl, formula: KrCl2}
+          - {centre: Kr, ligand: Br, formula: KrBr2}
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen molecular backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyscf==2.14.0" "geometric==1.1.1"
+
+      - name: Download common dimer prepasses
+        uses: actions/download-artifact@v4
+        with:
+          pattern: molecular-dimer-v0.14a-*
+          path: dimer-data
+          merge-multiple: true
+
+      - name: Execute five frozen starts for formula
+        run: >-
+          python scripts/run_molecular_formula_v0_14a.py
+          --centre ${{ matrix.centre }}
+          --ligand ${{ matrix.ligand }}
+          --dimer-json dimer-data/${{ matrix.ligand }}2.json
+          --output-dir benchmarks/v0_14a_formulae
+
+      - name: Validate formula receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          files = list(Path('benchmarks/v0_14a_formulae').glob('*.json'))
+          if len(files) != 1:
+              raise SystemExit(f'expected one formula receipt, got {files}')
+          payload = json.loads(files[0].read_text(encoding='utf-8'))
+          assert payload['schema'] == 'RESCHEM_MOLECULAR_FORMULA_RELAXATION_V0_14A'
+          if payload['status'] == 'FORMULA_RELAXATION_SCREEN_COMPLETE':
+              assert payload['start_count'] == 5
+              assert len(payload['relaxations']) == 5
+          print({'formula': payload['formula'], 'status': payload['status'], 'successes': payload.get('successful_relaxation_count')})
+          PY
+
+      - name: Upload formula relaxation receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-formula-v0.14a-${{ matrix.formula }}
+          path: benchmarks/v0_14a_formulae/*.json
+          if-no-files-found: error
+
+  aggregate:
+    needs: formula-relaxation
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all formula receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: molecular-formula-v0.14a-*
+          path: formulae
+          merge-multiple: true
+
+      - name: Aggregate 45-start relaxation screen
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          files = sorted(Path('formulae').glob('*.json'))
+          if len(files) != 9:
+              raise SystemExit(f'expected 9 formula receipts, found {len(files)}: {[p.name for p in files]}')
+          formulae = [json.loads(path.read_text(encoding='utf-8')) for path in files]
+          if len({x['formula'] for x in formulae}) != 9:
+              raise SystemExit('duplicate/missing formula receipts')
+
+          rows = [row for item in formulae for row in item.get('relaxations', [])]
+          status_counts = Counter(row.get('status') for row in rows)
+          successful = [row for row in rows if row.get('status') == 'RELAXATION_RETURNED_FINAL_SCF_CONVERGED_NO_HESSIAN']
+          payload = {
+              'schema': 'RESCHEM_MOLECULAR_STATE_RELAXATION_V0_14A',
+              'generated_utc': datetime.now(timezone.utc).isoformat(),
+              'preregister_source': 'benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json',
+              'status': 'COMMON_METHOD_RELAXATION_SCREEN_COMPLETE_NO_HESSIAN_ADMISSION',
+              'formula_count': len(formulae),
+              'relaxation_start_count': len(rows),
+              'successful_relaxation_count': len(successful),
+              'status_counts': dict(status_counts),
+              'formulae': sorted(formulae, key=lambda x: x['formula']),
+              'nonclaims': [
+                  'no Hessian/local-minimum admission is performed',
+                  'no geometry-only 3c4e/VDW topology label is assigned',
+                  'the screen does not replace the v0.8 high-level method policy',
+                  'relative energies are preliminary B97M-V/def2-TZVPD screening values',
+              ],
+          }
+          out = Path('MOLECULAR_STATE_RELAXATION_V0_14A.json')
+          out.write_text(json.dumps(payload, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps({
+              'formula_count': payload['formula_count'],
+              'relaxation_start_count': payload['relaxation_start_count'],
+              'successful_relaxation_count': payload['successful_relaxation_count'],
+              'status_counts': payload['status_counts'],
+          }, indent=2))
+          PY
+
+      - name: Upload combined molecular relaxation screen
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-state-relaxation-v0.14a-combined
+          path: MOLECULAR_STATE_RELAXATION_V0_14A.json
+          if-no-files-found: error
