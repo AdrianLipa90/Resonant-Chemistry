@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Semantic entity-card atlas for the current Resonant Chemistry repository checkpoint.">
+  <title>Resonant Chemistry — Semantic Card Atlas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">RESONANT CHEMISTRY / SEMANTIC ENTITY GRAPH</p>
+      <h1>Repository-derived semantic cards</h1>
+      <p class="lede">A read-only view of the persisted semantic coverage, deterministic entity populations, and the current v0.14A1 molecular screening boundary.</p>
+    </div>
+    <div class="header-actions">
+      <a class="button primary" href="./">Interactive laboratory</a>
+      <a class="button" href="../semantic_cards/README.md">Semantic contract</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel active">
+      <div class="section-head">
+        <div><p class="eyebrow">CURRENT REGISTRY</p><h2>Calculation-addressable populations</h2></div>
+        <span class="badge control">REPOSITORY DERIVED</span>
+      </div>
+      <div id="semantic-summary" class="status-grid"></div>
+      <div class="callout"><strong>Boundary:</strong> registry membership is addressability and provenance, not physical validation or canon promotion.</div>
+    </section>
+
+    <section class="panel active">
+      <div class="section-head">
+        <div><p class="eyebrow">MODEL / GATE COVERAGE</p><h2>Semantic projections through v0.14A1</h2></div>
+        <span class="badge candidate">ANTI-DRIFT SURFACE</span>
+      </div>
+      <div id="stage-list" class="status-grid"></div>
+    </section>
+
+    <section class="panel active">
+      <div class="section-head">
+        <div><p class="eyebrow">MOLECULAR SCREEN</p><h2>Noble-gas XY₂ formula cards</h2></div>
+        <span class="badge numerical">SCREENING ONLY</span>
+      </div>
+      <p>Each formula retains the same three unranked v0.13 candidate states. Activated-survival values below are descriptive v0.14A1 observations, with no fitted threshold or topology assignment.</p>
+      <div id="formula-grid" class="status-grid"></div>
+    </section>
+
+    <section class="panel active">
+      <div class="section-head">
+        <div><p class="eyebrow">EPISTEMIC CONTRACT</p><h2>What this surface cannot promote</h2></div>
+        <span class="badge candidate">FAIL CLOSED</span>
+      </div>
+      <div id="boundary-list" class="status-grid"></div>
+      <div class="callout warning"><strong>Semantic separation:</strong> TIR axes and affective mappings remain unassigned unless an explicit provenance-bearing mapping is supplied and tested. Provenance holonomy is not physical holonomy.</div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Semantic Card Atlas — current repository projection</span>
+    <span id="semantic-data-status">Data: loading…</span>
+  </footer>
+  <script src="semantic_cards.js" defer></script>
+</body>
+</html>
