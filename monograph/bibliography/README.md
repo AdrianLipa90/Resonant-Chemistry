@@ -7,7 +7,9 @@ Current modules:
 
 - `references.bib` — active/current source ledger;
 - `compound_legacy.bib` — provenance backfilled from compound gates that
-  predated the live bibliography invariant.
+  predated the live bibliography invariant;
+- `molecular_screening.bib` — molecular-method and software sources introduced
+  by the v0.14 common relaxation-screen trajectory.
 
 The monograph must wire every `.bib` module, and
 `scripts/audit_compound_bibliography.py` treats the directory as one logical
@@ -40,6 +42,9 @@ The working monograph currently uses `\nocite{*}` so the live source ledger is
 visible in the compiled PDF even before every new development note has been
 converted into a dedicated textbook chapter with inline `\cite{...}` calls.
 
-CI gate: `.github/workflows/compound-relations-ci.yml` runs full Python test
-discovery, benchmark JSON parsing, the DOI/key/wiring audit, and a branch-surface
-check on `compound-relations-v0.3`.
+CI gates:
+
+- `.github/workflows/compound-relations-ci.yml` runs full Python test discovery,
+  benchmark JSON parsing, the DOI/key/wiring audit, and branch-surface checks;
+- `.github/workflows/bibliography-ci.yml` compiles the monograph through
+  LaTeX/BibTeX and rejects unresolved citations/references.
