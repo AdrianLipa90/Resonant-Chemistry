@@ -1,6 +1,6 @@
 """Semantic entity cards, relations, and provenance holonomy for calculations.
 
-This layer is deliberately downstream of the scientific models.  It turns
+This layer is deliberately downstream of the scientific models. It turns
 explicit model outputs into addressable calculation objects without granting a
 semantic label additional physical authority.
 """
@@ -17,6 +17,15 @@ RELATION_SCHEMA = "RESCHEM_ENTITY_RELATION_V0_1"
 
 def _canonical_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+
+
+def _nested_get(value: Mapping[str, Any], dotted_path: str) -> Any:
+    current: Any = value
+    for part in dotted_path.split("."):
+        if not isinstance(current, Mapping) or part not in current:
+            return None
+        current = current[part]
+    return current
 
 
 def lineage_sha256(*, parents: Sequence[str], operation: str, identity: Mapping[str, Any]) -> str:
@@ -159,11 +168,12 @@ def make_emergent_candidate_card(
 
 @dataclass
 class CardRegistry:
-    """In-memory graph used by downstream calculations.
+    """In-memory semantic graph consumed by downstream calculations.
 
-    The registry refuses duplicate card ids.  Calculations may resolve cards and
-    relations from it, but scientific status remains whatever is encoded in the
-    source card; registry membership is not promotion.
+    Registry membership is addressability, not scientific promotion. Exact-id
+    links and selector links can both be resolved. Selector resolution is
+    deterministic equality matching on dotted fields such as
+    ``identity.symbol``.
     """
 
     cards: dict[str, dict[str, Any]]
@@ -187,6 +197,13 @@ class CardRegistry:
         except KeyError as exc:
             raise KeyError(f"unknown semantic card: {card_id}") from exc
 
+    def match_selector(self, selector: Mapping[str, Any]) -> tuple[dict[str, Any], ...]:
+        matched = []
+        for card in self.cards.values():
+            if all(_nested_get(card, key) == expected for key, expected in selector.items()):
+                matched.append(card)
+        return tuple(sorted((dict(card) for card in matched), key=lambda card: card["card_id"]))
+
     def neighbors(self, card_id: str, predicate: str | None = None) -> tuple[dict[str, Any], ...]:
         card = self.resolve(card_id)
         relations = card.get("relations", [])
@@ -194,11 +211,47 @@ class CardRegistry:
             relations = [relation for relation in relations if relation.get("predicate") == predicate]
         return tuple(dict(relation) for relation in relations)
 
-    def calculation_context(self, card_ids: Sequence[str]) -> dict[str, Any]:
-        selected = [self.resolve(card_id) for card_id in card_ids]
+    def relation_targets(self, card_id: str, predicate: str | None = None) -> tuple[dict[str, Any], ...]:
+        targets: dict[str, dict[str, Any]] = {}
+        for relation in self.neighbors(card_id, predicate):
+            target_id = relation.get("target_card_id")
+            if target_id:
+                if target_id in self.cards:
+                    targets[target_id] = self.resolve(target_id)
+                continue
+            for target in self.match_selector(relation.get("target_selector", {})):
+                targets[target["card_id"]] = target
+        return tuple(targets[key] for key in sorted(targets))
+
+    def provenance_lineage(self, card_id: str, *, max_depth: int = 32) -> tuple[str, ...]:
+        seen: set[str] = set()
+        order: list[str] = []
+
+        def visit(current_id: str, depth: int) -> None:
+            if depth > max_depth or current_id in seen:
+                return
+            seen.add(current_id)
+            card = self.cards.get(current_id)
+            if card is None:
+                return
+            for parent in card.get("provenance_holonomy", {}).get("parent_card_ids", []):
+                visit(parent, depth + 1)
+            order.append(current_id)
+
+        visit(card_id, 0)
+        return tuple(order)
+
+    def calculation_context(self, card_ids: Sequence[str], *, include_relation_targets: bool = False) -> dict[str, Any]:
+        selected_ids = list(card_ids)
+        if include_relation_targets:
+            for card_id in tuple(selected_ids):
+                for target in self.relation_targets(card_id):
+                    if target["card_id"] not in selected_ids:
+                        selected_ids.append(target["card_id"])
+        selected = [self.resolve(card_id) for card_id in selected_ids]
         return {
             "schema": "RESCHEM_CARD_CALCULATION_CONTEXT_V0_1",
-            "card_ids": list(card_ids),
+            "card_ids": selected_ids,
             "cards": selected,
             "context_sha256": hashlib.sha256(_canonical_json(selected).encode("utf-8")).hexdigest(),
             "status": "DERIVED_CALCULATION_CONTEXT_NOT_SCIENTIFIC_PROMOTION",
