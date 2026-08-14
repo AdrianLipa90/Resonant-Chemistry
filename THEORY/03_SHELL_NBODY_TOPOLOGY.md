@@ -25,3 +25,36 @@ For a declared oriented projection `P`, use electron-nucleus winding `w_iA` and 
 
 ## Required falsification order
 SCF/CI control -> shell-only particle-hole tests -> transfer across principal shell number `n` -> only then knot/conformal comparison.
+
+## Current downstream boundary — v0.13/v0.14A1
+
+The repository now carries the topology layer into multicentre **candidate-state enumeration**, but this does not promote a topology claim.
+
+For each of the nine frozen `XY2` compositions in the v0.13 closed-shell ensemble, three competing relational states are retained without prior ranking:
+
+1. `ACTIVATED_LINEAR_3C4E`;
+2. `WEAK_COMPLEX_LINEAR_END_ON`;
+3. `WEAK_COMPLEX_T_SHAPED`.
+
+These labels are model-defined candidate states. They are not proofs of bonding class, local-minimum character, or physical holonomy. Their admission interfaces remain conventional energetics/local-minimum analysis and the preregistered multi-diagnostic electronic-topology gate.
+
+The v0.14A1 molecular relaxation screen evaluates frozen geometric starts under a common conventional method. Its current status is 8/9 formulae and 40/45 starts, with `ArBr2 = MISSING_EXECUTION_NOT_CHEMICAL_FAIL`.
+
+Therefore the current implication chain is deliberately one-way:
+
+```text
+shell algebra
+  -> relational-state candidate
+  -> conventional relaxation screen
+  -> [future Hessian/local-minimum gate]
+  -> [electronic-topology admission]
+  -> possible physical interpretation
+```
+
+and **not**:
+
+```text
+geometry seed -> topology label -> physical canon
+```
+
+The semantic registry mirrors this boundary. `provenance_holonomy` records deterministic model lineage; it is explicitly distinct from `physical_holonomy`, which remains uncomputed unless winding/connection observables are actually evaluated with named provenance.
