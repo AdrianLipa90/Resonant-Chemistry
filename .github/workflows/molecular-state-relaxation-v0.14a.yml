@@ -1,16 +1,7 @@
 name: molecular-state-relaxation-v0.14a
 
+# Frozen experiment replay: no automatic branch trigger.
 on:
-  push:
-    branches:
-      - compound-relations-v0.3
-    paths:
-      - reschem/molecular_state_relaxation.py
-      - scripts/smoke_molecular_backend_v0_14a.py
-      - scripts/run_molecular_ligand_dimer_v0_14a.py
-      - scripts/run_molecular_formula_v0_14a.py
-      - benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json
-      - .github/workflows/molecular-state-relaxation-v0.14a.yml
   workflow_dispatch:
 
 concurrency:
