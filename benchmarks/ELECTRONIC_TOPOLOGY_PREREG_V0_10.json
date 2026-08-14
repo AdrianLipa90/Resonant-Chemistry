@@ -1,0 +1,58 @@
+{
+  "schema": "RESCHEM_ELECTRONIC_TOPOLOGY_PREREG_V0_10",
+  "branch": "compound-relations-v0.3",
+  "status": "AGGREGATOR_FROZEN_BEFORE_REMAINING_TOPOLOGY_LABEL_LOOKUP",
+  "purpose": "Distinguish an activated 3c4e XY2 topology from a weak X...Y2 van der Waals complex after v0.9 structural generation.",
+  "structural_prediction_source": "benchmarks/CLOSED_SHELL_ACTIVATION_V0_9.json",
+  "diagnostic_families": {
+    "ORBITAL_SUBSPACE": {
+      "role": "localized or explicitly projected bonding-subspace analysis",
+      "minimum_provenance": ["wavefunction/electronic-structure method", "basis/ECP policy", "analysis definition", "raw occupation/delocalization summary"],
+      "warning": "A visual canonical-MO pattern alone is not sufficient."
+    },
+    "REAL_SPACE_FORCE": {
+      "role": "electron-density topology plus local-force/bond-strength information",
+      "minimum_provenance": ["density method", "basis/ECP policy", "raw density/topology summary", "force/local-mode summary when available"],
+      "warning": "Presence or absence of one QTAIM bond critical point alone is not sufficient."
+    },
+    "FRAGMENTATION_ISOMER_ENERGY": {
+      "role": "common-method comparison of activated candidate, weak-complex isomer(s), and preregistered dissociation products",
+      "minimum_provenance": ["method/basis/environment", "local-minimum checks", "energy differences", "isomer/fragment definitions"],
+      "warning": "Stoichiometry or one optimized geometry alone is not sufficient."
+    }
+  },
+  "family_verdicts": ["SUPPORT_3C4E", "SUPPORT_VDW", "INCONCLUSIVE", "NOT_RUN"],
+  "aggregation_rule": {
+    "3c4e": "at least two distinct families SUPPORT_3C4E, zero informative families SUPPORT_VDW, and local_minimum=true",
+    "vdw": "at least two distinct families SUPPORT_VDW, zero informative families SUPPORT_3C4E, and local_minimum=true",
+    "mixed": "at least one informative family on each side",
+    "unknown": "fewer than two agreeing informative families, missing local-minimum status, or otherwise unresolved",
+    "not_local_minimum": "REJECTED_NOT_LOCAL_MINIMUM without assigning a stable topology label"
+  },
+  "important_interpretation": "The 2-of-3 rule is a preregistered validation contract, not a physical constant, bond-order threshold, or new Hamiltonian term.",
+  "preknown_or_already_opened_exclusions": [
+    {"formula":"KrF2","reason":"motivating known 3c bonding case"},
+    {"formula":"KrCl2","reason":"post-v0.9 lookup already revealed van der Waals isomers"},
+    {"formula":"ArF2","reason":"post-v0.9 high-pressure/theoretical literature already opened"},
+    {"formula":"NeF2","reason":"post-v0.9 theoretical literature already opened"},
+    {"formula":"ArCl2","reason":"literature existence as a weak complex was encountered before freezing v0.10; exclude from any blind score"}
+  ],
+  "remaining_frozen_topology_targets": ["NeCl2", "NeBr2", "ArBr2", "KrBr2"],
+  "frozen_model_prediction_for_remaining_targets": {
+    "NeCl2":"3C4E",
+    "NeBr2":"3C4E",
+    "ArBr2":"3C4E",
+    "KrBr2":"3C4E"
+  },
+  "scoring": {
+    "resolved_only": true,
+    "primary": "accuracy on multi-diagnostic resolved labels",
+    "unknowns": "visible and excluded from denominator",
+    "anti_fit": "Do not change the structural generator, family list, or 2-of-3 aggregation rule after opening remaining topology labels."
+  },
+  "methodological_sources": [
+    {"key":"landis_weinhold_2013_long_bonding","doi":"10.1021/ic4000395","role":"shows NBO/NRT 3c4e analysis and cautions that canonical MO/QTAIM signatures can be misleading for long-bonded cases"},
+    {"key":"oliveira_kraka_machado_2019_3c4e","doi":"10.1021/acs.inorgchem.9b02458","role":"high-accuracy multi-descriptor comparison of hypervalent and noncovalent structures"},
+    {"key":"liao_zhang_1998_noble_gas_halides","doi":"10.1021/jp9825516","role":"systematic noble-gas halide bonding/stability study across gas and solid-state environments"}
+  ]
+}
