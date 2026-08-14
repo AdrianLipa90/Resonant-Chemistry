@@ -1,6 +1,6 @@
 {
   "schema": "RESCHEM_SEMANTIC_CARD_RECONCILIATION_V0_14A1",
-  "status": "IMPLEMENTED_PREMERGE_VALIDATION_PENDING",
+  "status": "PREMERGE_GATES_PASS",
   "repository": "AdrianLipa90/Resonant-Chemistry",
   "branch": "semantic-cards/reconcile-v0.14a1",
   "base_main_after_revert": "5344ed1aa841a9ffcf4036fd3be1a6e9b9b53516",
@@ -24,6 +24,8 @@
     "coverage_audit": "scripts/audit_semantic_card_coverage.py"
   },
   "expected_dynamic_populations": {
+    "canonical_neutral_atomic_cards_H_to_Kr": 36,
+    "model_gate_cards": 14,
     "compound_relation_candidates_v0_1": 231,
     "relational_state_candidates_v0_13": 27,
     "molecular_model_plus_formula_cards_v0_14A1": 10
@@ -42,10 +44,35 @@
   "scientific_model_changes": false,
   "frozen_benchmark_value_changes": false,
   "raw_first_attempt_receipt_changes": false,
+  "validated_head_before_receipt_update": "df46ad3298158a4c6d67e3b55bdbea043f34eac2",
   "validation": {
-    "unit_tests": "PENDING_PR_CI",
-    "semantic_card_audit": "PENDING_PR_CI",
-    "textbook_build": "PENDING_PR_CI",
-    "bibliography_build": "PENDING_PR_CI"
-  }
+    "unit_tests": {
+      "status": "PASS",
+      "tests_run": 241,
+      "skipped": 1,
+      "workflow_run": 31843472303
+    },
+    "semantic_card_audit": {
+      "status": "PASS",
+      "workflow_run": 31843472303,
+      "observed": {
+        "atomic_symbols_h_to_kr": 36,
+        "model_gate_cards": 14,
+        "generated_compound_candidate_cards": 231,
+        "generated_relational_state_cards": 27,
+        "generated_molecular_cards": 10,
+        "completed_formulae": 8,
+        "missing_formulae": ["ArBr2"]
+      }
+    },
+    "bibliography_build": {
+      "status": "PASS",
+      "workflow_run": 31843472277
+    },
+    "textbook_build": {
+      "status": "PASS",
+      "workflow_run": 31843472295
+    }
+  },
+  "final_commit_note": "This receipt update is documentation/provenance only. The pull request must still pass its maintained checks at the resulting final head before merge."
 }
