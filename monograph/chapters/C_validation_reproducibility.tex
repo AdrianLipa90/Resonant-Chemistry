@@ -30,10 +30,35 @@ A frozen protocol may require a technical amendment before scientific outputs ex
 
 Target-specific rescue is distinct and remains forbidden.  A change made only because one composition gives an inconvenient scientific result would require a new declared experiment rather than a silent repair of the frozen gate.
 
+\section{Semantic entity-card reproducibility}
+Semantic cards are part of the calculation state.  A newly addressable atom, compound candidate, relational state, molecular screen or later emergent entity must have a card or deterministic projection that records its properties, state invariants, source artifacts, relation edges and epistemic status.
+
+The current repository distinguishes two notions of holonomy.  \emph{Provenance holonomy} is deterministic lineage: parent-card identifiers, generating operation and a lineage hash.  \emph{Physical holonomy} is reserved for explicitly computed winding, phase, connection or topology observables.  A semantic graph loop or provenance loop is not evidence of physical holonomy.
+
+High-cardinality entities may be generated deterministically from frozen model generators instead of being copied manually into hundreds of files.  The generator itself is tested against frozen cardinalities and the current benchmark.  Stable/base cards and model/gate checkpoints remain persisted under \path{semantic_cards/}.
+
+A calculation can request a semantic context from the current repository card registry.  The selected cards and, optionally, their relation targets are canonically serialized and hashed.  The hash identifies the consumed semantic/entity context; it does not prove that two contexts are physically equivalent.
+
+Emergent model outputs remain explicitly candidate.  The registry status \code{MODEL\_DEFINED\_EMERGENT\_CANDIDATE} means only that a deterministic model generated an addressable entity.  It does not establish molecular existence, harmonic stability, ground-state status, electronic topology or project canon.
+
+\section{Semantic-card anti-drift gate}
+The maintained compound/molecular CI runs a card-coverage audit.  The gate checks:
+\begin{enumerate}
+\item canonical H--Kr neutral atomic-card coverage;
+\item model/gate card coverage through the current compound/molecular frontier;
+\item deterministic generation of the 231 v0.1 compound candidates and 27 v0.13 relational states;
+\item exact agreement between the nine v0.14A1 formula cards and the machine-readable expected/completed formula sets;
+\item preservation of ArBr$_2$ as missing execution rather than chemical failure;
+\item absence of silent TIR or affective assignments without provenance;
+\item provenance for any non-empty physical-holonomy record;
+\item no semantic promotion of Hessian status, ground-state ranking or electronic topology beyond the underlying evidence.
+\end{enumerate}
+Thus a new scientific/model entity cannot be merged merely by updating code while leaving the calculation-card layer stale.
+
 \section{LaTeX as the formal scientific surface}
 The scientific architecture is maintained as this single LaTeX textbook.  Every major code path, benchmark and candidate formalism must be represented here at its actual epistemic status.  Supplemental Markdown can contain operational detail, but a scientific definition or validation rule that affects interpretation may not exist only in a chat transcript or dashboard.
 
-A successful PDF build proves that the LaTeX source is buildable; it does not prove that the source is current relative to the repository.  Therefore documentation reconciliation is a separate requirement: when a merged change alters implementation status, benchmark evidence, nonclaims or the next open gate, \texttt{README.md}, \texttt{STATUS.md}, the relevant textbook chapter and its appendices must be reviewed against the new \texttt{main} state.
+A successful PDF build proves that the LaTeX source is buildable; it does not prove that the source is current relative to the repository.  Therefore documentation reconciliation is a separate requirement: when a merged change alters implementation status, benchmark evidence, semantic-card coverage, nonclaims or the next open gate, \texttt{README.md}, \texttt{STATUS.md}, the relevant textbook chapter and its appendices must be reviewed against the new \texttt{main} state.
 
 \section{Repository Source of Truth}
 The GitHub repository default branch \texttt{main} is the project Source of Truth.  Research branches may contain candidate work and reconciliation patches, but a branch name from an earlier workstream is not current canon merely because an older workflow still references it.
@@ -41,7 +66,7 @@ The GitHub repository default branch \texttt{main} is the project Source of Trut
 Continuous-integration triggers for the maintained textbook, bibliography and compound/molecular regression surfaces must therefore validate \texttt{main} and pull requests targeting \texttt{main}.  Manual dispatch may be retained for reproducibility, but historical branch-only triggers are not an adequate release contract.
 
 \section{Continuous-integration build}
-The maintained textbook gate runs Python test discovery, repository-structure checks, the live bibliography audit, LaTeX/BibTeX compilation, unresolved-reference rejection, hashes and PDF artifact upload.  The dedicated bibliography gate independently compiles the modular bibliography when manuscript/bibliography files change.  The compound/molecular regression gate parses the relevant JSON ledgers and verifies the current v0.13/v0.14 surfaces.
+The maintained textbook gate runs Python test discovery, repository-structure checks, the live bibliography audit, LaTeX/BibTeX compilation, unresolved-reference rejection, hashes and PDF artifact upload.  The dedicated bibliography gate independently compiles the modular bibliography when manuscript/bibliography files change.  The compound/molecular regression gate parses the relevant JSON ledgers, verifies current v0.13/v0.14 surfaces and enforces semantic-card coverage/epistemic separation.
 
 A CI infrastructure or account/billing failure is reported separately from software/scientific failure.  Absence of a workflow run is not a PASS.
 
@@ -58,4 +83,4 @@ The same distinction applies after merge: code or evidence may be canonical repo
 \section{PDF acceptance}
 A release-quality textbook build requires more than a successful TeX exit code.  The PDF must be rendered and inspected for clipping, overlapping text, broken glyphs, malformed tables and unresolved references.  The page count, build log and hashes should be recorded with the release artifact.  If the rendered document and the source disagree visually, the rendered document controls the acceptance decision.
 
-A PDF is considered a current project snapshot only when both conditions hold: it builds from the declared repository state and the manuscript has been reconciled against the merged code/benchmark state it claims to describe.
+A PDF is considered a current project snapshot only when both conditions hold: it builds from the declared repository state and the manuscript has been reconciled against the merged code/benchmark/card state it claims to describe.
