@@ -66,3 +66,22 @@ is preserved as a result; no candidate-specific rescue is permitted.
 
 See bibliography key `pyscf_dft_grid_docs_2026` and the existing PySCF program
 reference `sun_et_al_2020_pyscf`.
+
+## Subsequent execution state — provenance update, not amendment rewrite
+
+The historical status above remains unchanged: the amendment itself was made
+before screening output existed. Later execution has now established the
+following downstream state without changing the amendment:
+
+- amended F2 + KrF2 structured backend smoke: **PASS**, durably recorded in
+  `benchmarks/MOLECULAR_BACKEND_SMOKE_V0_14A1_EXECUTION.json`;
+- common F2/Cl2/Br2 ligand-dimer prepass: recorded in
+  `benchmarks/MOLECULAR_DIMER_PREPASS_V0_14A1_EXECUTION.json`;
+- eight of nine XY2 formula receipts recovered from the first full workflow;
+- 40 of 45 frozen starts have durable first-attempt evidence;
+- `ArBr2` remains `MISSING_EXECUTION`;
+- no Hessian/local-minimum admission or topology verdict has been performed.
+
+This follow-up does not retroactively alter what was known when A1 was frozen.
+For the constrained partial interpretation, see
+`docs/molecular_state_relaxation_v0_14a1_partial_readout.md`.

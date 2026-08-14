@@ -3,7 +3,26 @@ name: period2-active-ci
 on:
   push:
     branches:
-      - period2-correlation-ci-v0.1
+      - main
+    paths:
+      - reschem/period2_*.py
+      - reschem/carbon_*.py
+      - tests/test_period2_*.py
+      - tests/test_carbon_*.py
+      - benchmarks/PERIOD2_*.json
+      - benchmarks/CARBON_*.json
+      - .github/workflows/period2-active-ci.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - reschem/period2_*.py
+      - reschem/carbon_*.py
+      - tests/test_period2_*.py
+      - tests/test_carbon_*.py
+      - benchmarks/PERIOD2_*.json
+      - benchmarks/CARBON_*.json
+      - .github/workflows/period2-active-ci.yml
   workflow_dispatch:
 
 jobs:

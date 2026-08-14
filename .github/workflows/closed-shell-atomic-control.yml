@@ -1,15 +1,7 @@
 name: closed-shell-atomic-control-v0.11
 
+# Frozen experiment replay: no automatic branch trigger.
 on:
-  push:
-    branches:
-      - compound-relations-v0.3
-    paths:
-      - reschem/closed_shell_atomic_control.py
-      - scripts/run_closed_shell_atomic_control_v0_11.py
-      - scripts/run_closed_shell_atomic_quality_v0_11b.py
-      - benchmarks/CLOSED_SHELL_ATOMIC_CONTROL_PREREG_V0_11.json
-      - .github/workflows/closed-shell-atomic-control.yml
   workflow_dispatch:
 
 jobs:

@@ -1,7 +1,7 @@
 \chapter{Equation-to-Code Map}
 \label{app:implementation-map}
 
-The purpose of this appendix is to make the textbook executable in the scientific sense: a reader should be able to locate the code that realizes each major model class and the tests that constrain it.  Paths refer to the repository root.
+The purpose of this appendix is to make the textbook executable in the scientific sense: a reader should be able to locate the code that realizes each major model class and the tests or receipts that constrain it.  Paths refer to the repository root.
 
 \begingroup
 \small
@@ -36,12 +36,28 @@ Carbon state-average $p$ relaxation & \path{reschem/carbon_state_averaged_orbita
 Knot conformal exploration & \path{reschem/knot_conformal_analysis.py} & conformal utility tests; direct spectral interpretation rejected by null control \\
 Shell N-body topology & \path{reschem/shell_nbody_topology.py} & shell-capacity, duality, winding, parity and conformal-inverse tests \\
 Shell symmetry v0.2 & \path{reschem/shell_symmetry.py} & particle--hole involution tests independent of atom labels \\
+Compound relation skeleton & \path{reschem/compound_shell_relations.py}, \path{reschem/relation_graph.py} & v0.1/v0.3 structural candidate tests and benchmark ledgers \\
+Three-centre relation mode & \path{reschem/hyperrelation.py} & B$_2$H$_6$/bridged-halide structural bookkeeping tests; no literal fractional-electron claim \\
+Coordination/reorganization & \path{reschem/coordination_ladder.py}, \path{reschem/parity_validation.py} & parity-matched v0.6 null and ladder regression tests \\
+Energetic admission contract & \path{reschem/energetic_admission.py} & fail-closed data structures and preregistered v0.8 reaction/method contract \\
+Closed-shell activation & \path{reschem/closed_shell_activation.py} & v0.9 nine-composition atlas and no-element-special-case tests \\
+Electronic topology admission & \path{reschem/electronic_topology.py} & independent diagnostic-family aggregation tests; insufficient evidence remains UNKNOWN \\
+Competing compound-state ensemble & \path{reschem/compound_state_ensemble.py} & \path{benchmarks/COMPOUND_STATE_ENSEMBLE_V0_13.json}; 27 unranked states and no prior scores \\
+Common molecular-state relaxation & \path{reschem/molecular_state_relaxation.py} & v0.14A preregistration, v0.14A1 backend/dimer receipts, and partial eight-of-nine formula readout \\
+Molecular execution provenance wrapper & \path{scripts/wrap_molecular_relaxation_v0_14a1.py} & \path{tests/test_molecular_execution_wrapper.py} and rerun-scope provenance guard \\
 \bottomrule
 \end{longtable}
 \endgroup
+
+\section{Control backend boundary}
+The v0.14 molecular relaxation module uses PySCF/geomeTRIC as conventional numerical backends.  Those packages do not define the Resonant-Chemistry relational state taxonomy, gate semantics or scientific promotion rules.  The project layer defines the frozen method policy, common seed generation, failure preservation and receipts; the backend supplies conventional electronic energies, gradients and geometry optimization.
+
+Future orchestration may expose the same operations through a PhaseNav-native command/gate surface.  Such orchestration must preserve the conventional results and provenance and may not rewrite a backend failure or energy to satisfy a relational hypothesis.
 
 \section{No hidden physical authority}
 A function name, semantic-card field or 36D encoding is not granted physical authority by appearing in this map.  The equation in the textbook and the benchmark acceptance rule jointly define what the implementation is supposed to compute.  If code and documentation diverge, the discrepancy is a defect to be resolved rather than permission to reinterpret the equation silently.
 
 \section{Reproducibility convention}
-Every new solver module should ship with: a deterministic or tolerance-bounded test; a machine-readable benchmark when numerical output is scientifically discussed; a monograph section giving the governing equations and approximations; and a receipt or commit reference sufficient to identify the tested implementation.  Exploratory notebooks or dashboards may visualize results, but they are not the sole repository of a scientific claim.
+Every new solver or candidate module should ship with: a deterministic or tolerance-bounded test; a machine-readable benchmark/receipt when numerical output is scientifically discussed; a monograph section giving the governing equations and approximations; and provenance sufficient to identify the tested implementation.  Exploratory notebooks or dashboards may visualize results, but they are not the sole repository of a scientific claim.
+
+Merged changes that alter implementation status, validation state or the current open gate must trigger documentation reconciliation.  `main` is the project Source of Truth; historical research branch names are not a substitute for current repository state.

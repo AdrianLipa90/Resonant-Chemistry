@@ -42,9 +42,24 @@ The working monograph currently uses `\nocite{*}` so the live source ledger is
 visible in the compiled PDF even before every new development note has been
 converted into a dedicated textbook chapter with inline `\cite{...}` calls.
 
-CI gates:
+## Source-of-truth and CI contract
 
-- `.github/workflows/compound-relations-ci.yml` runs full Python test discovery,
-  benchmark JSON parsing, the DOI/key/wiring audit, and branch-surface checks;
-- `.github/workflows/bibliography-ci.yml` compiles the monograph through
+The repository default branch `main` is the project Source of Truth. The
+bibliography ledger is therefore maintained in the repository and mirrored to
+other continuity/provenance stores only as a secondary copy.
+
+Maintained gates:
+
+- `.github/workflows/compound-relations-ci.yml` runs on `main`, pull requests
+  targeting `main`, and manual dispatch. It performs full Python test discovery,
+  compound/molecular benchmark JSON parsing, the DOI/key/wiring audit, and
+  current-surface checks.
+- `.github/workflows/bibliography-ci.yml` runs on manuscript/bibliography changes
+  to `main` and pull requests targeting `main`; it compiles the monograph through
   LaTeX/BibTeX and rejects unresolved citations/references.
+- `.github/workflows/monograph-ci.yml` is the full repository/textbook gate and
+  also audits the live bibliography before producing the current textbook PDF.
+
+Historical experiment workflows may remain manually replayable for provenance,
+but a successful historical workflow is not a substitute for validating the
+current `main` manuscript and bibliography.

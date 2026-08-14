@@ -3,7 +3,18 @@ name: resonant-chemistry-web
 on:
   push:
     branches:
-      - interactive-web-v0.1
+      - main
+    paths:
+      - web/**
+      - benchmarks/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
+      - .github/workflows/web-ci.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - web/**
+      - benchmarks/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json
+      - .github/workflows/web-ci.yml
   workflow_dispatch:
 
 jobs:

@@ -1,12 +1,12 @@
 # Resonant Chemistry Status
 
-## 2026-08-14 — compound relation / molecular-state checkpoint
+## 2026-08-14 — repository reconciliation checkpoint
 
-State: **CONTROL PHYSICS BASELINE PRESERVED / COMPOUND CANDIDATE STACK v0.1–v0.13 IMPLEMENTED / SOFTWARE+PROVENANCE CI ACTIVE / PHYSICAL ADMISSION PARTIAL / CANON NOT PROMOTED**
+State: **CONTROL PHYSICS BASELINE PRESERVED / COMPOUND CANDIDATE STACK v0.1–v0.13 IMPLEMENTED / v0.14A1 MOLECULAR SCREEN PARTIALLY EXECUTED / SOFTWARE+PROVENANCE GATES ACTIVE / PHYSICAL ADMISSION PARTIAL / CANON NOT PROMOTED**
 
-Integration branch: `compound-relations-v0.3`.
+Source of Truth: **GitHub repository `AdrianLipa90/Resonant-Chemistry`, default branch `main`**.
 
-`main` is not modified by this working checkpoint.
+This status describes the state that has already been merged to `main` through merge commit `346fd8790846d776cbb826a540e6a27e20b653aa`. Research/reconciliation branches may contain newer unmerged documentation, but they do not replace `main` as project SoT.
 
 ## Operational contract
 
@@ -18,7 +18,10 @@ Integration branch: `compound-relations-v0.3`.
 - failures remain visible; no target-specific rescue branch may erase a preregistered failure;
 - predictions are not deleted after contradictory evidence appears;
 - missing literature is not a negative chemical-existence label;
-- any technical source used by an active gate is added to the live bibliography in the same development iteration.
+- missing execution, cancellation, or timeout is not a chemical falsification;
+- first-attempt/frozen receipts remain distinguishable from reruns;
+- any technical source used by an active gate is added to the live bibliography in the same development iteration;
+- implementation/runtime orchestration may be PhaseNav-native, but an external conventional electronic-structure backend remains an isolated control adapter and does not define Resonant-Chemistry semantics.
 
 ## Control-physics baseline
 
@@ -26,11 +29,13 @@ The pre-existing H–Kr atomic stack remains the control substrate: analytic/num
 
 No compound-relation correction is inserted into those control Hamiltonians.
 
+The first state-averaged active–external carbon relaxation gate has already demonstrated a variationally informative radial-p direction under a frozen equal-weight `3P/1D/1S` objective. The next carbon control frontier is multidimensional state-averaged orbital optimization/MCSCF-type relaxation without experimental term-energy fitting.
+
 ## Compound trajectory v0.1–v0.8
 
 ### v0.1 — nearest-closed-shell relation skeleton
 
-`d(v)=min(v,C-v)` and binary endpoint balance `n_A d_A = n_B d_B`.
+`d(v)=min(v,C-v)` with binary endpoint balance `n_A d_A = n_B d_B`.
 
 - 231 H–Kr main-group binary skeleton candidates;
 - Sc–Zn fail closed;
@@ -50,11 +55,11 @@ The formula hit count is not a general chemistry accuracy claim.
 
 `sum_j b_ij=d_i`, `b_ij in {0,1,2,3}`, connected.
 
-Coarse controls recover H2/F2/O2/N2/H2O/NH3/CH4/CO2/HCN/C2H2/C2H4/C2H6 patterns. B2H6/PCl5/SF6/KrF2 remain explicit failures.
+Coarse controls recover H2/F2/O2/N2/H2O/NH3/CH4/CO2/HCN/C2H2/C2H4/C2H6 patterns. B2H6/PCl5/SF6/KrF2 remain explicit failures of that frozen layer.
 
 ### v0.4 — three-centre bridge candidate
 
-A separate `1:2:1` half-unit hyperrelation closes B2H6 with two bridges plus four terminal relations and transfers structurally to Al2Cl6/Al2Br6/Ga2Cl6. Half-units are bookkeeping, not literal fractional electrons.
+A separate `1:2:1` half-unit hyperrelation closes B2H6 with two bridges plus four terminal relations and transfers structurally to bridged Al/Ga halides. Half-units are bookkeeping, not literal fractional electrons.
 
 ### v0.5 — coordination/reorganization ladder
 
@@ -68,7 +73,7 @@ On sequential SF_n dissociation, M0 parity and M1 shell ladder are identical. Ve
 
 ### v0.7 — held-out ligand-family lookup
 
-Existence lookup proved non-discriminating: resolved positives were predicted by both M0 and M1, while missing reports could not supply valid negatives. The primary target was therefore changed to a common computable physical observable.
+Existence lookup proved non-discriminating: resolved positives were predicted by both M0 and M1, while missing reports could not supply valid negatives. The target was therefore changed to a common computable physical observable.
 
 ### v0.8 — energetic admission contract
 
@@ -78,17 +83,15 @@ Preregistered pair-loss control:
 
 `DeltaE_pair = E(XY_(n-2)) + E(Y2) - E(XY_n)`.
 
-Frozen conventional policy: r2SCAN-3c geometry/Hessian/ZPE screen followed by DLPNO-CCSD(T1)/TightPNO high-level confirmation under one common method/basis/environment policy. This is a conventional control gate, not a Resonant-Chemistry energy term.
+Frozen high-level conventional policy: r2SCAN-3c geometry/Hessian/ZPE screen followed by DLPNO-CCSD(T1)/TightPNO confirmation under one common method/basis/environment policy. This is a conventional control gate, not a Resonant-Chemistry energy term. It remains distinct from the lower-cost v0.14 relaxation screen.
 
 ## Closed-shell topology trajectory v0.9–v0.10
 
 ### v0.9 — generic closed-shell activation branch
 
-KrF2 motivated the gate but krypton is not special-cased.
+KrF2 motivated the gate but krypton is not special-cased. Eligibility inside H–Kr gives centres Ne/Ar/Kr and ligands F/Cl/Br, producing nine `XY2` structural candidates with a linear 3c4e branch.
 
-Eligibility inside H–Kr gives centres Ne/Ar/Kr and ligands F/Cl/Br, producing nine `XY2` structural candidates with a linear 3c4e branch.
-
-Post-freeze evidence showed immediately that **stoichiometry is not topology**: KrF2 has established three-centre bonding descriptions, while KrCl2 and several rare-gas halogen systems have van der Waals reference classes.
+Post-freeze evidence showed immediately that **stoichiometry is not topology**: KrF2 has established activated/three-centre bonding descriptions, while several rare-gas halogen systems have van-der-Waals reference classes.
 
 ### v0.10 — electronic-topology admission
 
@@ -100,71 +103,32 @@ Frozen independent diagnostic families:
 
 A stable topology label requires at least two agreeing independent families and no informative opposing family. Conflicts remain mixed; insufficient evidence remains UNKNOWN. The 2-of-3 rule is a validation contract, not a physical constant.
 
-Post-preregistered literature classes NeCl2, NeBr2 and ArBr2 as van der Waals systems, conflicting with the broad v0.9 3c4e branch. Formal v0.10 remains UNKNOWN until a second admitted diagnostic family exists. KrBr2 remains UNKNOWN.
+Primary literature classes NeCl2, NeBr2 and ArBr2 as van-der-Waals systems, conflicting with the broad structural v0.9 3c4e branch. Formal v0.10 labels remain conservative until sufficient admitted diagnostic families exist.
 
 ## Atomic explanatory-control trajectory v0.11–v0.12
 
-### v0.11 — first atomic finite-difference control attempt
+### v0.11 — atomic finite-difference control attempt
 
 Raw vector used the existing atomic HF control only:
 
 - `I_X^HF = E(X+) - E(X)`;
 - `A_Y^HF = E(Y) - E(Y-)`;
 - `Delta_CT^HF = I_X^HF - A_Y^HF`;
-- neutral outer-`p` radial descriptors.
+- neutral outer-p radial descriptors.
 
-No scalar classifier or fitted threshold was defined.
+No scalar classifier or fitted threshold was defined. Targeted diagnostics localized F-/Br- failures, and a canonical-fidelity audit showed that first-passing neutral energies were not precise enough to support the intended finite-difference descriptor. Therefore v0.11 is **not admitted as a precision chemistry classifier**.
 
-The first physical run failed closed. Targeted v0.11C localized the failures:
+### v0.12A/B — common global numerical scans
 
-- F neutral PASS; F- FAIL because SCF converged to a state with virial residual ~18.09 Ha;
-- Br neutral PASS; Br- FAIL after 700 iterations with virial residual ~9.54 Ha;
-- both are `anion_only_failure` under the frozen broad quality gate.
+All twelve Ne/Ne+/Ar/Ar+/Kr/Kr+/F/F-/Cl/Cl-/Br/Br- states were run through common globally enlarged spaces without target-specific rescue.
 
-A separate canonical-fidelity audit showed that first-passing neutral energies were not numerically identical to the previously frozen neutral checkpoints, especially for Br/Kr. Therefore v0.11 finite-difference energies are **not admitted as a precision chemistry descriptor**.
+v0.12A showed that F- and Br- enter a viable low-virial branch only at the largest tested L2 space. v0.12B continued every state to the same L3 and found small attachment drifts for F/Cl/Br but a counterexample in neutral Kr: its L3 virial quality worsened and the Kr ionization difference moved substantially.
 
-### v0.12A — global L0/L1/L2 numerical scan
-
-All twelve states Ne/Ne+/Ar/Ar+/Kr/Kr+/F/F-/Cl/Cl-/Br/Br- were run through the same globally enlarged radial spaces without early acceptance and without selecting a numerical convergence threshold.
-
-Verified workflow run: `31783012784`, head `71175b86c98fcec6f775ace798c130ad144ba541`, combined artifact SHA256 `105954c3a8372f956b4f581f99cf25e44505df00222f6df6f257ac0cd64b60ad`.
-
-Important observations:
-
-- F- changes to a low-virial converged branch only at L2;
-- Br- changes from nonconverged L0/L1 to converged low-virial L2;
-- Ne/Ar/Kr ionization matched differences and Cl attachment show decreasing drift through L2;
-- F/Br attachment differences are not stable across v0.12A because the anions change numerical branch at the terminal level.
-
-No L2 value was declared converged.
-
-### v0.12B — common L3 continuation
-
-Because F-/Br- entered their viable branch only at L2, a further identical L3 was frozen for all twelve states before any convergence criterion was proposed:
-
-- basis 32;
-- grid 2200;
-- `zeta_min=0.0025`;
-- `r_max=300 bohr`;
-- common late-stage DIIS/damping settings;
-- no target-specific rescue.
-
-Verified workflow run: `31783601291`, head `7566987863f0b7a750e5c40fdb1747e3ab9d5b95`, combined artifact SHA256 `1e8e4c44a29dbdb0ca67528688cca56279d4fcbb912125d6967ce3bf91245050`.
-
-Results:
-
-- F- and Br- remain SCF-converged on the L3 branch with small virial residuals;
-- attachment drift L2->L3 is small for F (~9.78e-5 Ha), Cl (~1.12e-4 Ha), and Br (~2.57e-4 Ha);
-- Ne/Ar ionization drift remains small;
-- **neutral Kr is the counterexample to monotonic diffuse extension**: L3 virial rises to ~5.09 Ha and Kr ionization drift jumps to ~0.0465 Ha.
-
-Verdict: **do not fit or promote a chemistry classifier from the v0.11/v0.12 atomic energy-difference path at this stage**. Global diffuse extension improves the anion problem but is not uniformly quality-improving across the full state set.
-
-No post-hoc convergence tolerance is selected and no L4 continuation is launched automatically.
+Verdict: **do not fit or promote a molecular chemistry classifier from the v0.11/v0.12 atomic finite-difference path at this stage**. No post-hoc convergence tolerance was selected.
 
 ## v0.13 — competing relational-state ensemble
 
-The core architectural update is:
+Core architecture:
 
 `composition -> unranked ensemble of relational states -> physical admission`
 
@@ -178,76 +142,120 @@ For every frozen v0.9 closed-shell `XY2` composition, v0.13 generates the same t
 2. `WEAK_COMPLEX_LINEAR_END_ON`;
 3. `WEAK_COMPLEX_T_SHAPED`.
 
-Nine compositions therefore yield 27 state candidates.
+Nine compositions yield 27 state candidates. Every state has `prior_rank=None` and `prior_probability=None`; already-known KrF2/VDW examples are not converted into priors. Physical selection remains delegated to conventional energetic/local-minimum controls and v0.10 multi-diagnostic electronic-topology admission.
 
-Every state has `prior_rank=None` and `prior_probability=None`; known KrF2/VDW cases are not converted into priors. The implementation rejects prior ranking at this layer.
+## v0.14A/A1 — common molecular-state relaxation screen
 
-Physical selection remains delegated to:
+### Original v0.14A preregistration
 
-- conventional energetic/local-minimum controls;
-- v0.10 multi-diagnostic electronic-topology admission.
+v0.14A is a **conventional screening layer**, not a Resonant-Chemistry molecular-energy law. The common method was frozen before molecular relaxation outputs:
 
-The physical layer may select one state, multiple metastable states, or reject all enumerated states.
+- PySCF 2.14.0 + geomeTRIC 1.1.1;
+- B97M-V/VV10;
+- def2-TZVPD;
+- neutral singlets, gas phase;
+- common SCF and optimizer policy;
+- no candidate-specific rescue;
+- no Hessian in this screen;
+- no geometry-only topology verdict.
 
-This ensemble architecture also captures the broader lesson of B2H6 and PCl5/SF6: new relation modes should coexist as competing branches rather than silently overwrite the lower-level relation law.
+F2/Cl2/Br2 are relaxed first from one common 2.0 Å start. Their optimized `r_YY` values are used only as method-internal seed scales. Each of the nine XY2 compositions then receives the same five starts: three symmetric activated-linear seeds (`1.0`, `1.3`, `1.6` times `r_YY`), one weak end-on seed, and one weak T-shaped seed. Total frozen work: 45 XY2 relaxations.
+
+### v0.14A1 global grid amendment
+
+The original backend smoke exposed a PySCF SG-1 pruning limitation for Kr during VV10/NLC grid construction before a KrF2 energy was produced. The amendment was recorded **post-smoke / pre-screening-output** and changed only numerical pruning: both regular and NLC grids use the common PySCF `nwchem_prune` policy. B97M-V, VV10, def2-TZVPD, grid sizes, SCF policy, optimizer settings, seed geometries, and no-rescue rules remained unchanged.
+
+The amended backend smoke subsequently passed and the common ligand-dimer prepass was durably recorded.
+
+### v0.14A1 partial execution evidence
+
+Original workflow: `31795895258`, frozen execution head `db756f5aa8598a24004f056aeb09b18034a08e5b`.
+
+Durably recovered first-attempt formula receipts:
+
+- NeF2, NeCl2, NeBr2;
+- ArF2, ArCl2;
+- KrF2, KrCl2, KrBr2.
+
+Current durable matrix: **8/9 formulae, 40/45 frozen starts**.
+
+`ArBr2` remains **`MISSING_EXECUTION`** after cancellation during the five-start job. This is an execution gap, not a negative chemical label. A later GitHub matrix rerun re-executed a broader dependency scope than intended; the original first-attempt receipts remain the canonical v0.14A1 evidence for the eight already-completed formulae. Only a missing ArBr2 receipt may fill the existing gap without replacing those first-attempt records.
+
+Threshold-free descriptive observations from the persisted evidence:
+
+- for every completed composition, the lowest successful *screening* electronic energy belongs to a weak-complex seed family;
+- KrF2 has 3/3 successful activated starts; the symmetric activated basin is near `r(Kr-F) ~ 1.883 Å` and lies about `9.288 kcal/mol` above the lowest successful weak-linear screening state under this common screen;
+- ArF2 activated starts: 3/3; corresponding activated-to-lowest-weak screening gap about `37.99 kcal/mol`;
+- NeF2 activated starts: 2/3; corresponding gap about `95.93 kcal/mol`;
+- NeCl2 and NeBr2: 0/3 successful activated starts, while both weak seed families complete;
+- ArCl2: 2/3 activated starts complete;
+- KrCl2: 2/3;
+- KrBr2: 1/3;
+- successful weak-complex states retain Y-Y distances close to the same-method ligand-dimer prepass values.
+
+These are **basin-screen/convergence observations only**. They do not establish harmonic minima, ground states, dissociation stability, or 3c4e/VDW electronic topology.
+
+## Current molecular gate boundary
+
+The v0.14A1 preregistration/readout contract blocks a Hessian gate until all nine formula receipts / all 45 starts are durably present.
+
+Therefore the immediate molecular frontier is:
+
+1. complete **only the missing ArBr2 execution evidence** under the same frozen A1 policy, preserving timeout/cancellation as UNKNOWN if execution again fails;
+2. obtain a complete 9/9, 45/45 screening ledger;
+3. only then freeze a separate v0.14B Hessian/local-minimum admission protocol;
+4. after local-minimum evidence exists, apply conventional energetic comparison and v0.10 multi-diagnostic electronic-topology admission;
+5. retain UNKNOWN whenever required independent evidence is absent.
+
+The older H2+/H2/HeH+/LiH molecular-control ladder remains scientifically useful as a complementary simple-system validation track, but it is no longer accurate to describe H2+ as the repository's first molecular implementation target: v0.14A/A1 molecular relaxation infrastructure now exists and has partial execution evidence.
 
 ## Live bibliography and provenance
 
-The working textbook uses the modular ledger `monograph/bibliography/*.bib`.
+The working textbook uses the modular ledger `monograph/bibliography/*.bib`:
 
 - `references.bib`: active/current sources;
-- `compound_legacy.bib`: backfilled older compound-track provenance.
+- `compound_legacy.bib`: backfilled older compound-track provenance;
+- `molecular_screening.bib`: B97M-V, PySCF, diffuse def2, geomeTRIC, and grid-pruning technical provenance for v0.14.
 
-Invariant enforced by CI:
+Invariant:
 
 - source DOI used in active compound docs/benchmarks but absent from the ledger -> FAIL;
 - duplicate BibTeX key or DOI -> FAIL;
-- bibliography module not wired into `monograph/main.tex` -> FAIL.
+- bibliography module not wired into `monograph/main.tex` -> FAIL;
+- manuscript build must reject unresolved citations/references.
 
-A dedicated LaTeX/BibTeX build gate has already passed and produced a PDF/hash receipt. New sources are added in the same development iteration; v0.12/v0.13 introduced no new external paper and therefore required no duplicate bibliography entries.
+A bibliography entry establishes provenance, not scientific promotion.
 
-## Current verification state
+## CI / repository reconciliation requirement
 
-Verified independent execution gates include:
+Historical workflow triggers were created on research branches. Because `main` is now the project SoT, the maintained CI contract must validate `main` and pull requests targeting `main`, while retaining explicit manual dispatch where useful. Branch names from completed historical tracks must not be the sole trigger for textbook, bibliography, or compound-regression gates.
 
-- complete v0.12A 12-state numerical scan: PASS as an execution/receipt gate;
-- complete v0.12B 12-state L3 continuation: PASS as an execution/receipt gate;
-- bibliography LaTeX/BibTeX/PDF build: PASS;
-- branch software/provenance CI: active on every push; current compound-state ensemble changes are subject to the same full Python-test, JSON, DOI and branch-surface checks.
-
-Scientific nonconvergence and failed physical controls are not converted into CI infrastructure failures unless a preregistered gate explicitly requires physical quality.
-
-## Open physical frontier
-
-The priority is now **state admission for compounds**, not further tuning of the atom-only descriptor:
-
-1. feed v0.13 competing states into a conventional common-method molecular control;
-2. preserve all local minima/isomers and compare their energies under one policy;
-3. apply v0.10 electronic-topology evidence to distinguish activated 3c4e from weak-complex states;
-4. keep UNKNOWN when the second independent topology family is absent.
-
-The conventional multicentre molecular solver remains a separate control frontier; the relational stack is an interface into it, not a substitute for Born–Oppenheimer/electronic-structure physics.
+The full manuscript and root documentation must be updated whenever a merged change materially changes current implementation status, numerical evidence, open gates, or nonclaims. A PDF can be build-correct yet scientifically stale if the underlying LaTeX has not been reconciled with merged repository evidence.
 
 ## TIR / PhaseNav admission
 
 - `kappa = ln(2)/(24*pi)` remains model-defined metadata;
 - `W_AB` remains reserved/candidate until tied to a no-refit observable;
-- 36D PhaseNav remains a representation interface, not proof of 36 physical dimensions;
+- 36D PhaseNav remains a representation/orchestration interface, not proof of 36 physical dimensions;
+- new orchestration functions may be PhaseNav-native, but conventional quantum-chemistry backends remain isolated control adapters;
 - semantic/affective mappings may consume immutable controls but may not rewrite physical control outcomes;
-- no TIR or affective correction is promoted into atomic or molecular energies.
+- no TIR, PhaseNav, or affective correction is promoted into atomic or molecular energies.
 
 ## Not claimed
 
 - a validated knot-shell law;
 - a topological force term in a physical Hamiltonian;
 - a validated Resonant-Chemistry molecular-energy solver;
+- a complete v0.14A1 molecular screen before ArBr2 is recovered;
+- harmonic local-minimum status for v0.14A1 relaxed geometries;
+- a validated ground-state ranking from v0.14A1 screening energies;
+- 3c4e/VDW topology from stoichiometry, seed label, geometry, one QTAIM point, or one orbital picture alone;
 - literal fractional-electron meaning of v0.4 half-units;
 - literal expanded-octet/d-orbital mechanism for v0.5;
 - independent physical novelty of the v0.5 `+2` sequence;
 - general chemical accuracy from v0.2 formula screening;
-- 3c4e topology from stoichiometry/linearity/one QTAIM point/one orbital picture alone;
-- quantitative molecular prediction from the retired v0.11 atomic finite-difference path;
-- numerical convergence of every v0.12 L2/L3 atomic energy;
+- quantitative molecular prediction from the retired/non-admitted v0.11 atomic finite-difference path;
+- numerical convergence of every v0.12 absolute atomic energy;
 - completeness of the v0.13 state ensemble;
 - complete transition-metal, hypervalent, radical, electron-deficient, or noble-gas chemistry;
 - canonical promotion of the compound candidate stack.
