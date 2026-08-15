@@ -10,12 +10,15 @@ if str(ROOT) not in sys.path:
 
 from reschem.entity_registry import CardRegistry
 from reschem.molecular_semantic_projection import project_molecular_screen_readout
+from reschem.phasenav_chem import FROZEN_METHOD_POLICY_SHA256, assert_frozen_method_gate
 from reschem.semantic_projection import generate_compound_candidate_cards, generate_relational_state_cards
+from reschem.molecular_state_relaxation import xy2_seed_geometries
 
 CARDS = ROOT / "semantic_cards"
-COVERAGE = CARDS / "SEMANTIC_CARD_COVERAGE_V0_14A1.json"
+COVERAGE = CARDS / "SEMANTIC_CARD_COVERAGE_V0_14A2.json"
 COMPOUND_OVERLAYS = CARDS / "COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl"
 MOLECULAR_OVERLAYS = CARDS / "MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl"
+A2_OVERLAYS = CARDS / "MOLECULAR_EXECUTION_PARTITION_V0_14A2.jsonl"
 MOLECULAR_BENCHMARK = ROOT / "benchmarks" / "MOLECULAR_STATE_RELAXATION_PARTIAL_READOUT_V0_14A1.json"
 
 H_TO_KR = [
@@ -88,8 +91,35 @@ def audit_relations_and_holonomy(records):
                 raise SystemExit(f"relation target ambiguity: {record.get('card_id')}")
 
 
+def audit_a2_execution_partition(records):
+    if assert_frozen_method_gate() != FROZEN_METHOD_POLICY_SHA256:
+        raise SystemExit("v0.14A2 frozen method gate drift")
+
+    model_id = "MODEL:MOLECULAR_EXECUTION_PARTITION:v0.14A2"
+    model = next((r for r in records if r.get("card_id") == model_id), None)
+    if model is None:
+        raise SystemExit("missing v0.14A2 execution-partition model card")
+    assert_unassigned(model, "v0.14A2 model")
+    control = model.get("physical_control", {})
+    if control.get("seed_count") != 5 or control.get("method_changed") is not False:
+        raise SystemExit("v0.14A2 model-card frozen execution contract drift")
+
+    unit_records = [r for r in records if r.get("entity_level") == "molecular_seed_execution_unit"]
+    expected = [seed.seed_id for seed in xy2_seed_geometries("Ar", "Br", 1.0)]
+    got = [r.get("identity", {}).get("seed_id") for r in unit_records]
+    if got != expected:
+        raise SystemExit(f"v0.14A2 execution-unit identity drift: {got} != {expected}")
+    for record in unit_records:
+        assert_unassigned(record, "v0.14A2 execution unit")
+        physical = record.get("physical_control", {})
+        if physical.get("execution_status") != "PENDING":
+            raise SystemExit(f"v0.14A2 pre-execution card must remain PENDING: {record.get('card_id')}")
+        if physical.get("no_rescue") is not True:
+            raise SystemExit(f"v0.14A2 no-rescue invariant missing: {record.get('card_id')}")
+
+
 def main():
-    required_files = [COVERAGE, COMPOUND_OVERLAYS, MOLECULAR_OVERLAYS, MOLECULAR_BENCHMARK]
+    required_files = [COVERAGE, COMPOUND_OVERLAYS, MOLECULAR_OVERLAYS, A2_OVERLAYS, MOLECULAR_BENCHMARK]
     missing = [str(p.relative_to(ROOT)) for p in required_files if not p.is_file()]
     if missing:
         raise SystemExit(f"missing semantic coverage surfaces: {missing}")
@@ -107,13 +137,16 @@ def main():
 
     compound_records = load_jsonl(COMPOUND_OVERLAYS)
     molecular_records = load_jsonl(MOLECULAR_OVERLAYS)
-    projection_records = compound_records + molecular_records
+    a2_records = load_jsonl(A2_OVERLAYS)
+    projection_records = compound_records + molecular_records + a2_records
     projection_ids = {record.get("card_id") for record in projection_records}
     uncovered = sorted(stage_ids - projection_ids)
     if uncovered:
         raise SystemExit(f"model/gate semantic coverage missing: {uncovered}")
     for record in projection_records:
         assert_unassigned(record, "persisted projection")
+
+    audit_a2_execution_partition(a2_records)
 
     atomic_symbols = collect_atomic_symbols()
     missing_atoms = [symbol for symbol in H_TO_KR if symbol not in atomic_symbols]
@@ -180,6 +213,7 @@ def main():
         "generated_compound_candidate_cards": len(generated_compounds),
         "generated_relational_state_cards": len(generated_states),
         "generated_molecular_cards": len(generated_molecular),
+        "v0_14a2_execution_units": len([r for r in a2_records if r.get("entity_level") == "molecular_seed_execution_unit"]),
         "completed_formulae": len(completed),
         "missing_formulae": sorted(expected - completed),
     }, sort_keys=True))
