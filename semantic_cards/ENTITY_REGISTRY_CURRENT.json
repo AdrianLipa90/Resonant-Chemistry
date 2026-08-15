@@ -5,11 +5,15 @@
   "loader": "reschem.repository_cards.load_current_card_registry",
   "calculation_context": "reschem.repository_cards.calculation_context",
   "canonical_atom_index": "semantic_cards/ATOM_CARD_INDEX_CURRENT.json",
-  "persisted_model_gate_coverage": "semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json",
+  "persisted_model_gate_coverage": "semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A2.json",
   "generated_entity_populations": {
     "compound_relation_candidates_v0_1": 231,
     "relational_state_candidates_v0_13": 27,
     "molecular_v0_14A1": 10
+  },
+  "persisted_execution_populations": {
+    "molecular_execution_partition_models_v0_14A2": 1,
+    "ArBr2_seed_execution_units_v0_14A2": 5
   },
   "holonomy_contract": {
     "provenance_holonomy": "required deterministic lineage for generated entities",
@@ -31,5 +35,13 @@
     "hessian_admission": "NOT_RUN",
     "ground_state_ranking": "NOT_VALIDATED",
     "geometry_only_topology_assignment": "NOT_PROMOTED"
+  },
+  "execution_frontier": {
+    "version": "v0.14A2",
+    "status": "IMPLEMENTED_EXECUTION_PENDING",
+    "target_formula": "ArBr2",
+    "partition": "ONE_FROZEN_SEED_ONE_RECEIPT",
+    "method_changed": false,
+    "seed_policy_changed": false
   }
 }
