@@ -8,18 +8,18 @@ on:
       - .github/workflows/molecular-state-relaxation-v0.14a2.yml
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: read
+
 concurrency:
   group: molecular-state-relaxation-v0.14a2-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  arbr2-prepass:
+  arbr2-frozen-input:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      OMP_NUM_THREADS: "2"
-      MKL_NUM_THREADS: "2"
-      OPENBLAS_NUM_THREADS: "2"
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -27,57 +27,110 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Resonant Chemistry with frozen molecular backend
+      - name: Install Resonant Chemistry core command surface
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[molecular-v014]"
+          python -m pip install -e .
           python -m pip check
 
-      - name: Relax common Br2 dimer prepass
-        run: >-
-          python scripts/run_molecular_ligand_dimer_v0_14a.py
-          --ligand Br
-          --output-dir benchmarks/v0_14a2_dimers
+      - name: Download canonical first-attempt v0.14A1 Br2 receipt
+        uses: actions/download-artifact@v4
+        with:
+          name: molecular-dimer-v0.14a-Br
+          path: canonical-dimer
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 31795895258
 
-      - name: Freeze exact five-seed PhaseNav manifest
+      - name: Gate exact historical Br2 bytes and record provenance
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          source = Path('canonical-dimer/Br2.json')
+          raw = source.read_bytes()
+          raw_sha = hashlib.sha256(raw).hexdigest()
+          expected_raw_sha = '6c322bbc7ea31cfb51e4d195fcaeea32747e09447cd1dd56a8aab4771af19602'
+          if raw_sha != expected_raw_sha:
+              raise SystemExit(f'canonical Br2 byte hash drift: {raw_sha} != {expected_raw_sha}')
+
+          dimer = json.loads(raw)
+          if dimer.get('schema') != 'RESCHEM_MOLECULAR_LIGAND_DIMER_V0_14A':
+              raise SystemExit(f"unexpected Br2 schema: {dimer.get('schema')}")
+          if dimer.get('status') != 'DIMER_PREPASS_AVAILABLE':
+              raise SystemExit(f"unexpected Br2 status: {dimer.get('status')}")
+          if dimer.get('optimized_r_YY_angstrom') != 2.2842324866344543:
+              raise SystemExit(f"canonical Br2 rYY drift: {dimer.get('optimized_r_YY_angstrom')}")
+
+          out = Path('benchmarks/v0_14a2_frozen_input')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'Br2.json').write_bytes(raw)
+          provenance = {
+              'schema': 'RESCHEM_V0_14A2_FROZEN_INPUT_PROVENANCE_V1',
+              'role': 'FROZEN_V0_14A1_DIMER_INPUT',
+              'formula': 'Br2',
+              'source_workflow_run_id': 31795895258,
+              'source_head_sha': 'db756f5aa8598a24004f056aeb09b18034a08e5b',
+              'source_artifact_id': 9217426658,
+              'source_artifact_name': 'molecular-dimer-v0.14a-Br',
+              'source_artifact_digest': 'sha256:98379b5527657df1cd782c37f84f580a6405711e9ad730271615760abd5751e4',
+              'raw_json_sha256': raw_sha,
+              'optimized_r_YY_angstrom': dimer['optimized_r_YY_angstrom'],
+              'reuse_policy': 'EXACT_BYTES_NO_REOPTIMIZATION',
+              'epistemic_status': 'HISTORICAL_FIRST_ATTEMPT_INPUT_REUSED_FOR_EXECUTION_PARTITION_ONLY',
+          }
+          (out / 'CANONICAL_SOURCE.json').write_text(json.dumps(provenance, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps(provenance, indent=2))
+          PY
+
+      - name: Freeze exact five-seed PhaseNav manifest from canonical Br2
         run: >-
           phase chem seed-manifest
           --centre Ar
           --ligand Br
-          --dimer-json benchmarks/v0_14a2_dimers/Br2.json
+          --dimer-json benchmarks/v0_14a2_frozen_input/Br2.json
           --output benchmarks/v0_14a2_seed_manifest/ArBr2.json
 
-      - name: Validate Br2 and seed manifest
+      - name: Validate exact frozen seed identities
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          dimer = json.loads(Path('benchmarks/v0_14a2_dimers/Br2.json').read_text())
+
           manifest = json.loads(Path('benchmarks/v0_14a2_seed_manifest/ArBr2.json').read_text())
-          assert dimer['status'] == 'DIMER_PREPASS_AVAILABLE'
-          assert manifest['seed_count'] == 5
-          assert [x['seed_id'] for x in manifest['seeds']] == [
-              'ArBr2_activated_s1p0',
-              'ArBr2_activated_s1p3',
-              'ArBr2_activated_s1p6',
-              'ArBr2_weak_linear',
-              'ArBr2_weak_t',
-          ]
-          assert all(x['phase36']['dimension'] == 36 for x in manifest['seeds'])
-          print({'r_YY': dimer['optimized_r_YY_angstrom'], 'seed_count': manifest['seed_count']})
+          expected = {
+              'ArBr2_activated_s1p0': 'f4a3399a565ac2688ed568edb839c036d981006ef3a1d5ee57c9ce99edaca629',
+              'ArBr2_activated_s1p3': 'be90ec4a53bff85348b0ebfc45515e3e25a3ec96d5e52169720c0d46a8873127',
+              'ArBr2_activated_s1p6': 'bd5478a6059cdabe85c1732853177473bd2b3d78bb516a318ff416f958a0a30b',
+              'ArBr2_weak_linear': '05c956d722e890dc3f0a5845c3e058681bf602c77560ace58a575d2df6c06101',
+              'ArBr2_weak_t': '866f804d66d2c865c1275b4d0c6f71e90d783b85cb9e831562fb668a244f1cfa',
+          }
+          if manifest['method_policy_sha256'] != '9b58d32d361bd2c2248c10859b12785aa9aa0244e18b5504f6cbb79d2abe366d':
+              raise SystemExit('frozen METHOD_POLICY hash drift')
+          got = {row['seed_id']: row['seed_identity_sha256'] for row in manifest['seeds']}
+          if got != expected:
+              raise SystemExit(f'frozen seed identity drift: {got} != {expected}')
+          if manifest['optimized_r_YY_angstrom'] != 2.2842324866344543:
+              raise SystemExit('manifest rYY does not equal canonical v0.14A1 value')
+          if not all(row['phase36']['dimension'] == 36 for row in manifest['seeds']):
+              raise SystemExit('phase36 dimension drift')
+          print({'r_YY': manifest['optimized_r_YY_angstrom'], 'seed_count': manifest['seed_count'], 'seed_hashes': got})
           PY
 
-      - name: Upload ArBr2 frozen prepass and seed manifest
+      - name: Upload exact frozen input and seed manifest
         uses: actions/upload-artifact@v4
         with:
           name: molecular-v0.14a2-ArBr2-prepass
           path: |
-            benchmarks/v0_14a2_dimers/Br2.json
+            benchmarks/v0_14a2_frozen_input/Br2.json
+            benchmarks/v0_14a2_frozen_input/CANONICAL_SOURCE.json
             benchmarks/v0_14a2_seed_manifest/ArBr2.json
           if-no-files-found: error
 
   arbr2-seed:
-    needs: arbr2-prepass
+    needs: arbr2-frozen-input
     runs-on: ubuntu-latest
     timeout-minutes: 48
     strategy:
@@ -107,7 +160,7 @@ jobs:
           python -m pip install -e ".[molecular-v014]"
           python -m pip check
 
-      - name: Download frozen ArBr2 prepass
+      - name: Download exact frozen ArBr2 input
         uses: actions/download-artifact@v4
         with:
           name: molecular-v0.14a2-ArBr2-prepass
@@ -119,7 +172,7 @@ jobs:
           --centre Ar
           --ligand Br
           --seed ${{ matrix.seed }}
-          --dimer-json prepass/v0_14a2_dimers/Br2.json
+          --dimer-json prepass/v0_14a2_frozen_input/Br2.json
           --timeout-seconds 2400
           --output-dir benchmarks/v0_14a2_seed_receipts
 
@@ -171,7 +224,7 @@ jobs:
           python -m pip install -e .
           python -m pip check
 
-      - name: Download frozen ArBr2 prepass
+      - name: Download exact frozen ArBr2 input
         uses: actions/download-artifact@v4
         with:
           name: molecular-v0.14a2-ArBr2-prepass
@@ -189,7 +242,7 @@ jobs:
           phase chem aggregate
           --centre Ar
           --ligand Br
-          --dimer-json prepass/v0_14a2_dimers/Br2.json
+          --dimer-json prepass/v0_14a2_frozen_input/Br2.json
           --seed-dir seed-receipts
           --output benchmarks/MOLECULAR_FORMULA_RELAXATION_ARBR2_V0_14A2.json
 
