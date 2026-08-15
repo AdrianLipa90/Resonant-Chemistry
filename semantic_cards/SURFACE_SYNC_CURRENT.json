@@ -1,20 +1,27 @@
 {
   "schema": "RESCHEM_SEMANTIC_SURFACE_SYNC_CURRENT_V0_1",
   "status": "SEMANTIC_THEORY_WEB_PARITY_REQUIRED",
-  "source_of_truth": "repository main scientific state",
+  "source_of_truth": "repository main scientific state plus branch execution frontier",
   "scientific_checkpoint": "v0.14A1",
+  "execution_frontier": "v0.14A2_CANONICAL_ARBR2_EXECUTION_PENDING",
   "semantic_surfaces": [
     "semantic_cards/ATOM_CARD_INDEX_CURRENT.json",
     "semantic_cards/ENTITY_REGISTRY_CURRENT.json",
-    "semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json",
+    "semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A2.json",
     "semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl",
-    "semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl"
+    "semantic_cards/MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl",
+    "semantic_cards/MOLECULAR_EXECUTION_PARTITION_V0_14A2.jsonl"
   ],
   "theory_surfaces": [
     "THEORY/02_ATOM_FORMALISM.md",
     "THEORY/03_SHELL_NBODY_TOPOLOGY.md",
     "THEORY/04_COMPOUND_RELATIONAL_ARCHITECTURE.md",
     "THEORY/05_SEMANTIC_ENTITY_GRAPH.md"
+  ],
+  "operational_surfaces": [
+    "docs/molecular_state_relaxation_v0_14a2_execution_partition.md",
+    ".github/workflows/molecular-state-relaxation-v0.14a2.yml",
+    "reschem/phasenav_chem.py"
   ],
   "web_surfaces": [
     "web/index.html",
@@ -29,9 +36,19 @@
     "ground_state_ranking": "NOT_VALIDATED",
     "geometry_only_topology_assignment": "NOT_PROMOTED"
   },
+  "execution_frontier_provenance": {
+    "frozen_input_run_id": 31795895258,
+    "frozen_input_artifact_id": 9217426658,
+    "frozen_input_raw_sha256": "6c322bbc7ea31cfb51e4d195fcaeea32747e09447cd1dd56a8aab4771af19602",
+    "frozen_r_YY_angstrom": 2.2842324866344543,
+    "method_policy_sha256": "9b58d32d361bd2c2248c10859b12785aa9aa0244e18b5504f6cbb79d2abe366d",
+    "reuse_policy": "EXACT_BYTES_NO_REOPTIMIZATION"
+  },
   "invariants": [
     "semantic projections are downstream of named repository evidence",
     "THEORY and web may summarize but may not promote scientific status",
+    "execution-frontier cards may advance before scientific checkpoint only when they remain epistemically pending",
+    "v0.14A2 reuses exact frozen v0.14A1 Br2 bytes and may not regenerate the prepass",
     "TIR semantic axes remain unassigned without explicit provenance",
     "affective mappings remain unassigned without explicit provenance",
     "provenance holonomy is not physical holonomy",
