@@ -1,0 +1,14 @@
+{
+  "schema": "RESCHEM_V0_14A2_FROZEN_INPUT_PROVENANCE_V1",
+  "role": "FROZEN_V0_14A1_DIMER_INPUT",
+  "formula": "Br2",
+  "source_workflow_run_id": 31795895258,
+  "source_head_sha": "db756f5aa8598a24004f056aeb09b18034a08e5b",
+  "source_artifact_id": 9217426658,
+  "source_artifact_name": "molecular-dimer-v0.14a-Br",
+  "source_artifact_digest": "sha256:98379b5527657df1cd782c37f84f580a6405711e9ad730271615760abd5751e4",
+  "raw_json_sha256": "6c322bbc7ea31cfb51e4d195fcaeea32747e09447cd1dd56a8aab4771af19602",
+  "optimized_r_YY_angstrom": 2.2842324866344543,
+  "reuse_policy": "EXACT_BYTES_NO_REOPTIMIZATION",
+  "epistemic_status": "HISTORICAL_FIRST_ATTEMPT_INPUT_REUSED_FOR_EXECUTION_PARTITION_ONLY"
+}
