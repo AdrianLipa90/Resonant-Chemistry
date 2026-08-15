@@ -119,7 +119,7 @@ jobs:
           --centre Ar
           --ligand Br
           --seed ${{ matrix.seed }}
-          --dimer-json prepass/benchmarks/v0_14a2_dimers/Br2.json
+          --dimer-json prepass/v0_14a2_dimers/Br2.json
           --timeout-seconds 2400
           --output-dir benchmarks/v0_14a2_seed_receipts
 
@@ -189,7 +189,7 @@ jobs:
           phase chem aggregate
           --centre Ar
           --ligand Br
-          --dimer-json prepass/benchmarks/v0_14a2_dimers/Br2.json
+          --dimer-json prepass/v0_14a2_dimers/Br2.json
           --seed-dir seed-receipts
           --output benchmarks/MOLECULAR_FORMULA_RELAXATION_ARBR2_V0_14A2.json
 
