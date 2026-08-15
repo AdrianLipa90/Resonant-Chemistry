@@ -12,6 +12,9 @@ dependencies = [
   "scipy>=1.11",
 ]
 
+[project.scripts]
+phase = "reschem.phasenav_chem:main"
+
 [project.optional-dependencies]
 # Frozen conventional backend used by the v0.14A/A1 molecular relaxation screen.
 # This extra is intentionally not a core dependency: PySCF/geomeTRIC remain
