@@ -107,6 +107,33 @@ These values are descriptive screen outputs only.  No activation law, threshold,
 
 A later rerun request re-executed a broader GitHub matrix scope than intended.  To preserve provenance, the original first-attempt receipts remain the v0.14A1 evidence for the eight already-completed formulae.  Only a future ArBr$_2$ receipt may fill the missing slot without replacing those first-attempt records.
 
+\section{Execution partition frontier: v0.14A2}
+The missing ArBr$_2$ slot exposed an execution-unit problem rather than a need for a new molecular model.  In v0.14A1 all five frozen starts for one formula were evaluated sequentially inside one formula job, so cancellation before final serialization could erase already-performed work.  Version v0.14A2 therefore changes only the execution partition:
+\begin{equation}
+\mathrm{one\ frozen\ seed}\longrightarrow\mathrm{one\ process}\longrightarrow\mathrm{one\ durable\ receipt},
+\end{equation}
+followed by deterministic reconstruction of the existing five-start formula receipt.  The frozen functional, basis, grids, SCF thresholds, optimizer thresholds, five seed rules and no-rescue policy are unchanged.
+
+The execution surface is exposed through the repository command
+\begin{equation}
+\code{phase\ chem\ seed-manifest},\quad
+\code{phase\ chem\ relax},\quad
+\code{phase\ chem\ aggregate}.
+\end{equation}
+Each execution unit receives a deterministic 36-component address derived from the frozen method-policy hash and seed-identity hash.  This address is explicitly model-defined routing/provenance metadata and is \emph{not} a measured molecular phase space or a physical holonomy observable.
+
+A further reproducibility constraint is required.  Re-running the Br$_2$ dimer optimization under nominally identical settings changed the optimized distance at approximately the $10^{-12}$~\AA{} level.  That variation is chemically negligible but changes the exact serialized seed coordinates and therefore their identity hashes.  v0.14A2 consequently reuses the exact first-attempt v0.14A1 Br$_2$ receipt bytes instead of reoptimizing the dimer.  The frozen source is workflow run \code{31795895258}, artifact \code{9217426658}, raw \code{Br2.json} SHA-256
+\begin{equation}
+\code{6c322bbc7ea31cfb51e4d195fcaeea32747e09447cd1dd56a8aab4771af19602},
+\end{equation}
+with $r_{YY}=2.2842324866344543$~\AA{}.  The reuse policy is \code{EXACT\_BYTES\_NO\_REOPTIMIZATION}.  The frozen method-policy hash is
+\begin{equation}
+\code{9b58d32d361bd2c2248c10859b12785aa9aa0244e18b5504f6cbb79d2abe366d}.
+\end{equation}
+Both values are hard-gated before a backend calculation may start.
+
+The five ArBr$_2$ execution-unit cards and their canonical seed hashes are registered before execution.  They remain epistemically \code{PENDING} until durable receipts are persisted.  A parent-side timeout is written as \code{EXECUTION\_TIMEOUT\_UNKNOWN}; SCF or optimizer failure is retained as an executed backend result; neither status is translated into a chemical falsification.  v0.14A2 therefore remains an execution frontier and does not by itself promote the scientific checkpoint beyond v0.14A1.
+
 \section{Electronic topology is a separate admission problem}
 A linear symmetric geometry is not by itself evidence for a three-centre/four-electron electronic topology, just as an $XY_2$ formula is not such evidence.  The v0.10 admission contract therefore keeps three independent diagnostic families separate: orbital-subspace evidence, real-space/force evidence, and fragmentation/isomer-energy evidence.  A topology label requires independent agreement under that contract; insufficient evidence remains UNKNOWN.
 
@@ -124,8 +151,8 @@ Simple systems remain necessary controls even though they are no longer the firs
 This control ladder is complementary to the v0.14 closed-shell $XY_2$ screening trajectory rather than its historical predecessor in implementation order.
 
 \section{Current status and next gate}
-The repository now contains an implemented conventional molecular-state relaxation layer and partial v0.14A1 execution evidence, but it still does \emph{not} contain a validated Resonant-Chemistry molecular topology or molecular-energy law.
+The repository now contains an implemented conventional molecular-state relaxation layer, partial v0.14A1 execution evidence, and an implemented v0.14A2 exact per-seed recovery path for the missing ArBr$_2$ formula.  It still does \emph{not} contain a validated Resonant-Chemistry molecular topology or molecular-energy law.
 
-The immediate gate is operationally narrow: complete the missing ArBr$_2$ execution under the same frozen v0.14A1 method and seed policy.  Only after all nine formula receipts and all 45 frozen starts are durably present may a separate v0.14B Hessian/local-minimum protocol be frozen.  A timeout, cancellation, SCF failure or optimizer failure remains explicit evidence and does not license target-specific rescue.
+Until all five exact ArBr$_2$ execution-unit receipts are durably persisted and audited, the admitted scientific checkpoint remains 8/9 formulae and 40/45 frozen starts.  Only after all nine formula receipts and all 45 frozen starts are durably present may a separate v0.14B Hessian/local-minimum protocol be frozen.  A timeout, cancellation, SCF failure or optimizer failure remains explicit evidence and does not license target-specific rescue.
 
 After local-minimum admission, conventional energetic comparison and the independent v0.10 electronic-topology diagnostics may be applied.  TIR, PhaseNav and affective semantics remain outside the control electronic energies unless a separately defined no-refit observable passes its own admission gate.
