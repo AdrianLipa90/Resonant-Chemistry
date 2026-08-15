@@ -1,0 +1,220 @@
+name: molecular-state-relaxation-v0.14a2
+
+on:
+  push:
+    branches:
+      - chem/v0.14a2-arbr2
+    paths:
+      - .github/workflows/molecular-state-relaxation-v0.14a2.yml
+  workflow_dispatch:
+
+concurrency:
+  group: molecular-state-relaxation-v0.14a2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  arbr2-prepass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry with frozen molecular backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[molecular-v014]"
+          python -m pip check
+
+      - name: Relax common Br2 dimer prepass
+        run: >-
+          python scripts/run_molecular_ligand_dimer_v0_14a.py
+          --ligand Br
+          --output-dir benchmarks/v0_14a2_dimers
+
+      - name: Freeze exact five-seed PhaseNav manifest
+        run: >-
+          phase chem seed-manifest
+          --centre Ar
+          --ligand Br
+          --dimer-json benchmarks/v0_14a2_dimers/Br2.json
+          --output benchmarks/v0_14a2_seed_manifest/ArBr2.json
+
+      - name: Validate Br2 and seed manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          dimer = json.loads(Path('benchmarks/v0_14a2_dimers/Br2.json').read_text())
+          manifest = json.loads(Path('benchmarks/v0_14a2_seed_manifest/ArBr2.json').read_text())
+          assert dimer['status'] == 'DIMER_PREPASS_AVAILABLE'
+          assert manifest['seed_count'] == 5
+          assert [x['seed_id'] for x in manifest['seeds']] == [
+              'ArBr2_activated_s1p0',
+              'ArBr2_activated_s1p3',
+              'ArBr2_activated_s1p6',
+              'ArBr2_weak_linear',
+              'ArBr2_weak_t',
+          ]
+          assert all(x['phase36']['dimension'] == 36 for x in manifest['seeds'])
+          print({'r_YY': dimer['optimized_r_YY_angstrom'], 'seed_count': manifest['seed_count']})
+          PY
+
+      - name: Upload ArBr2 frozen prepass and seed manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-v0.14a2-ArBr2-prepass
+          path: |
+            benchmarks/v0_14a2_dimers/Br2.json
+            benchmarks/v0_14a2_seed_manifest/ArBr2.json
+          if-no-files-found: error
+
+  arbr2-seed:
+    needs: arbr2-prepass
+    runs-on: ubuntu-latest
+    timeout-minutes: 48
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        seed:
+          - ArBr2_activated_s1p0
+          - ArBr2_activated_s1p3
+          - ArBr2_activated_s1p6
+          - ArBr2_weak_linear
+          - ArBr2_weak_t
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry with frozen molecular backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[molecular-v014]"
+          python -m pip check
+
+      - name: Download frozen ArBr2 prepass
+        uses: actions/download-artifact@v4
+        with:
+          name: molecular-v0.14a2-ArBr2-prepass
+          path: prepass
+
+      - name: Execute exactly one frozen seed through PhaseNav chemistry surface
+        run: >-
+          phase chem relax
+          --centre Ar
+          --ligand Br
+          --seed ${{ matrix.seed }}
+          --dimer-json prepass/benchmarks/v0_14a2_dimers/Br2.json
+          --timeout-seconds 2400
+          --output-dir benchmarks/v0_14a2_seed_receipts
+
+      - name: Validate seed receipt and epistemic boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          files = list(Path('benchmarks/v0_14a2_seed_receipts').glob('*.json'))
+          if len(files) != 1:
+              raise SystemExit(f'expected one seed receipt, got {[p.name for p in files]}')
+          row = json.loads(files[0].read_text())
+          assert row['schema'] == 'RESCHEM_PHASENAV_CHEM_RELAX_SEED_V0_14A2'
+          assert row['gates'] == {
+              'method_frozen': 'PASS',
+              'seed_identity': 'PASS',
+              'no_rescue': 'PASS',
+              'phase36_dimension': 'PASS',
+          }
+          assert row['phase36']['dimension'] == 36
+          assert row['epistemic_status']['hessian_admission'] == 'NOT_RUN'
+          assert row['epistemic_status']['ground_state_ranking'] == 'NOT_VALIDATED'
+          assert row['epistemic_status']['geometry_only_topology_assignment'] == 'NOT_PROMOTED'
+          print({'seed': row['seed_id'], 'execution_status': row['execution_status']})
+          PY
+
+      - name: Upload one durable seed receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-v0.14a2-ArBr2-${{ matrix.seed }}
+          path: benchmarks/v0_14a2_seed_receipts/*.json
+          if-no-files-found: error
+
+  arbr2-aggregate:
+    needs: arbr2-seed
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry core command surface
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Download frozen ArBr2 prepass
+        uses: actions/download-artifact@v4
+        with:
+          name: molecular-v0.14a2-ArBr2-prepass
+          path: prepass
+
+      - name: Download all available ArBr2 seed receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: molecular-v0.14a2-ArBr2-ArBr2_*
+          path: seed-receipts
+          merge-multiple: true
+
+      - name: Require five durable seed receipts and aggregate
+        run: >-
+          phase chem aggregate
+          --centre Ar
+          --ligand Br
+          --dimer-json prepass/benchmarks/v0_14a2_dimers/Br2.json
+          --seed-dir seed-receipts
+          --output benchmarks/MOLECULAR_FORMULA_RELAXATION_ARBR2_V0_14A2.json
+
+      - name: Validate formula compatibility receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('benchmarks/MOLECULAR_FORMULA_RELAXATION_ARBR2_V0_14A2.json')
+          payload = json.loads(path.read_text())
+          assert payload['schema'] == 'RESCHEM_MOLECULAR_FORMULA_RELAXATION_V0_14A'
+          assert payload['execution_partition'] == 'v0.14A2_PER_SEED'
+          assert payload['formula'] == 'ArBr2'
+          assert payload['start_count'] == 5
+          assert len(payload['relaxations']) == 5
+          print({
+              'status': payload['status'],
+              'successful_relaxation_count': payload['successful_relaxation_count'],
+              'unknown_execution_seed_ids': payload['unknown_execution_seed_ids'],
+          })
+          PY
+
+      - name: Upload aggregated ArBr2 v0.14A2 receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-v0.14a2-ArBr2-aggregate
+          path: benchmarks/MOLECULAR_FORMULA_RELAXATION_ARBR2_V0_14A2.json
+          if-no-files-found: error
