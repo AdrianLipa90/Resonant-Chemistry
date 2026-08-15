@@ -57,7 +57,7 @@ def main() -> None:
     survival = load_json(SURVIVAL_PATH)
 
     # Scientific state remains v0.14A1 until exact ArBr2 receipts are durably
-    # persisted and audited.  v0.14A2 is an execution frontier only.
+    # persisted and audited. v0.14A2 is an execution frontier only.
     if sync.get("scientific_checkpoint") != "v0.14A1":
         raise SystemExit("surface sync scientific-checkpoint drift")
     if sync.get("execution_frontier") != "v0.14A2_CANONICAL_ARBR2_EXECUTION_PENDING":
@@ -80,15 +80,22 @@ def main() -> None:
     if frontier != FROZEN_A2_PROVENANCE:
         raise SystemExit(f"v0.14A2 frozen input provenance drift: {frontier}")
 
-    populations = registry.get("generated_entity_populations", {})
-    wanted_populations = {
+    generated = registry.get("generated_entity_populations", {})
+    wanted_generated = {
         "compound_relation_candidates_v0_1": 231,
         "relational_state_candidates_v0_13": 27,
         "molecular_v0_14A1": 10,
-        "execution_units_v0_14A2": 5,
     }
-    if populations != wanted_populations:
-        raise SystemExit(f"entity population drift: {populations} != {wanted_populations}")
+    if generated != wanted_generated:
+        raise SystemExit(f"generated entity population drift: {generated} != {wanted_generated}")
+
+    persisted_execution = registry.get("persisted_execution_populations", {})
+    wanted_execution = {
+        "molecular_execution_partition_models_v0_14A2": 1,
+        "ArBr2_seed_execution_units_v0_14A2": 5,
+    }
+    if persisted_execution != wanted_execution:
+        raise SystemExit(f"persisted A2 execution population drift: {persisted_execution} != {wanted_execution}")
 
     model = next((r for r in molecular if r.get("card_id") == "MODEL:MOLECULAR_STATE_RELAXATION:v0.14A1"), None)
     if model is None:
@@ -188,7 +195,7 @@ def main() -> None:
     )
 
     # The public web surface continues to show the admitted v0.14A1 scientific
-    # checkpoint while A2 is pending.  It must not pre-announce 45/45.
+    # checkpoint while A2 is pending. It must not pre-announce 45/45.
     require_text(
         ROOT / "web" / "index.html",
         "Semantic Card Atlas",
