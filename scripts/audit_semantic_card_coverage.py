@@ -21,6 +21,18 @@ MOLECULAR_OVERLAYS = CARDS / "MOLECULAR_STATE_RELAXATION_V0_14A1.jsonl"
 A2_OVERLAYS = CARDS / "MOLECULAR_EXECUTION_PARTITION_V0_14A2.jsonl"
 MOLECULAR_BENCHMARK = ROOT / "benchmarks" / "MOLECULAR_STATE_RELAXATION_PARTIAL_READOUT_V0_14A1.json"
 
+A2_FROZEN_BR2_RAW_SHA256 = "6c322bbc7ea31cfb51e4d195fcaeea32747e09447cd1dd56a8aab4771af19602"
+A2_FROZEN_BR2_RYY_ANGSTROM = 2.2842324866344543
+A2_FROZEN_SOURCE_RUN_ID = 31795895258
+A2_FROZEN_SOURCE_ARTIFACT_ID = 9217426658
+A2_EXPECTED_SEED_SHA256 = {
+    "ArBr2_activated_s1p0": "f4a3399a565ac2688ed568edb839c036d981006ef3a1d5ee57c9ce99edaca629",
+    "ArBr2_activated_s1p3": "be90ec4a53bff85348b0ebfc45515e3e25a3ec96d5e52169720c0d46a8873127",
+    "ArBr2_activated_s1p6": "bd5478a6059cdabe85c1732853177473bd2b3d78bb516a318ff416f958a0a30b",
+    "ArBr2_weak_linear": "05c956d722e890dc3f0a5845c3e058681bf602c77560ace58a575d2df6c06101",
+    "ArBr2_weak_t": "866f804d66d2c865c1275b4d0c6f71e90d783b85cb9e831562fb668a244f1cfa",
+}
+
 H_TO_KR = [
     "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne",
     "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar",
@@ -103,19 +115,40 @@ def audit_a2_execution_partition(records):
     control = model.get("physical_control", {})
     if control.get("seed_count") != 5 or control.get("method_changed") is not False:
         raise SystemExit("v0.14A2 model-card frozen execution contract drift")
+    if control.get("method_policy_sha256") != FROZEN_METHOD_POLICY_SHA256:
+        raise SystemExit("v0.14A2 semantic method-policy hash drift")
+    frozen = control.get("frozen_input", {})
+    if frozen.get("raw_json_sha256") != A2_FROZEN_BR2_RAW_SHA256:
+        raise SystemExit("v0.14A2 semantic frozen Br2 byte hash drift")
+    if frozen.get("optimized_r_YY_angstrom") != A2_FROZEN_BR2_RYY_ANGSTROM:
+        raise SystemExit("v0.14A2 semantic frozen Br2 rYY drift")
+    if frozen.get("workflow_run_id") != A2_FROZEN_SOURCE_RUN_ID:
+        raise SystemExit("v0.14A2 semantic frozen source run drift")
+    if frozen.get("artifact_id") != A2_FROZEN_SOURCE_ARTIFACT_ID:
+        raise SystemExit("v0.14A2 semantic frozen source artifact drift")
+    if frozen.get("reuse_policy") != "EXACT_BYTES_NO_REOPTIMIZATION":
+        raise SystemExit("v0.14A2 semantic frozen-input reuse policy drift")
 
     unit_records = [r for r in records if r.get("entity_level") == "molecular_seed_execution_unit"]
-    expected = [seed.seed_id for seed in xy2_seed_geometries("Ar", "Br", 1.0)]
-    got = [r.get("identity", {}).get("seed_id") for r in unit_records]
-    if got != expected:
-        raise SystemExit(f"v0.14A2 execution-unit identity drift: {got} != {expected}")
+    expected_ids = [seed.seed_id for seed in xy2_seed_geometries("Ar", "Br", 1.0)]
+    got_ids = [r.get("identity", {}).get("seed_id") for r in unit_records]
+    if got_ids != expected_ids:
+        raise SystemExit(f"v0.14A2 execution-unit identity drift: {got_ids} != {expected_ids}")
     for record in unit_records:
         assert_unassigned(record, "v0.14A2 execution unit")
+        identity = record.get("identity", {})
+        seed_id = identity.get("seed_id")
+        if identity.get("seed_identity_sha256") != A2_EXPECTED_SEED_SHA256.get(seed_id):
+            raise SystemExit(f"v0.14A2 canonical seed hash drift: {seed_id}")
         physical = record.get("physical_control", {})
         if physical.get("execution_status") != "PENDING":
             raise SystemExit(f"v0.14A2 pre-execution card must remain PENDING: {record.get('card_id')}")
         if physical.get("no_rescue") is not True:
             raise SystemExit(f"v0.14A2 no-rescue invariant missing: {record.get('card_id')}")
+        if physical.get("method_policy_sha256") != FROZEN_METHOD_POLICY_SHA256:
+            raise SystemExit(f"v0.14A2 execution-unit method hash drift: {seed_id}")
+        if physical.get("frozen_input_raw_sha256") != A2_FROZEN_BR2_RAW_SHA256:
+            raise SystemExit(f"v0.14A2 execution-unit frozen-input hash drift: {seed_id}")
 
 
 def main():
@@ -214,6 +247,7 @@ def main():
         "generated_relational_state_cards": len(generated_states),
         "generated_molecular_cards": len(generated_molecular),
         "v0_14a2_execution_units": len([r for r in a2_records if r.get("entity_level") == "molecular_seed_execution_unit"]),
+        "v0_14a2_frozen_input_sha256": A2_FROZEN_BR2_RAW_SHA256,
         "completed_formulae": len(completed),
         "missing_formulae": sorted(expected - completed),
     }, sort_keys=True))
