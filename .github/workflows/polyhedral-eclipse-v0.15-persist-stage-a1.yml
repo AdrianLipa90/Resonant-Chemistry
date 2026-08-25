@@ -1,0 +1,97 @@
+name: polyhedral-eclipse-v0.15-persist-stage-a1
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-a1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-stage-a1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry core
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Download exact Stage-A1 artifact from canonical run
+        uses: actions/download-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-a1
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32891267340
+
+      - name: Verify exact recovered A1 artifacts and receipts
+        run: |
+          python scripts/validate_atomic_t36_aufbau_bindings_v015.py \
+            --manifest recovered/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json \
+            --evidence recovered/ATOMIC_T36_AUFBAU_EVIDENCE_V0_15.json
+          python scripts/validate_polyhedral_eclipse_stage_a1_v015.py \
+            --stage-a recovered/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json \
+            --bindings recovered/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          expected = {
+              'ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json': {
+                  'raw': '00f4c587c4d994bbc97966fc75559f88e88641a5c7e564dd36f25ba1fb71fd32',
+                  'field': 'manifest_sha256',
+                  'internal': 'c7077f59eceaa6217e03ee59a3edfb394a4bbfb4c84d0e16849459f80c2e6f47',
+              },
+              'ATOMIC_T36_AUFBAU_EVIDENCE_V0_15.json': {
+                  'raw': '94721192dd7882b858fdd3c86391f902f42a9a520103b6a2ba736228a8bd3e2a',
+                  'field': 'evidence_sha256',
+                  'internal': 'c490992df3cdb6f0bea8b711928ae459a11b6a6ca63f7d62703855359882966c',
+              },
+              'POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json': {
+                  'raw': 'c35dfdf1449625a80e6a04fe934b330bf2f15ed213cefc79c95279476bc25e69',
+                  'field': 'ledger_sha256',
+                  'internal': 'ecb01b00831140bfc71483ec1f7f64dc69e25929868cafe05d99651390c898f6',
+              },
+          }
+          for name, contract in expected.items():
+              source = Path('recovered') / name
+              raw = source.read_bytes()
+              raw_sha = hashlib.sha256(raw).hexdigest()
+              if raw_sha != contract['raw']:
+                  raise SystemExit(f'{name} raw SHA drift: {raw_sha} != {contract["raw"]}')
+              payload = json.loads(raw)
+              if payload.get(contract['field']) != contract['internal']:
+                  raise SystemExit(f'{name} internal SHA drift')
+              destination = Path('benchmarks') / name
+              destination.write_bytes(raw)
+              print(name, raw_sha, payload[contract['field']])
+          PY
+
+      - name: Persist exact verified A1 bytes on experiment branch
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add \
+            benchmarks/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json \
+            benchmarks/ATOMIC_T36_AUFBAU_EVIDENCE_V0_15.json \
+            benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-A1 blind semantic-mass ledger"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy
