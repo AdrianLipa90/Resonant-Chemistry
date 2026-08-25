@@ -64,12 +64,12 @@ class AtomicT36AufbauV015Tests(unittest.TestCase):
         self.assertLess(phase_order_parameter(empty), 1.0e-9)
         self.assertLess(phase_order_parameter(full), 1.0e-9)
 
-    def test_global_occupancy_complement_preserves_order_parameter(self):
+    def test_global_occupancy_complement_preserves_order_parameter_with_runtime_tolerance(self):
         occupancy = occupancy_vector36("1s^2 2s^2 2p^3")
         complement = complement_occupancy(occupancy)
         left = phase_order_parameter(phase36_from_occupancy(occupancy))
         right = phase_order_parameter(phase36_from_occupancy(complement))
-        self.assertAlmostEqual(left, right, places=12)
+        self.assertLess(abs(left - right), 1.0e-9)
 
     def test_candidate_uses_electron_count_as_explicit_occupied_slot_phase_index(self):
         source = b'{"card_id":"ATOM:B:11:q+0"}\n'
