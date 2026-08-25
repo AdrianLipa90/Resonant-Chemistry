@@ -12,11 +12,10 @@ import math
 from typing import Mapping, Sequence
 
 import numpy as np
-from scipy.special import sph_harm
+from scipy import special as _scipy_special
 
 
 KAPPA_INFORMATION = math.log(2.0) / (24.0 * math.pi)
-_EPS = 1.0e-15
 
 
 def _unit(vector: Sequence[float]) -> np.ndarray:
@@ -27,6 +26,17 @@ def _unit(vector: Sequence[float]) -> np.ndarray:
     if not math.isfinite(norm) or norm <= 0.0:
         raise ValueError("direction must have positive finite norm")
     return row / norm
+
+
+def _spherical_harmonic(ell: int, em: int, polar: np.ndarray, azimuth: np.ndarray) -> np.ndarray:
+    """Resolve SciPy's current or legacy spherical-harmonic API explicitly."""
+    current = getattr(_scipy_special, "sph_harm_y", None)
+    if current is not None:
+        return np.asarray(current(ell, em, polar, azimuth), dtype=complex)
+    legacy = getattr(_scipy_special, "sph_harm", None)
+    if legacy is not None:
+        return np.asarray(legacy(em, ell, azimuth, polar), dtype=complex)
+    raise RuntimeError("SciPy installation provides no supported spherical-harmonic evaluator")
 
 
 def fibonacci_sphere(sample_count: int) -> np.ndarray:
@@ -80,21 +90,9 @@ def regular_polyhedral_axes(kind: str) -> np.ndarray:
     elif key == "icosahedron":
         phi = 0.5 * (1.0 + math.sqrt(5.0))
         raw = np.asarray(
-            [
-                (0.0, sy, sz * phi)
-                for sy in (-1.0, 1.0)
-                for sz in (-1.0, 1.0)
-            ]
-            + [
-                (sx, sy * phi, 0.0)
-                for sx in (-1.0, 1.0)
-                for sy in (-1.0, 1.0)
-            ]
-            + [
-                (sx * phi, 0.0, sz)
-                for sx in (-1.0, 1.0)
-                for sz in (-1.0, 1.0)
-            ],
+            [(0.0, sy, sz * phi) for sy in (-1.0, 1.0) for sz in (-1.0, 1.0)]
+            + [(sx, sy * phi, 0.0) for sx in (-1.0, 1.0) for sy in (-1.0, 1.0)]
+            + [(sx * phi, 0.0, sz) for sx in (-1.0, 1.0) for sz in (-1.0, 1.0)],
             dtype=float,
         )
     else:
@@ -174,7 +172,7 @@ def orbital_angular_density(
 
     amplitude = np.zeros(len(points), dtype=complex)
     for index, em in enumerate(range(-ell, ell + 1)):
-        amplitude += coeffs[index] * sph_harm(em, ell, azimuth, polar)
+        amplitude += coeffs[index] * _spherical_harmonic(ell, em, polar, azimuth)
     density = np.square(np.abs(amplitude))
     total = float(np.sum(density))
     if not math.isfinite(total) or total <= 0.0:
@@ -193,11 +191,7 @@ def cone_probabilities(
     if np.any(density < 0.0) or not np.isclose(float(np.sum(density)), 1.0, atol=1.0e-10):
         raise ValueError("normalized_density must be nonnegative and sum to one")
     assignment = partition.assignments(directions)
-    probs = np.bincount(
-        assignment,
-        weights=density,
-        minlength=len(partition.axes),
-    ).astype(float)
+    probs = np.bincount(assignment, weights=density, minlength=len(partition.axes)).astype(float)
     probs /= float(np.sum(probs))
     return probs
 
