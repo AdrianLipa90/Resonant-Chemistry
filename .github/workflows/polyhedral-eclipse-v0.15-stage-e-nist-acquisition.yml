@@ -1,0 +1,76 @@
+name: polyhedral-eclipse-v0.15-stage-e-nist-acquisition
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_RESONANCE_HOLDOUT_PREREG_V0_15.json
+      - scripts/acquire_nist_ground_origin_stage_e_v015.py
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-e-nist-acquisition.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-nist-ground-origin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile acquisition runner
+        run: python -m py_compile scripts/acquire_nist_ground_origin_stage_e_v015.py
+
+      - name: Enforce prereg-before-acquisition boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_RESONANCE_HOLDOUT_PREREG_V0_15.json')
+          d=json.loads(p.read_text('utf-8'))
+          if d['status']!='INDEPENDENT_NIST_GROUND_ORIGIN_LINE_HOLDOUT_PREREGISTERED_BEFORE_DATA_JOIN': raise SystemExit('Stage-E prereg drift')
+          if d['fit_parameters']!=[] or d['calibration_parameters']!=[]: raise SystemExit('Stage-E fit/calibration drift')
+          if d['model_parameter_changes_after_join']!='PROHIBITED': raise SystemExit('Stage-E mutation boundary drift')
+          print({'prereg_boundary':'PASS'})
+          PY
+
+      - name: Acquire exact NIST ASD ground-origin responses
+        run: >-
+          python scripts/acquire_nist_ground_origin_stage_e_v015.py
+          --output-dir out/stage_e_nist_ground_origin
+
+      - name: Validate acquisition manifest and no-join boundary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path('out/stage_e_nist_ground_origin/NIST_GROUND_ORIGIN_STAGE_E_ACQUISITION_MANIFEST_V0_15.json')
+          d=json.loads(p.read_text('utf-8'))
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          if d['status']!='NIST_STAGE_E_RAW_GROUND_ORIGIN_RESPONSES_ARCHIVED_BEFORE_JOIN': raise SystemExit('acquisition status drift')
+          if d['species_count']!=6: raise SystemExit('species cohort drift')
+          if d['selection_performed'] is not False or d['model_data_join_performed'] is not False: raise SystemExit('premature selection/join detected')
+          if d['fit_parameters_added']!=[] or d['calibration_parameters_added']!=[]: raise SystemExit('acquisition fit/calibration drift')
+          body=dict(d); recorded=body.pop('manifest_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=recorded: raise SystemExit('manifest SHA drift')
+          for record in d['records']:
+              raw=Path(record['raw_path']).read_bytes()
+              normalized=Path(record['normalized_path']).read_bytes()
+              if hashlib.sha256(raw).hexdigest()!=record['raw_sha256']: raise SystemExit(f"raw SHA drift: {record['symbol']}")
+              if hashlib.sha256(normalized).hexdigest()!=record['normalized_sha256']: raise SystemExit(f"normalized SHA drift: {record['symbol']}")
+              if record['tab_line_count'] < 2: raise SystemExit(f"insufficient tabular NIST output: {record['symbol']}")
+          print({'manifest_sha256':recorded,'species_count':d['species_count']})
+          PY
+
+      - name: Upload exact Stage-E NIST acquisition
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-e-nist-acquisition
+          path: out/stage_e_nist_ground_origin
+          if-no-files-found: error
