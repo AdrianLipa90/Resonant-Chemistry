@@ -1,0 +1,190 @@
+name: molecular-state-relaxation-v0.14a3-weak-linear-replay
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: molecular-state-relaxation-v0.14a3-weak-linear-replay-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  arbr2-weak-linear-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 140
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen molecular backend
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[molecular-v014]"
+          python -m pip check
+
+      - name: Gate preregistration, frozen input, and first-attempt lineage
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          prereg = json.loads(
+              Path('benchmarks/MOLECULAR_STATE_RELAXATION_REPLAY_PREREG_V0_14A3.json').read_text()
+          )
+          if prereg['status'] != 'PREREGISTERED_NOT_EXECUTED':
+              raise SystemExit('A3 preregistration status drift')
+          if prereg['formula'] != 'ArBr2':
+              raise SystemExit('A3 formula drift')
+          if prereg['target_seed']['seed_id'] != 'ArBr2_weak_linear':
+              raise SystemExit('A3 target seed drift')
+          if prereg['execution_envelope']['delta'] != 'TIME_BUDGET_ONLY':
+              raise SystemExit('A3 execution delta is not timeout-only')
+          if prereg['execution_envelope']['first_attempt_timeout_seconds'] != 2400:
+              raise SystemExit('A2 timeout baseline drift')
+          if prereg['execution_envelope']['replay_timeout_seconds'] != 7200:
+              raise SystemExit('A3 replay timeout drift')
+
+          source = Path(prereg['frozen_input']['path'])
+          source_raw = source.read_bytes()
+          source_sha = hashlib.sha256(source_raw).hexdigest()
+          if source_sha != prereg['frozen_input']['raw_json_sha256']:
+              raise SystemExit(f'frozen Br2 byte drift: {source_sha}')
+
+          parent = Path(prereg['target_seed']['first_attempt_receipt'])
+          parent_raw = parent.read_bytes()
+          header = f'blob {len(parent_raw)}\0'.encode('ascii')
+          parent_blob = hashlib.sha1(header + parent_raw).hexdigest()
+          if parent_blob != prereg['target_seed']['first_attempt_repository_blob_sha1']:
+              raise SystemExit(f'first-attempt receipt byte drift: {parent_blob}')
+
+          parent_row = json.loads(parent_raw)
+          if parent_row['seed_id'] != prereg['target_seed']['seed_id']:
+              raise SystemExit('first-attempt seed-id drift')
+          if parent_row['seed_identity_sha256'] != prereg['target_seed']['seed_identity_sha256']:
+              raise SystemExit('first-attempt seed identity drift')
+          if parent_row['method_policy_sha256'] != prereg['frozen_method']['method_policy_sha256']:
+              raise SystemExit('first-attempt method-policy drift')
+          if parent_row['execution_status'] != 'EXECUTION_TIMEOUT_UNKNOWN':
+              raise SystemExit('A3 replay target is no longer the frozen UNKNOWN first attempt')
+          if parent_row['epistemic_status']['execution'] != 'UNKNOWN_EXECUTION_NOT_CHEMICAL_FAIL':
+              raise SystemExit('first-attempt epistemic boundary drift')
+
+          forbidden = [
+              'method_change_allowed',
+              'seed_change_allowed',
+              'geometry_change_allowed',
+              'basis_change_allowed',
+              'grid_change_allowed',
+              'scf_policy_change_allowed',
+              'optimizer_policy_change_allowed',
+              'rescue_allowed',
+          ]
+          if any(prereg['frozen_method'][key] for key in forbidden):
+              raise SystemExit('A3 preregistration admits a forbidden scientific change')
+
+          print({
+              'frozen_input_sha256': source_sha,
+              'parent_receipt_blob_sha1': parent_blob,
+              'seed_identity_sha256': parent_row['seed_identity_sha256'],
+              'method_policy_sha256': parent_row['method_policy_sha256'],
+              'execution_delta': prereg['execution_envelope']['delta'],
+          })
+          PY
+
+      - name: Replay exact frozen weak-linear seed with larger execution budget only
+        run: >-
+          phase chem relax
+          --centre Ar
+          --ligand Br
+          --seed ArBr2_weak_linear
+          --dimer-json benchmarks/v0_14a2_frozen_input/Br2.json
+          --timeout-seconds 7200
+          --output-dir benchmarks/v0_14a3_replay_receipts
+
+      - name: Validate replay receipt and write immutable lineage record
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          prereg_path = Path('benchmarks/MOLECULAR_STATE_RELAXATION_REPLAY_PREREG_V0_14A3.json')
+          prereg = json.loads(prereg_path.read_text())
+          receipt_path = Path('benchmarks/v0_14a3_replay_receipts/ArBr2_weak_linear.json')
+          row = json.loads(receipt_path.read_text())
+
+          if row['schema'] != 'RESCHEM_PHASENAV_CHEM_RELAX_SEED_V0_14A2':
+              raise SystemExit(f"unexpected replay receipt schema: {row['schema']}")
+          if row['seed_id'] != 'ArBr2_weak_linear':
+              raise SystemExit('replay returned a different seed')
+          if row['seed_identity_sha256'] != prereg['target_seed']['seed_identity_sha256']:
+              raise SystemExit('replay seed identity drift')
+          if row['method_policy_sha256'] != prereg['frozen_method']['method_policy_sha256']:
+              raise SystemExit('replay method-policy drift')
+          if row['gates'] != {
+              'method_frozen': 'PASS',
+              'seed_identity': 'PASS',
+              'no_rescue': 'PASS',
+              'phase36_dimension': 'PASS',
+          }:
+              raise SystemExit(f"replay gates failed: {row['gates']}")
+          if row['phase36']['dimension'] != 36:
+              raise SystemExit('replay phase36 dimension drift')
+          if row['epistemic_status']['hessian_admission'] != 'NOT_RUN':
+              raise SystemExit('unexpected Hessian admission')
+          if row['epistemic_status']['ground_state_ranking'] != 'NOT_VALIDATED':
+              raise SystemExit('unexpected ground-state promotion')
+          if row['epistemic_status']['geometry_only_topology_assignment'] != 'NOT_PROMOTED':
+              raise SystemExit('unexpected topology promotion')
+
+          raw = receipt_path.read_bytes()
+          provenance = {
+              'schema': 'RESCHEM_ARBR2_V0_14A3_EXECUTION_REPLAY_PROVENANCE_V1',
+              'generated_utc': datetime.now(timezone.utc).isoformat(),
+              'formula': 'ArBr2',
+              'seed_id': 'ArBr2_weak_linear',
+              'purpose': 'RESOLVE_PRIOR_EXECUTION_TIMEOUT_UNKNOWN_WITHOUT_CHANGING_SCIENTIFIC_INPUTS',
+              'parent_execution_partition': 'v0.14A2_PER_SEED',
+              'parent_receipt': prereg['target_seed']['first_attempt_receipt'],
+              'parent_receipt_blob_sha1': prereg['target_seed']['first_attempt_repository_blob_sha1'],
+              'parent_execution_status': prereg['target_seed']['first_attempt_execution_status'],
+              'replay_receipt_sha256': hashlib.sha256(raw).hexdigest(),
+              'replay_execution_status': row['execution_status'],
+              'seed_identity_sha256': row['seed_identity_sha256'],
+              'method_policy_sha256': row['method_policy_sha256'],
+              'execution_policy_delta': {
+                  'kind': 'TIME_BUDGET_ONLY',
+                  'from_timeout_seconds': 2400,
+                  'to_timeout_seconds': 7200,
+              },
+              'first_attempt_preserved': True,
+              'replay_replaces_first_attempt': False,
+              'automatic_checkpoint_promotion': False,
+              'promotion_requires_explicit_lineage_audit': True,
+          }
+          out = receipt_path.parent / 'REPLAY_PROVENANCE.json'
+          out.write_text(json.dumps(provenance, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps(provenance, indent=2))
+          PY
+
+      - name: Upload replay receipt and lineage without modifying repository state
+        uses: actions/upload-artifact@v4
+        with:
+          name: molecular-v0.14a3-ArBr2-weak-linear-replay
+          path: |
+            benchmarks/v0_14a3_replay_receipts/ArBr2_weak_linear.json
+            benchmarks/v0_14a3_replay_receipts/REPLAY_PROVENANCE.json
+            benchmarks/MOLECULAR_STATE_RELAXATION_REPLAY_PREREG_V0_14A3.json
+          if-no-files-found: error
+          retention-days: 90
