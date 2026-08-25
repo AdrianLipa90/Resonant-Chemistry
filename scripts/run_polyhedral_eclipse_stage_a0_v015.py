@@ -6,8 +6,6 @@ import hashlib
 import json
 from pathlib import Path
 
-import numpy as np
-
 from reschem.orbital_basis_v015 import P_ORBITAL_BASIS_ID, p_orbital_basis_manifest, real_p_coefficients
 from reschem.polyhedral_eclipse_spectroscopy import (
     PolyhedralConePartition,
@@ -21,6 +19,10 @@ from reschem.polyhedral_eclipse_spectroscopy import (
     shannon_information_nats,
 )
 from reschem.repository_cards import load_current_card_registry
+from reschem.tetrahedral_inference_axis_v015 import (
+    AXIS_RESOLVED_PHASE_CONTRACT_ID,
+    axis_resolved_tetrahedral_harmonics,
+)
 from reschem.tetrahedral_inference_v015 import (
     TETRAHEDRAL_SIC_CONTRACT_ID,
     build_tetrahedral_inference_probe,
@@ -31,6 +33,7 @@ from reschem.tetrahedral_inference_v015 import (
 PREREG_PATH = Path("benchmarks/POLYHEDRAL_ECLIPSE_SPECTROSCOPY_PREREG_V0_15.json")
 SPATIAL_CONTROL_GEOMETRIES = ("tetrahedron", "octahedron", "cube", "icosahedron")
 P_STATES = ("p_x", "p_y", "p_z")
+STAGE_A0_REVISION = "R2_AXIS_RESOLVED_TIR_SIC_PHASE"
 
 
 def _canonical_json(value: object) -> str:
@@ -107,6 +110,12 @@ def build_stage_a0_ledger(*, sample_count: int, phase_samples: int) -> dict:
         ).as_dict()
         if inference["schema"] != TETRAHEDRAL_SIC_CONTRACT_ID:
             raise RuntimeError("tetrahedral inference schema drift")
+        inference["axis_resolved_phase"] = axis_resolved_tetrahedral_harmonics(
+            spin["bloch_vector"],
+            phase_samples=phase_samples,
+        )
+        if inference["axis_resolved_phase"]["schema"] != AXIS_RESOLVED_PHASE_CONTRACT_ID:
+            raise RuntimeError("axis-resolved tetrahedral phase schema drift")
 
         spatial = [
             _spatial_orbital_feature(
@@ -134,10 +143,12 @@ def build_stage_a0_ledger(*, sample_count: int, phase_samples: int) -> dict:
 
     body = {
         "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_A0_GEOMETRY_LEDGER_V0_15",
+        "revision": STAGE_A0_REVISION,
         "status": "GEOMETRY_FEATURES_FROZEN_BEFORE_SEMANTIC_MASS_AND_SPECTRAL_JOIN",
         "preregister_source": str(PREREG_PATH),
         "orbital_basis": p_orbital_basis_manifest(),
         "primary_inference_geometry": TETRAHEDRAL_SIC_CONTRACT_ID,
+        "axis_resolved_phase_contract": AXIS_RESOLVED_PHASE_CONTRACT_ID,
         "spatial_partition_controls": list(SPATIAL_CONTROL_GEOMETRIES),
         "sampling": {
             "sphere_samples": int(sample_count),
@@ -171,6 +182,7 @@ def main() -> int:
     print(
         json.dumps(
             {
+                "revision": ledger["revision"],
                 "status": ledger["status"],
                 "atom_count": ledger["atom_count"],
                 "spatial_feature_count": ledger["spatial_feature_count"],
