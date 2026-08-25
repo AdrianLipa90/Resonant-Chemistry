@@ -1,0 +1,90 @@
+{
+  "schema": "RESCHEM_ECLIPSE_TIME_DOPPLER_FREEZE_V0_15",
+  "version": "0.15.0",
+  "status": "FROZEN_BEFORE_SPECTRAL_JOIN",
+  "contract_id": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+  "input_order": [
+    "dominant_harmonic_order_n_star",
+    "proper_phase_rate_omega_tau_rad_s",
+    "subjective_time_scale_g_combined",
+    "radial_relative_velocity_beta"
+  ],
+  "equations": {
+    "proper_frequency_hz": "nu_proper = n_star * Omega_tau / (2*pi)",
+    "subjective_time_relation": "d_tau = d_t * g_combined",
+    "coordinate_frequency_hz": "nu_coordinate = g_combined * nu_proper",
+    "doppler_factor": "D = sqrt((1-beta)/(1+beta))",
+    "observed_frequency_hz": "nu_observed = D * nu_coordinate",
+    "observed_wavelength_m": "lambda_observed = c/nu_observed for nu_observed > 0"
+  },
+  "doppler_convention": {
+    "geometry": "LONGITUDINAL_RELATIVISTIC",
+    "beta_definition": "v_radial/c",
+    "positive_beta": "RECEDING",
+    "negative_beta": "APPROACHING",
+    "domain": "-1 < beta < 1"
+  },
+  "subjective_time_source": {
+    "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+    "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+    "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+    "relation": "Delta tau = Delta t * g_combined",
+    "g_policy": "EXPLICIT_PROVENANCE_BEARING_INPUT"
+  },
+  "constants": {
+    "speed_of_light_m_s": 299792458.0
+  },
+  "zero_frequency_policy": {
+    "observed_frequency_hz": 0.0,
+    "observed_wavelength_m": null,
+    "status": "STATIC_ZERO_FREQUENCY"
+  },
+  "blind_boundary": {
+    "observed_spectrum": "WITHHELD",
+    "observed_wavelengths": "WITHHELD",
+    "observed_line_intensities": "WITHHELD",
+    "fit_to_spectrum": "PROHIBITED_AT_THIS_STAGE"
+  },
+  "separation_invariant": [
+    "nu_proper",
+    "nu_coordinate",
+    "doppler_factor",
+    "nu_observed",
+    "lambda_observed"
+  ],
+  "test_vectors": [
+    {
+      "name": "identity",
+      "n_star": 2,
+      "omega_tau_rad_s": 6.283185307179586,
+      "g_combined": 1.0,
+      "beta": 0.0,
+      "expected_nu_proper_hz": 2.0,
+      "expected_nu_coordinate_hz": 2.0,
+      "expected_doppler_factor": 1.0,
+      "expected_nu_observed_hz": 2.0
+    },
+    {
+      "name": "subjective_half_plus_receding_beta_0p6",
+      "n_star": 2,
+      "omega_tau_rad_s": 12.566370614359172,
+      "g_combined": 0.5,
+      "beta": 0.6,
+      "expected_nu_proper_hz": 4.0,
+      "expected_nu_coordinate_hz": 2.0,
+      "expected_doppler_factor": 0.5,
+      "expected_nu_observed_hz": 1.0
+    },
+    {
+      "name": "approaching_beta_minus_0p6",
+      "n_star": 1,
+      "omega_tau_rad_s": 6.283185307179586,
+      "g_combined": 1.0,
+      "beta": -0.6,
+      "expected_nu_proper_hz": 1.0,
+      "expected_nu_coordinate_hz": 1.0,
+      "expected_doppler_factor": 2.0,
+      "expected_nu_observed_hz": 2.0
+    }
+  ]
+}
