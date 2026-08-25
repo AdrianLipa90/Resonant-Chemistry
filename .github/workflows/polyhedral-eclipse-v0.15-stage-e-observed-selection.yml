@@ -1,0 +1,69 @@
+name: polyhedral-eclipse-v0.15-stage-e-observed-selection
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - scripts/select_nist_ground_origin_stage_e_v015.py
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-e-observed-selection.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  select-observed-lines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile deterministic selector
+        run: python -m py_compile scripts/select_nist_ground_origin_stage_e_v015.py
+      - name: Verify persisted acquisition exists and remains unjoined
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('benchmarks/stage_e_nist_ground_origin/NIST_GROUND_ORIGIN_STAGE_E_ACQUISITION_MANIFEST_V0_15.json')
+          d=json.loads(p.read_text('utf-8'))
+          if d['status']!='NIST_STAGE_E_RAW_GROUND_ORIGIN_RESPONSES_ARCHIVED_BEFORE_JOIN': raise SystemExit('acquisition status drift')
+          if d['selection_performed'] is not False or d['model_data_join_performed'] is not False: raise SystemExit('acquisition boundary drift')
+          print({'acquisition_manifest_sha256':d['manifest_sha256'],'selection_before_this_step':False})
+          PY
+      - name: Run preregistered deterministic observed-line selection
+        run: >-
+          python scripts/select_nist_ground_origin_stage_e_v015.py
+          --output out/NIST_GROUND_ORIGIN_STAGE_E_SELECTED_OBSERVED_LEDGER_V0_15.json
+      - name: Validate selected observed ledger and hashes
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          p=Path('out/NIST_GROUND_ORIGIN_STAGE_E_SELECTED_OBSERVED_LEDGER_V0_15.json')
+          d=json.loads(p.read_text('utf-8'))
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          if d['status']!='STAGE_E_OBSERVED_GROUND_ORIGIN_LINES_SELECTED_BY_PREREGISTERED_RULE': raise SystemExit('selection status drift')
+          if d['species_count']!=6 or d['selection_performed'] is not True or d['selection_automatic'] is not True: raise SystemExit('selection cohort/automation drift')
+          if d['model_data_join_performed'] is not False or d['model_parameters_changed'] is not False: raise SystemExit('premature model join/mutation detected')
+          if d['fit_parameters_added']!=[] or d['calibration_parameters_added']!=[]: raise SystemExit('fit/calibration drift')
+          body=dict(d); rec=body.pop('ledger_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=rec: raise SystemExit('ledger SHA drift')
+          expected={'B':15.287,'C':16.416713,'N':19224.464,'O':158.265,'F':404.141,'Ne':134459.3}
+          for row in d['rows']:
+              rb=dict(row); rr=rb.pop('row_sha256')
+              if hashlib.sha256(canonical(rb).encode()).hexdigest()!=rr: raise SystemExit(f"row SHA drift: {row['symbol']}")
+              if row['manual_selection'] is not False: raise SystemExit('manual selection drift')
+              if row['selected_lower_energy_cm_inverse']!=0.0: raise SystemExit(f"non-ground lower level: {row['symbol']}")
+              if abs(row['selected_wavenumber_cm_inverse']-expected[row['symbol']])>1e-9: raise SystemExit(f"selected minimum drift: {row['symbol']}")
+          print({'ledger_sha256':rec,'selected':{r['symbol']:r['selected_wavenumber_cm_inverse'] for r in d['rows']}})
+          PY
+      - name: Upload Stage-E selected observed ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-e-selected-observed
+          path: out/NIST_GROUND_ORIGIN_STAGE_E_SELECTED_OBSERVED_LEDGER_V0_15.json
+          if-no-files-found: error
