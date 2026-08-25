@@ -1,0 +1,31 @@
+{
+  "schema": "RESCHEM_ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_CONTRACT_V0_15",
+  "version": "0.15.0",
+  "status": "POST_JOIN_DIAGNOSTIC_METRICS_FROZEN",
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "inputs": {
+    "subjective_time_ledger": "benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_D0_LEDGER_V0_15.json",
+    "stage_c_result": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json"
+  },
+  "diagnostic_only": true,
+  "validation_claimed": false,
+  "candidate_selection_or_removal_allowed": false,
+  "model_parameter_updates_allowed": false,
+  "per_atom_calculation": {
+    "corrected_wavenumber_cm_inverse": "kepler_fundamental_predicted_wavenumber_cm_inverse * frozen_subjective_time_lapse",
+    "absolute_relative_error": "abs(corrected-observed)/observed",
+    "g_ratio": "frozen_subjective_time_lapse / post_join_g_required",
+    "log10_g_ratio": "log10(g_ratio)"
+  },
+  "aggregate_metrics_per_policy": [
+    "median_absolute_relative_error",
+    "mean_absolute_relative_error",
+    "rms_log10_g_ratio"
+  ],
+  "reference_policy": "NULL_REST_CONTROL",
+  "report_all_frozen_policies": true,
+  "fit_parameters_added": [],
+  "calibration_parameters_added": [],
+  "interpretation": "NONE_IN_DIAGNOSTIC_LEDGER"
+}
