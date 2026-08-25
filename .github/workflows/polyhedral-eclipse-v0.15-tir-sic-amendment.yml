@@ -1,0 +1,47 @@
+name: polyhedral-eclipse-v0.15-tir-sic-amendment
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-tir-sic-amendment.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freeze-primary-tir-sic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile amendment runner and validator
+        run: >-
+          python -m py_compile
+          scripts/run_tir_sic_mass_weighted_amendment_v015.py
+          scripts/validate_tir_sic_mass_weighted_amendment_v015.py
+
+      - name: Freeze primary TIR-SIC mass-weighted ledger
+        run: >-
+          python scripts/run_tir_sic_mass_weighted_amendment_v015.py
+          --output /tmp/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json
+
+      - name: Validate primary TIR-SIC ledger
+        run: >-
+          python scripts/validate_tir_sic_mass_weighted_amendment_v015.py
+          /tmp/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json
+
+      - name: Upload primary TIR-SIC ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: tir-sic-mass-weighted-v0.15
+          path: /tmp/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json
+          if-no-files-found: error
+          retention-days: 90
