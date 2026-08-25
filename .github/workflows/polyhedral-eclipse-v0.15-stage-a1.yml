@@ -1,0 +1,66 @@
+name: polyhedral-eclipse-v0.15-stage-a1
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-a1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freeze-stage-a1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry core
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Freeze preregistered atom-to-T36 PNCS bindings
+        run: >-
+          python scripts/run_atomic_t36_aufbau_bindings_v015.py
+          --manifest-output /tmp/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json
+          --evidence-output /tmp/ATOMIC_T36_AUFBAU_EVIDENCE_V0_15.json
+
+      - name: Validate exact A1 binding and evidence receipts
+        run: >-
+          python scripts/validate_atomic_t36_aufbau_bindings_v015.py
+          --manifest /tmp/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json
+          --evidence /tmp/ATOMIC_T36_AUFBAU_EVIDENCE_V0_15.json
+
+      - name: Freeze mass-weighted Stage-A1 eclipse probes
+        run: >-
+          python scripts/run_polyhedral_eclipse_stage_a_v015.py
+          --bindings /tmp/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json
+          --output /tmp/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json
+          --sample-count 8192
+          --phase-samples 128
+
+      - name: Validate Stage-A1 ledger and blind spectral boundary
+        run: >-
+          python scripts/validate_polyhedral_eclipse_stage_a1_v015.py
+          --stage-a /tmp/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json
+          --bindings /tmp/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json
+
+      - name: Upload Stage-A1 frozen artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-a1
+          path: |
+            /tmp/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json
+            /tmp/ATOMIC_T36_AUFBAU_EVIDENCE_V0_15.json
+            /tmp/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json
+          if-no-files-found: error
+          retention-days: 90
