@@ -1,0 +1,56 @@
+{
+  "schema": "RESCHEM_TIR_SIC_MASS_WEIGHTED_AMENDMENT_V0_15",
+  "version": "0.15.0",
+  "status": "POST_A1_MODEL_SIDE_AMENDMENT_FROZEN_BEFORE_SPECTRAL_JOIN",
+  "reason": "Stage-A1 combined semantic mass with spatial partition controls but did not yet apply the same frozen nucleon-normalized information coupling to the primary TIR tetrahedral SIC inference geometry already frozen in Stage-A0 R2.",
+  "timeline_boundary": {
+    "stage_a0_r2_internal_sha256": "e3438d2e090db378b566eb31b0b03159fca407bee2826c400d8e82099a00f39a",
+    "stage_a1_internal_sha256": "ecb01b00831140bfc71483ec1f7f64dc69e25929868cafe05d99651390c898f6",
+    "semantic_mass_manifest_internal_sha256": "c7077f59eceaa6217e03ee59a3edfb394a4bbfb4c84d0e16849459f80c2e6f47",
+    "observed_spectrum_accessed_for_amendment": false,
+    "spectral_join_status": "WITHHELD_FOR_BLIND_COMPARISON"
+  },
+  "sources": {
+    "stage_a0_r2": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json",
+    "stage_a1": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json",
+    "semantic_mass_manifest": "benchmarks/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json",
+    "primary_tir_geometry_contract": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15"
+  },
+  "constants": {
+    "kappa_expression": "ln(2)/(24*pi)",
+    "kappa": 0.009193150006360484
+  },
+  "frozen_formula": {
+    "sic_information": "I_SIC=sum_j p_j ln(4*p_j)",
+    "sic_information_ratio_to_nucleons": "eta_SIC=I_SIC/(A*kappa)",
+    "semantic_mass_per_nucleon": "mu_s=M_s/A",
+    "primary_tir_sic_eclipse_coupling": "E_SIC=mu_s*eta_SIC*chi_r",
+    "axis_phase_records": "preserve x,y,z dominant harmonic order and strength from Stage-A0 R2 without selection",
+    "frequency_mapping": "unchanged: nu=n_star*Omega_phase/(2*pi); Omega_phase remains an independent Stage-B requirement"
+  },
+  "required_outputs": [
+    "atom_card_id",
+    "A",
+    "radial_nuclear_exposure",
+    "semantic_mass",
+    "semantic_mass_per_nucleon",
+    "sic_information_nats",
+    "sic_information_ratio_to_nucleons",
+    "primary_tir_sic_eclipse_coupling",
+    "axis_x_harmonic_order",
+    "axis_x_harmonic_strength",
+    "axis_y_harmonic_order",
+    "axis_y_harmonic_strength",
+    "axis_z_harmonic_order",
+    "axis_z_harmonic_strength",
+    "row_sha256"
+  ],
+  "forbidden_operations": [
+    "change the formula after observing spectral data",
+    "select x, y, or z axis from observed spectral performance",
+    "select spatial control geometry from observed spectral performance",
+    "inject observed wavelength, wavenumber, oscillator strength, or line intensity"
+  ],
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false
+}
