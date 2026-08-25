@@ -1,0 +1,59 @@
+{
+  "schema": "RESCHEM_ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_RESONANCE_HOLDOUT_PREREG_V0_15",
+  "version": "0.15.0",
+  "status": "INDEPENDENT_NIST_GROUND_ORIGIN_LINE_HOLDOUT_PREREGISTERED_BEFORE_DATA_JOIN",
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "model_inputs": {
+    "stage_b_prediction_ledger": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json",
+    "stage_d0_subjective_time_ledger": "benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_D0_LEDGER_V0_15.json"
+  },
+  "observed_source": {
+    "authority": "NIST Atomic Spectra Database",
+    "species": ["B I", "C I", "N I", "O I", "F I", "Ne I"],
+    "data_must_be_retrieved_after_this_preregister_commit": true,
+    "raw_retrieved_records_must_be_archived_and_hashed_before_join": true
+  },
+  "observed_line_selection_rule": {
+    "lower_level_energy_cm_inverse": "exact absolute ground level, E_lower=0 cm^-1 as represented by the retrieved NIST record",
+    "upper_level_energy": "finite and strictly positive",
+    "ritz_or_observed_wavenumber": "finite and strictly positive",
+    "selection": "choose the candidate with the smallest strictly positive transition wavenumber among records satisfying the ground-origin rule",
+    "tie_break": "lexicographic order of the complete archived NIST record after canonical JSON serialization",
+    "manual_line_selection": "PROHIBITED"
+  },
+  "model_channel": {
+    "base": "KEPLER_FUNDAMENTAL_ZERO_FIT from Stage-B",
+    "time_mapping": "multiply the frozen Stage-B Kepler fundamental wavenumber by each frozen Stage-D0 subjective-time lapse",
+    "doppler": "rest control beta=0 for this laboratory atomic holdout",
+    "candidate_policies": [
+      "NULL_REST_CONTROL",
+      "KAPPA_RADIAL_BALANCED",
+      "SEMANTIC_MASS_BALANCED",
+      "RADIAL_SEMANTIC_GEOMETRIC_COUPLING",
+      "RADIAL_SEMANTIC_PRODUCT_COUPLING"
+    ],
+    "all_policies_must_be_reported": true,
+    "candidate_selection_or_removal_after_holdout": "PROHIBITED"
+  },
+  "per_atom_metrics": [
+    "predicted_wavenumber_cm_inverse",
+    "observed_ground_origin_wavenumber_cm_inverse",
+    "predicted_to_observed_ratio",
+    "absolute_relative_error",
+    "log10_ratio"
+  ],
+  "aggregate_metrics_per_policy": [
+    "median_absolute_relative_error",
+    "mean_absolute_relative_error",
+    "rms_log10_ratio",
+    "spearman_rank_correlation",
+    "pearson_log10_correlation"
+  ],
+  "promotion_threshold": "NONE_PREDECLARED",
+  "fit_parameters": [],
+  "calibration_parameters": [],
+  "model_parameter_changes_after_join": "PROHIBITED",
+  "interpretation": "NONE_IN_RESULT_LEDGER",
+  "failure_is_a_valid_outcome": true
+}
