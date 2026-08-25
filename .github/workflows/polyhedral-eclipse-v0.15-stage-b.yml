@@ -1,0 +1,71 @@
+name: polyhedral-eclipse-v0.15-stage-b
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-b.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freeze-stage-b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry core
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Run Kepler unit gates before prediction freeze
+        run: >-
+          python -m unittest
+          tests.test_atomic_kepler_phase_v015
+          tests.test_eclipse_time_doppler_v015
+
+      - name: Freeze zero-fit Stage-B predictions
+        run: >-
+          python scripts/run_polyhedral_eclipse_stage_b_v015.py
+          --output out/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json
+
+      - name: Validate prediction ledger and blind boundary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path('out/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json')
+          d=json.loads(p.read_text())
+          if d['schema']!='RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_ZERO_FIT_PREDICTION_LEDGER_V0_15': raise SystemExit('schema drift')
+          if d['status']!='ZERO_FIT_PREDICTIONS_FROZEN_BEFORE_SPECTRAL_JOIN': raise SystemExit('status drift')
+          if d['atom_count']!=6: raise SystemExit('atom count drift')
+          if d['fit_parameters']!=[] or d['calibration_to_observed_spectrum']!='NONE': raise SystemExit('zero-fit boundary drift')
+          if d['observed_spectrum']!='WITHHELD_FOR_BLIND_COMPARISON': raise SystemExit('spectral boundary drift')
+          body=dict(d); recorded=body.pop('ledger_sha256')
+          canonical=json.dumps(body,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          if hashlib.sha256(canonical.encode()).hexdigest()!=recorded: raise SystemExit('ledger SHA drift')
+          for atom in d['atoms']:
+              b=dict(atom); r=b.pop('prediction_sha256')
+              c=json.dumps(b,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+              if hashlib.sha256(c.encode()).hexdigest()!=r: raise SystemExit(f"prediction SHA drift: {atom['symbol']}")
+              if atom['observed_spectrum']!='WITHHELD_FOR_BLIND_COMPARISON': raise SystemExit(f"spectral leak: {atom['symbol']}")
+              if set(atom['tir_sic_axis_frequency_candidates'])!={'x','y','z'}: raise SystemExit(f"axis set drift: {atom['symbol']}")
+          print({'ledger_sha256':recorded,'atom_count':d['atom_count']})
+          PY
+
+      - name: Upload frozen Stage-B prediction ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-b-prediction-ledger
+          path: out/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json
+          if-no-files-found: error
