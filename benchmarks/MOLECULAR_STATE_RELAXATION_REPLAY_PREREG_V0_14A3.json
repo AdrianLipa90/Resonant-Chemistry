@@ -1,0 +1,60 @@
+{
+  "schema": "RESCHEM_MOLECULAR_STATE_RELAXATION_REPLAY_PREREG_V0_14A3",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "formula": "ArBr2",
+  "purpose": "RESOLVE_PRIOR_EXECUTION_TIMEOUT_UNKNOWN_WITHOUT_CHANGING_SCIENTIFIC_INPUTS",
+  "parent_execution_partition": "v0.14A2_PER_SEED",
+  "target_seed": {
+    "seed_id": "ArBr2_weak_linear",
+    "seed_identity_sha256": "05c956d722e890dc3f0a5845c3e058681bf602c77560ace58a575d2df6c06101",
+    "first_attempt_receipt": "benchmarks/v0_14a2_seed_receipts/ArBr2_weak_linear.json",
+    "first_attempt_repository_blob_sha1": "b4476a0b7896950010987d7aed640b6495052a9f",
+    "first_attempt_execution_status": "EXECUTION_TIMEOUT_UNKNOWN",
+    "first_attempt_scientific_interpretation": "UNKNOWN_EXECUTION_NOT_CHEMICAL_FAIL"
+  },
+  "frozen_input": {
+    "path": "benchmarks/v0_14a2_frozen_input/Br2.json",
+    "raw_json_sha256": "6c322bbc7ea31cfb51e4d195fcaeea32747e09447cd1dd56a8aab4771af19602",
+    "optimized_r_YY_angstrom": 2.2842324866344543,
+    "reuse_policy": "EXACT_BYTES_NO_REOPTIMIZATION"
+  },
+  "frozen_method": {
+    "method_policy_sha256": "9b58d32d361bd2c2248c10859b12785aa9aa0244e18b5504f6cbb79d2abe366d",
+    "method_change_allowed": false,
+    "seed_change_allowed": false,
+    "geometry_change_allowed": false,
+    "basis_change_allowed": false,
+    "grid_change_allowed": false,
+    "scf_policy_change_allowed": false,
+    "optimizer_policy_change_allowed": false,
+    "rescue_allowed": false
+  },
+  "execution_envelope": {
+    "first_attempt_timeout_seconds": 2400,
+    "replay_timeout_seconds": 7200,
+    "workflow_timeout_minutes": 140,
+    "delta": "TIME_BUDGET_ONLY",
+    "timeout_multiplier": 3.0
+  },
+  "output": {
+    "receipt_directory": "benchmarks/v0_14a3_replay_receipts",
+    "receipt_filename": "ArBr2_weak_linear.json",
+    "provenance_filename": "REPLAY_PROVENANCE.json",
+    "artifact_name": "molecular-v0.14a3-ArBr2-weak-linear-replay"
+  },
+  "admission": {
+    "preserve_first_attempt_receipt": true,
+    "overwrite_parent_receipt": false,
+    "replay_result_may_replace_parent_evidence": false,
+    "replay_result_automatically_promotes_formula_checkpoint": false,
+    "promotion_requires_explicit_lineage_audit": true,
+    "promotion_requires_no_unresolved_execution_unit": true
+  },
+  "epistemic_boundary": {
+    "timeout_replay_is_execution_resolution_attempt": true,
+    "timeout_is_chemical_failure": false,
+    "hessian_admission": "NOT_RUN",
+    "ground_state_ranking": "NOT_VALIDATED",
+    "geometry_only_topology_assignment": "NOT_PROMOTED"
+  }
+}
