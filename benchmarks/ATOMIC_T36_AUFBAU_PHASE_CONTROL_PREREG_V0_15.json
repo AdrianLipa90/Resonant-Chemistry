@@ -40,14 +40,20 @@
     "phase_index_rule": "TOTAL_OCCUPIED_SPIN_ORBITAL_SLOT_COUNT",
     "neutral_atom_note": "For charge-zero atom cards this count equals electron_count and numerically equals Z; Z is not used as the derivation input."
   },
+  "runtime_numeric_contract": {
+    "pncs_trigonometric_evaluation": "mass_v19._runtime_sin/_runtime_cos",
+    "empty_full_R_abs_tolerance": 1e-9,
+    "global_complement_R_abs_difference_tolerance": 1e-9,
+    "reason": "The frozen PNCS runtime uses finite Taylor evaluation; theoretical root-of-unity/complement symmetry is therefore tested with an explicit numerical tolerance rather than exact floating equality."
+  },
   "required_invariants": [
     "exactly 36 slot records",
     "sum(slot_occupancy) equals identity.electron_count",
     "electron_configuration occupancy total equals identity.electron_count",
     "all T36 phases are finite and in [0,2*pi)",
-    "empty 36-slot reference has PNCS resultant R approximately zero",
-    "full 36-slot reference has PNCS resultant R approximately zero",
-    "global bitwise occupancy complement preserves PNCS resultant magnitude R",
+    "empty 36-slot reference has PNCS resultant R below 1e-9",
+    "full 36-slot reference has PNCS resultant R below 1e-9",
+    "global bitwise occupancy complement preserves PNCS resultant magnitude R within absolute difference 1e-9",
     "phase_index is explicit in every emitted binding record",
     "no observed wavelength, wavenumber, oscillator strength, intensity, or spectral label is accepted"
   ],
