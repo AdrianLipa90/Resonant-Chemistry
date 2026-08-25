@@ -1,0 +1,51 @@
+{
+  "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_PREREG_V0_15",
+  "version": "0.15.0",
+  "status": "PREREGISTERED_BEFORE_EXTERNAL_SPECTRAL_LOOKUP",
+  "objective": "Test whether frozen zero-fit B-Ne phase-frequency candidates occupy and order the same coarse spectral-energy scale as independently tabulated first ionization edges of the corresponding neutral atoms.",
+  "prediction_source": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json",
+  "prediction_ledger_sha256": "e83be56f85de537d4fb4be8623f96b8cc72c64f42e36e5bebea5a75b998df4b1",
+  "external_source_policy": {
+    "authority": "NIST Atomic Spectra Database / NIST ionization-energy data",
+    "species": ["B I", "C I", "N I", "O I", "F I", "Ne I"],
+    "observable": "first ionization energy from the neutral ground state",
+    "conversion": "tabulated energy converted to vacuum wavenumber cm^-1 if required using source/NIST constants",
+    "line_or_edge_selection_from_model": "PROHIBITED",
+    "manual_best_match_selection": "PROHIBITED"
+  },
+  "frozen_model_channels": {
+    "primary_scale": "radial_kepler_phase.kepler_wavenumber_cm_inverse",
+    "tir_sic_axes": ["x", "y", "z"],
+    "spatial_probes": "ALL_FROZEN_PARTITIONS_AND_P_X_P_Y_P_Z_PRESERVED",
+    "spin_orbit_control": "radial_kepler_phase.zeta_2p_control_wavenumber_cm_inverse"
+  },
+  "observer_policy": {
+    "ionization_edge_reference_frame": "REST_FRAME_TABULATED_ATOMIC_VALUE",
+    "doppler_beta": 0.0,
+    "subjective_time_scale": 1.0,
+    "meaning": "NULL_REST_CONTROL_ONLY",
+    "nontrivial_subjective_time": "PENDING_SEPARATE_ATOMIC_SUBSTRATE_PREREGISTRATION"
+  },
+  "metrics": [
+    "predicted_to_observed_ratio",
+    "absolute_relative_error",
+    "log10_ratio",
+    "median_absolute_relative_error_across_six_atoms",
+    "rms_log10_ratio_across_valid_nonzero_predictions",
+    "spearman_rank_correlation_across_six_atoms_for_kepler_fundamental",
+    "pearson_correlation_of_log10_wavenumbers_for_kepler_fundamental"
+  ],
+  "reporting_rules": {
+    "zero_prediction_against_nonzero_observation": "REPORT_EXPLICITLY_AS_ZERO_CHANNEL_MISMATCH",
+    "no_global_scale_fit": true,
+    "no_offset_fit": true,
+    "no_element_specific_fit": true,
+    "no_channel_selection_after_observation": true,
+    "all_residuals_reported": true,
+    "failure_is_valid": true
+  },
+  "promotion_rule": "MEASUREMENT_ONLY_NO_PROMOTION_THRESHOLD_PREDECLARED",
+  "next_test_if_completed": "preregister a line-level ground-state resonance-transition join separately; do not reuse ionization-edge results to select its line/channel",
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false
+}
