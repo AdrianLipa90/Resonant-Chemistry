@@ -2,40 +2,120 @@
 
 ## State
 
-**IMPLEMENTED FEATURE LAYER / PNCS SEMANTIC-MASS BRIDGE IMPLEMENTED / ATOM-T36 BINDINGS OPEN / BLIND SPECTRAL COMPARISON PENDING**
+**TIR TETRAHEDRAL SIC INFERENCE GEOMETRY IMPLEMENTED / STAGE-A0 GEOMETRY FREEZE IMPLEMENTED / PNCS v0.19 SEMANTIC-MASS BRIDGE IMPLEMENTED / ATOM-T36 BINDINGS OPEN / BLIND SPECTRAL COMPARISON PENDING**
 
 ## Objective
 
-v0.15 constructs a calculation path from an atomic semantic card, an explicit PNCS v0.19 semantic-mass binding, orbital angular structure, polyhedral cone occupancy, and the existing radial nuclear-exposure control to frozen model-side spectral features.
-
-The execution path is:
+v0.15 constructs a provenance-bearing calculation path linking:
 
 ```text
 atomic semantic card
-  -> explicit PNCS v0.19 T36 binding
-  -> semantic mass M_s
-  -> nucleon normalization A
-  -> orbital angular density
-  -> polyhedral cone partition
-  -> cone probabilities p_a
-  -> solid-angle reference q_a
-  -> polyhedral information D_KL(p || q)
-  -> radial nuclear exposure chi_r
-  -> phase eclipse trace
-  -> harmonic spectrum
-  -> frozen blind-transition feature record
-  -> later spectral comparison
+  -> radial nuclear exposure
+  -> orbital-band angular information
+  -> TIR tetrahedral SIC inference coordinates
+  -> nucleon normalization
+  -> exact PNCS v0.19 semantic mass
+  -> phase/harmonic observables
+  -> frozen blind-transition features
+  -> preregistered spectral comparison
 ```
 
-## Existing control substrate
+The geometry and mass layers are frozen in separate steps so the exact PNCS semantic-mass binding enters after the mass-independent atomic geometry ledger has been generated.
 
-The atomic cards already provide `Z`, `N`, `A`, electron configuration, solver provenance, and the canonical information constant
+## TIR tetrahedral inference geometry
+
+The primary inference geometry is referenced directly to:
+
+```text
+repository: AdrianLipa90/Metatime-Relation_of_Information_Framework
+commit: 7498d8c6349573f8d58895145342e849d36983c8
+path: theory/metatime/foundational_formal_notes/hilbert_kahler_phase_hamiltonian/main.tex
+```
+
+The tetrahedral frame inside the Bloch sphere is
 
 \[
-\kappa = \frac{\ln 2}{24\pi}.
+\mathbf v_1=\frac{(1,1,1)}{\sqrt3},\quad
+\mathbf v_2=\frac{(1,-1,-1)}{\sqrt3},\quad
+\mathbf v_3=\frac{(-1,1,-1)}{\sqrt3},\quad
+\mathbf v_4=\frac{(-1,-1,1)}{\sqrt3},
 \]
 
-The existing period-2 spectroscopy module supplies a radial B--Ne control state and the central-field spin-orbit quantity
+with
+
+\[
+\mathbf v_i\cdot\mathbf v_j=
+\begin{cases}
+1,&i=j,\\
+-1/3,&i\neq j.
+\end{cases}
+\]
+
+For a Bloch-ball coordinate \(\mathbf n\), the inference-cone probabilities use the TIR qubit SIC map
+
+\[
+\boxed{p_j(\mathbf n)=\frac14\left(1+\mathbf n\cdot\mathbf v_j\right)},
+\qquad
+\sum_{j=1}^{4}p_j=1.
+\]
+
+The corresponding interference Gram matrix is
+
+\[
+G_{ij}=\frac{1+\mathbf v_i\cdot\mathbf v_j}{2},
+\]
+
+hence
+
+\[
+G_{ii}=1,
+\qquad
+G_{ij}=\frac13\quad(i\neq j).
+\]
+
+The implementation contract is
+
+```text
+RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15
+```
+
+and lives in `reschem/tetrahedral_inference_v015.py`.
+
+## Period-2 subshell Bloch control
+
+For the first B--Ne cohort, the existing atomic control solver supplies the 2p alpha/beta occupations. v0.15 reduces this shell-level spin population to
+
+\[
+P_{2p}=\frac{N_\alpha-N_\beta}{N_\alpha+N_\beta},
+\qquad
+\mathbf n_{2p}=(0,0,P_{2p}).
+\]
+
+The initial cohort therefore carries a deterministic shell-spin coordinate derived from the same atomic configuration machinery already used by Resonant Chemistry.
+
+The reduction receipt is
+
+```text
+RESCHEM_PERIOD2_P_SPIN_BLOCH_CONTROL_V0_15
+```
+
+with provenance `reschem.atomic_hf_average.subshells_for_atom`.
+
+## Tetrahedral inference information
+
+For the SIC probabilities \(p_j\), v0.15 records the information relative to the central Bloch-ball reference \((1/4,1/4,1/4,1/4)\):
+
+\[
+I_{\rm SIC}
+=
+\sum_{j=1}^{4}p_j\ln(4p_j).
+\]
+
+The complete SIC probability vector remains in every receipt. The model therefore preserves both the scalar information and the directional distribution over the four inference sectors.
+
+## Radial nuclear-exposure control
+
+The existing period-2 spectroscopy module supplies the central-field spin-orbit quantity
 
 \[
 \zeta_{2p}=\frac{\alpha^2}{2}\chi_r,
@@ -44,32 +124,142 @@ The existing period-2 spectroscopy module supplies a radial B--Ne control state 
 with
 
 \[
-\chi_r=\int \rho_{2p}(r)\frac{Z-Q_{\mathrm{enc}}(r)}{r^3}\,dr.
+\chi_r
+=
+\int \rho_{2p}(r)
+\frac{Z-Q_{\rm enc}(r)}{r^3}
+\,dr.
 \]
 
-v0.15 exposes the equivalent radial control quantity as
+v0.15 exposes this as
 
 ```text
 RESCHEM_PERIOD2_P_RADIAL_EXPOSURE_CONTROL_V0_15
 ```
 
-and keeps it provenance-linked to `reschem.atomic_radial_spectroscopy`.
+and retains the originating HF energy and virial residual in the control receipt.
 
-## PNCS semantic-mass binding
+## Spatial orbital-band channel
 
-The semantic-mass bridge mirrors PNCS v0.19 exactly:
+For an orbital angular state
 
 \[
-m_k=\kappa(1+\alpha_M k)+\frac{2}{7}R_k,
+\psi_l(\Omega)=\sum_{m=-l}^{l}c_mY_l^m(\Omega),
+\]
+
+the spatial cloud is sampled deterministically on an equal-area Fibonacci sphere.
+
+The first frozen real 2p basis is
+
+```text
+p_x
+p_y
+p_z
+```
+
+under contract
+
+```text
+RESCHEM_REAL_2P_BASIS_V0_15
+```
+
+The spatial tetrahedral projection is retained alongside octahedral, cubic, and icosahedral partition controls. These control partitions allow the later held-out comparison to measure the incremental value of the TIR tetrahedral choice while preserving the TIR SIC inference geometry as the primary internal inference layer.
+
+For a spatial partition cell \(C_a\),
+
+\[
+p_a^{\rm orb}
+=
+\int_{C_a}|\psi_l(\Omega)|^2\,d\Omega,
+\]
+
+with solid-angle reference
+
+\[
+q_a=\frac{\Omega_a}{4\pi}.
+\]
+
+The geometry-sensitive orbital information is
+
+\[
+I_{\rm orb}
+=
+D_{KL}(p^{\rm orb}\Vert q)
+=
+\sum_a p_a^{\rm orb}
+\ln\frac{p_a^{\rm orb}}{q_a}.
+\]
+
+The cone Shannon quantity
+
+\[
+H_{\rm orb}=-\sum_a p_a^{\rm orb}\ln p_a^{\rm orb}
+\]
+
+is preserved separately.
+
+## Stage-A0 — mass-independent geometry freeze
+
+`run_polyhedral_eclipse_stage_a0_v015.py` creates the mass-independent ledger before the PNCS semantic-mass join.
+
+For every preregistered atom it freezes:
+
+```text
+Z
+A
+radial nuclear exposure chi_r
+2p alpha/beta occupation
+2p spin polarization
+Bloch coordinate
+TIR tetrahedral SIC probabilities
+TIR SIC information
+TIR inference-cone phase harmonic
+p_x / p_y / p_z spatial features
+spatial tetrahedral projection control
+spatial octahedral control
+spatial cubic control
+spatial icosahedral control
+per-feature SHA-256
+per-atom SHA-256
+ledger SHA-256
+```
+
+The state marker is
+
+```text
+GEOMETRY_FEATURES_FROZEN_BEFORE_SEMANTIC_MASS_AND_SPECTRAL_JOIN
+```
+
+The spectral field remains
+
+```text
+WITHHELD_FOR_BLIND_COMPARISON
+```
+
+throughout Stage-A0.
+
+## PNCS v0.19 semantic-mass binding
+
+The semantic-mass bridge mirrors the frozen PNCS v0.19 contract:
+
+\[
+\boxed{m_k=\kappa(1+\alpha_M k)+\frac{2}{7}R_k},
 \]
 
 where
 
 \[
-R_k=\frac{1}{36}\sqrt{\left(\sum_i\sin\phi_i\right)^2+\left(\sum_i\cos\phi_i\right)^2}.
+R_k
+=
+\frac1{36}
+\sqrt{
+\left(\sum_i\sin\phi_i\right)^2
++
+\left(\sum_i\cos\phi_i\right)^2
+}.
 \]
 
-Frozen constants and provenance:
+Frozen provenance:
 
 ```text
 mass_contract_id: PNV_SEMANTIC_MASS_V1
@@ -80,175 +270,126 @@ epistemic operator: CHYBA
 canon_allowed: false
 ```
 
-An atomic binding requires all of:
+Every atomic binding carries explicitly:
 
 ```text
 atom_card_id
 phase_index >= 1
-exact 36-component phase
+exact 36-component phase realization
 realization_id
 realization_binding_id
 source PNCS mass_binding_id
 ```
 
-`phase_index` is always explicit. Atom identity, `Z`, isotope mass number, filename, and content ID are not used as hidden index derivation rules.
+The explicit binding is the sole Stage-A1 source of `phase_index` and T36 for semantic-mass evaluation.
 
-A verified binding generates a nondestructive semantic-card overlay at:
+A verified binding produces a nondestructive atomic semantic-card overlay at
 
 ```text
 tir.semantic_axes.values.semantic_mass
 ```
 
-with the PhaseNav realization and mass-binding provenance retained.
+with realization and mass-binding lineage retained.
 
-## Polyhedral cone partition
+## Orbital information ratio relative to nucleons
 
-For an orbital angular state
-
-\[
-\psi_l(\Omega)=\sum_{m=-l}^{l}c_mY_l^m(\Omega),
-\]
-
-the angular probability density is sampled deterministically on an equal-area Fibonacci sphere and assigned to spherical Voronoi cells defined by polyhedral axes.
-
-The initial geometry ensemble is:
-
-```text
-tetrahedron: 4 vertex cones
-octahedron: 6 vertex cones
-cube: 8 vertex cones
-icosahedron: 12 vertex cones
-```
-
-These geometries are Stage-A candidates. Their scores are generated before spectral observations are joined.
-
-For cone `a`,
+After the atomic mass binding is admitted,
 
 \[
-p_a=\int_{C_a}|\psi_l(\Omega)|^2\,d\Omega,
+\eta_A
+=
+\frac{I_{\rm orb}}{A\kappa},
 \]
 
-and the geometric reference is its solid-angle fraction
-
-\[
-q_a=\frac{\Omega_a}{4\pi}.
-\]
-
-## Orbital information relative to nucleons
-
-The geometry-sensitive orbital information is
-
-\[
-I_{\mathrm{poly}}=D_{KL}(p\Vert q)
-=\sum_a p_a\ln\frac{p_a}{q_a}.
-\]
-
-The v0.15 nucleon-normalized information ratio is
-
-\[
-\eta_A=\frac{I_{\mathrm{poly}}}{A\kappa}.
-\]
-
-The ordinary cone Shannon information
-
-\[
-H_C=-\sum_a p_a\ln p_a
-\]
-
-is retained in every receipt as a separate observable.
-
-For an isotropic angular state, `p_a=q_a` and therefore
-
-\[
-I_{\mathrm{poly}}=0.
-\]
-
-This provides the spherical angular control inside the same implementation.
-
-## Semantic mass per nucleon
-
-For a provenance-bound semantic mass `M_s`,
+and
 
 \[
 \mu_s=\frac{M_s}{A}.
 \]
 
-The Stage-A eclipse coupling is
+The current Stage-A1 combined eclipse feature is
 
 \[
-\mathcal E=\mu_s\,\eta_A\,\chi_r.
+\boxed{\mathcal E=\mu_s\,\eta_A\,\chi_r}.
 \]
 
-Its components are always persisted separately so later tests can compare the combined scalar against each component and against the radial control.
+Every factor remains available as an independent column for the later comparison panel.
 
-## Phase eclipse trace
+## Phase and eclipse harmonics
 
-A model phase `phi` rotates the orbital angular density relative to a fixed polyhedral partition and observer direction. For the observer cone `o`, the normalized occupancy contrast is
+For a spatial orbital-band partition, the normalized observer-cell occupancy contrast is
 
 \[
-O(\phi)=\frac{p_o(\phi)}{q_o}-1.
+O_{\rm orb}(\phi)
+=
+\frac{p_o^{\rm orb}(\phi)}{q_o}-1.
 \]
 
-The discrete Fourier transform of one phase cycle yields a harmonic order and amplitude:
+For the TIR inference sector, the phase trace is generated directly from the rotated Bloch coordinate:
 
 \[
-O(\phi)\rightarrow \{A_n\},
-\qquad
-n_*=\arg\max_{n>0}|A_n|.
+O_{\rm SIC}^{(j)}(\phi)
+=
+p_j(R(\phi)\mathbf n)-\frac14.
 \]
 
-v0.15 stores `n_*` and its amplitude. Conversion to hertz requires an independently supplied physical/model phase rate:
+Each trace is decomposed by a discrete Fourier transform and stores its dominant harmonic order and amplitude.
+
+Conversion to hertz is activated by a separately provenance-bound phase rate:
 
 \[
-\nu_{\mathrm{eclipse}}=\frac{n_*\Omega_{\mathrm{phase}}}{2\pi}.
+\nu_{\rm eclipse}
+=
+\frac{n_*\Omega_{\rm phase}}{2\pi}.
 \]
 
-The phase-rate source must be provenance-bearing in the later mapping stage.
+The phase-rate binding is part of the later spectral-mapping preregistration.
 
-## Blind transition records
+## Blind validation stages
 
-For initial and final orbital probes, v0.15 freezes:
+### Stage A0 — geometry freeze
+
+1. Resolve the B--Ne atomic cards.
+2. Compute radial exposure.
+3. Compute the 2p shell-spin Bloch control.
+4. Compute the TIR tetrahedral SIC inference coordinates.
+5. Compute the frozen real-2p spatial orbital controls.
+6. Persist hashes before the semantic-mass and spectral joins.
+
+Gate:
 
 ```text
-delta_polyhedral_information_nats
-delta_orbital_information_ratio
-delta_eclipse_coupling
-initial_harmonic_order
-final_harmonic_order
+GEOMETRY_FEATURES_FROZEN_BEFORE_SEMANTIC_MASS_AND_SPECTRAL_JOIN
 ```
 
-and writes
+### Stage A1 — semantic-mass join
+
+1. Bind each atomic card to an exact PNCS v0.19 realization.
+2. Verify `M_s` under the frozen mass contract.
+3. Compute `M_s/A`, `I_orb/(A*kappa)`, and the combined eclipse feature.
+4. Freeze mass-weighted feature receipts.
+
+Gate:
 
 ```text
-observed_spectrum = WITHHELD_FOR_BLIND_COMPARISON
-validation_status = PREDICTION_FEATURES_FROZEN
+FEATURES_FROZEN_BEFORE_SPECTRAL_JOIN
 ```
 
-No observed wavelength, wavenumber, oscillator strength, or line intensity is accepted by the Stage-A feature builder.
+### Stage B — spectral mapping preregistration
 
-## Validation stages
+Freeze the map from Stage-A features to spectral observables, including global scale parameters, calibration subset, held-out subset, error metric, and comparison controls.
 
-### Stage A — feature freeze
+Gate:
 
-1. Bind selected atomic cards to exact PNCS v0.19 realizations.
-2. Verify semantic mass exactly under the frozen PNCS contract.
-3. Compute radial control exposure.
-4. Compute all four polyhedral candidate feature sets.
-5. Freeze transition-feature receipts and hashes.
-
-Gate: **FEATURES_FROZEN_BEFORE_SPECTRAL_JOIN**.
-
-### Stage B — mapping preregistration
-
-Define one explicit map from frozen model features to spectral observables, including any global scale parameter, calibration subset, held-out subset, error metric, and null baselines.
-
-Gate: **SPECTRAL_MAPPING_PREREGISTERED**.
+```text
+SPECTRAL_MAPPING_PREREGISTERED
+```
 
 ### Stage C — spectral join
 
-Join the preregistered experimental spectrum and evaluate the frozen map on held-out transitions/elements.
+Join the preregistered experimental observations and evaluate the frozen mapping on held-out transitions/elements.
 
-Gate statuses distinguish:
+Gate states:
 
 ```text
 MODEL_FEATURE_AVAILABLE
@@ -258,9 +399,9 @@ HELD_OUT_VALIDATION_PASS
 HELD_OUT_VALIDATION_FAIL
 ```
 
-## Initial element cohort
+## Initial cohort
 
-The first control cohort is the existing period-2 p-shell path:
+The first cohort is the implemented period-2 p-shell control path:
 
 ```text
 B-11
@@ -271,24 +412,26 @@ F-19
 Ne-20
 ```
 
-The cohort is selected from the already implemented B--Ne radial spectroscopy surface. Atom-to-T36 semantic-mass bindings remain a required input before Stage A can be closed.
+This cohort supplies a continuous sequence from open 2p occupation through half filling to the closed 2p shell while remaining inside one established radial-control implementation.
 
-## Model comparison contract
+## Model comparison columns
 
-The Stage-A outputs preserve separate columns for:
+The frozen comparison surface preserves:
 
 ```text
-radial exposure only
-semantic mass per nucleon only
-polyhedral information only
-semantic mass x polyhedral information
+radial exposure
+2p spin polarization
+TIR SIC probability vector
+TIR SIC information
+TIR SIC harmonic order and strength
+spatial orbital information
+spatial orbital harmonic order and strength
+semantic mass per nucleon
+orbital information per nucleon
+semantic mass x orbital information
 full eclipse coupling
-harmonic order
-harmonic strength
-polyhedron identity
+spatial control partition identity
 ```
-
-This permits the later validation to measure the incremental contribution of each layer.
 
 ## Scientific status
 
@@ -297,10 +440,15 @@ The v0.15 model may suggest a relation between polyhedral electron-cone informat
 Current evidential state:
 
 ```text
-polyhedral feature implementation: IMPLEMENTED
-unit-test contract: IMPLEMENTED
-PNCS v0.19 mass bridge: IMPLEMENTED
+TIR tetrahedral SIC inference geometry: IMPLEMENTED
+period-2 spin-Bloch control reduction: IMPLEMENTED
+mass-independent Stage-A0 runner: IMPLEMENTED
+spatial orbital feature layer: IMPLEMENTED
+PNCS v0.19 semantic-mass bridge: IMPLEMENTED
+semantic-card representation: IMPLEMENTED
 atom-to-T36 bindings: OPEN
-blind spectral prediction ledger: PENDING BINDINGS
+Stage-A0 durable execution ledger: PENDING EXECUTION
+Stage-A1 mass-weighted ledger: PENDING T36 BINDINGS
+spectral mapping preregistration: PENDING
 experimental spectral comparison: PENDING
 ```
