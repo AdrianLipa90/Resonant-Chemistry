@@ -1,0 +1,111 @@
+{
+  "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_SPECTROSCOPY_PREREG_V0_15",
+  "version": "0.15.0",
+  "status": "STAGE_A_PREREGISTERED_SPECTRUM_WITHHELD",
+  "documentation": "docs/polyhedral_eclipse_spectroscopy_v0_15.md",
+  "depends_on": {
+    "resonant_chemistry_branch_base": "chem/v0.14a2-arbr2",
+    "resonant_chemistry_base_sha": "c89c6863ff901fb5f3f9212e6ff3bfaba9b192f5",
+    "pncs_reference_commit": "5b866572f842407302acbb742df8a3955a0b8325",
+    "pncs_reference_path": "src/phasenav_natural_code/mass_v19.py",
+    "pncs_mass_contract_id": "PNV_SEMANTIC_MASS_V1",
+    "pncs_runtime_source_sha256": "0b4df86cd01db313ea46ebac0eceee9cf6df0673391edd1a3fb2667c30464a32"
+  },
+  "constants": {
+    "kappa_expression": "ln(2)/(24*pi)",
+    "kappa": 0.009193150006360484,
+    "semantic_mass_l3": 7,
+    "semantic_mass_l4": 2,
+    "semantic_mass_l5": 5,
+    "semantic_mass_l_ratio": 0.2857142857142857,
+    "semantic_mass_alpha_m": 0.0072973113787402075
+  },
+  "semantic_mass_binding": {
+    "status": "EXPLICIT_ATOM_TO_PNCS_BINDINGS_REQUIRED",
+    "phase_index_rule": "EXPLICIT_PROVENANCE_INPUT_ONLY",
+    "phase36_rule": "EXACT_36_COMPONENT_BOUND_REALIZATION",
+    "epistemic_operator": "CHYBA",
+    "canon_allowed": false,
+    "required_fields": [
+      "atom_card_id",
+      "phase_index",
+      "phase36",
+      "realization_id",
+      "realization_binding_id",
+      "source_binding_id"
+    ]
+  },
+  "initial_atomic_cohort": [
+    {"card_id": "ATOM:B:11:q+0", "symbol": "B", "A": 11, "radial_control": "period2_2p"},
+    {"card_id": "ATOM:C:12:q+0", "symbol": "C", "A": 12, "radial_control": "period2_2p"},
+    {"card_id": "ATOM:N:14:q+0", "symbol": "N", "A": 14, "radial_control": "period2_2p"},
+    {"card_id": "ATOM:O:16:q+0", "symbol": "O", "A": 16, "radial_control": "period2_2p"},
+    {"card_id": "ATOM:F:19:q+0", "symbol": "F", "A": 19, "radial_control": "period2_2p"},
+    {"card_id": "ATOM:Ne:20:q+0", "symbol": "Ne", "A": 20, "radial_control": "period2_2p"}
+  ],
+  "polyhedral_geometry_candidates": [
+    {"name": "tetrahedron", "cone_count": 4, "role": "STAGE_A_CANDIDATE"},
+    {"name": "octahedron", "cone_count": 6, "role": "STAGE_A_CANDIDATE"},
+    {"name": "cube", "cone_count": 8, "role": "STAGE_A_CANDIDATE"},
+    {"name": "icosahedron", "cone_count": 12, "role": "STAGE_A_CANDIDATE"}
+  ],
+  "feature_definitions": {
+    "cone_probability": "p_a = integral_Ca |psi_l(Omega)|^2 dOmega",
+    "solid_angle_reference": "q_a = Omega_a/(4*pi)",
+    "shannon_information_nats": "H_C = -sum_a p_a ln(p_a)",
+    "polyhedral_information_nats": "I_poly = sum_a p_a ln(p_a/q_a)",
+    "orbital_information_ratio_to_nucleons": "eta_A = I_poly/(A*kappa)",
+    "semantic_mass_per_nucleon": "mu_s = M_s/A",
+    "eclipse_coupling": "E = mu_s * eta_A * chi_r",
+    "phase_trace": "O(phi) = p_observer(phi)/q_observer - 1",
+    "dominant_harmonic": "argmax_{n>0} |FFT[O]_n|",
+    "frequency_mapping": "nu_eclipse = n_star * Omega_phase/(2*pi) with provenance-bearing Omega_phase"
+  },
+  "sampling": {
+    "sphere": "DETERMINISTIC_FIBONACCI_EQUAL_AREA",
+    "default_feature_samples": 8192,
+    "default_phase_trace_samples": 128,
+    "phase_cycle": "[0,2*pi)",
+    "cone_assignment": "MAXIMUM_AXIS_DOT_PRODUCT_SPHERICAL_VORONOI"
+  },
+  "blind_protocol": {
+    "stage_a_gate": "FEATURES_FROZEN_BEFORE_SPECTRAL_JOIN",
+    "stage_b_gate": "SPECTRAL_MAPPING_PREREGISTERED",
+    "stage_c_gate": "EXPERIMENTAL_COMPARISON_AVAILABLE",
+    "observed_wavelength": "WITHHELD",
+    "observed_wavenumber": "WITHHELD",
+    "observed_oscillator_strength": "WITHHELD",
+    "observed_line_intensity": "WITHHELD",
+    "geometry_selection_from_observed_spectrum": "PROHIBITED_BEFORE_STAGE_B_FREEZE"
+  },
+  "required_stage_a_outputs": [
+    "semantic_mass",
+    "semantic_mass_per_nucleon",
+    "radial_nuclear_exposure",
+    "cone_probabilities",
+    "solid_angle_fractions",
+    "shannon_information_nats",
+    "polyhedral_information_nats",
+    "orbital_information_ratio_to_nucleons",
+    "eclipse_coupling",
+    "dominant_eclipse_harmonic_order",
+    "dominant_eclipse_harmonic_strength",
+    "feature_receipt_sha256"
+  ],
+  "comparison_columns": [
+    "radial_exposure_only",
+    "semantic_mass_per_nucleon_only",
+    "polyhedral_information_only",
+    "semantic_mass_x_polyhedral_information",
+    "full_eclipse_coupling",
+    "harmonic_order",
+    "harmonic_strength",
+    "polyhedron_identity"
+  ],
+  "current_open_gates": [
+    "bind initial atom cohort to exact PNCS v0.19 T36 realizations",
+    "freeze Stage-A feature receipts for all geometry candidates",
+    "preregister Stage-B spectral map",
+    "join experimental spectral observations only after Stage-B freeze"
+  ]
+}
