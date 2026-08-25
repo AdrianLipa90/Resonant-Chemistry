@@ -1,0 +1,24 @@
+{
+  "schema": "RESCHEM_NIST_B_NE_NEUTRAL_IONIZATION_EDGES_V0_15",
+  "status": "EXTERNAL_REFERENCE_DATA_JOINED_AFTER_STAGE_B_FREEZE",
+  "source": {
+    "authority": "NIST Atomic Spectra Database",
+    "database_version": "5.12",
+    "database_citation_year": 2024,
+    "url": "https://physics.nist.gov/cgi-bin/ASD/ie.pl",
+    "observable": "neutral-atom first ionization energy",
+    "units": "cm^-1",
+    "retrieved_date": "2026-08-25"
+  },
+  "preregistration": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_PREREG_V0_15.json",
+  "rows": [
+    {"symbol": "B", "spectrum": "B I", "Z": 5, "ionization_wavenumber_cm_inverse": 66928.040},
+    {"symbol": "C", "spectrum": "C I", "Z": 6, "ionization_wavenumber_cm_inverse": 90820.348},
+    {"symbol": "N", "spectrum": "N I", "Z": 7, "ionization_wavenumber_cm_inverse": 117225.7},
+    {"symbol": "O", "spectrum": "O I", "Z": 8, "ionization_wavenumber_cm_inverse": 109837.02},
+    {"symbol": "F", "spectrum": "F I", "Z": 9, "ionization_wavenumber_cm_inverse": 140524.5},
+    {"symbol": "Ne", "spectrum": "Ne I", "Z": 10, "ionization_wavenumber_cm_inverse": 173929.75}
+  ],
+  "selection_status": "FIXED_BY_PREREGISTERED_SPECIES_AND_OBSERVABLE_NO_MODEL_MATCH_SELECTION",
+  "model_parameters_changed_after_lookup": false
+}
