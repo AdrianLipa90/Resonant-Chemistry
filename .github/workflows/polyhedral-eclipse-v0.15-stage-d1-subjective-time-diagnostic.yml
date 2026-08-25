@@ -1,0 +1,72 @@
+name: polyhedral-eclipse-v0.15-stage-d1-subjective-time-diagnostic
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_CONTRACT_V0_15.json
+      - scripts/run_atomic_subjective_time_stage_d1_diagnostic_v015.py
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-d1-subjective-time-diagnostic.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  post-join-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile Stage-D1 diagnostic
+        run: python -m py_compile scripts/run_atomic_subjective_time_stage_d1_diagnostic_v015.py
+
+      - name: Run frozen Stage-D1 diagnostic
+        run: >-
+          python scripts/run_atomic_subjective_time_stage_d1_diagnostic_v015.py
+          --output out/ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_LEDGER_V0_15.json
+
+      - name: Validate diagnostic boundary and hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path('out/ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_LEDGER_V0_15.json')
+          d=json.loads(p.read_text('utf-8'))
+          expected=(
+              'NULL_REST_CONTROL',
+              'KAPPA_RADIAL_BALANCED',
+              'SEMANTIC_MASS_BALANCED',
+              'RADIAL_SEMANTIC_GEOMETRIC_COUPLING',
+              'RADIAL_SEMANTIC_PRODUCT_COUPLING',
+          )
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          if d['status']!='POST_JOIN_SUBJECTIVE_TIME_DIAGNOSTIC_COMPLETE': raise SystemExit('status drift')
+          if d['diagnostic_only'] is not True or d['validation_claimed'] is not False: raise SystemExit('diagnostic boundary drift')
+          if d['model_parameters_changed'] is not False or d['candidate_selected_or_removed'] is not False: raise SystemExit('model mutation/selection drift')
+          if d['fit_parameters_added']!=[] or d['calibration_parameters_added']!=[]: raise SystemExit('fit/calibration drift')
+          if tuple(p['policy_id'] for p in d['policies'])!=expected: raise SystemExit('policy set drift')
+          body=dict(d); rec=body.pop('diagnostic_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=rec: raise SystemExit('diagnostic SHA drift')
+          for policy in d['policies']:
+              pb=dict(policy); pr=pb.pop('policy_sha256')
+              if hashlib.sha256(canonical(pb).encode()).hexdigest()!=pr: raise SystemExit(f"policy SHA drift: {policy['policy_id']}")
+              if policy['candidate_selected_for_model_update'] is not False or policy['validation_claimed'] is not False: raise SystemExit('policy promotion drift')
+              for row in policy['atom_rows']:
+                  rb=dict(row); rr=rb.pop('row_sha256')
+                  if hashlib.sha256(canonical(rb).encode()).hexdigest()!=rr: raise SystemExit(f"row SHA drift: {policy['policy_id']}:{row['symbol']}")
+          print({'diagnostic_sha256':rec,'policies':len(d['policies'])})
+          PY
+
+      - name: Upload Stage-D1 diagnostic ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: atomic-subjective-time-v0.15-stage-d1-diagnostic
+          path: out/ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_LEDGER_V0_15.json
+          if-no-files-found: error
