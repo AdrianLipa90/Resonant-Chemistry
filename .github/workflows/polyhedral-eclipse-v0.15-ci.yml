@@ -1,0 +1,48 @@
+name: polyhedral-eclipse-v0.15-ci
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - reschem/polyhedral_eclipse_spectroscopy.py
+      - reschem/pncs_semantic_mass_bridge_v015.py
+      - reschem/orbital_basis_v015.py
+      - tests/test_polyhedral_eclipse_spectroscopy.py
+      - tests/test_pncs_semantic_mass_bridge_v015.py
+      - .github/workflows/polyhedral-eclipse-v0.15-ci.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  v015-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install core package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Compile v0.15 modules and runner
+        run: >-
+          python -m py_compile
+          reschem/polyhedral_eclipse_spectroscopy.py
+          reschem/pncs_semantic_mass_bridge_v015.py
+          reschem/orbital_basis_v015.py
+          scripts/run_polyhedral_eclipse_stage_a_v015.py
+
+      - name: Run v0.15 unit gates
+        run: >-
+          python -m unittest
+          tests.test_polyhedral_eclipse_spectroscopy
+          tests.test_pncs_semantic_mass_bridge_v015
