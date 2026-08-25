@@ -1,0 +1,64 @@
+{
+  "schema": "RESCHEM_ARBR2_V0_14A2_CANONICAL_RUN_RECOVERY_V1",
+  "formula": "ArBr2",
+  "execution_partition": "v0.14A2_PER_SEED",
+  "canonical_workflow_run_id": 31887655166,
+  "canonical_source_head": "506b6631fa36fadea32210cd884b5481250f8a08",
+  "workflow_conclusion": "success",
+  "method_policy_sha256": "9b58d32d361bd2c2248c10859b12785aa9aa0244e18b5504f6cbb79d2abe366d",
+  "seed_receipts_persisted_in_repository": true,
+  "seed_receipts": {
+    "ArBr2_activated_s1p0": {
+      "repository_blob_sha1": "0fd55e562e9394b80d3148dc69be6194e22239cc",
+      "artifact_id": 9247770785,
+      "artifact_zip_sha256": "fc8c4049a877d2dae9caa508512f9f2a8a2a495fc8ae55af9bb2bd82bd765573",
+      "execution_status": "RELAXATION_RETURNED_FINAL_SCF_CONVERGED_NO_HESSIAN"
+    },
+    "ArBr2_activated_s1p3": {
+      "repository_blob_sha1": "5f049569062d3bd3044016080a5455698393979c",
+      "artifact_id": 9247718474,
+      "artifact_zip_sha256": "270f59badb093322c2b8019df5ac9da25acc45cfd082310870c4bf551aeb1d84",
+      "execution_status": "RELAXATION_EXCEPTION"
+    },
+    "ArBr2_activated_s1p6": {
+      "repository_blob_sha1": "5125884778cb67515950b52f906ea86ce89586fd",
+      "artifact_id": 9247772391,
+      "artifact_zip_sha256": "47c72aece775c76936250bcb5ba181b3b8102b1ec7112a56f32bed0dba3332b4",
+      "execution_status": "INITIAL_SCF_FAILED_NO_RESCUE"
+    },
+    "ArBr2_weak_linear": {
+      "repository_blob_sha1": "b4476a0b7896950010987d7aed640b6495052a9f",
+      "artifact_id": 9248167184,
+      "artifact_zip_sha256": "a3102737a60959ff0e827fee90118d330c725262708fe58229205b365f08ef1d",
+      "execution_status": "EXECUTION_TIMEOUT_UNKNOWN",
+      "scientific_interpretation": "UNKNOWN_EXECUTION_NOT_CHEMICAL_FAIL"
+    },
+    "ArBr2_weak_t": {
+      "repository_blob_sha1": "b258e252c0f06423de871d79ca35883e43689823",
+      "artifact_id": 9247822256,
+      "artifact_zip_sha256": "4a5cc02442320b2173f6820f672d3a90ee119edcb9c974045788f584bcb293ea",
+      "execution_status": "RELAXATION_RETURNED_FINAL_SCF_CONVERGED_NO_HESSIAN"
+    }
+  },
+  "aggregate": {
+    "artifact_id": 9248171893,
+    "artifact_zip_sha256": "51adeadd4e12ac970f6bbfcf70655312aad7c97c6509afa62d7c7133699d4764",
+    "raw_json_sha256": "76eaf92fb81a0cf140a2b8b75ae0b511cdca15a281acf2b05987545c1e4649c8",
+    "canonical_json_sha256": "12c6110072fc626d9ef3534c27acad048892424d1030d0e809585f57bb764739",
+    "raw_json_git_blob_sha1": "9eb889789ff5204ecd61d5e9f855aa02f18e8cd7",
+    "repository_copy_persisted": false,
+    "status": "FORMULA_EXECUTION_PARTITION_COMPLETE_WITH_UNKNOWN_SEEDS",
+    "start_count": 5,
+    "attempted_start_count": 5,
+    "successful_relaxation_count": 2,
+    "unknown_execution_seed_ids": [
+      "ArBr2_weak_linear"
+    ]
+  },
+  "scientific_checkpoint": {
+    "formulae_complete": "8/9",
+    "starts_complete": "40/45",
+    "promotion_condition_met": false,
+    "blocker": "ArBr2_weak_linear remains EXECUTION_TIMEOUT_UNKNOWN"
+  }
+}
