@@ -1,4 +1,6 @@
+import json
 import math
+from pathlib import Path
 import unittest
 
 from reschem.eclipse_time_doppler_v015 import (
@@ -9,6 +11,9 @@ from reschem.eclipse_time_doppler_v015 import (
     proper_eclipse_frequency_hz,
     transform_eclipse_observation,
 )
+
+
+FREEZE_PATH = Path("benchmarks/ECLIPSE_TIME_DOPPLER_FREEZE_V0_15.json")
 
 
 class EclipseTimeDopplerV015Tests(unittest.TestCase):
@@ -114,6 +119,30 @@ class EclipseTimeDopplerV015Tests(unittest.TestCase):
                 "observer_frequency_and_wavelength",
             ],
         )
+
+    def test_freeze_manifest_pins_contract_and_blind_boundary(self):
+        freeze = json.loads(FREEZE_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(freeze["status"], "FROZEN_BEFORE_SPECTRAL_JOIN")
+        self.assertEqual(freeze["contract_id"], CONTRACT_ID)
+        self.assertEqual(freeze["constants"]["speed_of_light_m_s"], C_M_PER_S)
+        self.assertEqual(freeze["doppler_convention"]["positive_beta"], "RECEDING")
+        self.assertEqual(freeze["subjective_time_source"]["relation"], "Delta tau = Delta t * g_combined")
+        self.assertEqual(freeze["blind_boundary"]["observed_spectrum"], "WITHHELD")
+        self.assertEqual(freeze["blind_boundary"]["fit_to_spectrum"], "PROHIBITED_AT_THIS_STAGE")
+
+    def test_freeze_manifest_vectors_replay_exact_transform(self):
+        freeze = json.loads(FREEZE_PATH.read_text(encoding="utf-8"))
+        for vector in freeze["test_vectors"]:
+            out = transform_eclipse_observation(
+                harmonic_order=vector["n_star"],
+                omega_proper_rad_s=vector["omega_tau_rad_s"],
+                subjective_time_scale=vector["g_combined"],
+                beta_radial=vector["beta"],
+            )
+            self.assertAlmostEqual(out.proper_frequency_hz, vector["expected_nu_proper_hz"], places=12)
+            self.assertAlmostEqual(out.coordinate_frequency_hz, vector["expected_nu_coordinate_hz"], places=12)
+            self.assertAlmostEqual(out.doppler_factor, vector["expected_doppler_factor"], places=12)
+            self.assertAlmostEqual(out.observed_frequency_hz, vector["expected_nu_observed_hz"], places=12)
 
 
 if __name__ == "__main__":
