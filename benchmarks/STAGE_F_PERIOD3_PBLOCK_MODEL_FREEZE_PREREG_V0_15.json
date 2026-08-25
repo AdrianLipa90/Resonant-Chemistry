@@ -1,0 +1,73 @@
+{
+  "schema": "RESCHEM_STAGE_F_PERIOD3_PBLOCK_MODEL_FREEZE_PREREG_V0_15",
+  "version": "0.15.0",
+  "status": "PERIOD3_AL_AR_MODEL_SIDE_FREEZE_PREREGISTERED_BEFORE_ANY_STAGE_F_SPECTRAL_DATA",
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "cohort": [
+    {"symbol":"Al","Z":13,"card_id":"ATOM:Al:27:q+0","active_p_shell":"3p"},
+    {"symbol":"Si","Z":14,"card_id":"ATOM:Si:28:q+0","active_p_shell":"3p"},
+    {"symbol":"P","Z":15,"card_id":"ATOM:P:31:q+0","active_p_shell":"3p"},
+    {"symbol":"S","Z":16,"card_id":"ATOM:S:32:q+0","active_p_shell":"3p"},
+    {"symbol":"Cl","Z":17,"card_id":"ATOM:Cl:35:q+0","active_p_shell":"3p"},
+    {"symbol":"Ar","Z":18,"card_id":"ATOM:Ar:40:q+0","active_p_shell":"3p"}
+  ],
+  "canonical_card_source": "semantic_cards/PERIOD3_NA_AR_V0_1.jsonl",
+  "stage_f_spectral_input": "PROHIBITED_UNTIL_MODEL_LEDGER_IS_FROZEN_HASHED_PERSISTED_AND_CI_GREEN",
+  "model_side_requirements": {
+    "atomic_card_identity": "use exact canonical JSONL record bytes for each card",
+    "t36_semantic_mass": {
+      "module": "reschem.atomic_t36_aufbau_v015",
+      "basis_id": "RESCHEM_AUFBAU36_ROOTS_OF_UNITY_OCCUPANCY_PHASE_V0_15",
+      "phase_index": "electron_count",
+      "mass_contract_id": "PNV_SEMANTIC_MASS_V1",
+      "fit_parameters": []
+    },
+    "radial_state": {
+      "requirement": "generalize the existing Stage-B radial-HF state extraction from active 2p to active 3p without changing the one-body, direct, exchange, SCF convergence, density normalization, or Kepler-observable definitions",
+      "reference_module": "reschem.atomic_radial_spectroscopy._solve_period2_radial_state",
+      "reference_kepler_module": "reschem.atomic_kepler_phase_v015.radial_kepler_observables",
+      "basis_size": 24,
+      "grid_points": 1500,
+      "mixing": 0.32,
+      "tolerance_hartree": 5e-8,
+      "max_iterations": 120,
+      "active_one_p_density": "one-electron normalized 3p radial density",
+      "method_change_to_fit_stage_f_data": "PROHIBITED"
+    },
+    "kepler_phase_rate": {
+      "mean_radius_bohr": "r_bar=integral P_3p(r)*r dr",
+      "other_electron_density": "rho_other=rho_total-P_3p",
+      "enclosed_other_charge": "Q_other(r)=integral_0^r rho_other(s) ds",
+      "effective_charge": "Z_eff=Z-Q_other(r_bar)",
+      "omega_au": "sqrt(Z_eff/r_bar^3)",
+      "frequency_and_wavenumber_conversion": "identical constants and conversion chain to Stage-B"
+    },
+    "subjective_time": {
+      "module": "reschem.atomic_subjective_time_v015",
+      "x": "kappa*radial_nuclear_exposure",
+      "y": "semantic_mass/kappa",
+      "policies": [
+        "NULL_REST_CONTROL",
+        "KAPPA_RADIAL_BALANCED",
+        "SEMANTIC_MASS_BALANCED",
+        "RADIAL_SEMANTIC_GEOMETRIC_COUPLING",
+        "RADIAL_SEMANTIC_PRODUCT_COUPLING"
+      ],
+      "all_policies_preserved": true
+    }
+  },
+  "pre_spectral_gates": [
+    "six canonical Al-Ar cards resolved exactly",
+    "six T36 realizations and PNCS v0.19 semantic masses generated and nested-hash verified",
+    "six active-3p radial states converged and normalized",
+    "six Kepler phase-rate records frozen",
+    "all five subjective-time policies frozen for all six atoms",
+    "model ledger raw bytes persisted in repository",
+    "all CI gates green"
+  ],
+  "fit_parameters": [],
+  "calibration_parameters": [],
+  "interpretation": "NONE_IN_PREREGISTRATION",
+  "failure_is_a_valid_outcome": true
+}

@@ -1,0 +1,2926 @@
+{
+  "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_A0_GEOMETRY_LEDGER_V0_15",
+  "revision": "R2_AXIS_RESOLVED_TIR_SIC_PHASE",
+  "status": "GEOMETRY_FEATURES_FROZEN_BEFORE_SEMANTIC_MASS_AND_SPECTRAL_JOIN",
+  "preregister_source": "benchmarks/POLYHEDRAL_ECLIPSE_SPECTROSCOPY_PREREG_V0_15.json",
+  "orbital_basis": {
+    "schema": "RESCHEM_REAL_2P_BASIS_V0_15",
+    "l": 1,
+    "coefficient_order": [
+      -1,
+      0,
+      1
+    ],
+    "states": {
+      "p_x": [
+        {
+          "real": 0.7071067811865475,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": -0.7071067811865475,
+          "imag": 0.0
+        }
+      ],
+      "p_y": [
+        {
+          "real": 0.0,
+          "imag": 0.7071067811865475
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.7071067811865475
+        }
+      ],
+      "p_z": [
+        {
+          "real": 0.0,
+          "imag": 0.0
+        },
+        {
+          "real": 1.0,
+          "imag": 0.0
+        },
+        {
+          "real": 0.0,
+          "imag": 0.0
+        }
+      ]
+    },
+    "status": "FROZEN_STAGE_A_ANGULAR_BASIS"
+  },
+  "primary_inference_geometry": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15",
+  "axis_resolved_phase_contract": "RESCHEM_TIR_TETRAHEDRAL_SIC_AXIS_RESOLVED_PHASE_V0_15_R2",
+  "spatial_partition_controls": [
+    "tetrahedron",
+    "octahedron",
+    "cube",
+    "icosahedron"
+  ],
+  "sampling": {
+    "sphere_samples": 8192,
+    "phase_samples": 128
+  },
+  "atom_count": 6,
+  "spatial_feature_count": 72,
+  "atoms": [
+    {
+      "atom_card_id": "ATOM:B:11:q+0",
+      "symbol": "B",
+      "Z": 5,
+      "A": 11,
+      "radial_control": {
+        "schema": "RESCHEM_PERIOD2_P_RADIAL_EXPOSURE_CONTROL_V0_15",
+        "Z": 5,
+        "radial_nuclear_exposure": 1.6951648879910488,
+        "zeta_2p_hartree": 4.5134913210701014e-05,
+        "hf_energy_hartree": -24.414360255832307,
+        "virial_residual_hartree": 0.00016106578902341795,
+        "control_source": "reschem.atomic_radial_spectroscopy",
+        "status": "CONTROL_RADIAL_EXPOSURE_AVAILABLE"
+      },
+      "subshell_spin_control": {
+        "schema": "RESCHEM_PERIOD2_P_SPIN_BLOCH_CONTROL_V0_15",
+        "Z": 5,
+        "subshell": "2p",
+        "alpha_occupancy": 1,
+        "beta_occupancy": 0,
+        "total_occupancy": 1,
+        "spin_polarization": 1.0,
+        "bloch_vector": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bloch_radius": 1.0,
+        "reduction": "MODEL_DEFINED_SUBSHELL_SPIN_POLARIZATION_BLOCH_COORDINATE",
+        "source": "reschem.atomic_hf_average.subshells_for_atom"
+      },
+      "tetrahedral_inference": {
+        "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15",
+        "tir_reference": {
+          "repository": "AdrianLipa90/Metatime-Relation_of_Information_Framework",
+          "commit": "7498d8c6349573f8d58895145342e849d36983c8",
+          "path": "theory/metatime/foundational_formal_notes/hilbert_kahler_phase_hamiltonian/main.tex",
+          "coordinate_expression": "p_j(n)=1/4*(1+n dot v_j)"
+        },
+        "bloch_vector": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bloch_radius": 1.0,
+        "sic_probabilities": [
+          0.39433756729740643,
+          0.10566243270259354,
+          0.10566243270259354,
+          0.39433756729740643
+        ],
+        "sic_information_nats": 0.17744044409639098,
+        "gram": {
+          "diagonal": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "off_diagonal": 0.33333333333333326
+        },
+        "phase": {
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "epistemic_status": {
+          "tetrahedral_frame": "TIR_MODEL_AXIOM_REFERENCE_BOUND",
+          "bloch_coordinate": "MODEL_DEFINED_CONTROL_REDUCTION",
+          "spectral_validation": "BLIND_COMPARISON_PENDING"
+        },
+        "axis_resolved_phase": {
+          "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_AXIS_RESOLVED_PHASE_V0_15_R2",
+          "cone_index": 0,
+          "phase_samples": 128,
+          "axes": {
+            "x": {
+              "rotation_axis": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.10206207261596578
+            },
+            "y": {
+              "rotation_axis": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.10206207261596578
+            },
+            "z": {
+              "rotation_axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            }
+          },
+          "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED",
+          "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON"
+        }
+      },
+      "spatial_orbital_features": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.2509965938514447,
+            0.24908678967550316,
+            0.25016030142420786,
+            0.24975631504884435
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.3862905372293364,
+          "polyhedral_information_nats": 6.703041449704719e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.1856340480548264,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.2512471542981032,
+            0.24958935998839488,
+            0.24898764420295594,
+            0.2501758415105459
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386288803730087,
+          "polyhedral_information_nats": 1.6316018014974276e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.18563404805482642,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.2503197283942777,
+            0.24949279563742477,
+            0.25011963253742586,
+            0.25006784343087174
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386293604069714,
+          "polyhedral_information_nats": 8.657263334567038e-07,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.3501862479492724,
+            0.35041625741748006,
+            0.07447355831219585,
+            0.07505764197083464,
+            0.07485674814408223,
+            0.07500954620613483
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.5110252018109138,
+          "polyhedral_information_nats": 0.2810695038505316,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4129109082076801,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07488334672486589,
+            0.07469954630124089,
+            0.3497903805396067,
+            0.351318628061625,
+            0.07459592323671979,
+            0.07471217513594171
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.510242389476194,
+          "polyhedral_information_nats": 0.28124707365030993,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41291090820768006,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.07444212940359636,
+            0.07476213131203877,
+            0.07414913764374385,
+            0.07569891582011325,
+            0.35042526242192895,
+            0.35052242339857886
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.51048458205172,
+          "polyhedral_information_nats": 0.28120250750843473,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.12487692746507564,
+            0.12500524775064178,
+            0.12524140784712312,
+            0.12487644685708521,
+            0.12518548258146303,
+            0.1247890942973488,
+            0.12482010448184737,
+            0.12520528871941508
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.079440573354166,
+          "polyhedral_information_nats": 1.0063338545410552e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702975,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.12504356136100406,
+            0.1249994287457255,
+            0.12518895109776484,
+            0.12493118602037093,
+            0.12490551411651202,
+            0.1250514728126255,
+            0.12473805105585911,
+            0.125141834790138
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794409709913317,
+          "polyhedral_information_nats": 3.1794014787898473e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702976,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.12507951117122745,
+            0.1246291125607271,
+            0.12493585198985696,
+            0.12519236712537515,
+            0.12490900330750186,
+            0.12552564382950743,
+            0.12507563353141377,
+            0.12465287648439037
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794391591226007,
+          "polyhedral_information_nats": 1.88204155822391e-06,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.01983768542278031,
+            0.01996707905373741,
+            0.01976441442666149,
+            0.01968910783072617,
+            0.07299274706911772,
+            0.07172429021896728,
+            0.07193530290642214,
+            0.07275489283827591,
+            0.15755493580691168,
+            0.1583774395780595,
+            0.15689034424034046,
+            0.15851176060799993
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.236408124355121,
+          "polyhedral_information_nats": 0.24806788336523344,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41508650225626503,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07203682829383361,
+            0.07239971420536283,
+            0.072845457552237,
+            0.07267725136076647,
+            0.1584375278216711,
+            0.15724514767316453,
+            0.15774867766417808,
+            0.15731965450286273,
+            0.019732537873743284,
+            0.02009295291953443,
+            0.019586221140556286,
+            0.019878028992089652
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.2369086084442795,
+          "polyhedral_information_nats": 0.24825829375268232,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4150865022562649,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.15788134592615102,
+            0.15812148825231134,
+            0.15714598762377124,
+            0.15702328947615526,
+            0.02015663545557465,
+            0.019687784963539068,
+            0.02007187509012293,
+            0.019681308344350838,
+            0.07283460009359445,
+            0.07275031409148243,
+            0.07218066462574643,
+            0.07246470605720039
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.237756332367517,
+          "polyhedral_information_nats": 0.2473022929572828,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "semantic_mass_binding": "PENDING_EXACT_PNCS_T36_BINDING",
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "atomic_feature_sha256": "b0e35310cfabd14a185c417dea225be3e330e3a06c4a8b19169d9d9560852da2"
+    },
+    {
+      "atom_card_id": "ATOM:C:12:q+0",
+      "symbol": "C",
+      "Z": 6,
+      "A": 12,
+      "radial_control": {
+        "schema": "RESCHEM_PERIOD2_P_RADIAL_EXPOSURE_CONTROL_V0_15",
+        "Z": 6,
+        "radial_nuclear_exposure": 6.52289835893938,
+        "zeta_2p_hartree": 0.0001736765865070865,
+        "hf_energy_hartree": -37.530170570741355,
+        "virial_residual_hartree": -9.501093476238509e-05,
+        "control_source": "reschem.atomic_radial_spectroscopy",
+        "status": "CONTROL_RADIAL_EXPOSURE_AVAILABLE"
+      },
+      "subshell_spin_control": {
+        "schema": "RESCHEM_PERIOD2_P_SPIN_BLOCH_CONTROL_V0_15",
+        "Z": 6,
+        "subshell": "2p",
+        "alpha_occupancy": 2,
+        "beta_occupancy": 0,
+        "total_occupancy": 2,
+        "spin_polarization": 1.0,
+        "bloch_vector": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bloch_radius": 1.0,
+        "reduction": "MODEL_DEFINED_SUBSHELL_SPIN_POLARIZATION_BLOCH_COORDINATE",
+        "source": "reschem.atomic_hf_average.subshells_for_atom"
+      },
+      "tetrahedral_inference": {
+        "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15",
+        "tir_reference": {
+          "repository": "AdrianLipa90/Metatime-Relation_of_Information_Framework",
+          "commit": "7498d8c6349573f8d58895145342e849d36983c8",
+          "path": "theory/metatime/foundational_formal_notes/hilbert_kahler_phase_hamiltonian/main.tex",
+          "coordinate_expression": "p_j(n)=1/4*(1+n dot v_j)"
+        },
+        "bloch_vector": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bloch_radius": 1.0,
+        "sic_probabilities": [
+          0.39433756729740643,
+          0.10566243270259354,
+          0.10566243270259354,
+          0.39433756729740643
+        ],
+        "sic_information_nats": 0.17744044409639098,
+        "gram": {
+          "diagonal": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "off_diagonal": 0.33333333333333326
+        },
+        "phase": {
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "epistemic_status": {
+          "tetrahedral_frame": "TIR_MODEL_AXIOM_REFERENCE_BOUND",
+          "bloch_coordinate": "MODEL_DEFINED_CONTROL_REDUCTION",
+          "spectral_validation": "BLIND_COMPARISON_PENDING"
+        },
+        "axis_resolved_phase": {
+          "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_AXIS_RESOLVED_PHASE_V0_15_R2",
+          "cone_index": 0,
+          "phase_samples": 128,
+          "axes": {
+            "x": {
+              "rotation_axis": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.10206207261596578
+            },
+            "y": {
+              "rotation_axis": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.10206207261596578
+            },
+            "z": {
+              "rotation_axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            }
+          },
+          "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED",
+          "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON"
+        }
+      },
+      "spatial_orbital_features": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.2509965938514447,
+            0.24908678967550316,
+            0.25016030142420786,
+            0.24975631504884435
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.3862905372293364,
+          "polyhedral_information_nats": 6.703041449704719e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.1856340480548264,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.2512471542981032,
+            0.24958935998839488,
+            0.24898764420295594,
+            0.2501758415105459
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386288803730087,
+          "polyhedral_information_nats": 1.6316018014974276e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.18563404805482642,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.2503197283942777,
+            0.24949279563742477,
+            0.25011963253742586,
+            0.25006784343087174
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386293604069714,
+          "polyhedral_information_nats": 8.657263334567038e-07,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.3501862479492724,
+            0.35041625741748006,
+            0.07447355831219585,
+            0.07505764197083464,
+            0.07485674814408223,
+            0.07500954620613483
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.5110252018109138,
+          "polyhedral_information_nats": 0.2810695038505316,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4129109082076801,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07488334672486589,
+            0.07469954630124089,
+            0.3497903805396067,
+            0.351318628061625,
+            0.07459592323671979,
+            0.07471217513594171
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.510242389476194,
+          "polyhedral_information_nats": 0.28124707365030993,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41291090820768006,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.07444212940359636,
+            0.07476213131203877,
+            0.07414913764374385,
+            0.07569891582011325,
+            0.35042526242192895,
+            0.35052242339857886
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.51048458205172,
+          "polyhedral_information_nats": 0.28120250750843473,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.12487692746507564,
+            0.12500524775064178,
+            0.12524140784712312,
+            0.12487644685708521,
+            0.12518548258146303,
+            0.1247890942973488,
+            0.12482010448184737,
+            0.12520528871941508
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.079440573354166,
+          "polyhedral_information_nats": 1.0063338545410552e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702975,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.12504356136100406,
+            0.1249994287457255,
+            0.12518895109776484,
+            0.12493118602037093,
+            0.12490551411651202,
+            0.1250514728126255,
+            0.12473805105585911,
+            0.125141834790138
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794409709913317,
+          "polyhedral_information_nats": 3.1794014787898473e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702976,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.12507951117122745,
+            0.1246291125607271,
+            0.12493585198985696,
+            0.12519236712537515,
+            0.12490900330750186,
+            0.12552564382950743,
+            0.12507563353141377,
+            0.12465287648439037
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794391591226007,
+          "polyhedral_information_nats": 1.88204155822391e-06,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.01983768542278031,
+            0.01996707905373741,
+            0.01976441442666149,
+            0.01968910783072617,
+            0.07299274706911772,
+            0.07172429021896728,
+            0.07193530290642214,
+            0.07275489283827591,
+            0.15755493580691168,
+            0.1583774395780595,
+            0.15689034424034046,
+            0.15851176060799993
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.236408124355121,
+          "polyhedral_information_nats": 0.24806788336523344,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41508650225626503,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07203682829383361,
+            0.07239971420536283,
+            0.072845457552237,
+            0.07267725136076647,
+            0.1584375278216711,
+            0.15724514767316453,
+            0.15774867766417808,
+            0.15731965450286273,
+            0.019732537873743284,
+            0.02009295291953443,
+            0.019586221140556286,
+            0.019878028992089652
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.2369086084442795,
+          "polyhedral_information_nats": 0.24825829375268232,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4150865022562649,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.15788134592615102,
+            0.15812148825231134,
+            0.15714598762377124,
+            0.15702328947615526,
+            0.02015663545557465,
+            0.019687784963539068,
+            0.02007187509012293,
+            0.019681308344350838,
+            0.07283460009359445,
+            0.07275031409148243,
+            0.07218066462574643,
+            0.07246470605720039
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.237756332367517,
+          "polyhedral_information_nats": 0.2473022929572828,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "semantic_mass_binding": "PENDING_EXACT_PNCS_T36_BINDING",
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "atomic_feature_sha256": "d4ddec1a2e371a10a985dfb3a3d5c96e873b76e3621ffb53dd96fe9926f99b57"
+    },
+    {
+      "atom_card_id": "ATOM:N:14:q+0",
+      "symbol": "N",
+      "Z": 7,
+      "A": 14,
+      "radial_control": {
+        "schema": "RESCHEM_PERIOD2_P_RADIAL_EXPOSURE_CONTROL_V0_15",
+        "Z": 7,
+        "radial_nuclear_exposure": 16.601323277917704,
+        "zeta_2p_hartree": 0.0004420214756923178,
+        "hf_energy_hartree": -54.402889938806084,
+        "virial_residual_hartree": -9.361789321538083e-06,
+        "control_source": "reschem.atomic_radial_spectroscopy",
+        "status": "CONTROL_RADIAL_EXPOSURE_AVAILABLE"
+      },
+      "subshell_spin_control": {
+        "schema": "RESCHEM_PERIOD2_P_SPIN_BLOCH_CONTROL_V0_15",
+        "Z": 7,
+        "subshell": "2p",
+        "alpha_occupancy": 3,
+        "beta_occupancy": 0,
+        "total_occupancy": 3,
+        "spin_polarization": 1.0,
+        "bloch_vector": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bloch_radius": 1.0,
+        "reduction": "MODEL_DEFINED_SUBSHELL_SPIN_POLARIZATION_BLOCH_COORDINATE",
+        "source": "reschem.atomic_hf_average.subshells_for_atom"
+      },
+      "tetrahedral_inference": {
+        "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15",
+        "tir_reference": {
+          "repository": "AdrianLipa90/Metatime-Relation_of_Information_Framework",
+          "commit": "7498d8c6349573f8d58895145342e849d36983c8",
+          "path": "theory/metatime/foundational_formal_notes/hilbert_kahler_phase_hamiltonian/main.tex",
+          "coordinate_expression": "p_j(n)=1/4*(1+n dot v_j)"
+        },
+        "bloch_vector": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bloch_radius": 1.0,
+        "sic_probabilities": [
+          0.39433756729740643,
+          0.10566243270259354,
+          0.10566243270259354,
+          0.39433756729740643
+        ],
+        "sic_information_nats": 0.17744044409639098,
+        "gram": {
+          "diagonal": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "off_diagonal": 0.33333333333333326
+        },
+        "phase": {
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "epistemic_status": {
+          "tetrahedral_frame": "TIR_MODEL_AXIOM_REFERENCE_BOUND",
+          "bloch_coordinate": "MODEL_DEFINED_CONTROL_REDUCTION",
+          "spectral_validation": "BLIND_COMPARISON_PENDING"
+        },
+        "axis_resolved_phase": {
+          "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_AXIS_RESOLVED_PHASE_V0_15_R2",
+          "cone_index": 0,
+          "phase_samples": 128,
+          "axes": {
+            "x": {
+              "rotation_axis": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.10206207261596578
+            },
+            "y": {
+              "rotation_axis": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.10206207261596578
+            },
+            "z": {
+              "rotation_axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            }
+          },
+          "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED",
+          "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON"
+        }
+      },
+      "spatial_orbital_features": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.2509965938514447,
+            0.24908678967550316,
+            0.25016030142420786,
+            0.24975631504884435
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.3862905372293364,
+          "polyhedral_information_nats": 6.703041449704719e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.1856340480548264,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.2512471542981032,
+            0.24958935998839488,
+            0.24898764420295594,
+            0.2501758415105459
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386288803730087,
+          "polyhedral_information_nats": 1.6316018014974276e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.18563404805482642,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.2503197283942777,
+            0.24949279563742477,
+            0.25011963253742586,
+            0.25006784343087174
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386293604069714,
+          "polyhedral_information_nats": 8.657263334567038e-07,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.3501862479492724,
+            0.35041625741748006,
+            0.07447355831219585,
+            0.07505764197083464,
+            0.07485674814408223,
+            0.07500954620613483
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.5110252018109138,
+          "polyhedral_information_nats": 0.2810695038505316,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4129109082076801,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07488334672486589,
+            0.07469954630124089,
+            0.3497903805396067,
+            0.351318628061625,
+            0.07459592323671979,
+            0.07471217513594171
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.510242389476194,
+          "polyhedral_information_nats": 0.28124707365030993,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41291090820768006,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.07444212940359636,
+            0.07476213131203877,
+            0.07414913764374385,
+            0.07569891582011325,
+            0.35042526242192895,
+            0.35052242339857886
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.51048458205172,
+          "polyhedral_information_nats": 0.28120250750843473,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.12487692746507564,
+            0.12500524775064178,
+            0.12524140784712312,
+            0.12487644685708521,
+            0.12518548258146303,
+            0.1247890942973488,
+            0.12482010448184737,
+            0.12520528871941508
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.079440573354166,
+          "polyhedral_information_nats": 1.0063338545410552e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702975,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.12504356136100406,
+            0.1249994287457255,
+            0.12518895109776484,
+            0.12493118602037093,
+            0.12490551411651202,
+            0.1250514728126255,
+            0.12473805105585911,
+            0.125141834790138
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794409709913317,
+          "polyhedral_information_nats": 3.1794014787898473e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702976,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.12507951117122745,
+            0.1246291125607271,
+            0.12493585198985696,
+            0.12519236712537515,
+            0.12490900330750186,
+            0.12552564382950743,
+            0.12507563353141377,
+            0.12465287648439037
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794391591226007,
+          "polyhedral_information_nats": 1.88204155822391e-06,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.01983768542278031,
+            0.01996707905373741,
+            0.01976441442666149,
+            0.01968910783072617,
+            0.07299274706911772,
+            0.07172429021896728,
+            0.07193530290642214,
+            0.07275489283827591,
+            0.15755493580691168,
+            0.1583774395780595,
+            0.15689034424034046,
+            0.15851176060799993
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.236408124355121,
+          "polyhedral_information_nats": 0.24806788336523344,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41508650225626503,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07203682829383361,
+            0.07239971420536283,
+            0.072845457552237,
+            0.07267725136076647,
+            0.1584375278216711,
+            0.15724514767316453,
+            0.15774867766417808,
+            0.15731965450286273,
+            0.019732537873743284,
+            0.02009295291953443,
+            0.019586221140556286,
+            0.019878028992089652
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.2369086084442795,
+          "polyhedral_information_nats": 0.24825829375268232,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4150865022562649,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.15788134592615102,
+            0.15812148825231134,
+            0.15714598762377124,
+            0.15702328947615526,
+            0.02015663545557465,
+            0.019687784963539068,
+            0.02007187509012293,
+            0.019681308344350838,
+            0.07283460009359445,
+            0.07275031409148243,
+            0.07218066462574643,
+            0.07246470605720039
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.237756332367517,
+          "polyhedral_information_nats": 0.2473022929572828,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "semantic_mass_binding": "PENDING_EXACT_PNCS_T36_BINDING",
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "atomic_feature_sha256": "c537e6df2be48ea12ba5e914aa9ab3471fb8a12d3224dfbdfa0108b0a913776d"
+    },
+    {
+      "atom_card_id": "ATOM:O:16:q+0",
+      "symbol": "O",
+      "Z": 8,
+      "A": 16,
+      "radial_control": {
+        "schema": "RESCHEM_PERIOD2_P_RADIAL_EXPOSURE_CONTROL_V0_15",
+        "Z": 8,
+        "radial_nuclear_exposure": 30.21474302486761,
+        "zeta_2p_hartree": 0.0008044879962840727,
+        "hf_energy_hartree": -74.6200081495441,
+        "virial_residual_hartree": 0.000367566773491923,
+        "control_source": "reschem.atomic_radial_spectroscopy",
+        "status": "CONTROL_RADIAL_EXPOSURE_AVAILABLE"
+      },
+      "subshell_spin_control": {
+        "schema": "RESCHEM_PERIOD2_P_SPIN_BLOCH_CONTROL_V0_15",
+        "Z": 8,
+        "subshell": "2p",
+        "alpha_occupancy": 3,
+        "beta_occupancy": 1,
+        "total_occupancy": 4,
+        "spin_polarization": 0.5,
+        "bloch_vector": [
+          0.0,
+          0.0,
+          0.5
+        ],
+        "bloch_radius": 0.5,
+        "reduction": "MODEL_DEFINED_SUBSHELL_SPIN_POLARIZATION_BLOCH_COORDINATE",
+        "source": "reschem.atomic_hf_average.subshells_for_atom"
+      },
+      "tetrahedral_inference": {
+        "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15",
+        "tir_reference": {
+          "repository": "AdrianLipa90/Metatime-Relation_of_Information_Framework",
+          "commit": "7498d8c6349573f8d58895145342e849d36983c8",
+          "path": "theory/metatime/foundational_formal_notes/hilbert_kahler_phase_hamiltonian/main.tex",
+          "coordinate_expression": "p_j(n)=1/4*(1+n dot v_j)"
+        },
+        "bloch_vector": [
+          0.0,
+          0.0,
+          0.5
+        ],
+        "bloch_radius": 0.5,
+        "sic_probabilities": [
+          0.3221687836487032,
+          0.17783121635129678,
+          0.17783121635129678,
+          0.3221687836487032
+        ],
+        "sic_information_nats": 0.04226556901393323,
+        "gram": {
+          "diagonal": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "off_diagonal": 0.33333333333333326
+        },
+        "phase": {
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "epistemic_status": {
+          "tetrahedral_frame": "TIR_MODEL_AXIOM_REFERENCE_BOUND",
+          "bloch_coordinate": "MODEL_DEFINED_CONTROL_REDUCTION",
+          "spectral_validation": "BLIND_COMPARISON_PENDING"
+        },
+        "axis_resolved_phase": {
+          "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_AXIS_RESOLVED_PHASE_V0_15_R2",
+          "cone_index": 0,
+          "phase_samples": 128,
+          "axes": {
+            "x": {
+              "rotation_axis": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.05103103630798289
+            },
+            "y": {
+              "rotation_axis": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.05103103630798289
+            },
+            "z": {
+              "rotation_axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            }
+          },
+          "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED",
+          "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON"
+        }
+      },
+      "spatial_orbital_features": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.2509965938514447,
+            0.24908678967550316,
+            0.25016030142420786,
+            0.24975631504884435
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.3862905372293364,
+          "polyhedral_information_nats": 6.703041449704719e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.1856340480548264,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.2512471542981032,
+            0.24958935998839488,
+            0.24898764420295594,
+            0.2501758415105459
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386288803730087,
+          "polyhedral_information_nats": 1.6316018014974276e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.18563404805482642,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.2503197283942777,
+            0.24949279563742477,
+            0.25011963253742586,
+            0.25006784343087174
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386293604069714,
+          "polyhedral_information_nats": 8.657263334567038e-07,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.3501862479492724,
+            0.35041625741748006,
+            0.07447355831219585,
+            0.07505764197083464,
+            0.07485674814408223,
+            0.07500954620613483
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.5110252018109138,
+          "polyhedral_information_nats": 0.2810695038505316,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4129109082076801,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07488334672486589,
+            0.07469954630124089,
+            0.3497903805396067,
+            0.351318628061625,
+            0.07459592323671979,
+            0.07471217513594171
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.510242389476194,
+          "polyhedral_information_nats": 0.28124707365030993,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41291090820768006,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.07444212940359636,
+            0.07476213131203877,
+            0.07414913764374385,
+            0.07569891582011325,
+            0.35042526242192895,
+            0.35052242339857886
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.51048458205172,
+          "polyhedral_information_nats": 0.28120250750843473,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.12487692746507564,
+            0.12500524775064178,
+            0.12524140784712312,
+            0.12487644685708521,
+            0.12518548258146303,
+            0.1247890942973488,
+            0.12482010448184737,
+            0.12520528871941508
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.079440573354166,
+          "polyhedral_information_nats": 1.0063338545410552e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702975,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.12504356136100406,
+            0.1249994287457255,
+            0.12518895109776484,
+            0.12493118602037093,
+            0.12490551411651202,
+            0.1250514728126255,
+            0.12473805105585911,
+            0.125141834790138
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794409709913317,
+          "polyhedral_information_nats": 3.1794014787898473e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702976,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.12507951117122745,
+            0.1246291125607271,
+            0.12493585198985696,
+            0.12519236712537515,
+            0.12490900330750186,
+            0.12552564382950743,
+            0.12507563353141377,
+            0.12465287648439037
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794391591226007,
+          "polyhedral_information_nats": 1.88204155822391e-06,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.01983768542278031,
+            0.01996707905373741,
+            0.01976441442666149,
+            0.01968910783072617,
+            0.07299274706911772,
+            0.07172429021896728,
+            0.07193530290642214,
+            0.07275489283827591,
+            0.15755493580691168,
+            0.1583774395780595,
+            0.15689034424034046,
+            0.15851176060799993
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.236408124355121,
+          "polyhedral_information_nats": 0.24806788336523344,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41508650225626503,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07203682829383361,
+            0.07239971420536283,
+            0.072845457552237,
+            0.07267725136076647,
+            0.1584375278216711,
+            0.15724514767316453,
+            0.15774867766417808,
+            0.15731965450286273,
+            0.019732537873743284,
+            0.02009295291953443,
+            0.019586221140556286,
+            0.019878028992089652
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.2369086084442795,
+          "polyhedral_information_nats": 0.24825829375268232,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4150865022562649,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.15788134592615102,
+            0.15812148825231134,
+            0.15714598762377124,
+            0.15702328947615526,
+            0.02015663545557465,
+            0.019687784963539068,
+            0.02007187509012293,
+            0.019681308344350838,
+            0.07283460009359445,
+            0.07275031409148243,
+            0.07218066462574643,
+            0.07246470605720039
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.237756332367517,
+          "polyhedral_information_nats": 0.2473022929572828,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "semantic_mass_binding": "PENDING_EXACT_PNCS_T36_BINDING",
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "atomic_feature_sha256": "1802dacae9f06a24f53e0242cd6eb2d2ece2ff05824c51552e15da7318ff4ed6"
+    },
+    {
+      "atom_card_id": "ATOM:F:19:q+0",
+      "symbol": "F",
+      "Z": 9,
+      "A": 19,
+      "radial_control": {
+        "schema": "RESCHEM_PERIOD2_P_RADIAL_EXPOSURE_CONTROL_V0_15",
+        "Z": 9,
+        "radial_nuclear_exposure": 53.01687436769787,
+        "zeta_2p_hartree": 0.0014116101862660325,
+        "hf_energy_hartree": -99.1613174445641,
+        "virial_residual_hartree": 0.00023902830579380918,
+        "control_source": "reschem.atomic_radial_spectroscopy",
+        "status": "CONTROL_RADIAL_EXPOSURE_AVAILABLE"
+      },
+      "subshell_spin_control": {
+        "schema": "RESCHEM_PERIOD2_P_SPIN_BLOCH_CONTROL_V0_15",
+        "Z": 9,
+        "subshell": "2p",
+        "alpha_occupancy": 3,
+        "beta_occupancy": 2,
+        "total_occupancy": 5,
+        "spin_polarization": 0.2,
+        "bloch_vector": [
+          0.0,
+          0.0,
+          0.2
+        ],
+        "bloch_radius": 0.2,
+        "reduction": "MODEL_DEFINED_SUBSHELL_SPIN_POLARIZATION_BLOCH_COORDINATE",
+        "source": "reschem.atomic_hf_average.subshells_for_atom"
+      },
+      "tetrahedral_inference": {
+        "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15",
+        "tir_reference": {
+          "repository": "AdrianLipa90/Metatime-Relation_of_Information_Framework",
+          "commit": "7498d8c6349573f8d58895145342e849d36983c8",
+          "path": "theory/metatime/foundational_formal_notes/hilbert_kahler_phase_hamiltonian/main.tex",
+          "coordinate_expression": "p_j(n)=1/4*(1+n dot v_j)"
+        },
+        "bloch_vector": [
+          0.0,
+          0.0,
+          0.2
+        ],
+        "bloch_radius": 0.2,
+        "sic_probabilities": [
+          0.2788675134594813,
+          0.2211324865405187,
+          0.2211324865405187,
+          0.2788675134594813
+        ],
+        "sic_information_nats": 0.006681561062926257,
+        "gram": {
+          "diagonal": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "off_diagonal": 0.33333333333333326
+        },
+        "phase": {
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "epistemic_status": {
+          "tetrahedral_frame": "TIR_MODEL_AXIOM_REFERENCE_BOUND",
+          "bloch_coordinate": "MODEL_DEFINED_CONTROL_REDUCTION",
+          "spectral_validation": "BLIND_COMPARISON_PENDING"
+        },
+        "axis_resolved_phase": {
+          "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_AXIS_RESOLVED_PHASE_V0_15_R2",
+          "cone_index": 0,
+          "phase_samples": 128,
+          "axes": {
+            "x": {
+              "rotation_axis": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.020412414523193152
+            },
+            "y": {
+              "rotation_axis": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 1,
+              "dominant_harmonic_strength": 0.020412414523193156
+            },
+            "z": {
+              "rotation_axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            }
+          },
+          "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED",
+          "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON"
+        }
+      },
+      "spatial_orbital_features": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.2509965938514447,
+            0.24908678967550316,
+            0.25016030142420786,
+            0.24975631504884435
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.3862905372293364,
+          "polyhedral_information_nats": 6.703041449704719e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.1856340480548264,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.2512471542981032,
+            0.24958935998839488,
+            0.24898764420295594,
+            0.2501758415105459
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386288803730087,
+          "polyhedral_information_nats": 1.6316018014974276e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.18563404805482642,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.2503197283942777,
+            0.24949279563742477,
+            0.25011963253742586,
+            0.25006784343087174
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386293604069714,
+          "polyhedral_information_nats": 8.657263334567038e-07,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.3501862479492724,
+            0.35041625741748006,
+            0.07447355831219585,
+            0.07505764197083464,
+            0.07485674814408223,
+            0.07500954620613483
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.5110252018109138,
+          "polyhedral_information_nats": 0.2810695038505316,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4129109082076801,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07488334672486589,
+            0.07469954630124089,
+            0.3497903805396067,
+            0.351318628061625,
+            0.07459592323671979,
+            0.07471217513594171
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.510242389476194,
+          "polyhedral_information_nats": 0.28124707365030993,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41291090820768006,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.07444212940359636,
+            0.07476213131203877,
+            0.07414913764374385,
+            0.07569891582011325,
+            0.35042526242192895,
+            0.35052242339857886
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.51048458205172,
+          "polyhedral_information_nats": 0.28120250750843473,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.12487692746507564,
+            0.12500524775064178,
+            0.12524140784712312,
+            0.12487644685708521,
+            0.12518548258146303,
+            0.1247890942973488,
+            0.12482010448184737,
+            0.12520528871941508
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.079440573354166,
+          "polyhedral_information_nats": 1.0063338545410552e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702975,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.12504356136100406,
+            0.1249994287457255,
+            0.12518895109776484,
+            0.12493118602037093,
+            0.12490551411651202,
+            0.1250514728126255,
+            0.12473805105585911,
+            0.125141834790138
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794409709913317,
+          "polyhedral_information_nats": 3.1794014787898473e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702976,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.12507951117122745,
+            0.1246291125607271,
+            0.12493585198985696,
+            0.12519236712537515,
+            0.12490900330750186,
+            0.12552564382950743,
+            0.12507563353141377,
+            0.12465287648439037
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794391591226007,
+          "polyhedral_information_nats": 1.88204155822391e-06,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.01983768542278031,
+            0.01996707905373741,
+            0.01976441442666149,
+            0.01968910783072617,
+            0.07299274706911772,
+            0.07172429021896728,
+            0.07193530290642214,
+            0.07275489283827591,
+            0.15755493580691168,
+            0.1583774395780595,
+            0.15689034424034046,
+            0.15851176060799993
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.236408124355121,
+          "polyhedral_information_nats": 0.24806788336523344,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41508650225626503,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07203682829383361,
+            0.07239971420536283,
+            0.072845457552237,
+            0.07267725136076647,
+            0.1584375278216711,
+            0.15724514767316453,
+            0.15774867766417808,
+            0.15731965450286273,
+            0.019732537873743284,
+            0.02009295291953443,
+            0.019586221140556286,
+            0.019878028992089652
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.2369086084442795,
+          "polyhedral_information_nats": 0.24825829375268232,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4150865022562649,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.15788134592615102,
+            0.15812148825231134,
+            0.15714598762377124,
+            0.15702328947615526,
+            0.02015663545557465,
+            0.019687784963539068,
+            0.02007187509012293,
+            0.019681308344350838,
+            0.07283460009359445,
+            0.07275031409148243,
+            0.07218066462574643,
+            0.07246470605720039
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.237756332367517,
+          "polyhedral_information_nats": 0.2473022929572828,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "semantic_mass_binding": "PENDING_EXACT_PNCS_T36_BINDING",
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "atomic_feature_sha256": "cc3615294cdd9bb4232631125177faf9742a3d34d75524599f4845aca66a50cd"
+    },
+    {
+      "atom_card_id": "ATOM:Ne:20:q+0",
+      "symbol": "Ne",
+      "Z": 10,
+      "A": 20,
+      "radial_control": {
+        "schema": "RESCHEM_PERIOD2_P_RADIAL_EXPOSURE_CONTROL_V0_15",
+        "Z": 10,
+        "radial_nuclear_exposure": 88.50521275722029,
+        "zeta_2p_hartree": 0.002356511230731001,
+        "hf_energy_hartree": -128.54247370192857,
+        "virial_residual_hartree": -5.965224375437117e-05,
+        "control_source": "reschem.atomic_radial_spectroscopy",
+        "status": "CONTROL_RADIAL_EXPOSURE_AVAILABLE"
+      },
+      "subshell_spin_control": {
+        "schema": "RESCHEM_PERIOD2_P_SPIN_BLOCH_CONTROL_V0_15",
+        "Z": 10,
+        "subshell": "2p",
+        "alpha_occupancy": 3,
+        "beta_occupancy": 3,
+        "total_occupancy": 6,
+        "spin_polarization": 0.0,
+        "bloch_vector": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bloch_radius": 0.0,
+        "reduction": "MODEL_DEFINED_SUBSHELL_SPIN_POLARIZATION_BLOCH_COORDINATE",
+        "source": "reschem.atomic_hf_average.subshells_for_atom"
+      },
+      "tetrahedral_inference": {
+        "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15",
+        "tir_reference": {
+          "repository": "AdrianLipa90/Metatime-Relation_of_Information_Framework",
+          "commit": "7498d8c6349573f8d58895145342e849d36983c8",
+          "path": "theory/metatime/foundational_formal_notes/hilbert_kahler_phase_hamiltonian/main.tex",
+          "coordinate_expression": "p_j(n)=1/4*(1+n dot v_j)"
+        },
+        "bloch_vector": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bloch_radius": 0.0,
+        "sic_probabilities": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "sic_information_nats": 0.0,
+        "gram": {
+          "diagonal": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "off_diagonal": 0.33333333333333326
+        },
+        "phase": {
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "epistemic_status": {
+          "tetrahedral_frame": "TIR_MODEL_AXIOM_REFERENCE_BOUND",
+          "bloch_coordinate": "MODEL_DEFINED_CONTROL_REDUCTION",
+          "spectral_validation": "BLIND_COMPARISON_PENDING"
+        },
+        "axis_resolved_phase": {
+          "schema": "RESCHEM_TIR_TETRAHEDRAL_SIC_AXIS_RESOLVED_PHASE_V0_15_R2",
+          "cone_index": 0,
+          "phase_samples": 128,
+          "axes": {
+            "x": {
+              "rotation_axis": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            },
+            "y": {
+              "rotation_axis": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            },
+            "z": {
+              "rotation_axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "dominant_harmonic_order": 0,
+              "dominant_harmonic_strength": 0.0
+            }
+          },
+          "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED",
+          "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON"
+        }
+      },
+      "spatial_orbital_features": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.2509965938514447,
+            0.24908678967550316,
+            0.25016030142420786,
+            0.24975631504884435
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.3862905372293364,
+          "polyhedral_information_nats": 6.703041449704719e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.1856340480548264,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.2512471542981032,
+            0.24958935998839488,
+            0.24898764420295594,
+            0.2501758415105459
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386288803730087,
+          "polyhedral_information_nats": 1.6316018014974276e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.18563404805482642,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.2503197283942777,
+            0.24949279563742477,
+            0.25011963253742586,
+            0.25006784343087174
+          ],
+          "solid_angle_fractions": [
+            0.2508544921875,
+            0.2493896484375,
+            0.249755859375,
+            0.25
+          ],
+          "shannon_information_nats": 1.386293604069714,
+          "polyhedral_information_nats": 8.657263334567038e-07,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "TETRAHEDRAL_SPATIAL_PROJECTION_CONTROL",
+          "feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.3501862479492724,
+            0.35041625741748006,
+            0.07447355831219585,
+            0.07505764197083464,
+            0.07485674814408223,
+            0.07500954620613483
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.5110252018109138,
+          "polyhedral_information_nats": 0.2810695038505316,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4129109082076801,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07488334672486589,
+            0.07469954630124089,
+            0.3497903805396067,
+            0.351318628061625,
+            0.07459592323671979,
+            0.07471217513594171
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.510242389476194,
+          "polyhedral_information_nats": 0.28124707365030993,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41291090820768006,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.07444212940359636,
+            0.07476213131203877,
+            0.07414913764374385,
+            0.07569891582011325,
+            0.35042526242192895,
+            0.35052242339857886
+          ],
+          "solid_angle_fractions": [
+            0.16650390625,
+            0.1666259765625,
+            0.1661376953125,
+            0.1673583984375,
+            0.1666259765625,
+            0.166748046875
+          ],
+          "shannon_information_nats": 1.51048458205172,
+          "polyhedral_information_nats": 0.28120250750843473,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.12487692746507564,
+            0.12500524775064178,
+            0.12524140784712312,
+            0.12487644685708521,
+            0.12518548258146303,
+            0.1247890942973488,
+            0.12482010448184737,
+            0.12520528871941508
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.079440573354166,
+          "polyhedral_information_nats": 1.0063338545410552e-06,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702975,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.12504356136100406,
+            0.1249994287457255,
+            0.12518895109776484,
+            0.12493118602037093,
+            0.12490551411651202,
+            0.1250514728126255,
+            0.12473805105585911,
+            0.125141834790138
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794409709913317,
+          "polyhedral_information_nats": 3.1794014787898473e-07,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.3183694692702976,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.12507951117122745,
+            0.1246291125607271,
+            0.12493585198985696,
+            0.12519236712537515,
+            0.12490900330750186,
+            0.12552564382950743,
+            0.12507563353141377,
+            0.12465287648439037
+          ],
+          "solid_angle_fractions": [
+            0.125,
+            0.1248779296875,
+            0.1251220703125,
+            0.125,
+            0.125,
+            0.1251220703125,
+            0.1248779296875,
+            0.125
+          ],
+          "shannon_information_nats": 2.0794391591226007,
+          "polyhedral_information_nats": 1.88204155822391e-06,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_x",
+          "cone_probabilities": [
+            0.01983768542278031,
+            0.01996707905373741,
+            0.01976441442666149,
+            0.01968910783072617,
+            0.07299274706911772,
+            0.07172429021896728,
+            0.07193530290642214,
+            0.07275489283827591,
+            0.15755493580691168,
+            0.1583774395780595,
+            0.15689034424034046,
+            0.15851176060799993
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.236408124355121,
+          "polyhedral_information_nats": 0.24806788336523344,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.41508650225626503,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_y",
+          "cone_probabilities": [
+            0.07203682829383361,
+            0.07239971420536283,
+            0.072845457552237,
+            0.07267725136076647,
+            0.1584375278216711,
+            0.15724514767316453,
+            0.15774867766417808,
+            0.15731965450286273,
+            0.019732537873743284,
+            0.02009295291953443,
+            0.019586221140556286,
+            0.019878028992089652
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.2369086084442795,
+          "polyhedral_information_nats": 0.24825829375268232,
+          "dominant_orbital_band_harmonic_order": 2,
+          "dominant_orbital_band_harmonic_strength": 0.4150865022562649,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_basis_id": "RESCHEM_REAL_2P_BASIS_V0_15",
+          "orbital_label": "p_z",
+          "cone_probabilities": [
+            0.15788134592615102,
+            0.15812148825231134,
+            0.15714598762377124,
+            0.15702328947615526,
+            0.02015663545557465,
+            0.019687784963539068,
+            0.02007187509012293,
+            0.019681308344350838,
+            0.07283460009359445,
+            0.07275031409148243,
+            0.07218066462574643,
+            0.07246470605720039
+          ],
+          "solid_angle_fractions": [
+            0.083251953125,
+            0.08349609375,
+            0.083251953125,
+            0.0831298828125,
+            0.0838623046875,
+            0.0828857421875,
+            0.083251953125,
+            0.083251953125,
+            0.0833740234375,
+            0.083740234375,
+            0.0828857421875,
+            0.0836181640625
+          ],
+          "shannon_information_nats": 2.237756332367517,
+          "polyhedral_information_nats": 0.2473022929572828,
+          "dominant_orbital_band_harmonic_order": 0,
+          "dominant_orbital_band_harmonic_strength": 0.0,
+          "role": "ALTERNATIVE_SPATIAL_PARTITION_CONTROL",
+          "feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "semantic_mass_binding": "PENDING_EXACT_PNCS_T36_BINDING",
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "atomic_feature_sha256": "9e684992f72db4bfc11792ca3241a974ab70cd29a204f39cc29eb7ed5f3ba054"
+    }
+  ],
+  "semantic_mass_join": "PENDING_EXACT_PNCS_T36_BINDINGS",
+  "spectral_join": {
+    "status": "WITHHELD_FOR_BLIND_COMPARISON",
+    "accepted_observed_fields": []
+  },
+  "ledger_sha256": "e3438d2e090db378b566eb31b0b03159fca407bee2826c400d8e82099a00f39a"
+}

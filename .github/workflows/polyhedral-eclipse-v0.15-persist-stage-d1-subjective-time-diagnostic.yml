@@ -1,0 +1,71 @@
+name: polyhedral-eclipse-v0.15-persist-stage-d1-subjective-time-diagnostic
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-d1-subjective-time-diagnostic.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-stage-d1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - name: Download exact Stage-D1 artifact from canonical run
+        uses: actions/download-artifact@v4
+        with:
+          name: atomic-subjective-time-v0.15-stage-d1-diagnostic
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32900583035
+
+      - name: Verify exact recovered Stage-D1 diagnostic and nested receipts
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          source=Path('recovered/ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_LEDGER_V0_15.json')
+          raw=source.read_bytes()
+          raw_sha=hashlib.sha256(raw).hexdigest()
+          expected_raw_sha='f98ac67ffcb3c70fb74c22b847bee10911ff3adb999cfa990265f50cb1c07fbf'
+          if raw_sha!=expected_raw_sha: raise SystemExit(f'raw Stage-D1 drift: {raw_sha} != {expected_raw_sha}')
+          d=json.loads(raw)
+          if d['status']!='POST_JOIN_SUBJECTIVE_TIME_DIAGNOSTIC_COMPLETE': raise SystemExit('status drift')
+          if d['diagnostic_only'] is not True or d['validation_claimed'] is not False: raise SystemExit('diagnostic boundary drift')
+          if d['model_parameters_changed'] is not False or d['candidate_selected_or_removed'] is not False: raise SystemExit('model mutation/selection drift')
+          if d['fit_parameters_added']!=[] or d['calibration_parameters_added']!=[]: raise SystemExit('fit/calibration drift')
+          if d['interpretation']!='NONE_IN_DIAGNOSTIC_LEDGER': raise SystemExit('interpretation boundary drift')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          body=dict(d); recorded=body.pop('diagnostic_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=recorded: raise SystemExit('diagnostic SHA drift')
+          if recorded!='7f7106abbe6c3b1a49272dc3c5426a32eb91e8f21f4969f639d4d3e77bc4c1ab': raise SystemExit('canonical diagnostic SHA mismatch')
+          for policy in d['policies']:
+              pb=dict(policy); pr=pb.pop('policy_sha256')
+              if hashlib.sha256(canonical(pb).encode()).hexdigest()!=pr: raise SystemExit(f"policy SHA drift: {policy['policy_id']}")
+              for row in policy['atom_rows']:
+                  rb=dict(row); rr=rb.pop('row_sha256')
+                  if hashlib.sha256(canonical(rb).encode()).hexdigest()!=rr: raise SystemExit(f"row SHA drift: {policy['policy_id']}:{row['symbol']}")
+          destination=Path('benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_LEDGER_V0_15.json')
+          destination.write_bytes(raw)
+          print({'raw_json_sha256':raw_sha,'diagnostic_sha256':recorded,'policies':len(d['policies'])})
+          PY
+
+      - name: Persist exact verified Stage-D1 bytes on experiment branch
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_D1_DIAGNOSTIC_LEDGER_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-D1 subjective-time diagnostic"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy

@@ -1,0 +1,70 @@
+{
+  "schema": "RESCHEM_ATOMIC_T36_AUFBAU_PHASE_CONTROL_PREREG_V0_15",
+  "version": "0.15.0",
+  "status": "PREREGISTERED_BEFORE_SEMANTIC_MASS_EXECUTION",
+  "role": "CANDIDATE_ATOM_TO_T36_CONTROL",
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "spectral_input": "PROHIBITED",
+  "depends_on": {
+    "atomic_source": "semantic_cards/ATOM_CARD_INDEX_CURRENT.json",
+    "atomic_field": "physical_control.electron_configuration",
+    "pncs_mass_contract": "PNV_SEMANTIC_MASS_V1",
+    "pncs_reference_commit": "5b866572f842407302acbb742df8a3955a0b8325",
+    "pncs_reference_path": "src/phasenav_natural_code/mass_v19.py"
+  },
+  "dimension": 36,
+  "subshell_basis": [
+    {"subshell": "1s", "n": 1, "l": 0, "capacity": 2},
+    {"subshell": "2s", "n": 2, "l": 0, "capacity": 2},
+    {"subshell": "2p", "n": 2, "l": 1, "capacity": 6},
+    {"subshell": "3s", "n": 3, "l": 0, "capacity": 2},
+    {"subshell": "3p", "n": 3, "l": 1, "capacity": 6},
+    {"subshell": "4s", "n": 4, "l": 0, "capacity": 2},
+    {"subshell": "3d", "n": 3, "l": 2, "capacity": 10},
+    {"subshell": "4p", "n": 4, "l": 1, "capacity": 6}
+  ],
+  "slot_order": {
+    "subshell_order": "AS_LISTED_ABOVE",
+    "within_subshell": "m_l_ASCENDING_THEN_spin_ALPHA_BETA",
+    "occupancy_assignment": "HUND_ALPHA_CHANNEL_FIRST_THEN_BETA_CHANNEL_WITH_m_l_ASCENDING",
+    "total_slots": 36
+  },
+  "phase_realization": {
+    "basis_id": "RESCHEM_AUFBAU36_ROOTS_OF_UNITY_OCCUPANCY_PHASE_V0_15",
+    "base_phase": "phi_j = 2*pi*j/36 for j=0..35",
+    "occupancy": "o_j in {0,1}",
+    "phase_rule": "theta_j = (phi_j + pi*o_j) mod 2*pi",
+    "coordinate_space": "T^36",
+    "coordinate_range": "[0,2*pi)",
+    "phase_index_rule": "TOTAL_OCCUPIED_SPIN_ORBITAL_SLOT_COUNT",
+    "neutral_atom_note": "For charge-zero atom cards this count equals electron_count and numerically equals Z; Z is not used as the derivation input."
+  },
+  "runtime_numeric_contract": {
+    "pncs_trigonometric_evaluation": "mass_v19._runtime_sin/_runtime_cos",
+    "empty_full_R_abs_tolerance": 1e-9,
+    "global_complement_R_abs_difference_tolerance": 1e-9,
+    "reason": "The frozen PNCS runtime uses finite Taylor evaluation; theoretical root-of-unity/complement symmetry is therefore tested with an explicit numerical tolerance rather than exact floating equality."
+  },
+  "required_invariants": [
+    "exactly 36 slot records",
+    "sum(slot_occupancy) equals identity.electron_count",
+    "electron_configuration occupancy total equals identity.electron_count",
+    "all T36 phases are finite and in [0,2*pi)",
+    "empty 36-slot reference has PNCS resultant R below 1e-9",
+    "full 36-slot reference has PNCS resultant R below 1e-9",
+    "global bitwise occupancy complement preserves PNCS resultant magnitude R within absolute difference 1e-9",
+    "phase_index is explicit in every emitted binding record",
+    "no observed wavelength, wavenumber, oscillator strength, intensity, or spectral label is accepted"
+  ],
+  "initial_execution_cohort": [
+    "ATOM:B:11:q+0",
+    "ATOM:C:12:q+0",
+    "ATOM:N:14:q+0",
+    "ATOM:O:16:q+0",
+    "ATOM:F:19:q+0",
+    "ATOM:Ne:20:q+0"
+  ],
+  "model_selection_rule": "NO_SELECTION_OR_PARAMETER_CHANGE_FROM_OBSERVED_SPECTRA_BEFORE_STAGE_B_SPECTRAL_MAPPING_FREEZE",
+  "promotion_rule": "RESULTS_REMAIN_CHYBA_AND_CANON_ALLOWED_FALSE_UNLESS_A_SEPARATE_EXPLICIT_CANONIZATION_DECISION_IS_MADE"
+}

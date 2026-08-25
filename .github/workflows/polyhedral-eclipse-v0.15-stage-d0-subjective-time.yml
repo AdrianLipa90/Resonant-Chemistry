@@ -1,0 +1,111 @@
+name: polyhedral-eclipse-v0.15-stage-d0-subjective-time
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - benchmarks/ATOMIC_SUBJECTIVE_TIME_POSTJOIN_HYPOTHESIS_PREREG_V0_15.json
+      - reschem/atomic_subjective_time_v015.py
+      - scripts/run_atomic_subjective_time_stage_d0_v015.py
+      - tests/test_atomic_subjective_time_v015.py
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-d0-subjective-time.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freeze-model-side-subjective-time:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry core
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Compile subjective-time layer
+        run: >-
+          python -m py_compile
+          reschem/atomic_subjective_time_v015.py
+          scripts/run_atomic_subjective_time_stage_d0_v015.py
+          tests/test_atomic_subjective_time_v015.py
+
+      - name: Run subjective-time unit gates
+        run: python -m unittest tests.test_atomic_subjective_time_v015
+
+      - name: Enforce model-side dependency boundary
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          paths = [
+              Path('reschem/atomic_subjective_time_v015.py'),
+              Path('scripts/run_atomic_subjective_time_stage_d0_v015.py'),
+          ]
+          forbidden = (
+              'POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json',
+              'NIST_B_NE_NEUTRAL_IONIZATION_EDGES_V0_15.json',
+              'required_g_from_stage_c',
+              'observed_ionization_edge_cm_inverse',
+          )
+          for path in paths:
+              text = path.read_text('utf-8')
+              for token in forbidden:
+                  if token in text:
+                      raise SystemExit(f'prohibited post-join dependency in {path}: {token}')
+          print({'dependency_boundary': 'PASS', 'files_checked': [str(p) for p in paths]})
+          PY
+
+      - name: Freeze Stage-D0 model-side g candidates
+        run: >-
+          python scripts/run_atomic_subjective_time_stage_d0_v015.py
+          --output out/ATOMIC_SUBJECTIVE_TIME_STAGE_D0_LEDGER_V0_15.json
+
+      - name: Validate Stage-D0 ledger hashes and frozen candidate set
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path('out/ATOMIC_SUBJECTIVE_TIME_STAGE_D0_LEDGER_V0_15.json')
+          d=json.loads(p.read_text('utf-8'))
+          expected=(
+              'NULL_REST_CONTROL',
+              'KAPPA_RADIAL_BALANCED',
+              'SEMANTIC_MASS_BALANCED',
+              'RADIAL_SEMANTIC_GEOMETRIC_COUPLING',
+              'RADIAL_SEMANTIC_PRODUCT_COUPLING',
+          )
+          def canonical(v):
+              return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          if d['status']!='MODEL_SIDE_SUBJECTIVE_TIME_HYPOTHESES_FROZEN_FOR_FUTURE_HOLDOUT': raise SystemExit('status drift')
+          if d['atom_count']!=6 or d['candidate_policy_count']!=5: raise SystemExit('cohort/policy drift')
+          if d['fit_parameters']!=[] or d['calibration_parameters']!=[]: raise SystemExit('fit/calibration drift')
+          if d['stage_c_result_used_as_input'] is not False or d['nist_values_used_as_input'] is not False: raise SystemExit('observed-data boundary drift')
+          body=dict(d); rec=body.pop('ledger_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=rec: raise SystemExit('ledger SHA drift')
+          for row in d['rows']:
+              rb=dict(row); rr=rb.pop('row_sha256')
+              if hashlib.sha256(canonical(rb).encode()).hexdigest()!=rr: raise SystemExit(f"row SHA drift: {row['symbol']}")
+              ids=tuple(c['policy_id'] for c in row['candidates'])
+              if ids!=expected: raise SystemExit(f"policy set drift: {row['symbol']}")
+              for candidate in row['candidates']:
+                  cb=dict(candidate); cr=cb.pop('candidate_sha256')
+                  if hashlib.sha256(canonical(cb).encode()).hexdigest()!=cr: raise SystemExit(f"candidate SHA drift: {row['symbol']}:{candidate['policy_id']}")
+                  if candidate['fit_parameters']!=[] or candidate['calibration_parameters']!=[]: raise SystemExit('candidate fit drift')
+          print({'ledger_sha256':rec,'atom_count':d['atom_count'],'policy_count':d['candidate_policy_count']})
+          PY
+
+      - name: Upload frozen Stage-D0 subjective-time ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: atomic-subjective-time-v0.15-stage-d0-ledger
+          path: out/ATOMIC_SUBJECTIVE_TIME_STAGE_D0_LEDGER_V0_15.json
+          if-no-files-found: error

@@ -1,0 +1,76 @@
+{
+  "schema": "RESCHEM_ATOMIC_SUBJECTIVE_TIME_POSTJOIN_HYPOTHESIS_PREREG_V0_15",
+  "version": "0.15.0",
+  "status": "POST_STAGE_C_HYPOTHESIS_GENERATION_FROZEN_FOR_FUTURE_HOLDOUT",
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "purpose": "Freeze zero-parameter atomic projections of the PNCS v0.27 hydrodynamic proper-time lapse using model-side quantities already present before any future spectral-line holdout.",
+  "important_boundary": {
+    "stage_c_ionization_result_may_not_be_used_as_input": true,
+    "nist_values_may_not_be_used_as_input": true,
+    "required_g_from_stage_c_may_not_be_used_as_input": true,
+    "no_candidate_may_be_selected_or_removed_using_stage_c_performance": true,
+    "all_frozen_candidates_must_be_reported_in_future_holdout": true
+  },
+  "fixed_constant": {
+    "kappa_expression": "ln(2)/(24*pi)",
+    "kappa": 0.009193150006360484
+  },
+  "model_side_inputs": {
+    "radial_nuclear_exposure": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json::radial_controls[*].radial_nuclear_exposure",
+    "semantic_mass": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json::semantic_mass_overlays[*].tir.semantic_axes.values.semantic_mass.value",
+    "allowed_atoms": ["B", "C", "N", "O", "F", "Ne"]
+  },
+  "pncs_hydrodynamic_contract": {
+    "reference_repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+    "reference_commit": "5b866572f842407302acbb742df8a3955a0b8325",
+    "reference_path": "src/phasenav_natural_code/hydro_time_v27.py",
+    "lapse_expression": "g_hydro=sqrt(rho)/(1+nu_eff)",
+    "lapse_min": 0.015625,
+    "lapse_max": 8.0
+  },
+  "dimensionless_model_coordinates": {
+    "x": "kappa*radial_nuclear_exposure",
+    "y": "semantic_mass/kappa"
+  },
+  "frozen_candidate_policies": [
+    {
+      "policy_id": "NULL_REST_CONTROL",
+      "rho": "1",
+      "nu_eff": "0",
+      "g_unclamped": "1"
+    },
+    {
+      "policy_id": "KAPPA_RADIAL_BALANCED",
+      "rho": "1+x",
+      "nu_eff": "x",
+      "g_unclamped": "sqrt(1+x)/(1+x)=1/sqrt(1+x)"
+    },
+    {
+      "policy_id": "SEMANTIC_MASS_BALANCED",
+      "rho": "1+y",
+      "nu_eff": "y",
+      "g_unclamped": "sqrt(1+y)/(1+y)=1/sqrt(1+y)"
+    },
+    {
+      "policy_id": "RADIAL_SEMANTIC_GEOMETRIC_COUPLING",
+      "rho": "1+x",
+      "nu_eff": "sqrt(x*y)",
+      "g_unclamped": "sqrt(1+x)/(1+sqrt(x*y))"
+    },
+    {
+      "policy_id": "RADIAL_SEMANTIC_PRODUCT_COUPLING",
+      "rho": "1+x",
+      "nu_eff": "x*y",
+      "g_unclamped": "sqrt(1+x)/(1+x*y)"
+    }
+  ],
+  "fit_parameters": [],
+  "calibration_parameters": [],
+  "future_holdout_rule": {
+    "candidate_set_is_frozen": true,
+    "model_side_g_values_must_be_hashed_before_new_line_data_are_joined": true,
+    "failure_is_a_valid_outcome": true,
+    "post_holdout_candidate_ranking_may_be_reported_but_must_not_redefine_the_frozen_candidates": true
+  }
+}

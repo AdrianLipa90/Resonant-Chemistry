@@ -1,0 +1,94 @@
+name: polyhedral-eclipse-v0.15-stage-a0
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-a0.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: polyhedral-eclipse-v0.15-stage-a0-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  freeze-stage-a0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry core
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Freeze Stage-A0 geometry before semantic mass and spectrum
+        run: >-
+          python scripts/run_polyhedral_eclipse_stage_a0_v015.py
+          --sample-count 8192
+          --phase-samples 128
+          --output benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_LEDGER_V0_15.json
+
+      - name: Validate frozen ledger
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_LEDGER_V0_15.json')
+          payload = json.loads(path.read_text())
+          assert payload['schema'] == 'RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_A0_GEOMETRY_LEDGER_V0_15'
+          assert payload['status'] == 'GEOMETRY_FEATURES_FROZEN_BEFORE_SEMANTIC_MASS_AND_SPECTRAL_JOIN'
+          assert payload['atom_count'] == 6
+          assert payload['spatial_feature_count'] == 72
+          assert payload['semantic_mass_join'] == 'PENDING_EXACT_PNCS_T36_BINDINGS'
+          assert payload['spectral_join'] == {
+              'status': 'WITHHELD_FOR_BLIND_COMPARISON',
+              'accepted_observed_fields': [],
+          }
+          expected_z = [5, 6, 7, 8, 9, 10]
+          assert [row['Z'] for row in payload['atoms']] == expected_z
+          for row in payload['atoms']:
+              assert row['tetrahedral_inference']['schema'] == 'RESCHEM_TIR_TETRAHEDRAL_SIC_INFERENCE_V0_15'
+              assert len(row['tetrahedral_inference']['sic_probabilities']) == 4
+              assert abs(sum(row['tetrahedral_inference']['sic_probabilities']) - 1.0) < 1e-12
+              assert row['observed_spectrum'] == 'WITHHELD_FOR_BLIND_COMPARISON'
+              assert len(row['spatial_orbital_features']) == 12
+          print({
+              'status': payload['status'],
+              'ledger_sha256': payload['ledger_sha256'],
+              'atoms': [
+                  {
+                      'symbol': row['symbol'],
+                      'Z': row['Z'],
+                      'A': row['A'],
+                      'chi_r': row['radial_control']['radial_nuclear_exposure'],
+                      'spin_polarization': row['subshell_spin_control']['spin_polarization'],
+                      'sic_information_nats': row['tetrahedral_inference']['sic_information_nats'],
+                  }
+                  for row in payload['atoms']
+              ],
+          })
+          PY
+
+      - name: Upload Stage-A0 frozen ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-a0-ledger
+          path: benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_LEDGER_V0_15.json
+          if-no-files-found: error

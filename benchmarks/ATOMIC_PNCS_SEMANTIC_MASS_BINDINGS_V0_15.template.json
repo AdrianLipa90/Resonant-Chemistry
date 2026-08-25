@@ -1,0 +1,64 @@
+{
+  "schema": "RESCHEM_ATOMIC_PNCS_SEMANTIC_MASS_BINDING_MANIFEST_V0_15",
+  "status": "TEMPLATE_EXPLICIT_BINDINGS_REQUIRED",
+  "mass_contract_id": "PNV_SEMANTIC_MASS_V1",
+  "pncs_reference_commit": "5b866572f842407302acbb742df8a3955a0b8325",
+  "runtime_source_sha256": "0b4df86cd01db313ea46ebac0eceee9cf6df0673391edd1a3fb2667c30464a32",
+  "binding_rule": "Every phase_index and T36 realization is supplied explicitly with PNCS provenance.",
+  "bindings": [
+    {
+      "atom_card_id": "ATOM:B:11:q+0",
+      "phase_index": null,
+      "phase36": null,
+      "realization_id": null,
+      "realization_binding_id": null,
+      "source_binding_id": null,
+      "status": "OPEN"
+    },
+    {
+      "atom_card_id": "ATOM:C:12:q+0",
+      "phase_index": null,
+      "phase36": null,
+      "realization_id": null,
+      "realization_binding_id": null,
+      "source_binding_id": null,
+      "status": "OPEN"
+    },
+    {
+      "atom_card_id": "ATOM:N:14:q+0",
+      "phase_index": null,
+      "phase36": null,
+      "realization_id": null,
+      "realization_binding_id": null,
+      "source_binding_id": null,
+      "status": "OPEN"
+    },
+    {
+      "atom_card_id": "ATOM:O:16:q+0",
+      "phase_index": null,
+      "phase36": null,
+      "realization_id": null,
+      "realization_binding_id": null,
+      "source_binding_id": null,
+      "status": "OPEN"
+    },
+    {
+      "atom_card_id": "ATOM:F:19:q+0",
+      "phase_index": null,
+      "phase36": null,
+      "realization_id": null,
+      "realization_binding_id": null,
+      "source_binding_id": null,
+      "status": "OPEN"
+    },
+    {
+      "atom_card_id": "ATOM:Ne:20:q+0",
+      "phase_index": null,
+      "phase36": null,
+      "realization_id": null,
+      "realization_binding_id": null,
+      "source_binding_id": null,
+      "status": "OPEN"
+    }
+  ]
+}

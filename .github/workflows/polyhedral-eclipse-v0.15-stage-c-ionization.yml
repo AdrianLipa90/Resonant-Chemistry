@@ -1,0 +1,66 @@
+name: polyhedral-eclipse-v0.15-stage-c-ionization
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-c-ionization.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  blind-join:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Resonant Chemistry core
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+
+      - name: Compile Stage-C join
+        run: python -m py_compile scripts/run_polyhedral_eclipse_stage_c_ionization_v015.py
+
+      - name: Run preregistered B-Ne NIST ionization-edge join
+        run: >-
+          python scripts/run_polyhedral_eclipse_stage_c_ionization_v015.py
+          --output out/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json
+
+      - name: Validate no post-join fit and result hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path('out/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json')
+          d=json.loads(p.read_text())
+          if d['schema']!='RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15': raise SystemExit('schema drift')
+          if d['status']!='BLIND_IONIZATION_EDGE_JOIN_COMPLETE': raise SystemExit('status drift')
+          if d['fit_parameters_added_after_join']!=[] or d['model_parameters_changed_after_join'] is not False: raise SystemExit('post-join fit/mutation detected')
+          if len(d['rows'])!=6: raise SystemExit('cohort drift')
+          if d['interpretation']!='NONE_IN_RESULT_LEDGER': raise SystemExit('result-ledger interpretation drift')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          body=dict(d); rec=body.pop('result_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=rec: raise SystemExit('result SHA drift')
+          for row in d['rows']:
+              b=dict(row); r=b.pop('row_sha256')
+              if hashlib.sha256(canonical(b).encode()).hexdigest()!=r: raise SystemExit(f"row SHA drift: {row['symbol']}")
+              if row['post_join_diagnostic_only']['status']!='POST_JOIN_DIAGNOSTIC_ONLY_NOT_A_MODEL_INPUT_NOT_A_CALIBRATION': raise SystemExit(f"diagnostic status drift: {row['symbol']}")
+          print({'result_sha256':rec,'metrics':d['aggregate_primary_metrics']})
+          PY
+
+      - name: Upload blind Stage-C result
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-c-ionization-result
+          path: out/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json
+          if-no-files-found: error

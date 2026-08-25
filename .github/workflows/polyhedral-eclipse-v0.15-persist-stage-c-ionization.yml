@@ -1,0 +1,66 @@
+name: polyhedral-eclipse-v0.15-persist-stage-c-ionization
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-c-ionization.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-result:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - name: Download exact Stage-C artifact from canonical run
+        uses: actions/download-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-c-ionization-result
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32894422554
+
+      - name: Verify exact recovered Stage-C result and nested receipts
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          source=Path('recovered/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json')
+          raw=source.read_bytes()
+          raw_sha=hashlib.sha256(raw).hexdigest()
+          expected_raw_sha='b810ad99be5b046624d034f64a3ef2bc241df4bf399f187112494bcb8153ba0e'
+          if raw_sha!=expected_raw_sha: raise SystemExit(f'raw Stage-C drift: {raw_sha} != {expected_raw_sha}')
+          d=json.loads(raw)
+          if d['status']!='BLIND_IONIZATION_EDGE_JOIN_COMPLETE': raise SystemExit('status drift')
+          if d['fit_parameters_added_after_join']!=[] or d['model_parameters_changed_after_join'] is not False: raise SystemExit('post-join mutation detected')
+          if d['interpretation']!='NONE_IN_RESULT_LEDGER': raise SystemExit('interpretation boundary drift')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          body=dict(d); recorded=body.pop('result_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=recorded: raise SystemExit('result SHA drift')
+          if recorded!='eb1f5767edd2ef2f0e4fc994df3d99b9603d12a4cc57475a4abf82dc4a98b186': raise SystemExit('canonical result SHA mismatch')
+          for row in d['rows']:
+              b=dict(row); rec=b.pop('row_sha256')
+              if hashlib.sha256(canonical(b).encode()).hexdigest()!=rec: raise SystemExit(f"row SHA drift: {row['symbol']}")
+          destination=Path('benchmarks/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json')
+          destination.write_bytes(raw)
+          print({'raw_json_sha256':raw_sha,'result_sha256':recorded,'rows':len(d['rows'])})
+          PY
+
+      - name: Persist exact verified Stage-C bytes on experiment branch
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-C ionization blind result"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy

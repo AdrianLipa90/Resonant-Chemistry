@@ -1,0 +1,70 @@
+name: polyhedral-eclipse-v0.15-persist-stage-a0-r2
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-a0-r2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-r2-ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - name: Download exact Stage-A0 R2 artifact from canonical run
+        uses: actions/download-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-a0-r2-ledger
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32890189434
+
+      - name: Verify exact recovered R2 ledger
+        run: |
+          python scripts/validate_polyhedral_eclipse_stage_a0_r2_v015.py recovered/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          source = Path('recovered/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json')
+          raw = source.read_bytes()
+          raw_sha = hashlib.sha256(raw).hexdigest()
+          expected_raw_sha = '0dac2600beaadfd1b8a16a981a18ec9c31badc81280f1907db72773275e35ae3'
+          if raw_sha != expected_raw_sha:
+              raise SystemExit(f'raw Stage-A0 R2 JSON drift: {raw_sha} != {expected_raw_sha}')
+
+          payload = json.loads(raw)
+          if payload['ledger_sha256'] != 'e3438d2e090db378b566eb31b0b03159fca407bee2826c400d8e82099a00f39a':
+              raise SystemExit('Stage-A0 R2 internal ledger SHA differs from canonical run')
+
+          destination = Path('benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json')
+          destination.write_bytes(raw)
+          print({
+              'raw_json_sha256': raw_sha,
+              'ledger_sha256': payload['ledger_sha256'],
+              'revision': payload['revision'],
+              'atom_count': payload['atom_count'],
+              'spatial_feature_count': payload['spatial_feature_count'],
+          })
+          PY
+
+      - name: Persist exact verified R2 bytes on experiment branch
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-A0 R2 axis-resolved ledger"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy

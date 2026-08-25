@@ -1,0 +1,60 @@
+{
+  "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_A0_R1_DIAGNOSTIC_V0_15",
+  "status": "R1_PRESERVED_AXIS_COLLINEARITY_DIAGNOSTIC_RECORDED",
+  "source": {
+    "workflow_run_id": 32888465664,
+    "workflow_head_sha": "ced257756da989dc9b44f57772bfc98c149a92cf",
+    "artifact_id": 9578495740,
+    "artifact_name": "polyhedral-eclipse-v0.15-stage-a0-ledger",
+    "artifact_digest": "sha256:761b23d7b5ba51be0af5147022ee84efeff8d138605cc203de55d222130d0f7b",
+    "raw_json_sha256": "72d9ebc814236c17b7b503b54bd7fad01653b74f325bd124c49aa1d49e1bddaf",
+    "repository_git_blob_sha1": "bc360bd1ff9203bf299a0ae1d4e3f60962f78427",
+    "internal_ledger_sha256": "c6ab0e8245258924e8b5a0ddb87d7a09b0d580d5c81d356f943fbf554b3ccc12",
+    "repository_path": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_LEDGER_V0_15.json"
+  },
+  "r1_inference_phase_configuration": {
+    "subshell_bloch_axis": "z",
+    "phase_rotation_axis": "z",
+    "effect": "COLLINEAR_ROTATION_LEAVES_BLOCH_CONTROL_COORDINATE_INVARIANT",
+    "observed_model_result": {
+      "B": {"dominant_harmonic_order": 0, "strength": 0.0},
+      "C": {"dominant_harmonic_order": 0, "strength": 0.0},
+      "N": {"dominant_harmonic_order": 0, "strength": 0.0},
+      "O": {"dominant_harmonic_order": 0, "strength": 0.0},
+      "F": {"dominant_harmonic_order": 0, "strength": 0.0},
+      "Ne": {"dominant_harmonic_order": 0, "strength": 0.0}
+    }
+  },
+  "r1_spatial_orbital_harmonic_pattern": {
+    "rotation_axis": "z",
+    "observer_direction": "x",
+    "tetrahedron": {
+      "p_x": {"order": 2, "strength": 0.1856340480548264},
+      "p_y": {"order": 2, "strength": 0.18563404805482642},
+      "p_z": {"order": 0, "strength": 0.0}
+    },
+    "octahedron": {
+      "p_x": {"order": 2, "strength": 0.4129109082076801},
+      "p_y": {"order": 2, "strength": 0.41291090820768006},
+      "p_z": {"order": 0, "strength": 0.0}
+    },
+    "cube": {
+      "p_x": {"order": 2, "strength": 0.3183694692702975},
+      "p_y": {"order": 2, "strength": 0.3183694692702976},
+      "p_z": {"order": 0, "strength": 0.0}
+    },
+    "icosahedron": {
+      "p_x": {"order": 2, "strength": 0.41508650225626503},
+      "p_y": {"order": 2, "strength": 0.4150865022562649},
+      "p_z": {"order": 0, "strength": 0.0}
+    }
+  },
+  "r2_protocol": {
+    "revision": "R2_AXIS_RESOLVED_TIR_SIC_PHASE",
+    "axes": ["x", "y", "z"],
+    "axis_selection": "ALL_AXES_PRESERVED_BEFORE_SPECTRAL_JOIN",
+    "semantic_mass_join": "PENDING_EXACT_PNCS_T36_BINDINGS",
+    "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON",
+    "r1_replacement_policy": "R1_RETAINED_AS_FIRST_DURABLE_GEOMETRY_RECEIPT"
+  }
+}

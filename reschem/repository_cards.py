@@ -17,6 +17,10 @@ from .semantic_projection import generate_compound_candidate_cards, generate_rel
 
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
+MODEL_OVERLAY_SOURCES = (
+    "semantic_cards/COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl",
+    "semantic_cards/MODEL_OVERLAYS_V0_15.jsonl",
+)
 
 
 def _load_records(path: Path) -> list[dict]:
@@ -80,8 +84,12 @@ def _load_atom_bases_and_overlays(root: Path) -> tuple[list[dict], list[dict]]:
 
 
 def _load_model_overlay_cards(root: Path) -> list[dict]:
-    path = root / "semantic_cards" / "COMPOUND_MODEL_OVERLAYS_V0_14A1.jsonl"
-    return _load_records(path)
+    cards: list[dict] = []
+    for relpath in MODEL_OVERLAY_SOURCES:
+        path = root / relpath
+        if path.exists():
+            cards.extend(_load_records(path))
+    return cards
 
 
 def load_current_card_registry(root: Path | str | None = None) -> CardRegistry:
@@ -89,7 +97,7 @@ def load_current_card_registry(root: Path | str | None = None) -> CardRegistry:
 
     Composition:
     - 36 explicitly indexed neutral atomic base cards plus nondestructive overlays;
-    - persisted model/gate semantic cards through v0.13;
+    - persisted model/gate semantic cards through v0.15;
     - deterministic 231 v0.1 compound relation candidates;
     - deterministic 27 v0.13 competing relational states;
     - dynamic v0.14A1 model + nine molecular screen cards from the current

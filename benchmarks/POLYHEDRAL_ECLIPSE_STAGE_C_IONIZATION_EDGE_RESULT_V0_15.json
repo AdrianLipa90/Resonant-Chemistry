@@ -1,0 +1,1403 @@
+{
+  "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_RESULT_V0_15",
+  "version": "0.15.0",
+  "status": "BLIND_IONIZATION_EDGE_JOIN_COMPLETE",
+  "sources": {
+    "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_C_IONIZATION_EDGE_PREREG_V0_15.json": "fab68d18519fe2cd25a07b4a743330fc874ed0530b12c282de5c76e07d96a929",
+    "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json": "380e18bab517f36a1a711459b9be098a24e6fb9a997e4a5d35f89afba54bf786",
+    "benchmarks/NIST_B_NE_NEUTRAL_IONIZATION_EDGES_V0_15.json": "050dd3c39f30345bdcdc06526970f4db541611a53306cfb925f4654cebdc832e"
+  },
+  "prediction_ledger_sha256": "e83be56f85de537d4fb4be8623f96b8cc72c64f42e36e5bebea5a75b998df4b1",
+  "fit_parameters_added_after_join": [],
+  "model_parameters_changed_after_join": false,
+  "primary_channel": "KEPLER_FUNDAMENTAL_ZERO_FIT",
+  "aggregate_primary_metrics": {
+    "median_absolute_relative_error": 0.9940537723292378,
+    "rms_log10_ratio": 0.2970843050223736,
+    "spearman_rank_correlation": 0.942857142857143,
+    "spearman_p_value": 0.004804664723032055,
+    "pearson_log10_correlation": 0.9809669268006209,
+    "pearson_log10_p_value": 0.0005399393727894905,
+    "absolute_scale_status": "MEASURED_WITHOUT_PREDECLARED_PROMOTION_THRESHOLD"
+  },
+  "rows": [
+    {
+      "symbol": "B",
+      "Z": 5,
+      "A": 11,
+      "observed_ionization_edge_cm_inverse": 66928.04,
+      "kepler_fundamental": {
+        "predicted_wavenumber_cm_inverse": 51263.770286111445,
+        "observed_wavenumber_cm_inverse": 66928.04,
+        "predicted_to_observed_ratio": 0.765953556776972,
+        "absolute_relative_error": 0.23404644322302806,
+        "log10_ratio": -0.11579756280469461,
+        "status": "NONZERO_ABSOLUTE_COMPARISON"
+      },
+      "tir_sic_axes": {
+        "x": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.10206207261596578,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 51263.770286111445,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 0.765953556776972,
+            "absolute_relative_error": 0.23404644322302806,
+            "log10_ratio": -0.11579756280469461,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "y": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.10206207261596578,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 51263.770286111445,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 0.765953556776972,
+            "absolute_relative_error": 0.23404644322302806,
+            "log10_ratio": -0.11579756280469461,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "z": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      },
+      "spatial_probes": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.1856340480548264,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.18563404805482642,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4129109082076801,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41291090820768006,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702975,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702976,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41508650225626503,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4150865022562649,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 102527.54057222289,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 1.531907113553944,
+            "absolute_relative_error": 0.5319071135539439,
+            "log10_ratio": 0.18523243285928656,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 66928.04,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      ],
+      "semantic_mass": 0.0864968422,
+      "semantic_mass_per_nucleon": 0.00786334929090909,
+      "post_join_diagnostic_only": {
+        "g_required_if_all_scale_mismatch_were_assigned_to_subjective_time": 1.305562186051937,
+        "status": "POST_JOIN_DIAGNOSTIC_ONLY_NOT_A_MODEL_INPUT_NOT_A_CALIBRATION"
+      },
+      "row_sha256": "6acb62710f229dc72369881d1626555dfcc2c03dfcfa5a530d209c7188e3c40f"
+    },
+    {
+      "symbol": "C",
+      "Z": 6,
+      "A": 12,
+      "observed_ionization_edge_cm_inverse": 90820.348,
+      "kepler_fundamental": {
+        "predicted_wavenumber_cm_inverse": 124509.14770078086,
+        "observed_wavenumber_cm_inverse": 90820.348,
+        "predicted_to_observed_ratio": 1.3709388968734282,
+        "absolute_relative_error": 0.3709388968734282,
+        "log10_ratio": 0.13701809859544734,
+        "status": "NONZERO_ABSOLUTE_COMPARISON"
+      },
+      "tir_sic_axes": {
+        "x": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.10206207261596578,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 124509.14770078086,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 1.3709388968734282,
+            "absolute_relative_error": 0.3709388968734282,
+            "log10_ratio": 0.13701809859544734,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "y": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.10206207261596578,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 124509.14770078086,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 1.3709388968734282,
+            "absolute_relative_error": 0.3709388968734282,
+            "log10_ratio": 0.13701809859544734,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "z": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      },
+      "spatial_probes": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.1856340480548264,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.18563404805482642,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4129109082076801,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41291090820768006,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702975,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702976,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41508650225626503,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4150865022562649,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 249018.2954015617,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 2.7418777937468564,
+            "absolute_relative_error": 1.7418777937468564,
+            "log10_ratio": 0.43804809425942853,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 90820.348,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      ],
+      "semantic_mass": 0.09930546,
+      "semantic_mass_per_nucleon": 0.008275455,
+      "post_join_diagnostic_only": {
+        "g_required_if_all_scale_mismatch_were_assigned_to_subjective_time": 0.7294271117995166,
+        "status": "POST_JOIN_DIAGNOSTIC_ONLY_NOT_A_MODEL_INPUT_NOT_A_CALIBRATION"
+      },
+      "row_sha256": "a10c119ef227fe6acc81ffc0aebe9dd330477736fcae41b0c7a20503f5dd7dc4"
+    },
+    {
+      "symbol": "N",
+      "Z": 7,
+      "A": 14,
+      "observed_ionization_edge_cm_inverse": 117225.7,
+      "kepler_fundamental": {
+        "predicted_wavenumber_cm_inverse": 214422.96933073102,
+        "observed_wavenumber_cm_inverse": 117225.7,
+        "predicted_to_observed_ratio": 1.8291464186669906,
+        "absolute_relative_error": 0.8291464186669905,
+        "log10_ratio": 0.2622484710718184,
+        "status": "NONZERO_ABSOLUTE_COMPARISON"
+      },
+      "tir_sic_axes": {
+        "x": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.10206207261596578,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 214422.96933073102,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 1.8291464186669906,
+            "absolute_relative_error": 0.8291464186669905,
+            "log10_ratio": 0.2622484710718184,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "y": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.10206207261596578,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 214422.96933073102,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 1.8291464186669906,
+            "absolute_relative_error": 0.8291464186669905,
+            "log10_ratio": 0.2622484710718184,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "z": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      },
+      "spatial_probes": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.1856340480548264,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.18563404805482642,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4129109082076801,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41291090820768006,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702975,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702976,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41508650225626503,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4150865022562649,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 428845.93866146205,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 3.658292837333981,
+            "absolute_relative_error": 2.6582928373339807,
+            "log10_ratio": 0.5632784667357996,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 117225.7,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      ],
+      "semantic_mass": 0.1096379195,
+      "semantic_mass_per_nucleon": 0.007831279964285714,
+      "post_join_diagnostic_only": {
+        "g_required_if_all_scale_mismatch_were_assigned_to_subjective_time": 0.5467030904659674,
+        "status": "POST_JOIN_DIAGNOSTIC_ONLY_NOT_A_MODEL_INPUT_NOT_A_CALIBRATION"
+      },
+      "row_sha256": "f5b209aa9b556421f0714b96deb79f91e61f47cd35f2f23234ad495de84905ef"
+    },
+    {
+      "symbol": "O",
+      "Z": 8,
+      "A": 16,
+      "observed_ionization_edge_cm_inverse": 109837.02,
+      "kepler_fundamental": {
+        "predicted_wavenumber_cm_inverse": 237133.85637474927,
+        "observed_wavenumber_cm_inverse": 109837.02,
+        "predicted_to_observed_ratio": 2.158961125991485,
+        "absolute_relative_error": 1.1589611259914852,
+        "log10_ratio": 0.334244822547579,
+        "status": "NONZERO_ABSOLUTE_COMPARISON"
+      },
+      "tir_sic_axes": {
+        "x": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.05103103630798289,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 237133.85637474927,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 2.158961125991485,
+            "absolute_relative_error": 1.1589611259914852,
+            "log10_ratio": 0.334244822547579,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "y": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.05103103630798289,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 237133.85637474927,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 2.158961125991485,
+            "absolute_relative_error": 1.1589611259914852,
+            "log10_ratio": 0.334244822547579,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "z": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      },
+      "spatial_probes": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.1856340480548264,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.18563404805482642,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4129109082076801,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41291090820768006,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702975,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702976,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41508650225626503,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4150865022562649,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 474267.71274949855,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 4.31792225198297,
+            "absolute_relative_error": 3.31792225198297,
+            "log10_ratio": 0.6352748182115602,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 109837.02,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      ],
+      "semantic_mass": 0.1250368608,
+      "semantic_mass_per_nucleon": 0.0078148038,
+      "post_join_diagnostic_only": {
+        "g_required_if_all_scale_mismatch_were_assigned_to_subjective_time": 0.4631857368625654,
+        "status": "POST_JOIN_DIAGNOSTIC_ONLY_NOT_A_MODEL_INPUT_NOT_A_CALIBRATION"
+      },
+      "row_sha256": "9e0fcea3ff1325d7c63f2f20b63799ad176e614d81cf55e560ac6308a4af470c"
+    },
+    {
+      "symbol": "F",
+      "Z": 9,
+      "A": 19,
+      "observed_ionization_edge_cm_inverse": 140524.5,
+      "kepler_fundamental": {
+        "predicted_wavenumber_cm_inverse": 339697.39172049117,
+        "observed_wavenumber_cm_inverse": 140524.5,
+        "predicted_to_observed_ratio": 2.4173534986460807,
+        "absolute_relative_error": 1.4173534986460807,
+        "log10_ratio": 0.3833401635585483,
+        "status": "NONZERO_ABSOLUTE_COMPARISON"
+      },
+      "tir_sic_axes": {
+        "x": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.020412414523193152,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 339697.39172049117,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 2.4173534986460807,
+            "absolute_relative_error": 1.4173534986460807,
+            "log10_ratio": 0.3833401635585483,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "y": {
+          "harmonic_order": 1,
+          "harmonic_strength": 0.020412414523193156,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 339697.39172049117,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 2.4173534986460807,
+            "absolute_relative_error": 1.4173534986460807,
+            "log10_ratio": 0.3833401635585483,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        "z": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      },
+      "spatial_probes": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.1856340480548264,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.18563404805482642,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4129109082076801,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41291090820768006,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702975,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702976,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41508650225626503,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4150865022562649,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 679394.7834409823,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 4.8347069972921615,
+            "absolute_relative_error": 3.8347069972921615,
+            "log10_ratio": 0.6843701592225295,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 140524.5,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      ],
+      "semantic_mass": 0.1385769245,
+      "semantic_mass_per_nucleon": 0.007293522342105264,
+      "post_join_diagnostic_only": {
+        "g_required_if_all_scale_mismatch_were_assigned_to_subjective_time": 0.41367553424026865,
+        "status": "POST_JOIN_DIAGNOSTIC_ONLY_NOT_A_MODEL_INPUT_NOT_A_CALIBRATION"
+      },
+      "row_sha256": "7b98dcb4b63b6aee9e14d77eb94188678c9baba5cb5ec1c40ba68e9181d19eb1"
+    },
+    {
+      "symbol": "Ne",
+      "Z": 10,
+      "A": 20,
+      "observed_ionization_edge_cm_inverse": 173929.75,
+      "kepler_fundamental": {
+        "predicted_wavenumber_cm_inverse": 449362.7055734551,
+        "observed_wavenumber_cm_inverse": 173929.75,
+        "predicted_to_observed_ratio": 2.5835873711855224,
+        "absolute_relative_error": 1.5835873711855222,
+        "log10_ratio": 0.4122231530046291,
+        "status": "NONZERO_ABSOLUTE_COMPARISON"
+      },
+      "tir_sic_axes": {
+        "x": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        "y": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        "z": {
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      },
+      "spatial_probes": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.1856340480548264,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.18563404805482642,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4129109082076801,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41291090820768006,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702975,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.3183694692702976,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.41508650225626503,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "harmonic_order": 2,
+          "harmonic_strength": 0.4150865022562649,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 898725.4111469102,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 5.167174742371045,
+            "absolute_relative_error": 4.167174742371045,
+            "log10_ratio": 0.7132531486686103,
+            "status": "NONZERO_ABSOLUTE_COMPARISON"
+          }
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "harmonic_order": 0,
+          "harmonic_strength": 0.0,
+          "residual": {
+            "predicted_wavenumber_cm_inverse": 0.0,
+            "observed_wavenumber_cm_inverse": 173929.75,
+            "predicted_to_observed_ratio": 0.0,
+            "absolute_relative_error": 1.0,
+            "log10_ratio": null,
+            "status": "ZERO_CHANNEL_MISMATCH"
+          }
+        }
+      ],
+      "semantic_mass": 0.1493778801,
+      "semantic_mass_per_nucleon": 0.007468894005,
+      "post_join_diagnostic_only": {
+        "g_required_if_all_scale_mismatch_were_assigned_to_subjective_time": 0.38705871191076974,
+        "status": "POST_JOIN_DIAGNOSTIC_ONLY_NOT_A_MODEL_INPUT_NOT_A_CALIBRATION"
+      },
+      "row_sha256": "ac61142cf0bdd952c289d7ca787f89653d33a0b6371d55c34eebc50cca3a94e5"
+    }
+  ],
+  "interpretation": "NONE_IN_RESULT_LEDGER",
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "result_sha256": "eb1f5767edd2ef2f0e4fc994df3d99b9603d12a4cc57475a4abf82dc4a98b186"
+}

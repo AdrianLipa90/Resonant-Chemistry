@@ -1,0 +1,1860 @@
+{
+  "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_ZERO_FIT_PREDICTION_LEDGER_V0_15",
+  "version": "0.15.0",
+  "status": "ZERO_FIT_PREDICTIONS_FROZEN_BEFORE_SPECTRAL_JOIN",
+  "sources": {
+    "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15.json": "cc6a3c1909488801a03e79ca3ac3d33ed50c197ab5d83e1826f207024151c72a",
+    "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json": "0dac2600beaadfd1b8a16a981a18ec9c31badc81280f1907db72773275e35ae3",
+    "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json": "c35dfdf1449625a80e6a04fe934b330bf2f15ed213cefc79c95279476bc25e69",
+    "benchmarks/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json": "4a430cf3e1e51ba77cf973f415cdc8b52ce2be061835f8d9ac9e05a8bf026bb4",
+    "benchmarks/ECLIPSE_TIME_DOPPLER_FREEZE_V0_15.json": "7a2895aaf7c24251bfbf031bd8d11fe0f71aeb481053dc5228e2551adb9a0b03"
+  },
+  "atom_count": 6,
+  "fit_parameters": [],
+  "calibration_to_observed_spectrum": "NONE",
+  "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+  "observer_transform_boundary": {
+    "null_rest_control": {
+      "subjective_time_scale": 1.0,
+      "beta_radial": 0.0
+    },
+    "nontrivial_subjective_time": "PENDING_ATOMIC_SUBSTRATE_MAPPING_BEFORE_USE",
+    "nonzero_doppler": "PENDING_PROVENANCE_BEARING_OBSERVATION_VELOCITY"
+  },
+  "tir_mass_ledger_status": "PRIMARY_TIR_SIC_MASS_WEIGHTED_FEATURES_FROZEN_BEFORE_SPECTRAL_JOIN",
+  "atoms": [
+    {
+      "atom_card_id": "ATOM:B:11:q+0",
+      "symbol": "B",
+      "Z": 5,
+      "A": 11,
+      "semantic_mass": 0.0864968422,
+      "semantic_mass_per_nucleon": 0.00786334929090909,
+      "radial_kepler_phase": {
+        "schema": "RESCHEM_PERIOD2_RADIAL_KEPLER_PHASE_RATE_V0_15",
+        "prereg_schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15",
+        "Z": 5,
+        "mean_radius_bohr": 2.8573676392598375,
+        "enclosed_other_charge_at_mean_radius": 3.727227459208183,
+        "effective_charge_at_mean_radius": 1.272772540791817,
+        "kepler_angular_rate_atomic_units": 0.2335749237518585,
+        "kepler_angular_rate_rad_per_second": 9656308124559484.0,
+        "kepler_frequency_hz": 1536849170042071.2,
+        "kepler_wavenumber_cm_inverse": 51263.770286111445,
+        "zeta_2p_hartree": 4.513491321069862e-05,
+        "zeta_2p_control_wavenumber_cm_inverse": 9.90596843885759,
+        "hf_energy_hartree": -24.4143602558323,
+        "virial_residual_hartree": 0.00016106578905183966,
+        "scf_iterations": 31,
+        "constants": {
+          "atomic_time_second": 2.4188843265864e-17,
+          "speed_of_light_cm_per_second": 29979245800.0,
+          "hartree_to_wavenumber_cm_inverse": 219474.6313705
+        },
+        "fit_parameters": [],
+        "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+        "epistemic_operator": "CHYBA",
+        "canon_allowed": false,
+        "record_sha256": "f2db204e64c8d29e0619efb98854650e0bf07266712c001352bc50130e8616c1"
+      },
+      "tir_sic_axis_frequency_candidates": {
+        "x": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.10206207261596578,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 1536849170042071.2,
+            "wavenumber_cm_inverse": 51263.770286111445
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 9656308124559484.0,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 1536849170042071.2,
+            "coordinate_frequency_hz": 1536849170042071.2,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 1536849170042071.2,
+            "observed_wavelength_m": 1.950695382760256e-07,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "y": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.10206207261596578,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 1536849170042071.2,
+            "wavenumber_cm_inverse": 51263.770286111445
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 9656308124559484.0,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 1536849170042071.2,
+            "coordinate_frequency_hz": 1536849170042071.2,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 1536849170042071.2,
+            "observed_wavelength_m": 1.950695382760256e-07,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "z": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 9656308124559484.0,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        }
+      },
+      "spatial_probe_frequency_candidates": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.1856340480548264,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.18563404805482642,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4129109082076801,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41291090820768006,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702975,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702976,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41508650225626503,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4150865022562649,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 3073698340084142.5,
+            "wavenumber_cm_inverse": 102527.54057222289
+          },
+          "source_feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "subjective_time_observation_policy": {
+        "null_control_g": 1.0,
+        "atomic_substrate_lapse_mapping": "PENDING_PREREGISTERED_ATOMIC_SUBSTRATE_MAPPING",
+        "pncs_default_orbital_kernel_scale": 1.0
+      },
+      "doppler_observation_policy": {
+        "null_control_beta": 0.0,
+        "source_relative_velocity": "PENDING_OBSERVATION_CONTEXT"
+      },
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "prediction_sha256": "40cfd14b39e6b4f152b2142473225391fe90f58b8de5530bd2a69c546027da62"
+    },
+    {
+      "atom_card_id": "ATOM:C:12:q+0",
+      "symbol": "C",
+      "Z": 6,
+      "A": 12,
+      "semantic_mass": 0.09930546,
+      "semantic_mass_per_nucleon": 0.008275455,
+      "radial_kepler_phase": {
+        "schema": "RESCHEM_PERIOD2_RADIAL_KEPLER_PHASE_RATE_V0_15",
+        "prereg_schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15",
+        "Z": 6,
+        "mean_radius_bohr": 1.841495481178686,
+        "enclosed_other_charge_at_mean_radius": 3.990232418834096,
+        "effective_charge_at_mean_radius": 2.009767581165904,
+        "kepler_angular_rate_atomic_units": 0.5673054189792558,
+        "kepler_angular_rate_rad_per_second": 2.3453185121086536e+16,
+        "kepler_frequency_hz": 3732690343270214.0,
+        "kepler_wavenumber_cm_inverse": 124509.14770078086,
+        "zeta_2p_hartree": 0.00017367658650711669,
+        "zeta_2p_control_wavenumber_cm_inverse": 38.117604801336185,
+        "hf_energy_hartree": -37.53017057074133,
+        "virial_residual_hartree": -9.501093463271104e-05,
+        "scf_iterations": 34,
+        "constants": {
+          "atomic_time_second": 2.4188843265864e-17,
+          "speed_of_light_cm_per_second": 29979245800.0,
+          "hartree_to_wavenumber_cm_inverse": 219474.6313705
+        },
+        "fit_parameters": [],
+        "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+        "epistemic_operator": "CHYBA",
+        "canon_allowed": false,
+        "record_sha256": "f495803d88b3a9cf7ed1a9e98ec8409cb74be3c810f0d595735693ba2e36b853"
+      },
+      "tir_sic_axis_frequency_candidates": {
+        "x": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.10206207261596578,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 3732690343270214.0,
+            "wavenumber_cm_inverse": 124509.14770078086
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 2.3453185121086536e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 3732690343270214.0,
+            "coordinate_frequency_hz": 3732690343270214.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 3732690343270214.0,
+            "observed_wavelength_m": 8.031538392690552e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "y": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.10206207261596578,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 3732690343270214.0,
+            "wavenumber_cm_inverse": 124509.14770078086
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 2.3453185121086536e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 3732690343270214.0,
+            "coordinate_frequency_hz": 3732690343270214.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 3732690343270214.0,
+            "observed_wavelength_m": 8.031538392690552e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "z": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 2.3453185121086536e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        }
+      },
+      "spatial_probe_frequency_candidates": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.1856340480548264,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.18563404805482642,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4129109082076801,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41291090820768006,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702975,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702976,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41508650225626503,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4150865022562649,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 7465380686540428.0,
+            "wavenumber_cm_inverse": 249018.2954015617
+          },
+          "source_feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "subjective_time_observation_policy": {
+        "null_control_g": 1.0,
+        "atomic_substrate_lapse_mapping": "PENDING_PREREGISTERED_ATOMIC_SUBSTRATE_MAPPING",
+        "pncs_default_orbital_kernel_scale": 1.0
+      },
+      "doppler_observation_policy": {
+        "null_control_beta": 0.0,
+        "source_relative_velocity": "PENDING_OBSERVATION_CONTEXT"
+      },
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "prediction_sha256": "bad56096fa1fc2e3c308385664723a15077c92f390fb1b2037815690b714d6c6"
+    },
+    {
+      "atom_card_id": "ATOM:N:14:q+0",
+      "symbol": "N",
+      "Z": 7,
+      "A": 14,
+      "semantic_mass": 0.1096379195,
+      "semantic_mass_per_nucleon": 0.007831279964285714,
+      "radial_kepler_phase": {
+        "schema": "RESCHEM_PERIOD2_RADIAL_KEPLER_PHASE_RATE_V0_15",
+        "prereg_schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15",
+        "Z": 7,
+        "mean_radius_bohr": 1.4005505406495677,
+        "enclosed_other_charge_at_mean_radius": 4.377772837683712,
+        "effective_charge_at_mean_radius": 2.622227162316288,
+        "kepler_angular_rate_atomic_units": 0.9769829341959555,
+        "kepler_angular_rate_rad_per_second": 4.038981622468497e+16,
+        "kepler_frequency_hz": 6428238902731847.0,
+        "kepler_wavenumber_cm_inverse": 214422.96933073102,
+        "zeta_2p_hartree": 0.0004420214756923512,
+        "zeta_2p_control_wavenumber_cm_inverse": 97.0125004354232,
+        "hf_energy_hartree": -54.40288993880612,
+        "virial_residual_hartree": -9.361789370387896e-06,
+        "scf_iterations": 34,
+        "constants": {
+          "atomic_time_second": 2.4188843265864e-17,
+          "speed_of_light_cm_per_second": 29979245800.0,
+          "hartree_to_wavenumber_cm_inverse": 219474.6313705
+        },
+        "fit_parameters": [],
+        "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+        "epistemic_operator": "CHYBA",
+        "canon_allowed": false,
+        "record_sha256": "3d76a9d4e4aee5bdcc267c439120a5ce1a8d8b4e3ada4f2c94621ecc4a6a8884"
+      },
+      "tir_sic_axis_frequency_candidates": {
+        "x": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.10206207261596578,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 6428238902731847.0,
+            "wavenumber_cm_inverse": 214422.96933073102
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 4.038981622468497e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 6428238902731847.0,
+            "coordinate_frequency_hz": 6428238902731847.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 6428238902731847.0,
+            "observed_wavelength_m": 4.6636794701671e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "y": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.10206207261596578,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 6428238902731847.0,
+            "wavenumber_cm_inverse": 214422.96933073102
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 4.038981622468497e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 6428238902731847.0,
+            "coordinate_frequency_hz": 6428238902731847.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 6428238902731847.0,
+            "observed_wavelength_m": 4.6636794701671e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "z": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 4.038981622468497e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        }
+      },
+      "spatial_probe_frequency_candidates": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.1856340480548264,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.18563404805482642,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4129109082076801,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41291090820768006,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702975,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702976,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41508650225626503,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4150865022562649,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.2856477805463694e+16,
+            "wavenumber_cm_inverse": 428845.93866146205
+          },
+          "source_feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "subjective_time_observation_policy": {
+        "null_control_g": 1.0,
+        "atomic_substrate_lapse_mapping": "PENDING_PREREGISTERED_ATOMIC_SUBSTRATE_MAPPING",
+        "pncs_default_orbital_kernel_scale": 1.0
+      },
+      "doppler_observation_policy": {
+        "null_control_beta": 0.0,
+        "source_relative_velocity": "PENDING_OBSERVATION_CONTEXT"
+      },
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "prediction_sha256": "32888008b892e76e9e16cbb4ab9ad8f5ab62ce3908d6aff4b7382aa29ae6219e"
+    },
+    {
+      "atom_card_id": "ATOM:O:16:q+0",
+      "symbol": "O",
+      "Z": 8,
+      "A": 16,
+      "semantic_mass": 0.1250368608,
+      "semantic_mass_per_nucleon": 0.0078148038,
+      "radial_kepler_phase": {
+        "schema": "RESCHEM_PERIOD2_RADIAL_KEPLER_PHASE_RATE_V0_15",
+        "prereg_schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15",
+        "Z": 8,
+        "mean_radius_bohr": 1.3292082301134054,
+        "enclosed_other_charge_at_mean_radius": 5.258441378946521,
+        "effective_charge_at_mean_radius": 2.7415586210534792,
+        "kepler_angular_rate_atomic_units": 1.0804613494595474,
+        "kepler_angular_rate_rad_per_second": 4.46677560222289e+16,
+        "kepler_frequency_hz": 7109094167760505.0,
+        "kepler_wavenumber_cm_inverse": 237133.85637474927,
+        "zeta_2p_hartree": 0.0008044879962839955,
+        "zeta_2p_control_wavenumber_cm_inverse": 176.56470642642208,
+        "hf_energy_hartree": -74.62000814954413,
+        "virial_residual_hartree": 0.0003675667733569199,
+        "scf_iterations": 32,
+        "constants": {
+          "atomic_time_second": 2.4188843265864e-17,
+          "speed_of_light_cm_per_second": 29979245800.0,
+          "hartree_to_wavenumber_cm_inverse": 219474.6313705
+        },
+        "fit_parameters": [],
+        "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+        "epistemic_operator": "CHYBA",
+        "canon_allowed": false,
+        "record_sha256": "3138b107781b4bf7b0c734293b0229b56d57488c8978d83b87472c66b286c1c0"
+      },
+      "tir_sic_axis_frequency_candidates": {
+        "x": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.05103103630798289,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 7109094167760505.0,
+            "wavenumber_cm_inverse": 237133.85637474927
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 4.46677560222289e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 7109094167760505.0,
+            "coordinate_frequency_hz": 7109094167760505.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 7109094167760505.0,
+            "observed_wavelength_m": 4.217027527354306e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "y": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.05103103630798289,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 7109094167760505.0,
+            "wavenumber_cm_inverse": 237133.85637474927
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 4.46677560222289e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 7109094167760505.0,
+            "coordinate_frequency_hz": 7109094167760505.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 7109094167760505.0,
+            "observed_wavelength_m": 4.217027527354306e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "z": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 4.46677560222289e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        }
+      },
+      "spatial_probe_frequency_candidates": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.1856340480548264,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.18563404805482642,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4129109082076801,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41291090820768006,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702975,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702976,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41508650225626503,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4150865022562649,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 1.421818833552101e+16,
+            "wavenumber_cm_inverse": 474267.71274949855
+          },
+          "source_feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "subjective_time_observation_policy": {
+        "null_control_g": 1.0,
+        "atomic_substrate_lapse_mapping": "PENDING_PREREGISTERED_ATOMIC_SUBSTRATE_MAPPING",
+        "pncs_default_orbital_kernel_scale": 1.0
+      },
+      "doppler_observation_policy": {
+        "null_control_beta": 0.0,
+        "source_relative_velocity": "PENDING_OBSERVATION_CONTEXT"
+      },
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "prediction_sha256": "307d28e10df4a89acf1c6ad5c393d449177a3d9420df4e21eae2cdbaa45fd826"
+    },
+    {
+      "atom_card_id": "ATOM:F:19:q+0",
+      "symbol": "F",
+      "Z": 9,
+      "A": 19,
+      "semantic_mass": 0.1385769245,
+      "semantic_mass_per_nucleon": 0.007293522342105264,
+      "radial_kepler_phase": {
+        "schema": "RESCHEM_PERIOD2_RADIAL_KEPLER_PHASE_RATE_V0_15",
+        "prereg_schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15",
+        "Z": 9,
+        "mean_radius_bohr": 1.1120456348651184,
+        "enclosed_other_charge_at_mean_radius": 5.705544868237052,
+        "effective_charge_at_mean_radius": 3.2944551317629482,
+        "kepler_angular_rate_atomic_units": 1.54777520121877,
+        "kepler_angular_rate_rad_per_second": 6.398715243250327e+16,
+        "kepler_frequency_hz": 1.018387160400749e+16,
+        "kepler_wavenumber_cm_inverse": 339697.39172049117,
+        "zeta_2p_hartree": 0.0014116101862661347,
+        "zeta_2p_control_wavenumber_cm_inverse": 309.81262526960273,
+        "hf_energy_hartree": -99.16131744456416,
+        "virial_residual_hartree": 0.0002390283057192022,
+        "scf_iterations": 32,
+        "constants": {
+          "atomic_time_second": 2.4188843265864e-17,
+          "speed_of_light_cm_per_second": 29979245800.0,
+          "hartree_to_wavenumber_cm_inverse": 219474.6313705
+        },
+        "fit_parameters": [],
+        "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+        "epistemic_operator": "CHYBA",
+        "canon_allowed": false,
+        "record_sha256": "895893fd1396d3bed91b1f2ea6e80551e7202de0c71efc6b0308c66a3d7d3b38"
+      },
+      "tir_sic_axis_frequency_candidates": {
+        "x": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.020412414523193152,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 1.018387160400749e+16,
+            "wavenumber_cm_inverse": 339697.39172049117
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 6.398715243250327e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 1.018387160400749e+16,
+            "coordinate_frequency_hz": 1.018387160400749e+16,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 1.018387160400749e+16,
+            "observed_wavelength_m": 2.9437965211779344e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "y": {
+          "frozen_harmonic_order": 1,
+          "frozen_harmonic_strength": 0.020412414523193156,
+          "proper_kepler_candidate": {
+            "harmonic_order": 1,
+            "frequency_hz": 1.018387160400749e+16,
+            "wavenumber_cm_inverse": 339697.39172049117
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 1,
+            "omega_proper_rad_s": 6.398715243250327e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 1.018387160400749e+16,
+            "coordinate_frequency_hz": 1.018387160400749e+16,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 1.018387160400749e+16,
+            "observed_wavelength_m": 2.9437965211779344e-08,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "OBSERVER_FRAME_FREQUENCY_AVAILABLE",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "z": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 6.398715243250327e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        }
+      },
+      "spatial_probe_frequency_candidates": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.1856340480548264,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.18563404805482642,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4129109082076801,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41291090820768006,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702975,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702976,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41508650225626503,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4150865022562649,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.036774320801498e+16,
+            "wavenumber_cm_inverse": 679394.7834409823
+          },
+          "source_feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "subjective_time_observation_policy": {
+        "null_control_g": 1.0,
+        "atomic_substrate_lapse_mapping": "PENDING_PREREGISTERED_ATOMIC_SUBSTRATE_MAPPING",
+        "pncs_default_orbital_kernel_scale": 1.0
+      },
+      "doppler_observation_policy": {
+        "null_control_beta": 0.0,
+        "source_relative_velocity": "PENDING_OBSERVATION_CONTEXT"
+      },
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "prediction_sha256": "3340c13d6e2e2f0d3376fc289942bf8e5d365914a84874e48e24c7fbb372f958"
+    },
+    {
+      "atom_card_id": "ATOM:Ne:20:q+0",
+      "symbol": "Ne",
+      "Z": 10,
+      "A": 20,
+      "semantic_mass": 0.1493778801,
+      "semantic_mass_per_nucleon": 0.007468894005,
+      "radial_kepler_phase": {
+        "schema": "RESCHEM_PERIOD2_RADIAL_KEPLER_PHASE_RATE_V0_15",
+        "prereg_schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15",
+        "Z": 10,
+        "mean_radius_bohr": 0.9654057540839478,
+        "enclosed_other_charge_at_mean_radius": 6.2281445222088605,
+        "effective_charge_at_mean_radius": 3.7718554777911395,
+        "kepler_angular_rate_atomic_units": 2.0474471367488296,
+        "kepler_angular_rate_rad_per_second": 8.464427646435854e+16,
+        "kepler_frequency_hz": 1.347155500373964e+16,
+        "kepler_wavenumber_cm_inverse": 449362.7055734551,
+        "zeta_2p_hartree": 0.002356511230730787,
+        "zeta_2p_control_wavenumber_cm_inverse": 517.1944336850827,
+        "hf_energy_hartree": -128.54247370192857,
+        "virial_residual_hartree": -5.9652243718844034e-05,
+        "scf_iterations": 29,
+        "constants": {
+          "atomic_time_second": 2.4188843265864e-17,
+          "speed_of_light_cm_per_second": 29979245800.0,
+          "hartree_to_wavenumber_cm_inverse": 219474.6313705
+        },
+        "fit_parameters": [],
+        "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+        "epistemic_operator": "CHYBA",
+        "canon_allowed": false,
+        "record_sha256": "bb62119cc4275cfbe6f98fdcde0417ac8788930a4b6a8143cc37e18370b98689"
+      },
+      "tir_sic_axis_frequency_candidates": {
+        "x": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 8.464427646435854e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "y": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 8.464427646435854e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        },
+        "z": {
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "null_rest_observer_control": {
+            "schema": "RESCHEM_ECLIPSE_SUBJECTIVE_TIME_DOPPLER_V0_15_R1",
+            "harmonic_order": 0,
+            "omega_proper_rad_s": 8.464427646435854e+16,
+            "subjective_time_scale": 1.0,
+            "beta_radial": 0.0,
+            "doppler_sign_convention": "beta_radial_positive_receding",
+            "proper_frequency_hz": 0.0,
+            "coordinate_frequency_hz": 0.0,
+            "doppler_factor": 1.0,
+            "observed_frequency_hz": 0.0,
+            "observed_wavelength_m": null,
+            "speed_of_light_m_s": 299792458.0,
+            "transform_order": [
+              "harmonic_and_proper_phase_rate",
+              "subjective_time_scale",
+              "longitudinal_relativistic_doppler",
+              "observer_frequency_and_wavelength"
+            ],
+            "subjective_time_reference": {
+              "repository": "AdrianLipa90/PhaseNav-Natural-Coding-System",
+              "commit": "5b866572f842407302acbb742df8a3955a0b8325",
+              "path": "spec/PNCS_ORCHORBITAL_HYDRO_RUNTIME_V0_27.md",
+              "relation": "d_tau = d_t * g_combined"
+            },
+            "status": "STATIC_ZERO_FREQUENCY",
+            "observed_spectrum_input": "WITHHELD"
+          }
+        }
+      },
+      "spatial_probe_frequency_candidates": [
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.1856340480548264,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "481827aa6fc5b238145f9beb0c9fc97acf20ff483e165239dc5bb3292a5eb6f6"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.18563404805482642,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "37cae0a8d45803822ba7b7b0d175e9d56221e0513d67676f703bda7edc052d39"
+        },
+        {
+          "spatial_partition": "tetrahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "6224b8fdf3ee2be3ec8a8d31b36714d1c63a41888bcc05b8e2663957297a5649"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4129109082076801,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "5a8c2a992157415fc7683b16c3c6c98efc0eea31a15cff64091027650598d4c8"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41291090820768006,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "18642852bb72fd53bf1a64a3a7215dd699502b05595a4aed7488793a72f46cf6"
+        },
+        {
+          "spatial_partition": "octahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "5733120c357c9b099e220ccb1c8cd1e1ef1c691a1bfb4040d67eba09b9dce678"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702975,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "6fca122c3e49374af2fd10b391e25a8bb43afb4146373f2fbf91c0c7f7b3cb3a"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.3183694692702976,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "c424e1a75405c8912aa824916eb502d8d6deb8831f2dc27815efff9ae88e7fa4"
+        },
+        {
+          "spatial_partition": "cube",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "8c60b23bdb0df8dd41e91bf39af63d24cbfe0ad93b1ba6fd81eec6cffe546ed9"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_x",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.41508650225626503,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "5377d8b3214f0b4f36ad985560d1b6690f4739cd852041c8d5e8aef82634cafe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_y",
+          "frozen_harmonic_order": 2,
+          "frozen_harmonic_strength": 0.4150865022562649,
+          "proper_kepler_candidate": {
+            "harmonic_order": 2,
+            "frequency_hz": 2.694311000747928e+16,
+            "wavenumber_cm_inverse": 898725.4111469102
+          },
+          "source_feature_sha256": "05e87c0d9cefad5c1548e959e9d99fe2a17e14cbb0444de097bbd191d0a30efe"
+        },
+        {
+          "spatial_partition": "icosahedron",
+          "orbital_label": "p_z",
+          "frozen_harmonic_order": 0,
+          "frozen_harmonic_strength": 0.0,
+          "proper_kepler_candidate": {
+            "harmonic_order": 0,
+            "frequency_hz": 0.0,
+            "wavenumber_cm_inverse": 0.0
+          },
+          "source_feature_sha256": "7fc24c88b47cdd7533b2fb9d2057ba20f6dd727a6f1324f4683a36ede1872eb3"
+        }
+      ],
+      "subjective_time_observation_policy": {
+        "null_control_g": 1.0,
+        "atomic_substrate_lapse_mapping": "PENDING_PREREGISTERED_ATOMIC_SUBSTRATE_MAPPING",
+        "pncs_default_orbital_kernel_scale": 1.0
+      },
+      "doppler_observation_policy": {
+        "null_control_beta": 0.0,
+        "source_relative_velocity": "PENDING_OBSERVATION_CONTEXT"
+      },
+      "observed_spectrum": "WITHHELD_FOR_BLIND_COMPARISON",
+      "prediction_sha256": "0975fd1b5f7e52c3ecb82c8b419ba90d2c98c85be46185f1432502eaeb6d2678"
+    }
+  ],
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "ledger_sha256": "e83be56f85de537d4fb4be8623f96b8cc72c64f42e36e5bebea5a75b998df4b1"
+}

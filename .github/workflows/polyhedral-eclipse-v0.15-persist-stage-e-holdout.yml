@@ -1,0 +1,65 @@
+name: polyhedral-eclipse-v0.15-persist-stage-e-holdout
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-e-holdout.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-stage-e-result:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+      - name: Download exact Stage-E holdout result
+        uses: actions/download-artifact@v4
+        with:
+          name: atomic-subjective-time-v0.15-stage-e-holdout-result
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32901707175
+      - name: Verify exact Stage-E result and nested hashes
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          source=Path('recovered/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_ORIGIN_HOLDOUT_RESULT_V0_15.json')
+          raw=source.read_bytes(); raw_sha=hashlib.sha256(raw).hexdigest()
+          if raw_sha!='7f730e1eb46dcc98d6258dd96fd2bd02efed8a204bed322179b0e7f9769f7c52': raise SystemExit(f'raw result SHA drift: {raw_sha}')
+          d=json.loads(raw)
+          if d['status']!='INDEPENDENT_STAGE_E_GROUND_ORIGIN_HOLDOUT_JOIN_COMPLETE': raise SystemExit('status drift')
+          if d['candidate_selected_or_removed'] is not False or d['model_parameters_changed_after_join'] is not False: raise SystemExit('selection/model mutation drift')
+          if d['fit_parameters_added_after_join']!=[] or d['calibration_parameters_added_after_join']!=[]: raise SystemExit('fit/calibration drift')
+          if d['validation_claimed'] is not False or d['interpretation']!='NONE_IN_RESULT_LEDGER': raise SystemExit('epistemic boundary drift')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          body=dict(d); rec=body.pop('result_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=rec: raise SystemExit('result SHA drift')
+          if rec!='e0cfa0c43cf16835c03c3b760873e3822d9de74d32bbab0ae039f975c0db08d7': raise SystemExit('canonical result SHA mismatch')
+          for policy in d['policies']:
+              pb=dict(policy); pr=pb.pop('policy_sha256')
+              if hashlib.sha256(canonical(pb).encode()).hexdigest()!=pr: raise SystemExit(f"policy SHA drift: {policy['policy_id']}")
+              for row in policy['rows']:
+                  rb=dict(row); rr=rb.pop('row_sha256')
+                  if hashlib.sha256(canonical(rb).encode()).hexdigest()!=rr: raise SystemExit(f"row SHA drift: {policy['policy_id']}:{row['symbol']}")
+          destination=Path('benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_ORIGIN_HOLDOUT_RESULT_V0_15.json')
+          destination.write_bytes(raw)
+          print({'raw_sha256':raw_sha,'result_sha256':rec,'policies':len(d['policies'])})
+          PY
+      - name: Persist exact verified Stage-E result bytes
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_ORIGIN_HOLDOUT_RESULT_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-E ground-origin holdout result"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy

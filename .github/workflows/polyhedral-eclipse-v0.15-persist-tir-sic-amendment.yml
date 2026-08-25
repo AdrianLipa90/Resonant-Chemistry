@@ -1,0 +1,60 @@
+name: polyhedral-eclipse-v0.15-persist-tir-sic-amendment
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-tir-sic-amendment.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-primary-tir-sic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - name: Download exact primary TIR-SIC artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: tir-sic-mass-weighted-v0.15
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32892071065
+
+      - name: Verify exact recovered ledger
+        run: |
+          python scripts/validate_tir_sic_mass_weighted_amendment_v015.py recovered/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          source = Path('recovered/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json')
+          raw = source.read_bytes()
+          raw_sha = hashlib.sha256(raw).hexdigest()
+          if raw_sha != '4a430cf3e1e51ba77cf973f415cdc8b52ce2be061835f8d9ac9e05a8bf026bb4':
+              raise SystemExit(f'raw TIR-SIC ledger SHA drift: {raw_sha}')
+          payload = json.loads(raw)
+          if payload.get('ledger_sha256') != '5fd976c44cb030705561458739dd7013ac431606a888292bded3be541c64f422':
+              raise SystemExit('internal TIR-SIC ledger SHA drift')
+          Path('benchmarks/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json').write_bytes(raw)
+          print({'raw_sha256': raw_sha, 'ledger_sha256': payload['ledger_sha256']})
+          PY
+
+      - name: Persist exact verified primary TIR-SIC bytes
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 primary TIR-SIC mass-weighted ledger"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy

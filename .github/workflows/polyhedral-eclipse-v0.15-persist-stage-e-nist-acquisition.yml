@@ -1,0 +1,80 @@
+name: polyhedral-eclipse-v0.15-persist-stage-e-nist-acquisition
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-e-nist-acquisition.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-stage-e-acquisition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - name: Download exact Stage-E NIST acquisition artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-e-nist-acquisition
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32901170831
+
+      - name: Verify exact Stage-E acquisition before persistence
+        run: |
+          python - <<'PY'
+          import hashlib, json, shutil
+          from pathlib import Path
+          root=Path('recovered')
+          manifest_path=root/'NIST_GROUND_ORIGIN_STAGE_E_ACQUISITION_MANIFEST_V0_15.json'
+          raw_manifest=manifest_path.read_bytes()
+          expected_manifest_raw='96ff338c9a5e10c4c62abb1794f8f5aa64edb32e3521ae4bbb6c9105b53a43d7'
+          if hashlib.sha256(raw_manifest).hexdigest()!=expected_manifest_raw: raise SystemExit('manifest raw SHA drift')
+          d=json.loads(raw_manifest)
+          if d['status']!='NIST_STAGE_E_RAW_GROUND_ORIGIN_RESPONSES_ARCHIVED_BEFORE_JOIN': raise SystemExit('status drift')
+          if d['selection_performed'] is not False or d['model_data_join_performed'] is not False: raise SystemExit('premature selection/join drift')
+          if d['fit_parameters_added']!=[] or d['calibration_parameters_added']!=[]: raise SystemExit('fit/calibration drift')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          body=dict(d); recorded=body.pop('manifest_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=recorded: raise SystemExit('manifest nested SHA drift')
+          if recorded!='42f38de4a91232d71f4e1f6d7a5823b686658e91ca5bc43956bda773aead0d9f': raise SystemExit('canonical manifest SHA mismatch')
+          expected={
+            'B':('e3c911b2c913b8eeed555f5c866e8913d1b8f64bf4d3a2cf6d4515bfd19b0912','95307df37ee70aa655fd00f37f5edee0c87c20e4b9be80b017af0d87f1f11437'),
+            'C':('871dad7dc984e9deb20f8c6a34d87c19286da29461e6eeb5a69eae36c03c797e','b35b9a019d0258dc102a170050dbdaa29b3b64457adf67cad5a7696336a4342a'),
+            'N':('c4aefaefd8fc144d1a5e92070b3d1a61446bd14f2afa544cc77b6f7a76929a8f','11e0f530a74d99c6650a9e12e2b40beb2b0c8500ae100906c39ab80828cfa446'),
+            'O':('cfec2a6a19496704e2b21df0c80fff8f4f47a553731cb131dc3c5c47d93fc533','8bd7512760622342c542564499a65304019b27c631b680e65c88196dc479b5f0'),
+            'F':('d9fa3cce7740c09f2355131e779272e8d907f1b8adff1b98c8b14acfc4a8ab15','0458568bc117fd6a6ccd167a69df8d8342ebec514a03de3fdc4e267dce40dca8'),
+            'Ne':('eccd60f6dc7e947eb9b657e7ab0ead9976ffc7d88481de1e22559fa1581ceca2','76a091a83346762e899dbe066ac3389c362b2ad4f908cf2d04d218c7a71b42ac'),
+          }
+          for rec in d['records']:
+              symbol=rec['symbol']; eraw,enorm=expected[symbol]
+              raw=(root/Path(rec['raw_path']).relative_to('out/stage_e_nist_ground_origin')).read_bytes()
+              norm=(root/Path(rec['normalized_path']).relative_to('out/stage_e_nist_ground_origin')).read_bytes()
+              if hashlib.sha256(raw).hexdigest()!=eraw or rec['raw_sha256']!=eraw: raise SystemExit(f'raw SHA drift: {symbol}')
+              if hashlib.sha256(norm).hexdigest()!=enorm or rec['normalized_sha256']!=enorm: raise SystemExit(f'normalized SHA drift: {symbol}')
+          dest=Path('benchmarks/stage_e_nist_ground_origin')
+          if dest.exists(): shutil.rmtree(dest)
+          shutil.copytree(root/'raw', dest/'raw')
+          shutil.copytree(root/'normalized', dest/'normalized')
+          shutil.copy2(manifest_path, dest/'NIST_GROUND_ORIGIN_STAGE_E_ACQUISITION_MANIFEST_V0_15.json')
+          print({'manifest_sha256':recorded,'species_count':d['species_count'],'boundary':'NO_SELECTION_NO_JOIN'})
+          PY
+
+      - name: Persist exact verified Stage-E acquisition bytes
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/stage_e_nist_ground_origin
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-E NIST acquisition"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy

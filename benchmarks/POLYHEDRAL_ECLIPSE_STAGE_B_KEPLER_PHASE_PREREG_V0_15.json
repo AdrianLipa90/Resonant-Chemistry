@@ -1,0 +1,70 @@
+{
+  "schema": "RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_KEPLER_PHASE_PREREG_V0_15",
+  "version": "0.15.0",
+  "status": "STAGE_B_ZERO_FIT_PHASE_MAPPING_PREREGISTERED_BEFORE_SPECTRAL_JOIN",
+  "spectral_input": "PROHIBITED_DURING_PREDICTION_FREEZE",
+  "objective": "Produce absolute model-side phase-frequency and wavenumber candidates from the existing B-Ne radial HF state and already frozen eclipse harmonic orders, before any observed spectral lines are joined.",
+  "sources": {
+    "radial_solver": "reschem.atomic_radial_spectroscopy._solve_period2_radial_state",
+    "radial_solver_contract": "same numerical settings as period2_p_radial_control_exposure",
+    "stage_a0_r2": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json",
+    "stage_a1": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json",
+    "primary_tir_sic_a1s": "benchmarks/TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15.json"
+  },
+  "radial_solver_settings": {
+    "basis_size": 24,
+    "grid_points": 1500,
+    "mixing": 0.32,
+    "tolerance_hartree": 5e-8,
+    "max_iterations": 120
+  },
+  "constants": {
+    "atomic_time_second": 2.4188843265864e-17,
+    "speed_of_light_cm_per_second": 29979245800.0,
+    "hartree_to_wavenumber_cm_inverse": 219474.6313705
+  },
+  "phase_rate_derivation": {
+    "one_p_radial_probability": "P_2p(r)=one_p_density(r), normalized so integral P_2p(r) dr=1",
+    "mean_radius_bohr": "r_bar=integral P_2p(r)*r dr",
+    "other_electron_radial_density": "rho_other(r)=rho_total(r)-P_2p(r)",
+    "enclosed_other_charge": "Q_other(r)=integral_0^r rho_other(s) ds",
+    "effective_charge_at_mean_radius": "Z_eff=Z-Q_other(r_bar), using linear interpolation on the frozen radial grid",
+    "kepler_angular_rate_atomic_units": "Omega_K_au=sqrt(Z_eff/r_bar^3)",
+    "kepler_angular_rate_rad_per_second": "Omega_K=Omega_K_au/atomic_time_second",
+    "kepler_frequency_hz": "nu_K=Omega_K/(2*pi)",
+    "kepler_wavenumber_cm_inverse": "sigma_K=nu_K/c_cm_s"
+  },
+  "frozen_frequency_channels": {
+    "kepler_fundamental": "n=1: nu_1=nu_K",
+    "primary_tir_sic_axes": "for each x,y,z use the already frozen R2 harmonic order n_axis and compute nu_axis=n_axis*nu_K; preserve all axes",
+    "spatial_orbital_band": "for each frozen spatial Stage-A1 probe use its already frozen harmonic order n_orb and compute nu_orb=n_orb*nu_K; preserve every partition and p_x,p_y,p_z probe",
+    "conventional_spin_orbit_control": "retain zeta_2p_hartree*219474.6313705 cm^-1 as an independent radial-control comparator"
+  },
+  "model_side_outputs": [
+    "mean_radius_bohr",
+    "enclosed_other_charge_at_mean_radius",
+    "effective_charge_at_mean_radius",
+    "kepler_angular_rate_atomic_units",
+    "kepler_angular_rate_rad_per_second",
+    "kepler_frequency_hz",
+    "kepler_wavenumber_cm_inverse",
+    "tir_sic_axis_frequency_candidates",
+    "spatial_probe_frequency_candidates",
+    "zeta_2p_control_wavenumber_cm_inverse"
+  ],
+  "fit_parameters": [],
+  "calibration_to_observed_spectrum": "NONE",
+  "selection_rules": {
+    "axis_selection_from_observed_data": "PROHIBITED",
+    "spatial_partition_selection_from_observed_data": "PROHIBITED",
+    "harmonic_order_change_after_observed_data": "PROHIBITED",
+    "kepler_formula_change_after_observed_data": "PROHIBITED"
+  },
+  "stage_c_join_contract": {
+    "observed_values_remain_withheld_until_this_prediction_ledger_is_frozen_and_hashed": true,
+    "comparison_must_report_zero_fit_absolute_residuals_separately_from_any_later_calibrated_diagnostic": true,
+    "failure_is_a_valid_outcome": true
+  },
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false
+}

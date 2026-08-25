@@ -1,0 +1,326 @@
+{
+  "schema": "RESCHEM_TIR_SIC_MASS_WEIGHTED_LEDGER_V0_15",
+  "status": "PRIMARY_TIR_SIC_MASS_WEIGHTED_FEATURES_FROZEN_BEFORE_SPECTRAL_JOIN",
+  "amendment_source": "benchmarks/TIR_SIC_MASS_WEIGHTED_AMENDMENT_V0_15.json",
+  "source_lineage": {
+    "stage_a0_r2": {
+      "path": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_R2_LEDGER_V0_15.json",
+      "raw_sha256": "0dac2600beaadfd1b8a16a981a18ec9c31badc81280f1907db72773275e35ae3",
+      "internal_sha256": "e3438d2e090db378b566eb31b0b03159fca407bee2826c400d8e82099a00f39a"
+    },
+    "stage_a1": {
+      "path": "benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A1_LEDGER_V0_15.json",
+      "raw_sha256": "c35dfdf1449625a80e6a04fe934b330bf2f15ed213cefc79c95279476bc25e69",
+      "internal_sha256": "ecb01b00831140bfc71483ec1f7f64dc69e25929868cafe05d99651390c898f6"
+    },
+    "semantic_mass_manifest": {
+      "path": "benchmarks/ATOMIC_PNCS_SEMANTIC_MASS_BINDINGS_V0_15.json",
+      "raw_sha256": "00f4c587c4d994bbc97966fc75559f88e88641a5c7e564dd36f25ba1fb71fd32",
+      "internal_sha256": "c7077f59eceaa6217e03ee59a3edfb394a4bbfb4c84d0e16849459f80c2e6f47"
+    }
+  },
+  "kappa": 0.009193150006360484,
+  "formula": {
+    "eta_sic": "I_SIC/(A*kappa)",
+    "mu_s": "M_s/A",
+    "primary_tir_sic_eclipse_coupling": "mu_s*eta_sic*chi_r"
+  },
+  "row_count": 6,
+  "rows": [
+    {
+      "atom_card_id": "ATOM:B:11:q+0",
+      "symbol": "B",
+      "Z": 5,
+      "A": 11,
+      "radial_nuclear_exposure": 1.6951648879910488,
+      "semantic_mass": 0.0864968422,
+      "semantic_mass_per_nucleon": 0.00786334929090909,
+      "sic_information_nats": 0.17744044409639098,
+      "sic_information_ratio_to_nucleons": 1.754670537535852,
+      "primary_tir_sic_eclipse_coupling": 0.023389185575909875,
+      "axis_resolved_phase": {
+        "x": {
+          "rotation_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.10206207261596578
+        },
+        "y": {
+          "rotation_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.10206207261596578
+        },
+        "z": {
+          "rotation_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED"
+      },
+      "semantic_mass_binding_id": "pncs:mass-binding:sha256:44acfaf2f74c2d147385aad6790c8400b7d239de9a9229e6c7c9dc9003a3741a",
+      "semantic_mass_candidate_sha256": "928bd90686c9bc626bdca7cd1e9cd8a8351cdd4d248b6f080b4f2552c346bcb2",
+      "epistemic_operator": "CHYBA",
+      "canon_allowed": false,
+      "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON",
+      "row_sha256": "1d18db6ea34047dbaed4f305fbd3bbe0289ba97bf7d86de1f9b4bf821a7048ac"
+    },
+    {
+      "atom_card_id": "ATOM:C:12:q+0",
+      "symbol": "C",
+      "Z": 6,
+      "A": 12,
+      "radial_nuclear_exposure": 6.52289835893938,
+      "semantic_mass": 0.09930546,
+      "semantic_mass_per_nucleon": 0.008275455,
+      "sic_information_nats": 0.17744044409639098,
+      "sic_information_ratio_to_nucleons": 1.6084479927411977,
+      "primary_tir_sic_eclipse_coupling": 0.08682394518366857,
+      "axis_resolved_phase": {
+        "x": {
+          "rotation_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.10206207261596578
+        },
+        "y": {
+          "rotation_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.10206207261596578
+        },
+        "z": {
+          "rotation_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED"
+      },
+      "semantic_mass_binding_id": "pncs:mass-binding:sha256:262d9ba896bebf072a0ea137ef1dc52a150344ea22629824da6efb751317bbc9",
+      "semantic_mass_candidate_sha256": "70e4a8c77a49d82248bd3a1bf67ccb70e46e39d5ad1b3b9d946f1f789b5c4b5d",
+      "epistemic_operator": "CHYBA",
+      "canon_allowed": false,
+      "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON",
+      "row_sha256": "1fba0dbca2274cd3324035fdae97f3dec75933ed5abb341fe74d4ef1cf2a80d3"
+    },
+    {
+      "atom_card_id": "ATOM:N:14:q+0",
+      "symbol": "N",
+      "Z": 7,
+      "A": 14,
+      "radial_nuclear_exposure": 16.601323277917704,
+      "semantic_mass": 0.1096379195,
+      "semantic_mass_per_nucleon": 0.007831279964285714,
+      "sic_information_nats": 0.17744044409639098,
+      "sic_information_ratio_to_nucleons": 1.3786697080638834,
+      "primary_tir_sic_eclipse_coupling": 0.17924031157015313,
+      "axis_resolved_phase": {
+        "x": {
+          "rotation_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.10206207261596578
+        },
+        "y": {
+          "rotation_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.10206207261596578
+        },
+        "z": {
+          "rotation_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED"
+      },
+      "semantic_mass_binding_id": "pncs:mass-binding:sha256:9205c21383a99964e3d0461c014b6a90bfeb171e31bc0ea1d720cfb402f44fdb",
+      "semantic_mass_candidate_sha256": "5b29fed9073c965efdb88021d636ef3f17240abe2d4b50ca1567ea8519d03c07",
+      "epistemic_operator": "CHYBA",
+      "canon_allowed": false,
+      "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON",
+      "row_sha256": "f55c3a20a1d8183a047cf335c75031fc42a94aa22d20e760e0f5974583205290"
+    },
+    {
+      "atom_card_id": "ATOM:O:16:q+0",
+      "symbol": "O",
+      "Z": 8,
+      "A": 16,
+      "radial_nuclear_exposure": 30.21474302486761,
+      "semantic_mass": 0.1250368608,
+      "semantic_mass_per_nucleon": 0.0078148038,
+      "sic_information_nats": 0.04226556901393323,
+      "sic_information_ratio_to_nucleons": 0.2873441705555962,
+      "primary_tir_sic_eclipse_coupling": 0.06784836316939824,
+      "axis_resolved_phase": {
+        "x": {
+          "rotation_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.05103103630798289
+        },
+        "y": {
+          "rotation_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.05103103630798289
+        },
+        "z": {
+          "rotation_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED"
+      },
+      "semantic_mass_binding_id": "pncs:mass-binding:sha256:5c001268cf840366459e30e6e02471b8ae020837b868c39fb0d7c4c1092d7254",
+      "semantic_mass_candidate_sha256": "b053a27321e73502f27f884123d0bcdf67f8b5180046e064d92c014ca8f8f203",
+      "epistemic_operator": "CHYBA",
+      "canon_allowed": false,
+      "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON",
+      "row_sha256": "7864c10b4c5b381aef0f40d5c02532cd4919bde96d9153c5996029d454931643"
+    },
+    {
+      "atom_card_id": "ATOM:F:19:q+0",
+      "symbol": "F",
+      "Z": 9,
+      "A": 19,
+      "radial_nuclear_exposure": 53.01687436769787,
+      "semantic_mass": 0.1385769245,
+      "semantic_mass_per_nucleon": 0.007293522342105264,
+      "sic_information_nats": 0.006681561062926257,
+      "sic_information_ratio_to_nucleons": 0.038252515006473475,
+      "primary_tir_sic_eclipse_coupling": 0.014791473234478058,
+      "axis_resolved_phase": {
+        "x": {
+          "rotation_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.020412414523193152
+        },
+        "y": {
+          "rotation_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 1,
+          "dominant_harmonic_strength": 0.020412414523193156
+        },
+        "z": {
+          "rotation_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED"
+      },
+      "semantic_mass_binding_id": "pncs:mass-binding:sha256:c88483108c4fb5d97fae8993ae6435be491bf1a3ef6bde0f6c630ce2d2727d9b",
+      "semantic_mass_candidate_sha256": "45087c375c39c6f91f99e0a61b8051aa9be5afe06c2abb685fc71061d2aacb9c",
+      "epistemic_operator": "CHYBA",
+      "canon_allowed": false,
+      "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON",
+      "row_sha256": "c3a477bd11b3c8a4f8f31d09a4b4268ce829acc49e5841c427df4969c41f7f4e"
+    },
+    {
+      "atom_card_id": "ATOM:Ne:20:q+0",
+      "symbol": "Ne",
+      "Z": 10,
+      "A": 20,
+      "radial_nuclear_exposure": 88.50521275722029,
+      "semantic_mass": 0.1493778801,
+      "semantic_mass_per_nucleon": 0.007468894005,
+      "sic_information_nats": 0.0,
+      "sic_information_ratio_to_nucleons": 0.0,
+      "primary_tir_sic_eclipse_coupling": 0.0,
+      "axis_resolved_phase": {
+        "x": {
+          "rotation_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "y": {
+          "rotation_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "z": {
+          "rotation_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "dominant_harmonic_order": 0,
+          "dominant_harmonic_strength": 0.0
+        },
+        "selection_status": "ALL_PREREGISTERED_AXES_PRESERVED"
+      },
+      "semantic_mass_binding_id": "pncs:mass-binding:sha256:b71db7d19a6d449e09894043ed4f700fb127e6ad391315ac430babb52003176e",
+      "semantic_mass_candidate_sha256": "15ce24052b387ed1c1ccd425078b7ef39d52be8829ce60b02ce272cb093bddb1",
+      "epistemic_operator": "CHYBA",
+      "canon_allowed": false,
+      "spectral_join": "WITHHELD_FOR_BLIND_COMPARISON",
+      "row_sha256": "fee304deed4efa5ecb3ba51e07de24d1df33a547fd9d4b2cec20a9c22cddd35b"
+    }
+  ],
+  "spectral_join": {
+    "status": "WITHHELD_FOR_BLIND_COMPARISON",
+    "accepted_observed_fields": []
+  },
+  "epistemic_operator": "CHYBA",
+  "canon_allowed": false,
+  "ledger_sha256": "5fd976c44cb030705561458739dd7013ac431606a888292bded3be541c64f422"
+}

@@ -1,0 +1,89 @@
+name: polyhedral-eclipse-v0.15-stage-e-holdout
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - scripts/run_atomic_subjective_time_stage_e_holdout_v015.py
+      - .github/workflows/polyhedral-eclipse-v0.15-stage-e-holdout.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip check
+      - name: Compile Stage-E holdout join
+        run: python -m py_compile scripts/run_atomic_subjective_time_stage_e_holdout_v015.py
+      - name: Verify all frozen inputs and no prior join mutation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          paths={
+            'prereg':Path('benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_RESONANCE_HOLDOUT_PREREG_V0_15.json'),
+            'b':Path('benchmarks/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json'),
+            'd0':Path('benchmarks/ATOMIC_SUBJECTIVE_TIME_STAGE_D0_LEDGER_V0_15.json'),
+            'obs':Path('benchmarks/NIST_GROUND_ORIGIN_STAGE_E_SELECTED_OBSERVED_LEDGER_V0_15.json'),
+          }
+          d={k:json.loads(v.read_text('utf-8')) for k,v in paths.items()}
+          if d['prereg']['status']!='INDEPENDENT_NIST_GROUND_ORIGIN_LINE_HOLDOUT_PREREGISTERED_BEFORE_DATA_JOIN': raise SystemExit('prereg drift')
+          if d['b']['status']!='ZERO_FIT_PREDICTIONS_FROZEN_BEFORE_SPECTRAL_JOIN': raise SystemExit('Stage-B drift')
+          if d['d0']['status']!='MODEL_SIDE_SUBJECTIVE_TIME_HYPOTHESES_FROZEN_FOR_FUTURE_HOLDOUT': raise SystemExit('Stage-D0 drift')
+          if d['obs']['status']!='STAGE_E_OBSERVED_GROUND_ORIGIN_LINES_SELECTED_BY_PREREGISTERED_RULE': raise SystemExit('observed ledger drift')
+          if d['obs']['model_data_join_performed'] is not False or d['obs']['model_parameters_changed'] is not False: raise SystemExit('observed pre-join boundary drift')
+          print({'frozen_input_boundary':'PASS','policies':d['d0']['candidate_policy_count'],'species':d['obs']['species_count']})
+          PY
+      - name: Run independent Stage-E holdout join
+        run: >-
+          python scripts/run_atomic_subjective_time_stage_e_holdout_v015.py
+          --output out/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_ORIGIN_HOLDOUT_RESULT_V0_15.json
+      - name: Validate result boundary and nested hashes
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          p=Path('out/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_ORIGIN_HOLDOUT_RESULT_V0_15.json')
+          d=json.loads(p.read_text('utf-8'))
+          expected=(
+            'NULL_REST_CONTROL','KAPPA_RADIAL_BALANCED','SEMANTIC_MASS_BALANCED',
+            'RADIAL_SEMANTIC_GEOMETRIC_COUPLING','RADIAL_SEMANTIC_PRODUCT_COUPLING')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          if d['status']!='INDEPENDENT_STAGE_E_GROUND_ORIGIN_HOLDOUT_JOIN_COMPLETE': raise SystemExit('status drift')
+          if d['policy_count']!=5 or d['species_count']!=6 or d['all_frozen_policies_reported'] is not True: raise SystemExit('cohort/policy drift')
+          if d['candidate_selected_or_removed'] is not False or d['model_parameters_changed_after_join'] is not False: raise SystemExit('selection/model mutation drift')
+          if d['fit_parameters_added_after_join']!=[] or d['calibration_parameters_added_after_join']!=[]: raise SystemExit('fit/calibration drift')
+          if d['validation_claimed'] is not False or d['interpretation']!='NONE_IN_RESULT_LEDGER': raise SystemExit('epistemic boundary drift')
+          if tuple(x['policy_id'] for x in d['policies'])!=expected: raise SystemExit('policy order/set drift')
+          body=dict(d); rec=body.pop('result_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=rec: raise SystemExit('result SHA drift')
+          for policy in d['policies']:
+            pb=dict(policy); pr=pb.pop('policy_sha256')
+            if hashlib.sha256(canonical(pb).encode()).hexdigest()!=pr: raise SystemExit(f"policy SHA drift: {policy['policy_id']}")
+            if policy['candidate_selected_for_model_update'] is not False or policy['validation_claimed'] is not False: raise SystemExit('policy promotion drift')
+            if len(policy['rows'])!=6: raise SystemExit('policy row count drift')
+            for row in policy['rows']:
+              rb=dict(row); rr=rb.pop('row_sha256')
+              if hashlib.sha256(canonical(rb).encode()).hexdigest()!=rr: raise SystemExit(f"row SHA drift: {policy['policy_id']}:{row['symbol']}")
+              if row['model_parameters_changed'] is not False or row['fit_parameters_added']!=[] or row['calibration_parameters_added']!=[]: raise SystemExit('row mutation/fit drift')
+          print({'result_sha256':rec,'policy_count':d['policy_count'],'species_count':d['species_count']})
+          PY
+      - name: Upload independent Stage-E result
+        uses: actions/upload-artifact@v4
+        with:
+          name: atomic-subjective-time-v0.15-stage-e-holdout-result
+          path: out/ATOMIC_SUBJECTIVE_TIME_STAGE_E_GROUND_ORIGIN_HOLDOUT_RESULT_V0_15.json
+          if-no-files-found: error

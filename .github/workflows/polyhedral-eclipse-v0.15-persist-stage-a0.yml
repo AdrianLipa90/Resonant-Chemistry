@@ -1,0 +1,104 @@
+name: polyhedral-eclipse-v0.15-persist-stage-a0
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-a0.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - name: Download exact Stage-A0 artifact from canonical run
+        uses: actions/download-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-a0-ledger
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32888465664
+
+      - name: Verify exact recovered ledger and nested receipts
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          source = Path('recovered/POLYHEDRAL_ECLIPSE_STAGE_A0_LEDGER_V0_15.json')
+          raw = source.read_bytes()
+          raw_sha = hashlib.sha256(raw).hexdigest()
+          expected_raw_sha = '72d9ebc814236c17b7b503b54bd7fad01653b74f325bd124c49aa1d49e1bddaf'
+          if raw_sha != expected_raw_sha:
+              raise SystemExit(f'raw Stage-A0 JSON drift: {raw_sha} != {expected_raw_sha}')
+
+          payload = json.loads(raw)
+          if payload['schema'] != 'RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_A0_GEOMETRY_LEDGER_V0_15':
+              raise SystemExit('Stage-A0 schema drift')
+          if payload['status'] != 'GEOMETRY_FEATURES_FROZEN_BEFORE_SEMANTIC_MASS_AND_SPECTRAL_JOIN':
+              raise SystemExit('Stage-A0 status drift')
+          if payload['atom_count'] != 6 or payload['spatial_feature_count'] != 72:
+              raise SystemExit('Stage-A0 cohort/feature count drift')
+          if payload['semantic_mass_join'] != 'PENDING_EXACT_PNCS_T36_BINDINGS':
+              raise SystemExit('Stage-A0 semantic-mass boundary drift')
+          if payload['spectral_join'] != {'status': 'WITHHELD_FOR_BLIND_COMPARISON', 'accepted_observed_fields': []}:
+              raise SystemExit('Stage-A0 blind spectral boundary drift')
+
+          def canonical(value):
+              return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
+
+          body = dict(payload)
+          recorded_ledger_sha = body.pop('ledger_sha256')
+          computed_ledger_sha = hashlib.sha256(canonical(body).encode('utf-8')).hexdigest()
+          if recorded_ledger_sha != computed_ledger_sha:
+              raise SystemExit('Stage-A0 ledger internal SHA drift')
+          if recorded_ledger_sha != 'c6ab0e8245258924e8b5a0ddb87d7a09b0d580d5c81d356f943fbf554b3ccc12':
+              raise SystemExit('Stage-A0 ledger SHA differs from canonical run')
+
+          for atom in payload['atoms']:
+              atom_body = dict(atom)
+              recorded = atom_body.pop('atomic_feature_sha256')
+              computed = hashlib.sha256(canonical(atom_body).encode('utf-8')).hexdigest()
+              if recorded != computed:
+                  raise SystemExit(f"atomic feature SHA drift: {atom['symbol']}")
+              if atom['observed_spectrum'] != 'WITHHELD_FOR_BLIND_COMPARISON':
+                  raise SystemExit(f"spectral boundary drift: {atom['symbol']}")
+              for feature in atom['spatial_orbital_features']:
+                  feature_body = dict(feature)
+                  feature_sha = feature_body.pop('feature_sha256')
+                  computed_feature_sha = hashlib.sha256(canonical(feature_body).encode('utf-8')).hexdigest()
+                  if feature_sha != computed_feature_sha:
+                      raise SystemExit(
+                          f"spatial feature SHA drift: {atom['symbol']} {feature['spatial_partition']} {feature['orbital_label']}"
+                      )
+
+          destination = Path('benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_LEDGER_V0_15.json')
+          destination.write_bytes(raw)
+          print({
+              'raw_json_sha256': raw_sha,
+              'ledger_sha256': recorded_ledger_sha,
+              'atom_count': payload['atom_count'],
+              'spatial_feature_count': payload['spatial_feature_count'],
+          })
+          PY
+
+      - name: Persist exact verified bytes on experiment branch
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/POLYHEDRAL_ECLIPSE_STAGE_A0_LEDGER_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-A0 geometry ledger"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy
