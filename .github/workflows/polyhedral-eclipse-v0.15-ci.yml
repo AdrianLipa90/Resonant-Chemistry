@@ -10,6 +10,7 @@ on:
       - reschem/tetrahedral_inference_axis_v015.py
       - reschem/pncs_semantic_mass_bridge_v015.py
       - reschem/atomic_t36_aufbau_v015.py
+      - reschem/eclipse_time_doppler_v015.py
       - reschem/orbital_basis_v015.py
       - reschem/repository_cards.py
       - scripts/run_polyhedral_eclipse_stage_a0_v015.py
@@ -19,12 +20,14 @@ on:
       - scripts/validate_atomic_t36_aufbau_bindings_v015.py
       - scripts/validate_polyhedral_eclipse_stage_a1_v015.py
       - benchmarks/ATOMIC_T36_AUFBAU_PHASE_CONTROL_PREREG_V0_15.json
+      - benchmarks/ECLIPSE_TIME_DOPPLER_FREEZE_V0_15.json
       - semantic_cards/MODEL_OVERLAYS_V0_15.jsonl
       - tests/test_polyhedral_eclipse_spectroscopy.py
       - tests/test_tetrahedral_inference_v015.py
       - tests/test_tetrahedral_inference_axis_v015.py
       - tests/test_pncs_semantic_mass_bridge_v015.py
       - tests/test_atomic_t36_aufbau_v015.py
+      - tests/test_eclipse_time_doppler_v015.py
       - tests/test_polyhedral_eclipse_semantic_registry_v015.py
       - .github/workflows/polyhedral-eclipse-v0.15-ci.yml
   workflow_dispatch:
@@ -57,6 +60,7 @@ jobs:
           reschem/tetrahedral_inference_axis_v015.py
           reschem/pncs_semantic_mass_bridge_v015.py
           reschem/atomic_t36_aufbau_v015.py
+          reschem/eclipse_time_doppler_v015.py
           reschem/orbital_basis_v015.py
           reschem/repository_cards.py
           scripts/run_polyhedral_eclipse_stage_a0_v015.py
@@ -74,4 +78,5 @@ jobs:
           tests.test_tetrahedral_inference_axis_v015
           tests.test_pncs_semantic_mass_bridge_v015
           tests.test_atomic_t36_aufbau_v015
+          tests.test_eclipse_time_doppler_v015
           tests.test_polyhedral_eclipse_semantic_registry_v015
