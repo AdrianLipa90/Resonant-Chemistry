@@ -1,0 +1,69 @@
+name: polyhedral-eclipse-v0.15-persist-stage-b
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-b.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-exact-stage-b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+
+      - name: Download exact Stage-B artifact from canonical run
+        uses: actions/download-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-b-prediction-ledger
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32893831383
+
+      - name: Verify exact recovered Stage-B ledger and nested receipts
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          source=Path('recovered/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json')
+          raw=source.read_bytes()
+          raw_sha=hashlib.sha256(raw).hexdigest()
+          expected_raw_sha='380e18bab517f36a1a711459b9be098a24e6fb9a997e4a5d35f89afba54bf786'
+          if raw_sha!=expected_raw_sha: raise SystemExit(f'raw Stage-B drift: {raw_sha} != {expected_raw_sha}')
+          d=json.loads(raw)
+          if d['schema']!='RESCHEM_POLYHEDRAL_ECLIPSE_STAGE_B_ZERO_FIT_PREDICTION_LEDGER_V0_15': raise SystemExit('schema drift')
+          if d['status']!='ZERO_FIT_PREDICTIONS_FROZEN_BEFORE_SPECTRAL_JOIN': raise SystemExit('status drift')
+          if d['atom_count']!=6 or d['fit_parameters']!=[] or d['calibration_to_observed_spectrum']!='NONE': raise SystemExit('zero-fit boundary drift')
+          if d['observed_spectrum']!='WITHHELD_FOR_BLIND_COMPARISON': raise SystemExit('spectral boundary drift')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          body=dict(d); recorded=body.pop('ledger_sha256')
+          computed=hashlib.sha256(canonical(body).encode()).hexdigest()
+          if computed!=recorded: raise SystemExit('internal ledger SHA drift')
+          if recorded!='e83be56f85de537d4fb4be8623f96b8cc72c64f42e36e5bebea5a75b998df4b1': raise SystemExit('canonical ledger SHA mismatch')
+          for atom in d['atoms']:
+              b=dict(atom); rec=b.pop('prediction_sha256')
+              if hashlib.sha256(canonical(b).encode()).hexdigest()!=rec: raise SystemExit(f"prediction SHA drift: {atom['symbol']}")
+              if atom['observed_spectrum']!='WITHHELD_FOR_BLIND_COMPARISON': raise SystemExit(f"spectral leak: {atom['symbol']}")
+          destination=Path('benchmarks/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json')
+          destination.write_bytes(raw)
+          print({'raw_json_sha256':raw_sha,'ledger_sha256':recorded,'atom_count':d['atom_count']})
+          PY
+
+      - name: Persist exact verified Stage-B bytes on experiment branch
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/POLYHEDRAL_ECLIPSE_STAGE_B_PREDICTION_LEDGER_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-B zero-fit predictions"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy
