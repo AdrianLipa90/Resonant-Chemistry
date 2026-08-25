@@ -1,0 +1,162 @@
+{
+  "schema": "RESCHEM_PHASENAV_CHEM_RELAX_SEED_V0_14A2",
+  "generated_utc": "2026-08-15T14:18:02.643512+00:00",
+  "command": "phase chem relax",
+  "execution_partition": "v0.14A2_PER_SEED",
+  "preregister_source": "benchmarks/MOLECULAR_STATE_RELAXATION_PREREG_V0_14A.json",
+  "documentation": "docs/molecular_state_relaxation_v0_14a2_execution_partition.md",
+  "formula": "ArBr2",
+  "centre": "Ar",
+  "ligand": "Br",
+  "optimized_r_YY_angstrom": 2.2842324866344543,
+  "seed_id": "ArBr2_weak_linear",
+  "seed_identity_sha256": "05c956d722e890dc3f0a5845c3e058681bf602c77560ace58a575d2df6c06101",
+  "method_policy_sha256": "9b58d32d361bd2c2248c10859b12785aa9aa0244e18b5504f6cbb79d2abe366d",
+  "gates": {
+    "method_frozen": "PASS",
+    "seed_identity": "PASS",
+    "no_rescue": "PASS",
+    "phase36_dimension": "PASS"
+  },
+  "phase36": {
+    "dimension": 36,
+    "domain": "RESCHEM_PHASE36_EXECUTION_ADDRESS_V0_14A2",
+    "status": "MODEL_DEFINED_EXECUTION_ADDRESS_NOT_PHYSICAL_OBSERVABLE",
+    "method_policy_sha256": "9b58d32d361bd2c2248c10859b12785aa9aa0244e18b5504f6cbb79d2abe366d",
+    "seed_identity_sha256": "05c956d722e890dc3f0a5845c3e058681bf602c77560ace58a575d2df6c06101",
+    "vector": [
+      -0.23137254901960785,
+      0.984313725490196,
+      -0.1607843137254902,
+      0.00392156862745098,
+      0.5372549019607843,
+      -0.9921568627450981,
+      0.050980392156862744,
+      0.6705882352941176,
+      -0.29411764705882354,
+      -0.7333333333333333,
+      -0.1450980392156863,
+      0.49019607843137253,
+      0.9372549019607843,
+      0.9921568627450981,
+      -0.17647058823529413,
+      0.23921568627450981,
+      0.4117647058823529,
+      -0.5294117647058824,
+      0.17647058823529413,
+      -0.4196078431372549,
+      -0.396078431372549,
+      0.19215686274509805,
+      0.9294117647058824,
+      -0.3254901960784314,
+      -0.8431372549019608,
+      0.19215686274509805,
+      -0.9764705882352941,
+      -0.43529411764705883,
+      0.8117647058823529,
+      0.8196078431372549,
+      0.08235294117647059,
+      -0.06666666666666667,
+      0.803921568627451,
+      -0.12156862745098039,
+      -0.8196078431372549,
+      0.13725490196078433
+    ]
+  },
+  "backend_adapter": {
+    "kind": "CONVENTIONAL_NUMERICAL_BACKEND_ADAPTER",
+    "implementation": "reschem.molecular_state_relaxation.run_pyscf_relaxation",
+    "policy": {
+      "xc": "b97m_v",
+      "nlc": "vv10",
+      "basis": "def2-tzvpd",
+      "charge": 0,
+      "spin": 0,
+      "scf_conv_tol_hartree": 1e-10,
+      "scf_max_cycle": 200,
+      "grid_atom": [
+        99,
+        590
+      ],
+      "grid_prune": "nwchem_prune",
+      "nlc_grid_atom": [
+        50,
+        194
+      ],
+      "nlc_grid_prune": "nwchem_prune",
+      "optimizer_maxsteps": 120,
+      "convergence_energy_hartree": 1e-06,
+      "convergence_grms_hartree_per_bohr": 0.0003,
+      "convergence_gmax_hartree_per_bohr": 0.00045,
+      "convergence_drms_angstrom": 0.0012,
+      "convergence_dmax_angstrom": 0.0018
+    }
+  },
+  "execution_status": "EXECUTION_TIMEOUT_UNKNOWN",
+  "backend_result": {
+    "seed": {
+      "seed_id": "ArBr2_weak_linear",
+      "formula": "ArBr2",
+      "state_kind": "WEAK_COMPLEX_LINEAR_END_ON",
+      "atoms": [
+        "Ar",
+        "Br",
+        "Br"
+      ],
+      "coordinates_angstrom": [
+        [
+          0.0,
+          0.0,
+          -4.111618475942018
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          2.2842324866344543
+        ]
+      ],
+      "source_rule": "R_X_TO_NEAR_Y=1.8*R_YY_FROM_COMMON_DIMER_PREPASS"
+    },
+    "method_policy": {
+      "xc": "b97m_v",
+      "nlc": "vv10",
+      "basis": "def2-tzvpd",
+      "charge": 0,
+      "spin": 0,
+      "scf_conv_tol_hartree": 1e-10,
+      "scf_max_cycle": 200,
+      "grid_atom": [
+        99,
+        590
+      ],
+      "grid_prune": "nwchem_prune",
+      "nlc_grid_atom": [
+        50,
+        194
+      ],
+      "nlc_grid_prune": "nwchem_prune",
+      "optimizer_maxsteps": 120,
+      "convergence_energy_hartree": 1e-06,
+      "convergence_grms_hartree_per_bohr": 0.0003,
+      "convergence_gmax_hartree_per_bohr": 0.00045,
+      "convergence_drms_angstrom": 0.0012,
+      "convergence_dmax_angstrom": 0.0018
+    },
+    "status": "EXECUTION_TIMEOUT_UNKNOWN",
+    "timeout_seconds": 2400.0,
+    "wall_seconds": 2400.125215026,
+    "no_rescue": true,
+    "scientific_interpretation": "UNKNOWN_EXECUTION_NOT_CHEMICAL_FAIL"
+  },
+  "epistemic_status": {
+    "execution": "UNKNOWN_EXECUTION_NOT_CHEMICAL_FAIL",
+    "hessian_admission": "NOT_RUN",
+    "ground_state_ranking": "NOT_VALIDATED",
+    "geometry_only_topology_assignment": "NOT_PROMOTED"
+  }
+}
