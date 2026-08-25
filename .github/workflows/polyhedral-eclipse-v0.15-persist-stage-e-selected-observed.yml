@@ -1,0 +1,59 @@
+name: polyhedral-eclipse-v0.15-persist-stage-e-selected-observed
+
+on:
+  push:
+    branches:
+      - chem/v0.15-polyhedral-eclipse-spectroscopy
+    paths:
+      - .github/workflows/polyhedral-eclipse-v0.15-persist-stage-e-selected-observed.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist-selected-observed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chem/v0.15-polyhedral-eclipse-spectroscopy
+      - name: Download exact selected-observed artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: polyhedral-eclipse-v0.15-stage-e-selected-observed
+          path: recovered
+          github-token: ${{ github.token }}
+          repository: AdrianLipa90/Resonant-Chemistry
+          run-id: 32901522723
+      - name: Verify and stage exact selected-observed bytes
+        run: |
+          python - <<'PY'
+          import hashlib,json,shutil
+          from pathlib import Path
+          source=Path('recovered/NIST_GROUND_ORIGIN_STAGE_E_SELECTED_OBSERVED_LEDGER_V0_15.json')
+          raw=source.read_bytes()
+          raw_sha=hashlib.sha256(raw).hexdigest()
+          if raw_sha!='9645c58c6a98572697c78595678aedaab1fbf51c39b111afa9349c810cf31e7d': raise SystemExit(f'raw selected ledger drift: {raw_sha}')
+          d=json.loads(raw)
+          if d['status']!='STAGE_E_OBSERVED_GROUND_ORIGIN_LINES_SELECTED_BY_PREREGISTERED_RULE': raise SystemExit('status drift')
+          if d['model_data_join_performed'] is not False or d['model_parameters_changed'] is not False: raise SystemExit('join/mutation boundary drift')
+          if d['fit_parameters_added']!=[] or d['calibration_parameters_added']!=[]: raise SystemExit('fit/calibration drift')
+          def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+          body=dict(d); rec=body.pop('ledger_sha256')
+          if hashlib.sha256(canonical(body).encode()).hexdigest()!=rec: raise SystemExit('ledger SHA drift')
+          if rec!='d75e50a6f9ed29935f5707c11cfb809527c4d9ad2487cd6d9771ad85a31008c1': raise SystemExit('canonical selected ledger SHA mismatch')
+          destination=Path('benchmarks/NIST_GROUND_ORIGIN_STAGE_E_SELECTED_OBSERVED_LEDGER_V0_15.json')
+          destination.write_bytes(raw)
+          print({'raw_sha256':raw_sha,'ledger_sha256':rec,'species_count':d['species_count']})
+          PY
+      - name: Persist exact selected-observed bytes
+        run: |
+          git config user.name "Adrian Lipa"
+          git config user.email "adrianlipa90@gmail.com"
+          git add benchmarks/NIST_GROUND_ORIGIN_STAGE_E_SELECTED_OBSERVED_LEDGER_V0_15.json
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: persist exact v0.15 Stage-E selected observed ledger"
+          git push origin HEAD:chem/v0.15-polyhedral-eclipse-spectroscopy
