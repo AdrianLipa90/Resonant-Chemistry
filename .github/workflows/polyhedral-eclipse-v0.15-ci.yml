@@ -8,8 +8,11 @@ on:
       - reschem/polyhedral_eclipse_spectroscopy.py
       - reschem/pncs_semantic_mass_bridge_v015.py
       - reschem/orbital_basis_v015.py
+      - reschem/repository_cards.py
+      - semantic_cards/MODEL_OVERLAYS_V0_15.jsonl
       - tests/test_polyhedral_eclipse_spectroscopy.py
       - tests/test_pncs_semantic_mass_bridge_v015.py
+      - tests/test_polyhedral_eclipse_semantic_registry_v015.py
       - .github/workflows/polyhedral-eclipse-v0.15-ci.yml
   workflow_dispatch:
 
@@ -39,6 +42,7 @@ jobs:
           reschem/polyhedral_eclipse_spectroscopy.py
           reschem/pncs_semantic_mass_bridge_v015.py
           reschem/orbital_basis_v015.py
+          reschem/repository_cards.py
           scripts/run_polyhedral_eclipse_stage_a_v015.py
 
       - name: Run v0.15 unit gates
@@ -46,3 +50,4 @@ jobs:
           python -m unittest
           tests.test_polyhedral_eclipse_spectroscopy
           tests.test_pncs_semantic_mass_bridge_v015
+          tests.test_polyhedral_eclipse_semantic_registry_v015
