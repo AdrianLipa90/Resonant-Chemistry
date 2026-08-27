@@ -1,0 +1,57 @@
+{
+  "schema": "RESCHEM_CHEMPHOTOEM_BRIDGE_PREREG_V0_16",
+  "status": "PREREGISTRATION_CANDIDATE",
+  "contract_id": "RCE_CHEM_PHOTO_EM_BRIDGE_V0_1",
+  "base_branch": "chem/v0.15-polyhedral-eclipse-spectroscopy",
+  "new_branch": "chem/v0.16-chemphotoelectromagnetic-bridge",
+  "stages": {
+    "A_adapter_invariants": {
+      "tests": [
+        "half_interface_exact_zero",
+        "spinorial_2pi_over_4pi_half",
+        "line_center_energy_gap_over_hbar",
+        "zero_coupling_zero_strength",
+        "positive_linewidth_profile",
+        "distinct_state_graph_distinct_fingerprint"
+      ],
+      "promotion": "all_pass"
+    },
+    "B_atomic_control": {
+      "input_policy": "reuse_frozen_existing_NIST_atomic_ledgers",
+      "metrics": ["line_center_error", "transition_support_replay"],
+      "promotion": "no_regression_against_v0_15"
+    },
+    "C_molecular_holdout": {
+      "freeze_before_lookup": true,
+      "metrics": [
+        "line_or_band_center_mae",
+        "support_precision",
+        "support_recall",
+        "intensity_rank_correlation",
+        "linewidth_residual"
+      ],
+      "promotion": "thresholds_must_be_declared_before_holdout_open"
+    },
+    "D_half_interface_falsifier": {
+      "eligibility": "independently_identified_two_path_transition_only",
+      "prediction": "suppression_at_sigma_0p5_and_delta_tau_2pi_mod_4pi",
+      "control": "off_balance_or_off_phase_matched_case"
+    },
+    "E_incremental_value": {
+      "models": [
+        "chemical_baseline",
+        "chemical_plus_TIR",
+        "chemical_plus_TIR_plus_IDT",
+        "chemical_plus_TIR_plus_IDT_plus_half_interface"
+      ],
+      "holdout": "species_or_family_level"
+    }
+  },
+  "claim_firewall": {
+    "generic_line_centres": "energy_gap_over_hbar",
+    "half_interface_role": "interference_null_diagnostic",
+    "SOH_C004": "UNCHANGED",
+    "SOH_C005": "UNCHANGED",
+    "empirical_status": "PENDING"
+  }
+}
