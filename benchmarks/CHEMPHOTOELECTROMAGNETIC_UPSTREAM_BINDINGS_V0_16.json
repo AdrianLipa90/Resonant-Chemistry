@@ -1,0 +1,29 @@
+{
+  "schema": "RESCHEM_CHEMPHOTOEM_UPSTREAM_BINDINGS_V0_16",
+  "contract_id": "RCE_CHEM_PHOTO_EM_BRIDGE_V0_1",
+  "status": "PINNED_CANDIDATE_BINDINGS",
+  "bindings": {
+    "Informational-Dynamics-of-Time": {
+      "repository": "AdrianLipa90/Informational-Dynamics-of-Time",
+      "branch": "feat/half-interface-spectroscopy-bridge-v0.1",
+      "head": "dc821fc9df4a77b0cd4b3296b139cbf374a199b2"
+    },
+    "secret-of-a-half": {
+      "repository": "AdrianLipa90/secret-of-a-half",
+      "branch": "feat/idt-reschem-half-interface-v0.1",
+      "head": "206e49e306b246c4b0f4d182b0d32d5511739408"
+    },
+    "TIR": {
+      "repository": "AdrianLipa90/The-Fundamental-Theory-of-Informational-Relations",
+      "branch": "feat/resonant-spectroscopy-interface-v0.1",
+      "head": "ca794fe758668c976e9b054db555aa6280e4d35c"
+    }
+  },
+  "resonant_chemistry": {
+    "repository": "AdrianLipa90/Resonant-Chemistry",
+    "branch": "chem/v0.16-chemphotoelectromagnetic-bridge",
+    "adapter_parent_head": "fc2b8f6f36ac9d08b2ebfc434c246ae139462636",
+    "base_branch": "chem/v0.15-polyhedral-eclipse-spectroscopy",
+    "base_head": "4d374483e17d6543c2772d048e48b36c65656d2b"
+  }
+}
