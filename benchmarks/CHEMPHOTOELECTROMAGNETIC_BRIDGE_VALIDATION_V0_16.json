@@ -1,0 +1,22 @@
+{
+  "schema": "RESCHEM_CHEMPHOTOEM_BRIDGE_VALIDATION_V0_16",
+  "seed": 20260827,
+  "unit_tests": {
+    "passed": 8,
+    "failed": 0
+  },
+  "stress": {
+    "random_cases": 10000,
+    "exact_half_turn_cases": 1001,
+    "max_exact_half_interface_zero_defect": 0.0,
+    "min_random_half_defect": 5.804832461719922e-05,
+    "max_transition_gap_identity_error": 0.0,
+    "max_temporal_coherence_magnitude_excess": 0.0
+  },
+  "status": "TARGETED_NUMERICAL_PASS_CANDIDATE",
+  "empirical_status": "PENDING",
+  "claim_firewall": {
+    "SOH_C004": "UNCHANGED",
+    "SOH_C005": "UNCHANGED"
+  }
+}
