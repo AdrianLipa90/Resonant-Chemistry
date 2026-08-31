@@ -2,9 +2,9 @@
 
 Evidential class: CONTROL_MODEL_REPRODUCTION.
 
-The implementation solves the reduced radial Schr\u00f6dinger equation on a finite
+The implementation solves the reduced radial Schrödinger equation on a finite
 Dirichlet grid. The interaction parameters and kinetic convention are loaded
-from an immutable provider packet; no solver-side parameter fitting occurs.
+from an immutable provider packet; the solver consumes the provider parameters unchanged.
 """
 from __future__ import annotations
 
