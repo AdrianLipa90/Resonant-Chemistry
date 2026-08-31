@@ -1,0 +1,31 @@
+{
+  "schema": "RC_NN_INTERACTION_PROVIDER_V0_1",
+  "interaction_id": "MALFLIET_TJON_TRIPLET_CONTROL_V0_1",
+  "status": "CONTROL_MODEL_REPRODUCTION",
+  "channel": "triplet_S_wave",
+  "coordinate_space_potential": "V(r)=(V_A exp(-mu_A r)+V_R exp(-mu_R r))/r",
+  "parameters": {
+    "V_A_mev_fm": -626.885,
+    "mu_A_inv_fm": 1.55,
+    "V_R_mev_fm": 1438.72,
+    "mu_R_inv_fm": 3.11,
+    "hbar2_over_m_mev_fm2": 41.47
+  },
+  "reference": {
+    "binding_energy_mev": 2.2307,
+    "bound_state_energy_mev": -2.2307,
+    "single_nucleon_about_com_rms_fm": 1.985
+  },
+  "evidential_class": "CONTROL_MODEL_REPRODUCTION",
+  "source": {
+    "title": "Recombination rates from potential models close to the unitary limit",
+    "authors": [
+      "E. Garrido",
+      "M. Gattobigio",
+      "A. Kievsky"
+    ],
+    "doi": "10.1103/PhysRevA.88.032701",
+    "arxiv": "1306.1711",
+    "url": "https://arxiv.org/abs/1306.1711"
+  }
+}
