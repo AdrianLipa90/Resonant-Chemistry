@@ -1,0 +1,16 @@
+{
+  "schema": "FPDG_DEPENDENCY_EXPORT_V0_1",
+  "repository_id": "RC",
+  "repository": "AdrianLipa90/Resonant-Chemistry",
+  "source_commit": "9e7960b2076498787354336bad0da05c20525a9b",
+  "claims": [
+    {
+      "claim_id": "RC.NUCLEON_BOUNDARY",
+      "status": "SOURCE_BOUND_EFFECTIVE_INPUT_CONTRACT",
+      "source_path": "THEORY/01_NUCLEON_BOUNDARY_V0_1.md",
+      "evidence_class": "SOURCE_BOUND_EFFECTIVE_INTERFACE",
+      "exact_head": "9e7960b2076498787354336bad0da05c20525a9b"
+    }
+  ],
+  "local_edges": []
+}
