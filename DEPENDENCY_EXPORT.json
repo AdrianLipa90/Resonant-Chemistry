@@ -10,7 +10,19 @@
       "source_path": "THEORY/01_NUCLEON_BOUNDARY_V0_1.md",
       "evidence_class": "SOURCE_BOUND_EFFECTIVE_INTERFACE",
       "exact_head": "9e7960b2076498787354336bad0da05c20525a9b"
+    },
+    {
+      "claim_id": "RC.ATOM_FORMALISM",
+      "status": "CANDIDATE_FOUNDATION",
+      "source_path": "THEORY/02_ATOM_FORMALISM.md",
+      "evidence_class": "CONTROL_PHYSICS_WITH_TIR_BRIDGE"
     }
   ],
-  "local_edges": []
+  "local_edges": [
+    {
+      "from": "RC.NUCLEON_BOUNDARY",
+      "to": "RC.ATOM_FORMALISM",
+      "authority": "CANONICAL_FRONTIER"
+    }
+  ]
 }
