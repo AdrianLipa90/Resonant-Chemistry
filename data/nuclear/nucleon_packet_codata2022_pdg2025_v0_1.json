@@ -1,0 +1,41 @@
+{
+  "schema": "RC_NUCLEON_PACKET_V0_1",
+  "packet_id": "CODATA2022_PDG2025_PN_V0_1",
+  "status": "SOURCE_BOUND_EXTERNAL_EMPIRICAL",
+  "provenance_class": "EXTERNAL_EMPIRICAL",
+  "values": {
+    "proton": {
+      "mass_energy_mev": 938.27208943,
+      "mass_energy_uncertainty_mev": 2.9e-07,
+      "charge_e": 1.0,
+      "spin_parity": "1/2+",
+      "magnetic_moment_nuclear_magnetons": 2.79284734463,
+      "magnetic_moment_uncertainty_nuclear_magnetons": 8.2e-10
+    },
+    "neutron": {
+      "mass_energy_mev": 939.56542194,
+      "mass_energy_uncertainty_mev": 4.8e-07,
+      "charge_e": 0.0,
+      "spin_parity": "1/2+",
+      "magnetic_moment_nuclear_magnetons": -1.91304276,
+      "magnetic_moment_uncertainty_nuclear_magnetons": 4.5e-07
+    }
+  },
+  "constants": {
+    "hbar_c_mev_fm": 197.3269804
+  },
+  "sources": [
+    {
+      "id": "CODATA_2022",
+      "title": "CODATA recommended values of the fundamental physical constants: 2022",
+      "publisher": "NIST / CODATA",
+      "url": "https://physics.nist.gov/cuu/Constants/"
+    },
+    {
+      "id": "PDG_2025_PHYSICAL_CONSTANTS",
+      "title": "Review of Particle Physics 2025 update \u2014 Physical Constants",
+      "publisher": "Particle Data Group",
+      "url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-phys-constants.pdf"
+    }
+  ]
+}
