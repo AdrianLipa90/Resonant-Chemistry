@@ -102,7 +102,7 @@ with:
 - `V_NN` supplied by one explicitly named interaction provider or by a later source-owned TIR/RFC derivation;
 - `H_corr` containing only corrections whose provenance and order are declared independently.
 
-No nucleus-specific free parameter is admitted at this boundary. A parameter belongs to the interaction model, correction order, or source-bound nucleon packet and must retain the same value across every nucleus within its declared domain.
+Every parameter at this boundary belongs to the interaction model, correction order, or source-bound nucleon packet and retains the same value across every nucleus within its declared domain.
 
 ## 5. Channel decomposition
 
@@ -112,7 +112,7 @@ The two-nucleon solver must expose the channel labels
 (S,T,L,J,P),
 \]
 
-so that proton-neutron, proton-proton and neutron-neutron sectors are distinguished by the same typed Hamiltonian surface rather than by separate ad-hoc implementations.
+so that proton-neutron, proton-proton and neutron-neutron sectors share one typed Hamiltonian surface and one provenance discipline.
 
 For the first bound-state gate, the target channel is the deuteron sector with
 
@@ -169,7 +169,7 @@ NUCLEON_BOUNDARY
 -> ATOM_FORMALISM
 ```
 
-and removes the previous implicit jump from nuclear labels `(Z,N)` directly into the atomic model.
+and replaces the previous implicit jump from nuclear labels `(Z,N)` into the atomic model with an explicit nuclear carrier.
 
 ## 8. Fundamental-physics handoff
 
@@ -178,7 +178,7 @@ The boundary accepts two provenance classes:
 - `EXTERNAL_EMPIRICAL`: nucleon quantities are bound to an admitted external reference dataset;
 - `ENDOGENOUS_DERIVED`: a fundamental repository exports the same typed quantity with derivation provenance and a successful promotion gate.
 
-The downstream nuclear solver consumes the same interface in both cases. This makes replacement of an external anchor by a later TIR/RFC/QCD-derived value an explicit source substitution rather than a solver rewrite.
+The downstream nuclear solver consumes the same interface in both cases. Replacement of an external anchor by a later TIR/RFC/QCD-derived value is therefore an explicit source substitution under the same typed solver contract.
 
 ## 9. Federation contract
 
