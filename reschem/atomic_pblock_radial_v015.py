@@ -74,10 +74,11 @@ def solve_neutral_pblock_radial_state(
         raise AtomicPBlockRadialV015Error("max_iterations must be positive")
 
     subshells = subshells_for_atom(zz, 0)
-    p_shell = next((shell for shell in subshells if shell.label == active_p_shell), None)
-    if p_shell is None or p_shell.l != 1 or p_shell.occupancy <= 0:
+    occupied_p_shells = [shell for shell in subshells if shell.l == 1 and shell.occupancy > 0]
+    p_shell = max(occupied_p_shells, key=lambda shell: shell.n, default=None)
+    if p_shell is None or p_shell.label != active_p_shell:
         raise AtomicPBlockRadialV015Error(
-            f"active p shell {active_p_shell!r} is absent from neutral Z={zz} configuration"
+            f"active p shell {active_p_shell!r} is not the outermost occupied p shell for neutral Z={zz}"
         )
 
     active_l = sorted({shell.l for shell in subshells})
@@ -208,6 +209,14 @@ def solve_neutral_pblock_radial_state(
     if not math.isfinite(one_p_normalization) or one_p_normalization <= 0.0:
         raise RuntimeError("active one-p radial density normalization failed")
     one_p_density /= one_p_normalization
+
+    # Preserve exact 2p legacy replay while making the lifted n>2 state
+    # decomposition-consistent on the numerical quadrature used by observables.
+    if n_active > 2:
+        other_density = density - p_density
+        if float(np.min(other_density)) < -1.0e-12:
+            raise RuntimeError("non-active radial density became negative beyond roundoff tolerance")
+        density = np.maximum(other_density, 0.0) + float(p_shell.occupancy) * one_p_density
 
     return {
         "schema": SCHEMA,
