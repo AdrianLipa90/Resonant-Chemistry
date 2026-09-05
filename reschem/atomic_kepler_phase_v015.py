@@ -72,8 +72,17 @@ def radial_kepler_observables(
         raise AtomicKeplerPhaseV015Error("mean 2p radius must be positive and finite")
 
     other_density = total - one_p
-    if np.min(other_density) < -1.0e-8:
-        raise AtomicKeplerPhaseV015Error("other-electron radial density became negative beyond tolerance")
+    min_other = float(np.min(other_density))
+    if min_other < -1.0e-8:
+        total_charge = float(np.sum(ww * total))
+        active_charge = float(np.sum(ww * one_p))
+        integrated_negative_charge = float(np.sum(ww * np.maximum(-other_density, 0.0)))
+        raise AtomicKeplerPhaseV015Error(
+            "other-electron radial density became negative beyond tolerance: "
+            f"min_other={min_other:.17g}, total_charge={total_charge:.17g}, "
+            f"active_charge={active_charge:.17g}, "
+            f"integrated_negative_charge={integrated_negative_charge:.17g}"
+        )
     other_density = np.maximum(other_density, 0.0)
     enclosed_other = cumulative_trapezoid(other_density, rr, initial=0.0)
     q_other = float(np.interp(mean_radius, rr, enclosed_other))
