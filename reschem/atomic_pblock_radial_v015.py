@@ -79,6 +79,13 @@ def solve_neutral_pblock_radial_state(
         raise AtomicPBlockRadialV015Error(
             f"active p shell {active_p_shell!r} is absent from neutral Z={zz} configuration"
         )
+    occupied_p_shells = [shell for shell in subshells if shell.l == 1 and shell.occupancy > 0]
+    valence_p_shell = max(occupied_p_shells, key=lambda shell: shell.n)
+    if p_shell.label != valence_p_shell.label:
+        raise AtomicPBlockRadialV015Error(
+            "active p shell must be the outermost occupied p shell "
+            f"{valence_p_shell.label!r} for neutral Z={zz}; got {active_p_shell!r}"
+        )
 
     active_l = sorted({shell.l for shell in subshells})
     zetas = np.geomspace(0.02, max(20.0, 4.0 * zz), int(basis_size))

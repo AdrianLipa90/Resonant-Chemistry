@@ -20,6 +20,13 @@ class AtomicPBlockRadialV015Tests(unittest.TestCase):
         tolerance_hartree=2.0e-7,
         max_iterations=120,
     )
+    FROZEN_STAGE_F = dict(
+        basis_size=24,
+        grid_points=1500,
+        mixing=0.32,
+        tolerance_hartree=5.0e-8,
+        max_iterations=120,
+    )
 
     def _assert_period2_parity(self, z: int) -> None:
         legacy = _solve_period2_radial_state(z, **self.COMMON)
@@ -50,6 +57,21 @@ class AtomicPBlockRadialV015Tests(unittest.TestCase):
         self.assertAlmostEqual(normalization, 1.0, places=10)
         self.assertTrue(np.all(np.isfinite(state["density"])))
         self.assertTrue(np.all(state["density"] >= -1e-12))
+        obs = radial_kepler_observables(
+            13,
+            r=state["r"],
+            weights=state["weights"],
+            total_radial_density=state["density"],
+            one_p_density=state["one_p_density"],
+        )
+        self.assertGreater(obs["effective_charge_at_mean_radius"], 0.0)
+        self.assertGreater(obs["kepler_wavenumber_cm_inverse"], 0.0)
+
+    def test_aluminium_3p_frozen_stage_f_kepler_contract(self):
+        state = solve_neutral_pblock_radial_state(13, "3p", **self.FROZEN_STAGE_F)
+        self.assertEqual(state["basis_size"], 24)
+        self.assertEqual(state["grid_points"], 1500)
+        self.assertAlmostEqual(float(state["tolerance_hartree"]), 5.0e-8, places=16)
         obs = radial_kepler_observables(
             13,
             r=state["r"],
