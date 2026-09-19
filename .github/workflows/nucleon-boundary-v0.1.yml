@@ -1,0 +1,42 @@
+name: Validate Nucleon Boundary v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'THEORY/01_NUCLEON_BOUNDARY_V0_1.md'
+      - 'THEORY/02_ATOM_FORMALISM.md'
+      - 'DEPENDENCY_EXPORT.json'
+      - 'tools/validate_nucleon_boundary_v0_1.py'
+      - '.github/workflows/nucleon-boundary-v0.1.yml'
+  push:
+    branches:
+      - 'feat/nucleon-boundary-*'
+    paths:
+      - 'THEORY/01_NUCLEON_BOUNDARY_V0_1.md'
+      - 'THEORY/02_ATOM_FORMALISM.md'
+      - 'DEPENDENCY_EXPORT.json'
+      - 'tools/validate_nucleon_boundary_v0_1.py'
+      - '.github/workflows/nucleon-boundary-v0.1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  structural-provenance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate source-owned nucleon boundary
+        run: python tools/validate_nucleon_boundary_v0_1.py
+      - name: Upload structural provenance receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rc-nucleon-boundary-v0.1-validation
+          path: build/NUCLEON_BOUNDARY_V0_1_VALIDATION.json
+          if-no-files-found: error
