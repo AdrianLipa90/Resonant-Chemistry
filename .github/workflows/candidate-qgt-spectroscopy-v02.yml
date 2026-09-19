@@ -1,0 +1,27 @@
+name: Candidate QGT spectroscopy v0.2
+
+on:
+  push:
+    branches:
+      - candidate/600cell-working-layer-v0.1-20260911-v02
+    paths:
+      - 'reschem/qgt_spectroscopy_bridge_v01.py'
+      - 'tests/test_qgt_spectroscopy_bridge_v02.py'
+      - '.github/workflows/candidate-qgt-spectroscopy-v02.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  spectroscopy-v02:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated test dependencies
+        run: python -m pip install --upgrade pytest numpy
+      - name: Run dimension-scaled QGT spectroscopy tests
+        run: python -m pytest -q tests/test_qgt_spectroscopy_bridge_v02.py
