@@ -103,7 +103,7 @@ jobs:
           sha256sum ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.json > ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
           cat ci_artifacts/CARBON_STATE_AVERAGED_P_RELAXATION_V0_1.sha256
 
-      - name: Prepare canonical root textbook
+      - name: Prepare validated textbook artifact with event-aware provenance
         run: |
           cp monograph/main.pdf Resonant_Chemistry.pdf
           python - <<'PY'
@@ -116,11 +116,28 @@ jobs:
           def sha256(path):
               return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
+          event_name = os.environ["GITHUB_EVENT_NAME"]
+          github_ref = os.environ.get("GITHUB_REF", "")
+          event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
+
+          if event_name == "pull_request":
+              source_of_truth = "pull request merge candidate"
+              pull_request_head_commit = event["pull_request"]["head"]["sha"]
+              pull_request_base_commit = event["pull_request"]["base"]["sha"]
+          else:
+              source_of_truth = "repository main" if github_ref == "refs/heads/main" else f"workflow ref {github_ref}"
+              pull_request_head_commit = None
+              pull_request_base_commit = None
+
           payload = {
               "schema": "RESCHEM_ROOT_TEXTBOOK_BUILD_PROVENANCE_V1",
-              "source_of_truth": "repository main",
+              "event_name": event_name,
+              "source_of_truth": source_of_truth,
+              "source_ref": github_ref,
               "source_commit": os.environ["GITHUB_SHA"],
               "source_tree": subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], text=True).strip(),
+              "pull_request_head_commit": pull_request_head_commit,
+              "pull_request_base_commit": pull_request_base_commit,
               "source_main_tex_sha256": sha256("monograph/main.tex"),
               "semantic_coverage_sha256": sha256("semantic_cards/SEMANTIC_CARD_COVERAGE_V0_14A1.json"),
               "root_pdf": "Resonant_Chemistry.pdf",
@@ -159,3 +176,9 @@ jobs:
           fi
           git commit -m "Update canonical root textbook PDF [skip ci]"
           git push origin HEAD:main
+          local_head="$(git rev-parse HEAD)"
+          remote_head="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          echo "published_local_head=$local_head"
+          echo "published_remote_head=$remote_head"
+          test -n "$remote_head"
+          test "$remote_head" = "$local_head"
