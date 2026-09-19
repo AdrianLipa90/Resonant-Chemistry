@@ -1,0 +1,46 @@
+name: Deuteron MT Control v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'data/nuclear/**'
+      - 'reschem/nuclear/**'
+      - 'THEORY/03_DEUTERON_MT_CONTROL_GATE_V0_1.md'
+      - 'tools/run_deuteron_mt_control_v0_1.py'
+      - 'tests/test_deuteron_mt_control_v0_1.py'
+      - '.github/workflows/deuteron-mt-control-v0.1.yml'
+  push:
+    branches:
+      - 'feat/deuteron-*'
+    paths:
+      - 'data/nuclear/**'
+      - 'reschem/nuclear/**'
+      - 'THEORY/03_DEUTERON_MT_CONTROL_GATE_V0_1.md'
+      - 'tools/run_deuteron_mt_control_v0_1.py'
+      - 'tests/test_deuteron_mt_control_v0_1.py'
+      - '.github/workflows/deuteron-mt-control-v0.1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deuteron-control:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Resonant Chemistry
+        run: python -m pip install --disable-pip-version-check -e . pytest
+      - name: Run deuteron control tests
+        run: python -m pytest -q tests/test_deuteron_mt_control_v0_1.py
+      - name: Emit deuteron control receipt
+        run: python tools/run_deuteron_mt_control_v0_1.py
+      - name: Upload control receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rc-deuteron-mt-control-v0.1
+          path: build/DEUTERON_MT_CONTROL_V0_1.json
+          if-no-files-found: error
