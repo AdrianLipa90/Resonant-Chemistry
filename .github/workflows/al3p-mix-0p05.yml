@@ -1,0 +1,20 @@
+name: Al3p damping 0.05
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run Al 3p regression
+        run: python -m unittest tests.test_atomic_pblock_radial_v015 -v
