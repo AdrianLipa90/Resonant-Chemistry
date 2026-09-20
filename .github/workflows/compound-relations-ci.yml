@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - ci/validate-aluminium-3p-20260920
   pull_request:
     branches:
       - main

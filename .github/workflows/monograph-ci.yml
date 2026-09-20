@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - ci/validate-aluminium-3p-20260920
     paths-ignore:
       - Resonant_Chemistry.pdf
       - TEXTBOOK_BUILD_PROVENANCE.json
