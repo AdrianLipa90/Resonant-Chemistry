@@ -137,3 +137,8 @@ The live bibliography is modular under `monograph/bibliography/` and currently i
 - **CANON** - promoted only by an explicit project decision with provenance.
 
 Implementation does not imply validation; a numerical match does not establish ontology; a historical receipt is not current runtime evidence; an execution timeout or missing receipt is not a chemical falsification; a semantic-card lineage is not evidence of physical holonomy.
+
+
+## Informational phase / EB-orbital cross-reference
+
+The typed cross-repository interface is documented at `docs/INFORMATIONAL_PHASE_EB_ORBITAL_SPECTROSCOPY_CROSSWALK.md`. It keeps conventional chemistry authoritative while exposing candidate readouts from an admitted upstream potential through state energies, forces, Hessians and transition shifts. The physical informational/EB coupling remains OPEN.
