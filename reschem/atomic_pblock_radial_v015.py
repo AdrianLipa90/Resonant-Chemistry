@@ -160,6 +160,7 @@ def solve_neutral_pblock_radial_state(
         return total, kinetic_energy, nuclear_energy, direct_energy, exchange_energy, density
 
     previous_energy: float | None = None
+    last_energy_delta: float | None = None
     converged = False
     iteration = 0
     for iteration in range(1, int(max_iterations) + 1):
@@ -200,13 +201,21 @@ def solve_neutral_pblock_radial_state(
 
         orbitals.update(updated)
         total, _, _, _, _, _ = energy_components()
-        if previous_energy is not None and abs(total - previous_energy) < float(tolerance_hartree):
-            converged = True
-            break
+        if previous_energy is not None:
+            last_energy_delta = abs(total - previous_energy)
+            if last_energy_delta < float(tolerance_hartree):
+                converged = True
+                break
         previous_energy = total
 
     if not converged:
-        raise RuntimeError(f"neutral p-block radial SCF did not converge for Z={zz}, shell={active_p_shell}")
+        raise RuntimeError(
+            "neutral p-block radial SCF did not converge "
+            f"for Z={zz}, shell={active_p_shell}; "
+            f"last_energy_delta_hartree={last_energy_delta!r}, "
+            f"tolerance_hartree={float(tolerance_hartree)!r}, "
+            f"mixing_effective={mixing_effective!r}, iterations={iteration}"
+        )
 
     total, kinetic_energy, nuclear_energy, direct_energy, exchange_energy, density = energy_components()
     p_density = np.zeros_like(r)
