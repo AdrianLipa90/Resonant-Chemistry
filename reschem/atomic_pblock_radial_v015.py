@@ -73,6 +73,12 @@ def solve_neutral_pblock_radial_state(
     if int(max_iterations) < 1:
         raise AtomicPBlockRadialV015Error("max_iterations must be positive")
 
+    mixing_requested = float(mixing)
+    # Preserve the frozen B-Ne trajectory exactly. For n>=3 p shells the
+    # larger occupied space is more SCF-stiff, so use conservative damping
+    # without relaxing the requested energy tolerance.
+    mixing_effective = mixing_requested if n_active <= 2 else min(mixing_requested, 0.20)
+
     subshells = subshells_for_atom(zz, 0)
     p_shell = next((shell for shell in subshells if shell.label == active_p_shell), None)
     if p_shell is None or p_shell.l != 1 or p_shell.occupancy <= 0:
@@ -188,7 +194,7 @@ def solve_neutral_pblock_radial_state(
                 for column in range(candidate.shape[1]):
                     if float(current[:, column] @ overlap[ell] @ candidate[:, column]) < 0.0:
                         candidate[:, column] *= -1.0
-                mixed = _orthonormalize_columns((1.0 - float(mixing)) * current + float(mixing) * candidate, overlap[ell])
+                mixed = _orthonormalize_columns((1.0 - mixing_effective) * current + mixing_effective * candidate, overlap[ell])
                 for column, key in enumerate(targets):
                     updated[key] = mixed[:, column]
 
@@ -210,11 +216,22 @@ def solve_neutral_pblock_radial_state(
         key = (n_active, 1, spin)
         u = radial_orbital(key)
         p_density += count * u * u
-    one_p_density = p_density / float(p_shell.occupancy)
-    one_p_normalization = float(np.sum(weights * one_p_density))
+    raw_one_p_density = p_density / float(p_shell.occupancy)
+    one_p_normalization = float(np.sum(weights * raw_one_p_density))
     if not math.isfinite(one_p_normalization) or one_p_normalization <= 0.0:
         raise RuntimeError("active one-p radial density normalization failed")
-    one_p_density /= one_p_normalization
+    one_p_density = raw_one_p_density / one_p_normalization
+
+    # For the extended n>=3 path, keep the total density and the normalized
+    # one-electron active density on the same quadrature normalization. This
+    # preserves the non-active density as a sum of nonnegative orbital
+    # contributions rather than subtracting a renormalized active density from
+    # an unrenormalized total density.
+    density_normalization_correction_charge = 0.0
+    if n_active >= 3:
+        density_correction = float(p_shell.occupancy) * (one_p_density - raw_one_p_density)
+        density = density + density_correction
+        density_normalization_correction_charge = float(np.sum(weights * density_correction))
 
     return {
         "schema": SCHEMA,
@@ -231,7 +248,9 @@ def solve_neutral_pblock_radial_state(
         "converged": True,
         "basis_size": int(basis_size),
         "grid_points": int(grid_points),
-        "mixing": float(mixing),
+        "mixing": float(mixing_effective),
+        "mixing_requested": mixing_requested,
+        "density_normalization_correction_charge": density_normalization_correction_charge,
         "tolerance_hartree": float(tolerance_hartree),
         "max_iterations": int(max_iterations),
         "spectral_input": "NONE",
