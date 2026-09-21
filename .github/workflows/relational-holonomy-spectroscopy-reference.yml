@@ -1,0 +1,23 @@
+name: Relational holonomy spectroscopy reference
+
+on:
+  pull_request:
+    paths:
+      - 'THEORY/15_RELATIONAL_HOLONOMY_SPECTROSCOPY_BRIDGE_V0_1.md'
+      - 'reschem/relational_holonomy_spectroscopy.py'
+      - 'tests/test_relational_holonomy_spectroscopy.py'
+      - '.github/workflows/relational-holonomy-spectroscopy-reference.yml'
+  workflow_dispatch:
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Run holonomy bridge controls
+        run: python -m unittest -v tests.test_relational_holonomy_spectroscopy
