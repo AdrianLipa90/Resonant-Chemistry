@@ -1,0 +1,32 @@
+name: RC orientation scan control
+
+on:
+  push:
+    paths:
+      - 'reschem/orientation_scan.py'
+      - 'tests/test_orientation_scan.py'
+      - 'THEORY/16_RIGID_ORIENTATION_SPECTROSCOPY_CONTROL_V0_1.md'
+      - '.github/workflows/orientation-scan-control.yml'
+  pull_request:
+    paths:
+      - 'reschem/orientation_scan.py'
+      - 'tests/test_orientation_scan.py'
+      - 'THEORY/16_RIGID_ORIENTATION_SPECTROSCOPY_CONTROL_V0_1.md'
+      - '.github/workflows/orientation-scan-control.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  orientation-control:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Run orientation control gate
+        run: python -m unittest -v tests.test_orientation_scan
