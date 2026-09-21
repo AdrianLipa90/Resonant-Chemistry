@@ -119,7 +119,7 @@ class RelationalInvariantContractTests(unittest.TestCase):
         )
         contract = payload["representation_contract"]
         self.assertEqual(contract["schema"], INVARIANT_CONTRACT_ID)
-        self.assertEqual(contract["profile"], OES_ORBITAL_REPHASING_PROFILE_ID)
+        self.assertEqual(contract["profile"], OES_ORBITAL_UNITARY_BASIS_PROFILE_ID)
 
 
 if __name__ == "__main__":
