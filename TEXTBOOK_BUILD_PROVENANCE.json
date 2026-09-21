@@ -1,11 +1,15 @@
 {
   "epistemic_status": "BUILD_ARTIFACT_ONLY_NO_SCIENTIFIC_PROMOTION",
+  "event_name": "push",
+  "pull_request_base_commit": null,
+  "pull_request_head_commit": null,
   "root_pdf": "Resonant_Chemistry.pdf",
-  "root_pdf_sha256": "5cafd4b5a5f2534bce4945c93928102f3c9fb45cca11819d76b32b683b914df6",
+  "root_pdf_sha256": "cc34c9e6deaa141e3dd3a10ff1df34fc606849eacc3cea438876845af2f5cf5a",
   "schema": "RESCHEM_ROOT_TEXTBOOK_BUILD_PROVENANCE_V1",
-  "semantic_coverage_sha256": "fed31534e0eb6b1514bd542a0102e03ce3f30f4b5916ec6235e87698985abdfc",
-  "source_commit": "647e1f6f2241eabcf2120516968dee627662e297",
+  "semantic_coverage_sha256": "455a1b05a1d05edc5bf14edf2e18f03555713086b07da0bc6a33b8ee349f86d3",
+  "source_commit": "97d505dc8c9fa3a837e73f4d6d54586d61b91ca8",
   "source_main_tex_sha256": "dec22e9f96533bfa624d3a3780fb934f787a94eade7b3e385dd9d8289b858ee3",
   "source_of_truth": "repository main",
-  "source_tree": "3a7e76f8f0756711882c58d7041fbd6e6a278ecb"
+  "source_ref": "refs/heads/main",
+  "source_tree": "b8f551072ba0b84fcff26abdec6c6c9edc30a966"
 }
