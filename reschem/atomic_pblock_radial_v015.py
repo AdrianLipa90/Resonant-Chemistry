@@ -192,9 +192,20 @@ def solve_neutral_pblock_radial_state(
                 _, vectors = eigh(fock, overlap[ell], subset_by_index=[0, highest_index], check_finite=False)
                 candidate = np.column_stack([vectors[:, key[0] - ell - 1] for key in targets])
                 current = np.column_stack([orbitals[key] for key in targets])
-                for column in range(candidate.shape[1]):
-                    if float(current[:, column] @ overlap[ell] @ candidate[:, column]) < 0.0:
-                        candidate[:, column] *= -1.0
+                if n_active <= 2:
+                    # Exact legacy alignment retained for the B-Ne replay path.
+                    for column in range(candidate.shape[1]):
+                        if float(current[:, column] @ overlap[ell] @ candidate[:, column]) < 0.0:
+                            candidate[:, column] *= -1.0
+                else:
+                    # For n>=3 occupied shells, eigenvectors within the same
+                    # (l, spin) occupied subspace may rotate or exchange order
+                    # between SCF steps. Align the whole candidate subspace to
+                    # the current one in the overlap metric before damping.
+                    metric_overlap = current.T @ overlap[ell] @ candidate
+                    u_align, _, vh_align = np.linalg.svd(metric_overlap, full_matrices=False)
+                    rotation = vh_align.T @ u_align.T
+                    candidate = candidate @ rotation
                 mixed = _orthonormalize_columns((1.0 - mixing_effective) * current + mixing_effective * candidate, overlap[ell])
                 for column, key in enumerate(targets):
                     updated[key] = mixed[:, column]
@@ -259,6 +270,9 @@ def solve_neutral_pblock_radial_state(
         "grid_points": int(grid_points),
         "mixing": float(mixing_effective),
         "mixing_requested": mixing_requested,
+        "occupied_subspace_alignment": (
+            "LEGACY_COLUMN_SIGN" if n_active <= 2 else "S_METRIC_ORTHOGONAL_PROCRUSTES"
+        ),
         "density_normalization_correction_charge": density_normalization_correction_charge,
         "tolerance_hartree": float(tolerance_hartree),
         "max_iterations": int(max_iterations),
