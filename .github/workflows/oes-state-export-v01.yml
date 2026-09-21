@@ -4,12 +4,18 @@ on:
   push:
     paths:
       - 'reschem/oes_transition_export.py'
+      - 'reschem/relational_invariants.py'
+      - 'reschem/relational_holonomy_spectroscopy.py'
       - 'tests/test_oes_transition_export.py'
+      - 'tests/test_relational_invariant_contract.py'
       - '.github/workflows/oes-state-export-v01.yml'
   pull_request:
     paths:
       - 'reschem/oes_transition_export.py'
+      - 'reschem/relational_invariants.py'
+      - 'reschem/relational_holonomy_spectroscopy.py'
       - 'tests/test_oes_transition_export.py'
+      - 'tests/test_relational_invariant_contract.py'
       - '.github/workflows/oes-state-export-v01.yml'
   workflow_dispatch:
 
@@ -27,4 +33,7 @@ jobs:
       - name: Install focused dependencies
         run: python -m pip install -e . pytest
       - name: Run OES state-provider export gate
-        run: python -m pytest -q tests/test_oes_transition_export.py
+        run: >-
+          python -m pytest -q
+          tests/test_oes_transition_export.py
+          tests/test_relational_invariant_contract.py
