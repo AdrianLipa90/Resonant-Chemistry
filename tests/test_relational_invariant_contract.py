@@ -12,7 +12,7 @@ from reschem.relational_holonomy_spectroscopy import (
 )
 from reschem.relational_invariants import (
     INVARIANT_CONTRACT_ID,
-    OES_ORBITAL_REPHASING_PROFILE_ID,
+    OES_ORBITAL_UNITARY_BASIS_PROFILE_ID,
     align_s_metric_subspace,
     s_metric_projector_residual,
 )
