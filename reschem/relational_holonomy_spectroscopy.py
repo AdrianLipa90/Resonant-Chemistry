@@ -162,6 +162,8 @@ def forest_gauge_potential(
                 if seen[v]:
                     continue
                 theta = float(p[edge_index])
+                # edge i->j transforms as theta + chi_j - chi_i.
+                # direction=+1 means u=i,v=j; direction=-1 means u=j,v=i.
                 if direction == +1:
                     chi[v] = chi[u] - theta
                 else:

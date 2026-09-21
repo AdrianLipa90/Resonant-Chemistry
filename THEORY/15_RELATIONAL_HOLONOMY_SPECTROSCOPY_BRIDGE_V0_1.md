@@ -8,16 +8,16 @@ Standard electronic-structure, vibronic, and spectroscopy controls remain the ph
 
 Let (G=(V,E)) be the declared graph of effective states or couplings. The graph must be named explicitly; a molecular bond graph is not automatically the electronic-state transport graph.
 
-Assign an oriented (U(1)) phase (\theta_e) to each edge. Under a local basis rephasing
+Assign an oriented (U(1)) phase (	heta_e) to each edge. Under a local basis rephasing
 
 [
-|i\ranglemapsto e^{ichi_i}|i\rangle,
+|ianglemapsto e^{ichi_i}|iangle,
 ]
 
 the edge phase transforms as
 
 [
-\thetamapsto\theta+B^Tchipmod{2pi},
+	hetamapsto	heta+B^Tchipmod{2pi},
 ]
 
 where (B) is the oriented incidence matrix.
@@ -25,25 +25,25 @@ where (B) is the oriented incidence matrix.
 The physical graph-phase coordinate is therefore the gauge class
 
 [
-\boxed{[\theta]in H^1(G,U(1)).}
+oxed{[	heta]in H^1(G,U(1)).}
 ]
 
 For a graph with (C) connected components,
 
 [
-\boxed{\beta_1=E-V+C.}
+oxed{eta_1=E-V+C.}
 ]
 
-A forest has (\beta_1=0); all edge phases are gauge-removable. Cyclic graphs carry (\beta_1) independent loop phases.
+A forest has (eta_1=0); all edge phases are gauge-removable. Cyclic graphs carry (eta_1) independent loop phases.
 
 ## 2. Loop holonomy
 
 For an oriented cycle (C_a),
 
 [
-\boxed{Phi_a=sum_{ein C_a}s_{ae}\theta_epmod{2pi}},
+oxed{Phi_a=sum_{ein C_a}s_{ae}	heta_epmod{2pi}},
 qquad
-\boxed{W_a=e^{iPhi_a}}.
+oxed{W_a=e^{iPhi_a}}.
 ]
 
 Because the cycle matrix annihilates graph coboundaries, (Phi_a) is invariant under local basis rephasing.
@@ -51,7 +51,7 @@ Because the cycle matrix annihilates graph coboundaries, (Phi_a) is invariant un
 The exact statement is therefore:
 
 [
-\boxed{\text{edge phase is gauge-dependent; cycle holonomy is gauge-invariant}.}
+oxed{	ext{edge phase is gauge-dependent; cycle holonomy is gauge-invariant}.}
 ]
 
 ## 3. Hermitian graph Hamiltonian
@@ -59,30 +59,29 @@ The exact statement is therefore:
 For diagonal energies (epsilon_i) and complex hopping magnitudes (t_{ij}),
 
 [
-\boxed{
-H(\theta)
+oxed{
+H(	heta)
 =
-sum_iepsilon_i|i\ranglelangle i|
+sum_iepsilon_i|ianglelangle i|
 +
 sum_{(ij)in E}
 left[
-t_{ij}e^{i\theta_{ij}}|i\ranglelangle j|
-+
-t_{ij}^*e^{-i\theta_{ij}}|j\ranglelangle i|
-right].
+t_{ij}e^{i	heta_{ij}}|ianglelangle j|
++t_{ij}^*e^{-i	heta_{ij}}|janglelangle i|
+ight].
 }
 ]
 
 A basis rephasing gives unitary equivalence,
 
 [
-H(\theta+B^Tchi)=U_chi H(\theta)U_chi^dagger.
+H(	heta+B^Tchi)=U_chi H(	heta)U_chi^dagger.
 ]
 
 Hence its spectrum can depend on graph phases only through the gauge class, equivalently through a basis of loop holonomies:
 
 [
-\boxed{E_n=E_n(Phi_1,ldots,Phi_{\beta_1}).}
+oxed{E_n=E_n(Phi_1,ldots,Phi_{eta_1}).}
 ]
 
 ## 4. Spectral sensitivity
@@ -90,36 +89,36 @@ Hence its spectrum can depend on graph phases only through the gauge class, equi
 For a loop coordinate (Phi_a), define
 
 [
-G_a=\frac{partial H}{partialPhi_a}.
+G_a=rac{partial H}{partialPhi_a}.
 ]
 
 For a nondegenerate eigenstate, Feynman-Hellmann gives
 
 [
-\boxed{
-\frac{partial E_n}{partialPhi_a}
+oxed{
+rac{partial E_n}{partialPhi_a}
 =
-\langle n|G_a|n\rangle.
+langle n|G_a|nangle.
 }
 ]
 
 Define the source-neutral loop response
 
 [
-J_{n,a}:=-\frac{partial E_n}{partialPhi_a}.
+J_{n,a}:=-rac{partial E_n}{partialPhi_a}.
 ]
 
 For a transition frequency
 
 [
-omega_{mn}=\frac{E_m-E_n}{hbar},
+omega_{mn}=rac{E_m-E_n}{hbar},
 ]
 
 [
-\boxed{
-\frac{partialomega_{mn}}{partialPhi_a}
+oxed{
+rac{partialomega_{mn}}{partialPhi_a}
 =
--\frac{J_{m,a}-J_{n,a}}{hbar}.
+-rac{J_{m,a}-J_{n,a}}{hbar}.
 }
 ]
 
@@ -136,12 +135,12 @@ E_n=E_n(Q,Phi).
 Its joint curvature is
 
 [
-\boxed{
+oxed{
 mathbb K_n=
-\begin{pmatrix}
-partial^2_{QQ}E_n & partial^2_{QPhi}E_n\\
+egin{pmatrix}
+partial^2_{QQ}E_n & partial^2_{QPhi}E_n\
 partial^2_{Phi Q}E_n & partial^2_{PhiPhi}E_n
-\end{pmatrix}.
+end{pmatrix}.
 }
 ]
 
@@ -160,10 +159,10 @@ The linear response may be written
 [
 chi^{(1)}_{mumu}(omega;Phi)
 =
--\frac{i}{hbar}
+-rac{i}{hbar}
 int_0^infty
 e^{iomega t}
-\langle[hatmu(t),hatmu(0)]\rangle_Phi,dt.
+langle[hatmu(t),hatmu(0)]angle_Phi,dt.
 ]
 
 The natural nonlinear extension is
@@ -177,13 +176,13 @@ The inverse problem is constrained by an observable Jacobian
 [
 mathcal J_{alpha a}
 =
-\frac{partialmathcal O_alpha}{partialPhi_a}.
+rac{partialmathcal O_alpha}{partialPhi_a}.
 ]
 
-Local recovery of all (\beta_1) loop phases requires, after nuisance-parameter handling,
+Local recovery of all (eta_1) loop phases requires, after nuisance-parameter handling,
 
 [
-\boxed{operatorname{rank}mathcal J=\beta_1.}
+oxed{operatorname{rank}mathcal J=eta_1.}
 ]
 
 With covariance (Sigma), the corresponding local Fisher matrix is
@@ -203,7 +202,7 @@ Exact/implemented in this gate:
 - loop-dependent spectrum on cyclic control graphs.
 
 Open:
-- (W_{\rm chem}=W_{\rm sem});
+- (W_{m chem}=W_{m sem});
 - a universal molecular physical holonomy source;
 - direct PhaseNav/TIR semantic assignment to chemical edges;
 - experimental validation of a new phase term beyond standard quantum chemistry.
