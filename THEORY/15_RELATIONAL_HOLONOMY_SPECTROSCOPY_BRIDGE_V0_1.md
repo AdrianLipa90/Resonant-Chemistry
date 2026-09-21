@@ -216,3 +216,8 @@ Existing Resonant Chemistry provenance-holonomy semantics remain separate from p
 - GREMLIN radial gate: https://github.com/AdrianLipa90/GREMLIN/blob/integrate/relational-phase-observation-v0.1/spec/GREMLIN_RADIAL_MEDIUM_IDENTIFIABILITY_V0_1.md
 - Orbital Eclipse Spectroscopy: https://github.com/AdrianLipa90/Orbital-Eclipse-Spectroscopy
 - QHTRI phase optics: https://github.com/AdrianLipa90/QHTRI-Induced-Holonomic-Potentials-for-Neutrino-Flavour-Transport-and-Phase-Optics
+
+
+## 9. Shared representation-invariance contract
+
+This bridge is governed by `RELATIONAL_INVARIANT_CONTRACT_V0_1` in `THEORY/RELATIONAL_INVARIANT_CONTRACT_V0_1.md`. Edge phases and basis choices are representation data; Wilson loops, spectra, and declared downstream observables must pass the corresponding gauge-invariance tests.
