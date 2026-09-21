@@ -57,6 +57,9 @@ class AtomicPBlockRadialV015Tests(unittest.TestCase):
         self.assertAlmostEqual(normalization, 1.0, places=10)
         self.assertTrue(np.all(np.isfinite(state["density"])))
         self.assertTrue(np.all(state["density"] >= -1e-12))
+        self.assertAlmostEqual(float(state["mixing_requested"]), self.COMMON["mixing"], places=15)
+        self.assertAlmostEqual(float(state["mixing"]), 0.20, places=15)
+        self.assertTrue(math.isfinite(float(state["density_normalization_correction_charge"])))
         obs = radial_kepler_observables(
             13,
             r=state["r"],
@@ -72,6 +75,9 @@ class AtomicPBlockRadialV015Tests(unittest.TestCase):
         self.assertEqual(state["basis_size"], 24)
         self.assertEqual(state["grid_points"], 1500)
         self.assertAlmostEqual(float(state["tolerance_hartree"]), 5.0e-8, places=16)
+        self.assertAlmostEqual(float(state["mixing_requested"]), self.FROZEN_STAGE_F["mixing"], places=15)
+        self.assertAlmostEqual(float(state["mixing"]), 0.20, places=15)
+        self.assertTrue(math.isfinite(float(state["density_normalization_correction_charge"])))
         obs = radial_kepler_observables(
             13,
             r=state["r"],

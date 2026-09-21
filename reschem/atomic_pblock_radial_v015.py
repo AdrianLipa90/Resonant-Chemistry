@@ -73,6 +73,12 @@ def solve_neutral_pblock_radial_state(
     if int(max_iterations) < 1:
         raise AtomicPBlockRadialV015Error("max_iterations must be positive")
 
+    mixing_requested = float(mixing)
+    # Preserve the frozen B-Ne trajectory exactly. For n>=3 p shells the
+    # larger occupied space is more SCF-stiff, so use conservative damping
+    # without relaxing the requested energy tolerance.
+    mixing_effective = mixing_requested if n_active <= 2 else min(mixing_requested, 0.20)
+
     subshells = subshells_for_atom(zz, 0)
     p_shell = next((shell for shell in subshells if shell.label == active_p_shell), None)
     if p_shell is None or p_shell.l != 1 or p_shell.occupancy <= 0:
@@ -154,6 +160,7 @@ def solve_neutral_pblock_radial_state(
         return total, kinetic_energy, nuclear_energy, direct_energy, exchange_energy, density
 
     previous_energy: float | None = None
+    last_energy_delta: float | None = None
     converged = False
     iteration = 0
     for iteration in range(1, int(max_iterations) + 1):
@@ -185,22 +192,41 @@ def solve_neutral_pblock_radial_state(
                 _, vectors = eigh(fock, overlap[ell], subset_by_index=[0, highest_index], check_finite=False)
                 candidate = np.column_stack([vectors[:, key[0] - ell - 1] for key in targets])
                 current = np.column_stack([orbitals[key] for key in targets])
-                for column in range(candidate.shape[1]):
-                    if float(current[:, column] @ overlap[ell] @ candidate[:, column]) < 0.0:
-                        candidate[:, column] *= -1.0
-                mixed = _orthonormalize_columns((1.0 - float(mixing)) * current + float(mixing) * candidate, overlap[ell])
+                if n_active <= 2:
+                    # Exact legacy alignment retained for the B-Ne replay path.
+                    for column in range(candidate.shape[1]):
+                        if float(current[:, column] @ overlap[ell] @ candidate[:, column]) < 0.0:
+                            candidate[:, column] *= -1.0
+                else:
+                    # For n>=3 occupied shells, eigenvectors within the same
+                    # (l, spin) occupied subspace may rotate or exchange order
+                    # between SCF steps. Align the whole candidate subspace to
+                    # the current one in the overlap metric before damping.
+                    metric_overlap = current.T @ overlap[ell] @ candidate
+                    u_align, _, vh_align = np.linalg.svd(metric_overlap, full_matrices=False)
+                    rotation = vh_align.T @ u_align.T
+                    candidate = candidate @ rotation
+                mixed = _orthonormalize_columns((1.0 - mixing_effective) * current + mixing_effective * candidate, overlap[ell])
                 for column, key in enumerate(targets):
                     updated[key] = mixed[:, column]
 
         orbitals.update(updated)
         total, _, _, _, _, _ = energy_components()
-        if previous_energy is not None and abs(total - previous_energy) < float(tolerance_hartree):
-            converged = True
-            break
+        if previous_energy is not None:
+            last_energy_delta = abs(total - previous_energy)
+            if last_energy_delta < float(tolerance_hartree):
+                converged = True
+                break
         previous_energy = total
 
     if not converged:
-        raise RuntimeError(f"neutral p-block radial SCF did not converge for Z={zz}, shell={active_p_shell}")
+        raise RuntimeError(
+            "neutral p-block radial SCF did not converge "
+            f"for Z={zz}, shell={active_p_shell}; "
+            f"last_energy_delta_hartree={last_energy_delta!r}, "
+            f"tolerance_hartree={float(tolerance_hartree)!r}, "
+            f"mixing_effective={mixing_effective!r}, iterations={iteration}"
+        )
 
     total, kinetic_energy, nuclear_energy, direct_energy, exchange_energy, density = energy_components()
     p_density = np.zeros_like(r)
@@ -210,11 +236,22 @@ def solve_neutral_pblock_radial_state(
         key = (n_active, 1, spin)
         u = radial_orbital(key)
         p_density += count * u * u
-    one_p_density = p_density / float(p_shell.occupancy)
-    one_p_normalization = float(np.sum(weights * one_p_density))
+    raw_one_p_density = p_density / float(p_shell.occupancy)
+    one_p_normalization = float(np.sum(weights * raw_one_p_density))
     if not math.isfinite(one_p_normalization) or one_p_normalization <= 0.0:
         raise RuntimeError("active one-p radial density normalization failed")
-    one_p_density /= one_p_normalization
+    one_p_density = raw_one_p_density / one_p_normalization
+
+    # For the extended n>=3 path, keep the total density and the normalized
+    # one-electron active density on the same quadrature normalization. This
+    # preserves the non-active density as a sum of nonnegative orbital
+    # contributions rather than subtracting a renormalized active density from
+    # an unrenormalized total density.
+    density_normalization_correction_charge = 0.0
+    if n_active >= 3:
+        density_correction = float(p_shell.occupancy) * (one_p_density - raw_one_p_density)
+        density = density + density_correction
+        density_normalization_correction_charge = float(np.sum(weights * density_correction))
 
     return {
         "schema": SCHEMA,
@@ -231,7 +268,12 @@ def solve_neutral_pblock_radial_state(
         "converged": True,
         "basis_size": int(basis_size),
         "grid_points": int(grid_points),
-        "mixing": float(mixing),
+        "mixing": float(mixing_effective),
+        "mixing_requested": mixing_requested,
+        "occupied_subspace_alignment": (
+            "LEGACY_COLUMN_SIGN" if n_active <= 2 else "S_METRIC_ORTHOGONAL_PROCRUSTES"
+        ),
+        "density_normalization_correction_charge": density_normalization_correction_charge,
         "tolerance_hartree": float(tolerance_hartree),
         "max_iterations": int(max_iterations),
         "spectral_input": "NONE",
