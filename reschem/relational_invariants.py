@@ -8,7 +8,7 @@ from __future__ import annotations
 import numpy as np
 
 INVARIANT_CONTRACT_ID = "RELATIONAL_INVARIANT_CONTRACT_V0_1"
-OES_ORBITAL_REPHASING_PROFILE_ID = "OES_ORBITAL_U1_REPHASING_V0_1"
+OES_ORBITAL_UNITARY_BASIS_PROFILE_ID = "OES_ORBITAL_UNITARY_BASIS_V0_1"
 
 
 class RelationalInvariantError(ValueError):
@@ -96,10 +96,10 @@ def oes_representation_contract_block() -> dict[str, object]:
 
     return {
         "schema": INVARIANT_CONTRACT_ID,
-        "profile": OES_ORBITAL_REPHASING_PROFILE_ID,
-        "orbital_gauge_group": "U(1)^n",
-        "transition_rdm_covariance": "T'=D_chi T D_chi^dagger",
-        "transition_density_status": "INVARIANT_UNDER_MATCHED_ORBITAL_REPHASING",
+        "profile": OES_ORBITAL_UNITARY_BASIS_PROFILE_ID,
+        "orbital_gauge_group": "U(n)",
+        "transition_rdm_covariance": "T'=U^T T U^*",
+        "transition_density_status": "INVARIANT_UNDER_MATCHED_ORBITAL_UNITARY_BASIS_CHANGE",
         "state_ray_phase_status": (
             "GLOBAL_U1_COVARIANT__AMPLITUDE_NODES_RELATIVE_PHASE_INTENSITY_INVARIANT"
         ),
@@ -108,7 +108,7 @@ def oes_representation_contract_block() -> dict[str, object]:
 
 __all__ = [
     "INVARIANT_CONTRACT_ID",
-    "OES_ORBITAL_REPHASING_PROFILE_ID",
+    "OES_ORBITAL_UNITARY_BASIS_PROFILE_ID",
     "RelationalInvariantError",
     "s_metric_projector",
     "s_metric_projector_residual",
