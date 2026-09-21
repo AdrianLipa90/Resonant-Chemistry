@@ -11,6 +11,8 @@ from typing import Mapping, Sequence
 
 import numpy as np
 
+from .relational_invariants import oes_representation_contract_block
+
 OES_SCHEMA_ID = "OES_TRANSITION_STATE_V0_1"
 OES_TRANSITION_RDM_CONVENTION = "T_pq=<Psi_f|a_p^dagger a_q|Psi_i>"
 
@@ -117,6 +119,7 @@ def export_oes_transition_state(
             "real": t.real.tolist(),
             "imag": t.imag.tolist(),
         },
+        "representation_contract": oes_representation_contract_block(),
         "provenance": {
             "source_repository": "AdrianLipa90/Resonant-Chemistry",
             "source_commit": source_commit,
