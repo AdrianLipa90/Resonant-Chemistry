@@ -2,7 +2,7 @@
   "schema": "FPDG_DEPENDENCY_EXPORT_V0_1",
   "repository_id": "RC",
   "repository": "AdrianLipa90/Resonant-Chemistry",
-  "source_commit": "48414e0e76777d82974dd12d581b5d9598f80c27",
+  "source_commit": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
   "claims": [
     {
       "claim_id": "RC.NUCLEON_BOUNDARY",
@@ -16,6 +16,38 @@
       "status": "CANDIDATE_FOUNDATION",
       "source_path": "THEORY/02_ATOM_FORMALISM.md",
       "evidence_class": "CONTROL_PHYSICS_WITH_TIR_BRIDGE"
+    },
+    {
+      "claim_id": "RC.MATTER.PHYSICAL_STATE_BINDING",
+      "status": "CANDIDATE_INTERFACE / SCF_CI_MCSCF_TO_RELATIONAL_CARRIER_BINDING_OPEN / NO_TARGET_FIT",
+      "source_path": "THEORY/16_QUANTUM_MATTER_BRIDGE_H2PLUS_V0_1.md",
+      "evidence_class": "candidate_interface_contract",
+      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "validation": "tests/test_quantum_matter_bridge_v01.py"
+    },
+    {
+      "claim_id": "RC.MATTER.INFORMATIONAL_PERTURBATION_VI",
+      "status": "CANDIDATE_INTERFACE / HERMITIAN_SOFTWARE_CONTRACT_PASS_EXPECTED / PHYSICAL_VI_DERIVATION_OPEN",
+      "source_path": "THEORY/16_QUANTUM_MATTER_BRIDGE_H2PLUS_V0_1.md",
+      "evidence_class": "candidate_interface_contract",
+      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "validation": "tests/test_quantum_matter_bridge_v01.py"
+    },
+    {
+      "claim_id": "RC.MOLECULAR.H2PLUS_CONTROL",
+      "status": "PREREGISTERED_TWO_CENTRE_ONE_ELECTRON_CONTROL / IMPLEMENTATION_OF_FULL_SOLVER_OPEN",
+      "source_path": "benchmarks/QUANTUM_MATTER_BRIDGE_H2PLUS_PREREG_V0_1.json",
+      "evidence_class": "preregistered_control_contract",
+      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "validation": "tests/test_quantum_matter_bridge_v01.py"
+    },
+    {
+      "claim_id": "RC.SPECTROSCOPY.NO_REFIT_GATE",
+      "status": "PREREGISTERED_DECISION_CONTRACT / COMMON_MODE_NULL_EXACT / PHYSICAL_OPERATOR_AND_HOLDOUT_OPEN",
+      "source_path": "benchmarks/QUANTUM_MATTER_BRIDGE_H2PLUS_PREREG_V0_1.json",
+      "evidence_class": "preregistered_falsification_contract",
+      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "validation": "tests/test_quantum_matter_bridge_v01.py"
     }
   ],
   "local_edges": [
@@ -23,6 +55,38 @@
       "from": "RC.NUCLEON_BOUNDARY",
       "to": "RC.ATOM_FORMALISM",
       "authority": "CANONICAL_FRONTIER"
+    },
+    {
+      "from": "RC.ATOM_FORMALISM",
+      "to": "RC.MATTER.PHYSICAL_STATE_BINDING",
+      "authority": "CANDIDATE_ONLY",
+      "promotion_required": true,
+      "promotion_gate": "SOURCE_DERIVED_ELECTRONIC_STATE_TO_RELATIONAL_CARRIER_MAP_AND_VALIDATION"
+    },
+    {
+      "from": "RC.MATTER.PHYSICAL_STATE_BINDING",
+      "to": "RC.MATTER.INFORMATIONAL_PERTURBATION_VI",
+      "authority": "CANDIDATE_ONLY",
+      "promotion_required": true,
+      "promotion_gate": "HERMITIAN_UNIT_COMPLETE_SYMMETRY_COVARIANT_VI_DERIVATION_WITHOUT_TARGET_FIT"
+    },
+    {
+      "from": "RC.ATOM_FORMALISM",
+      "to": "RC.MOLECULAR.H2PLUS_CONTROL",
+      "authority": "CANONICAL_FRONTIER"
+    },
+    {
+      "from": "RC.MOLECULAR.H2PLUS_CONTROL",
+      "to": "RC.SPECTROSCOPY.NO_REFIT_GATE",
+      "authority": "CANONICAL_FRONTIER"
+    },
+    {
+      "from": "RC.MATTER.INFORMATIONAL_PERTURBATION_VI",
+      "to": "RC.SPECTROSCOPY.NO_REFIT_GATE",
+      "authority": "CANDIDATE_ONLY",
+      "promotion_required": true,
+      "promotion_gate": "FREEZE_VI_AND_DECISION_RULE_BEFORE_WITHHELD_OBSERVATION"
     }
-  ]
+  ],
+  "generated_at": "2026-09-23T06:38:00+01:00"
 }
