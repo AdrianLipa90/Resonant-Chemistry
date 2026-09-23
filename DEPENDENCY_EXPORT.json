@@ -9,7 +9,7 @@
       "status": "SOURCE_BOUND_EFFECTIVE_INPUT_CONTRACT",
       "source_path": "THEORY/01_NUCLEON_BOUNDARY_V0_1.md",
       "evidence_class": "SOURCE_BOUND_EFFECTIVE_INTERFACE",
-      "exact_head": "48414e0e76777d82974dd12d581b5d9598f80c27"
+      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c"
     },
     {
       "claim_id": "RC.ATOM_FORMALISM",
