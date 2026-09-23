@@ -2,14 +2,14 @@
   "schema": "FPDG_DEPENDENCY_EXPORT_V0_1",
   "repository_id": "RC",
   "repository": "AdrianLipa90/Resonant-Chemistry",
-  "source_commit": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+  "source_commit": "b5a5091298f73c37754e66f969dad5d7c26a1647",
   "claims": [
     {
       "claim_id": "RC.NUCLEON_BOUNDARY",
       "status": "SOURCE_BOUND_EFFECTIVE_INPUT_CONTRACT",
       "source_path": "THEORY/01_NUCLEON_BOUNDARY_V0_1.md",
       "evidence_class": "SOURCE_BOUND_EFFECTIVE_INTERFACE",
-      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c"
+      "exact_head": "b5a5091298f73c37754e66f969dad5d7c26a1647"
     },
     {
       "claim_id": "RC.ATOM_FORMALISM",
@@ -22,23 +22,23 @@
       "status": "CANDIDATE_INTERFACE / SCF_CI_MCSCF_TO_RELATIONAL_CARRIER_BINDING_OPEN / NO_TARGET_FIT",
       "source_path": "THEORY/16_QUANTUM_MATTER_BRIDGE_H2PLUS_V0_1.md",
       "evidence_class": "candidate_interface_contract",
-      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "exact_head": "b5a5091298f73c37754e66f969dad5d7c26a1647",
       "validation": "tests/test_quantum_matter_bridge_v01.py"
     },
     {
       "claim_id": "RC.MATTER.INFORMATIONAL_PERTURBATION_VI",
-      "status": "CANDIDATE_INTERFACE / HERMITIAN_SOFTWARE_CONTRACT_PASS_EXPECTED / PHYSICAL_VI_DERIVATION_OPEN",
+      "status": "CANDIDATE_INTERFACE / HOLONOMY_LINEARIZED_OPERATOR_CLASS_DERIVED / PHYSICAL_DELTA_PHI_SOURCE_OPEN / NO_TARGET_FIT",
       "source_path": "THEORY/16_QUANTUM_MATTER_BRIDGE_H2PLUS_V0_1.md",
       "evidence_class": "candidate_interface_contract",
-      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "exact_head": "b5a5091298f73c37754e66f969dad5d7c26a1647",
       "validation": "tests/test_quantum_matter_bridge_v01.py"
     },
     {
       "claim_id": "RC.MOLECULAR.H2PLUS_CONTROL",
-      "status": "PREREGISTERED_TWO_CENTRE_ONE_ELECTRON_CONTROL / IMPLEMENTATION_OF_FULL_SOLVER_OPEN",
+      "status": "PREREGISTERED_TWO_CENTRE_ONE_ELECTRON_CONTROL / BETA1_ZERO_HOLONOMY_NULL / FULL_SOLVER_IMPLEMENTATION_OPEN",
       "source_path": "benchmarks/QUANTUM_MATTER_BRIDGE_H2PLUS_PREREG_V0_1.json",
       "evidence_class": "preregistered_control_contract",
-      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "exact_head": "b5a5091298f73c37754e66f969dad5d7c26a1647",
       "validation": "tests/test_quantum_matter_bridge_v01.py"
     },
     {
@@ -46,7 +46,7 @@
       "status": "PREREGISTERED_DECISION_CONTRACT / COMMON_MODE_NULL_EXACT / PHYSICAL_OPERATOR_AND_HOLDOUT_OPEN",
       "source_path": "benchmarks/QUANTUM_MATTER_BRIDGE_H2PLUS_PREREG_V0_1.json",
       "evidence_class": "preregistered_falsification_contract",
-      "exact_head": "d243f02de42e070ef1c483dcd8742a3ff7bfca2c",
+      "exact_head": "b5a5091298f73c37754e66f969dad5d7c26a1647",
       "validation": "tests/test_quantum_matter_bridge_v01.py"
     }
   ],
@@ -88,5 +88,5 @@
       "promotion_gate": "FREEZE_VI_AND_DECISION_RULE_BEFORE_WITHHELD_OBSERVATION"
     }
   ],
-  "generated_at": "2026-09-23T06:38:00+01:00"
+  "generated_at": "2026-09-23T06:44:00+01:00"
 }
