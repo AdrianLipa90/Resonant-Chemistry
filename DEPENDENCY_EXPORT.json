@@ -2,14 +2,14 @@
   "schema": "FPDG_DEPENDENCY_EXPORT_V0_1",
   "repository_id": "RC",
   "repository": "AdrianLipa90/Resonant-Chemistry",
-  "source_commit": "bbe4beb8920d3d2599776578548e85ac3220544f",
+  "source_commit": "0e03c92f714b8464f458c19d8441bb826edf3a47",
   "claims": [
     {
       "claim_id": "RC.NUCLEON_BOUNDARY",
       "status": "SOURCE_BOUND_EFFECTIVE_INPUT_CONTRACT",
       "source_path": "THEORY/01_NUCLEON_BOUNDARY_V0_1.md",
       "evidence_class": "SOURCE_BOUND_EFFECTIVE_INTERFACE",
-      "exact_head": "bbe4beb8920d3d2599776578548e85ac3220544f"
+      "exact_head": "0e03c92f714b8464f458c19d8441bb826edf3a47"
     },
     {
       "claim_id": "RC.ATOM_FORMALISM",
@@ -64,6 +64,14 @@
       "evidence_class": "standard_qm_synthetic_control",
       "exact_head": "bbe4beb8920d3d2599776578548e85ac3220544f",
       "validation": "tests/test_chemical_berry_loop_control_v01.py"
+    },
+    {
+      "claim_id": "RC.BERRY.H3PLUS_CI_BENCHMARK",
+      "status": "PREREGISTERED_STANDARD_QM_MOLECULAR_CONTROL / FCI_STO3G / RESULT_PENDING / NO_NEW_PHYSICS",
+      "source_path": "THEORY/18_H3PLUS_CI_BERRY_BENCHMARK_V0_1.md",
+      "evidence_class": "preregistered_molecular_control",
+      "exact_head": "0e03c92f714b8464f458c19d8441bb826edf3a47",
+      "validation": ".github/workflows/h3plus-ci-berry-v01.yml"
     }
   ],
   "local_edges": [
@@ -112,7 +120,12 @@
       "from": "RC.BERRY.CHEMICAL_EIGENSTATE_CONNECTION",
       "to": "RC.BERRY.CONICAL_INTERSECTION_LOOP_CONTROL",
       "authority": "CANONICAL_FRONTIER"
+    },
+    {
+      "from": "RC.BERRY.CONICAL_INTERSECTION_LOOP_CONTROL",
+      "to": "RC.BERRY.H3PLUS_CI_BENCHMARK",
+      "authority": "CANONICAL_FRONTIER"
     }
   ],
-  "generated_at": "2026-09-23T07:05:00+01:00"
+  "generated_at": "2026-09-23T07:12:00+01:00"
 }
