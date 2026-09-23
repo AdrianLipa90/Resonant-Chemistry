@@ -3,7 +3,12 @@ import math
 import numpy as np
 import pytest
 
-from reschem.relational_holonomy_spectroscopy import (\n    cycle_rank,\n    phase_dressed_hamiltonian,\n    spectral_eigenvalues,\n)\nfrom reschem.quantum_matter_bridge_v01 import (
+from reschem.relational_holonomy_spectroscopy import (
+    cycle_rank,
+    phase_dressed_hamiltonian,
+    spectral_eigenvalues,
+)
+from reschem.quantum_matter_bridge_v01 import (
     QuantumMatterBridgeError,
     common_mode_perturbation,
     first_order_energy_shift,
