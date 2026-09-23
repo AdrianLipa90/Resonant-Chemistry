@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install package and test runner
-        run: python -m pip install -e . pytest
+      - name: Install package
+        run: python -m pip install -e .
       - name: Run quantum-matter bridge controls
-        run: python -m pytest -q tests/test_quantum_matter_bridge_v01.py
+        run: python -m unittest -v tests.test_quantum_matter_bridge_v01
