@@ -1,0 +1,29 @@
+{
+  "schema": "RESCHEM_CHEMICAL_BERRY_LOOP_CONTROL_V0_1",
+  "status": "STANDARD_QM_SYNTHETIC_POSITIVE_CONTROL / MOLECULE_SPECIFIC_BINDING_OPEN",
+  "model": "H(x,y)=x sigma_x + y sigma_z",
+  "lower_state_loop": {
+    "encircling": {
+      "path": "x=cos(phi), y=sin(phi)",
+      "prediction": "Wilson=-1; |Berry phase|=pi"
+    },
+    "contractible": {
+      "path": "x=2+0.4 cos(phi), y=0.4 sin(phi)",
+      "prediction": "Wilson=+1; Berry phase=0"
+    }
+  },
+  "invariants": [
+    "local eigenvector rephasing leaves Wilson loop invariant",
+    "adjacent zero overlap fails closed",
+    "Hermitian control only",
+    "no molecule-specific data",
+    "no beyond-standard-QM term"
+  ],
+  "rfc_type_match": {
+    "condition": "same normalized eigenstate family u(lambda)=n(lambda)",
+    "rfc_connection": "A_minus=+i<u|du>",
+    "chemistry_connection": "Berry connection of n(lambda)",
+    "status": "STANDARD_QM_CONTROL_BINDING"
+  },
+  "beyond_standard_physics": "OPEN_SEPARATE_GATE"
+}
