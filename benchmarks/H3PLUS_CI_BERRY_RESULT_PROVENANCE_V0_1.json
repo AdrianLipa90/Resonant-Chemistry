@@ -1,0 +1,16 @@
+{
+  "schema": "RESCHEM_H3PLUS_CI_BERRY_RESULT_PROVENANCE_V0_1",
+  "source_branch": "research/h3plus-ci-berry-benchmark-v0.1-20260923",
+  "validated_head": "e5465190c327dfabdd1d9288b31c5d4fd034f1c2",
+  "workflow_run_id": 35826137209,
+  "workflow_job_id": 107068162642,
+  "workflow_name": "H3+ conical-intersection Berry benchmark",
+  "artifact_id": 10734783283,
+  "artifact_name": "h3plus-ci-berry-v0.1-result",
+  "artifact_digest": "sha256:f1478e20ffca9fec3b79bb64ecc13e06881fa382b6c78c1ab5ab4bbdc41d0753",
+  "artifact_created_at": "2026-09-23T06:18:47Z",
+  "result_file": "benchmarks/H3PLUS_CI_BERRY_RESULT_V0_1.json",
+  "result_status": "PASS",
+  "preregistration": "benchmarks/H3PLUS_CI_BERRY_PREREG_V0_1.json",
+  "mutation_policy": "append result/provenance; preregistration unchanged"
+}
