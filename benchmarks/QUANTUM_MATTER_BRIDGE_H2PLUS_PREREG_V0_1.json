@@ -64,5 +64,13 @@
     "solver_and_tolerances",
     "decision_rule"
   ],
-  "promotion": "BLOCKED_UNTIL_PHYSICAL_STATE_BINDING_AND_SOURCE_DERIVED_VI"
+  "promotion": "BLOCKED_UNTIL_PHYSICAL_STATE_BINDING_AND_SOURCE_DERIVED_VI",
+  "holonomy_reduction": {
+    "status": "MATHEMATICAL_CONTROL_DERIVED / PHYSICAL_DELTA_PHI_SOURCE_OPEN",
+    "linearized_operator": "V_I^(1) = sum_a deltaPhi_a * dH/dPhi_a",
+    "physical_degrees_of_freedom": "gauge_invariant_cycle_coordinates_only",
+    "forest_null": "beta1 = 0 => edge phases gauge-removable => no loop-holonomy spectral channel",
+    "h2plus_minimal_graph_role": "NEGATIVE_HOLONOMY_CONTROL / POSITIVE_TWO_CENTRE_BINDING_CONTROL",
+    "positive_test_requirement": "independently justified cyclic effective-state graph with beta1 >= 1"
+  }
 }

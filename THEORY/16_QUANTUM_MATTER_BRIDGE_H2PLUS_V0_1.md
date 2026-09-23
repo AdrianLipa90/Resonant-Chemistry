@@ -85,9 +85,87 @@ therefore gives the exact null
 
 This null is part of the preregistered falsification contract.
 
-## 4. H2+ first molecular control
+## 4. Minimal holonomy-linearized operator class
 
-The first molecular target is \(H_2^+\) because it is a genuine two-centre molecular problem with one electron and therefore does not require electron-electron correlation.
+The existing Resonant Chemistry graph-holonomy control gives a stronger restriction than an arbitrary perturbation matrix. For a declared Hermitian phase-dressed control Hamiltonian
+
+\[
+H=H(\Phi_1,\ldots,\Phi_{\beta_1}),
+\]
+
+a small physical displacement of the gauge-invariant cycle coordinates gives
+
+\[
+H(\Phi+\delta\Phi)
+=
+H(\Phi)
++
+\sum_{a=1}^{\beta_1}
+\delta\Phi_a
+\frac{\partial H}{\partial\Phi_a}
++
+O(\delta\Phi^2).
+\]
+
+Define
+
+\[
+G_a:=\frac{\partial H}{\partial\Phi_a}.
+\]
+
+Because \(H\) is Hermitian for real cycle coordinates, \(G_a\) is Hermitian wherever the derivative exists. The minimal first-order candidate is therefore
+
+\[
+\boxed{
+V_I^{(1)}
+=
+\sum_a \delta\Phi_a G_a.
+}
+\]
+
+This removes an arbitrary operator-shape degree of freedom. The remaining physical problem is to derive the real source amplitudes \(\delta\Phi_a\) from an independently admitted upstream carrier.
+
+For a nondegenerate state,
+
+\[
+\Delta E_n
+=
+\sum_a \delta\Phi_a
+\langle n|G_a|n\rangle.
+\]
+
+Using the existing loop-response convention
+
+\[
+J_{n,a}:=-\frac{\partial E_n}{\partial\Phi_a},
+\]
+
+the transition response becomes
+
+\[
+\boxed{
+\Delta\omega_{mn}
+=
+-\frac1\hbar
+\sum_a
+\delta\Phi_a
+\left(J_{m,a}-J_{n,a}\right).
+}
+\]
+
+Only gauge-invariant cycle content can carry a new spectral effect. Pure edge-phase gauge directions are not physical observables.
+
+A finite graph with cycle rank
+
+\[
+\beta_1=E-V+C=0
+\]
+
+is a forest. Its edge phases are globally gauge-removable, so graph holonomy supplies an exact negative control rather than a positive spectral channel.
+
+## 5. H2+ first molecular control
+
+The first molecular target is \(H_2^+\) because it is a genuine two-centre molecular problem with one electron and therefore does not require electron-electron correlation. For the minimal two-vertex/one-edge effective-state graph, however, \(\beta_1=0\). Thus \(H_2^+\) is a positive control for two-centre state/operator binding but an exact **negative control for loop-holonomy spectroscopy** unless an independently justified cyclic effective-state graph is supplied.
 
 In atomic units, under the clamped-nuclei Born-Oppenheimer control,
 
@@ -122,7 +200,7 @@ Interpretation:
 - \(HeH^+\): asymmetry;
 - \(LiH\): core/valence and charge-transfer stress test.
 
-## 5. No-refit prospective gate
+## 6. No-refit prospective gate
 
 Before any withheld molecular/spectroscopic residual is inspected, freeze:
 
@@ -151,7 +229,7 @@ The sequence is then
 
 A failed prediction remains evidence. Post-result retuning creates a new version and does not overwrite the frozen result.
 
-## 6. Current epistemic boundary
+## 7. Current epistemic boundary
 
 Implemented here:
 
@@ -170,7 +248,7 @@ Not implemented / OPEN:
 - a prospective experimental holdout result;
 - promotion of any new energy term into the canonical chemistry Hamiltonian.
 
-## 7. FPDG handoff
+## 8. FPDG handoff
 
 Only after source-owned RC claims exist should FPDG add a cross-repository candidate interface. FPDG must not invent the physical operator on behalf of Resonant Chemistry.
 

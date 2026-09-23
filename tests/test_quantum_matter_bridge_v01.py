@@ -3,7 +3,7 @@ import math
 import numpy as np
 import pytest
 
-from reschem.quantum_matter_bridge_v01 import (
+from reschem.relational_holonomy_spectroscopy import (\n    cycle_rank,\n    phase_dressed_hamiltonian,\n    spectral_eigenvalues,\n)\nfrom reschem.quantum_matter_bridge_v01 import (
     QuantumMatterBridgeError,
     common_mode_perturbation,
     first_order_energy_shift,
@@ -71,3 +71,27 @@ def test_h2plus_born_oppenheimer_bookkeeping_adds_nuclear_repulsion():
 def test_h2plus_distance_domain_fails_closed(distance):
     with pytest.raises(QuantumMatterBridgeError):
         h2plus_total_born_oppenheimer_energy(-1.0, distance)
+
+
+def test_minimal_two_centre_graph_is_exact_holonomy_negative_control():
+    edges = [(0, 1)]
+    assert cycle_rank(2, edges) == 0
+
+    h_zero = phase_dressed_hamiltonian(
+        [0.0, 1.0],
+        edges,
+        [0.4],
+        [0.0],
+    )
+    h_phase = phase_dressed_hamiltonian(
+        [0.0, 1.0],
+        edges,
+        [0.4],
+        [1.234],
+    )
+    np.testing.assert_allclose(
+        spectral_eigenvalues(h_zero),
+        spectral_eigenvalues(h_phase),
+        rtol=0.0,
+        atol=1e-12,
+    )
