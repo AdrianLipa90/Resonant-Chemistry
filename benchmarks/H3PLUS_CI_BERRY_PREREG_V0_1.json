@@ -1,0 +1,64 @@
+{
+  "schema": "RESCHEM_H3PLUS_CI_BERRY_PREREG_V0_1",
+  "status": "PREREGISTERED_STANDARD_QM_MOLECULAR_CONTROL / RESULT_PENDING",
+  "external_method_anchor": {
+    "citation": "Y. Wang and D. A. Mazziotti, Phys. Chem. Chem. Phys. 26, 11491-11497 (2024)",
+    "doi": "10.1039/D4CP00391H",
+    "verified_facts": [
+      "H3+ used as conical-intersection benchmark",
+      "FCI comparison in STO-3G",
+      "coordinates (R,0), (R,pi), (rho,theta)",
+      "fixed-R example R=2.0 bohr",
+      "first and second excited states form symmetry-required E' CI at D3h"
+    ]
+  },
+  "frozen_geometry": {
+    "R_bohr": 2,
+    "rho0_formula": "sqrt(3)*R",
+    "theta0_rad": "pi/2",
+    "samples": 24,
+    "encircling": {
+      "delta_rho_bohr": 0.15,
+      "delta_theta_rad": 0.05,
+      "rho_center_shift_bohr": 0
+    },
+    "non_encircling": {
+      "delta_rho_bohr": 0.15,
+      "delta_theta_rad": 0.05,
+      "rho_center_shift_bohr": 0.6
+    }
+  },
+  "electronic_structure": {
+    "charge": 1,
+    "spin": 0,
+    "reference": "RHF",
+    "basis": "STO-3G",
+    "correlated_method": "singlet FCI",
+    "roots": 3,
+    "tracked_initial_root": 1,
+    "candidate_continuation_roots": [
+      1,
+      2
+    ]
+  },
+  "tracking": {
+    "rule": "maximum absolute many-electron overlap between adjacent geometries",
+    "overlap": "PySCF fci.addons.overlap with cross-geometry MO overlap matrix",
+    "expected_phase_used_for_tracking": false
+  },
+  "predictions": {
+    "encircling": {
+      "wilson_real": -1,
+      "berry_abs_rad": "pi"
+    },
+    "non_encircling": {
+      "wilson_real": 1,
+      "berry_rad": 0
+    }
+  },
+  "decision_tolerances": {
+    "wilson_imag_abs_max": 0.000001,
+    "wilson_real_abs_error_max": 0.0001
+  },
+  "mutation_policy": "result does not amend this preregistration; changes require v0.2"
+}
