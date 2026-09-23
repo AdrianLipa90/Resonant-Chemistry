@@ -1,0 +1,68 @@
+{
+  "schema": "RESCHEM_QUANTUM_MATTER_BRIDGE_H2PLUS_PREREG_V0_1",
+  "status": "PREREGISTRATION_CANDIDATE / OPERATOR_BINDING_OPEN / NO_TARGET_DATA_LOADED",
+  "contract_id": "RC_QMB_H2PLUS_V0_1",
+  "scientific_firewall": {
+    "conventional_hamiltonian_is_control": true,
+    "candidate_term_mutates_control_baseline": false,
+    "fit_to_target_data_forbidden": true,
+    "failed_prediction_retained": true
+  },
+  "state_binding_gate": {
+    "status": "OPEN",
+    "required_inputs": [
+      "electronic_state_provenance",
+      "rho_or_rdm",
+      "current_if_used",
+      "basis_gauge_law",
+      "units",
+      "domain_of_validity"
+    ],
+    "target_residuals_allowed_as_inputs": false
+  },
+  "operator_gate": {
+    "status": "OPEN",
+    "symbol": "V_I",
+    "required": [
+      "Hermitian",
+      "energy_dimensions",
+      "coefficient_provenance",
+      "declared_symmetry_or_gauge_law",
+      "zero_coupling_recovers_control"
+    ],
+    "target_fit_allowed": false
+  },
+  "first_molecular_control": {
+    "species": "H2+",
+    "approximation": "clamped_nuclei_nonrelativistic_Born_Oppenheimer_atomic_units",
+    "electronic_hamiltonian": "-1/2 nabla^2 - 1/r_A - 1/r_B",
+    "total_energy": "E_el(R) + 1/R",
+    "reason": "two-centre one-electron control before electron-electron correlation"
+  },
+  "control_ladder": [
+    "H",
+    "He",
+    "H2+",
+    "H2",
+    "HeH+",
+    "LiH"
+  ],
+  "prospective_readout": {
+    "first_order_shift": "Delta E_n = <n|V_I|n>",
+    "transition_shift": "Delta omega_mn = (Delta E_m - Delta E_n)/hbar",
+    "exact_null": "V_I = u0 I => Delta omega_mn = 0",
+    "holdout_status": "UNOPENED",
+    "measurement_values_present": false
+  },
+  "freeze_before_holdout": [
+    "state_binding_map",
+    "complete_operator_definition",
+    "constants_and_units",
+    "basis_gauge_convention",
+    "target_observable",
+    "predicted_sign_magnitude_or_null",
+    "solver_and_tolerances",
+    "decision_rule"
+  ],
+  "promotion": "BLOCKED_UNTIL_PHYSICAL_STATE_BINDING_AND_SOURCE_DERIVED_VI"
+}
