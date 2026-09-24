@@ -1,0 +1,329 @@
+{
+"schema": "RESCHEM_H3PLUS_CI_BERRY_RESULT_V0_1",
+"status": "PASS",
+"protocol": {
+"R_bohr": 2.0,
+"basis": "STO-3G",
+"method": "RHF + singlet FCI",
+"samples": 24,
+"delta_rho_bohr": 0.15,
+"delta_theta_rad": 0.05,
+"nonencircling_rho_shift_bohr": 0.6,
+"tracking": "maximum absolute FCI overlap among roots 1,2"
+},
+"results": {
+"encircling": {
+"tracked_roots": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1
+],
+"link_overlaps": [
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+}
+],
+"wilson": {
+"real": -1.0,
+"imag": 0.0
+},
+"berry_phase_rad": 3.141592653589793,
+"min_excited_gap_hartree": 0.007835550301640293
+},
+"non_encircling": {
+"tracked_roots": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1
+],
+"link_overlaps": [
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": -1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+},
+{
+"real": 1.0,
+"imag": 0.0,
+"abs": 1.0
+}
+],
+"wilson": {
+"real": 1.0,
+"imag": 0.0
+},
+"berry_phase_rad": 0.0,
+"min_excited_gap_hartree": 0.021359799604451668
+}
+},
+"interpretation": "STANDARD_QM_MOLECULAR_BERRY_CONTROL_ONLY"
+}

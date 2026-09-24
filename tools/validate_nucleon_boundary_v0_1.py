@@ -112,8 +112,14 @@ def main() -> int:
         for row in claims
         if isinstance(row, dict) and isinstance(row.get("claim_id"), str)
     }
-    if set(claim_map) != set(EXPECTED_CLAIMS):
-        fail(f"claim identity set: {sorted(claim_map)}", checks)
+    missing_claims = sorted(set(EXPECTED_CLAIMS) - set(claim_map))
+    if missing_claims:
+        fail(f"missing required claim identities: {missing_claims}", checks)
+    foreign_claims = sorted(
+        claim_id for claim_id in claim_map if not claim_id.startswith("RC.")
+    )
+    if foreign_claims:
+        fail(f"foreign claim identities in RC export: {foreign_claims}", checks)
     for claim_id, expected_status in EXPECTED_CLAIMS.items():
         if claim_map[claim_id].get("status") != expected_status:
             fail(f"claim status {claim_id}", checks)

@@ -1,0 +1,25 @@
+name: Quantum matter bridge H2+ reference
+
+on:
+  pull_request:
+    paths:
+      - 'THEORY/16_QUANTUM_MATTER_BRIDGE_H2PLUS_V0_1.md'
+      - 'benchmarks/QUANTUM_MATTER_BRIDGE_H2PLUS_PREREG_V0_1.json'
+      - 'reschem/quantum_matter_bridge_v01.py'
+      - 'tests/test_quantum_matter_bridge_v01.py'
+      - 'DEPENDENCY_EXPORT.json'
+      - '.github/workflows/quantum-matter-bridge-h2plus-v01.yml'
+  workflow_dispatch:
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Run quantum-matter bridge controls
+        run: python -m unittest -v tests.test_quantum_matter_bridge_v01
