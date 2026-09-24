@@ -77,7 +77,7 @@ def solve_neutral_pblock_radial_state(
     # Preserve the frozen B-Ne trajectory exactly. For n>=3 p shells the
     # larger occupied space is more SCF-stiff, so use conservative damping
     # without relaxing the requested energy tolerance.
-    mixing_effective = mixing_requested if n_active <= 2 else min(mixing_requested, 0.20)
+    mixing_effective = mixing_requested if n_active <= 2 else min(mixing_requested, 0.05)
 
     subshells = subshells_for_atom(zz, 0)
     p_shell = next((shell for shell in subshells if shell.label == active_p_shell), None)
