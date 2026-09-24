@@ -1,0 +1,26 @@
+{
+  "schema": "LOSSLESS_BRANCH_MERGE_MANIFEST_V1",
+  "repository": "AdrianLipa90/Resonant-Chemistry",
+  "target_branch": "main",
+  "source_branch": "ci/validate-aluminium-3p-r2-20260920",
+  "source_head_sha": "a67cc082de70cba1457074a201f9c053e2796d5a",
+  "merge_base_sha": "1af500a7a0fa0ff34b8eb4c7221bf5066cd63992",
+  "target_parent_sha": "bc01cb763eb1177bdeefac97a4d4252ee08a93e1",
+  "policy": "APPLY_BRANCH_ONLY_KEEP_TARGET_ON_CONFLICT_ARCHIVE_BRANCH_NEVER_DELETE_TARGET",
+  "applied_paths": [
+    ".github/workflows/aluminium-3p-targeted.yml"
+  ],
+  "conflicts": [
+    {
+      "path": ".github/workflows/compound-relations-ci.yml",
+      "archive_path": ".merge-preservation/ci__validate-aluminium-3p-r2-20260920/.github/workflows/compound-relations-ci.yml",
+      "action": "kept_target_archived_branch"
+    },
+    {
+      "path": ".github/workflows/monograph-ci.yml",
+      "archive_path": ".merge-preservation/ci__validate-aluminium-3p-r2-20260920/.github/workflows/monograph-ci.yml",
+      "action": "kept_target_archived_branch"
+    }
+  ],
+  "deletion_intents_preserved_without_deletion": []
+}
