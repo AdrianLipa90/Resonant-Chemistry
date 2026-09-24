@@ -1,0 +1,81 @@
+{
+  "schema": "LOSSLESS_MULTI_BRANCH_MERGE_MANIFEST_V1",
+  "repository": "AdrianLipa90/Resonant-Chemistry",
+  "target_branch": "main",
+  "target_parent_sha": "45bb97ee61f04376947996359ee7aff87707946d",
+  "sources": [
+    {
+      "branch": "ci/al3p-mix-0p08-20260920",
+      "head_sha": "145ed3b81f5a7d17e26ade21e9c6413e4c0af8d8",
+      "archived": [
+        {
+          "path": ".github/workflows/al3p-mix-0p08.yml",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p08-20260920/.github/workflows/al3p-mix-0p08.yml",
+          "branch_blob": "b9e34e590ed2541ac0901a991f905e7336e524a9",
+          "target_blob": null
+        },
+        {
+          "path": "reschem/atomic_pblock_radial_v015.py",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p08-20260920/reschem/atomic_pblock_radial_v015.py",
+          "branch_blob": "8493a7967406b3164a18adda59ab1a5ca206bde8",
+          "target_blob": "f15cd86fcabf01990c03b19dca5d2eb6e240b76b"
+        },
+        {
+          "path": "tests/test_atomic_pblock_radial_v015.py",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p08-20260920/tests/test_atomic_pblock_radial_v015.py",
+          "branch_blob": "6fc674bb683e876dcc2379fe4fcfd288e0c186b6",
+          "target_blob": "403fe836411a83cb9ff4ffd533858404131f4d12"
+        }
+      ]
+    },
+    {
+      "branch": "ci/al3p-mix-0p10-20260920",
+      "head_sha": "10b7cbf6ac3c3c8e248516456e1a4fa1c9039ba5",
+      "archived": [
+        {
+          "path": ".github/workflows/al3p-mix-0p10.yml",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p10-20260920/.github/workflows/al3p-mix-0p10.yml",
+          "branch_blob": "86fa06564e391715677f5dada8bc9b4ced055c88",
+          "target_blob": null
+        },
+        {
+          "path": "reschem/atomic_pblock_radial_v015.py",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p10-20260920/reschem/atomic_pblock_radial_v015.py",
+          "branch_blob": "5c5a453beda30e9e3c2b9bcfe058196f2748a976",
+          "target_blob": "f15cd86fcabf01990c03b19dca5d2eb6e240b76b"
+        },
+        {
+          "path": "tests/test_atomic_pblock_radial_v015.py",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p10-20260920/tests/test_atomic_pblock_radial_v015.py",
+          "branch_blob": "9050bacaf651c592a46222c077153e32a94014e4",
+          "target_blob": "403fe836411a83cb9ff4ffd533858404131f4d12"
+        }
+      ]
+    },
+    {
+      "branch": "ci/al3p-mix-0p12-20260920",
+      "head_sha": "a910a21922d4bcf824f1d76507826f64a204b18f",
+      "archived": [
+        {
+          "path": ".github/workflows/al3p-mix-0p12.yml",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p12-20260920/.github/workflows/al3p-mix-0p12.yml",
+          "branch_blob": "93099ab56b410d676019168cea280c103223e8e7",
+          "target_blob": null
+        },
+        {
+          "path": "reschem/atomic_pblock_radial_v015.py",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p12-20260920/reschem/atomic_pblock_radial_v015.py",
+          "branch_blob": "88bedc21a1539e32c49d53aa3e6e9b0a14873adc",
+          "target_blob": "f15cd86fcabf01990c03b19dca5d2eb6e240b76b"
+        },
+        {
+          "path": "tests/test_atomic_pblock_radial_v015.py",
+          "archive_path": ".merge-preservation/ci__al3p-mix-0p12-20260920/tests/test_atomic_pblock_radial_v015.py",
+          "branch_blob": "4f881557a44093b5f0d1099cc2e3fe8914335ceb",
+          "target_blob": "403fe836411a83cb9ff4ffd533858404131f4d12"
+        }
+      ]
+    }
+  ],
+  "policy": "KEEP_CURRENT_TARGET_CANONICAL_ARCHIVE_EACH_PARALLEL_EXPERIMENT_VARIANT_ADD_ALL_HEADS_AS_COMMIT_PARENTS"
+}
