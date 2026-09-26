@@ -147,3 +147,6 @@ The typed cross-repository interface is documented at `docs/INFORMATIONAL_PHASE_
 ## Montgomery–Dyson phase spectroscopy candidate
 
 A downstream transition-set diagnostic is implemented in reschem/phase_spectroscopy.py and documented in docs/MONTGOMERY_DYSON_PHASE_SPECTROSCOPY_V0_1.md and textbook Chapter 22. It consumes already calculated transition coordinates, maps an explicit unfolding to unwrapped phase, and supplies GUE/form-factor and prime-power phase-scramble controls. It does not modify quantum-chemistry Hamiltonians, energies, state rankings, molecular gates, or semantic-card admission.
+
+
+Phase-spectroscopy status refinement: the shared sine-kernel pair law is DERIVED_IN_FRAMEWORK / FORCED_PREDICTION from the Hardy–CAR sector. Chemical realization of that sector remains CANDIDATE and cannot change Hamiltonians, energies or state admission without an independent binding test.
