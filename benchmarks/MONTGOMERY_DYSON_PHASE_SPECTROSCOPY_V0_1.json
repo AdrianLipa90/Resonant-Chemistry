@@ -2,7 +2,7 @@
   "schema": "MONTGOMERY_DYSON_PHASE_SPECTROSCOPY_V0_1",
   "repository": "AdrianLipa90/Resonant-Chemistry",
   "domain_role": "CHEMISTRY_STATE_TO_TRANSITION_DIAGNOSTIC",
-  "status": "CANDIDATE_IMPLEMENTED_LOCAL_REFERENCE_TESTS_PASS",
+  "status": "CORE_FORCED_PREDICTION__CHEMISTRY_BINDING_CANDIDATE",
   "base_branch": "main",
   "base_sha": "c60305b993e083233484ac00a7643cd3ee3611f4",
   "branch": "candidate/montgomery-dyson-phase-spectroscopy-v0.1-20260926",
@@ -19,5 +19,15 @@
     "asserts_prime_generated_chemistry": false,
     "promotion_requires_repo_validation": true
   },
-  "canon_allowed": false
+  "canon_allowed": false,
+  "forced_prediction_dependency": {
+    "repository": "AdrianLipa90/Infinities",
+    "branch": "formalize/hardy-car-sine-kernel-forced-prediction-v0.1-20260926",
+    "head": "7008a9121d878674a7190d0966faa727f9eacb55",
+    "claim": "INF-270"
+  },
+  "status_split": {
+    "phase_correlation_core": "DERIVED_IN_FRAMEWORK_FORCED_PREDICTION",
+    "chemistry_domain_binding": "CANDIDATE_NOT_PROMOTED"
+  }
 }
