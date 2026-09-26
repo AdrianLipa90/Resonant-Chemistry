@@ -1,0 +1,23 @@
+{
+  "schema": "MONTGOMERY_DYSON_PHASE_SPECTROSCOPY_V0_1",
+  "repository": "AdrianLipa90/Resonant-Chemistry",
+  "domain_role": "CHEMISTRY_STATE_TO_TRANSITION_DIAGNOSTIC",
+  "status": "CANDIDATE_IMPLEMENTED_LOCAL_REFERENCE_TESTS_PASS",
+  "base_branch": "main",
+  "base_sha": "c60305b993e083233484ac00a7643cd3ee3611f4",
+  "branch": "candidate/montgomery-dyson-phase-spectroscopy-v0.1-20260926",
+  "date": "2026-09-26",
+  "local_reference_tests": {
+    "status": "PASS",
+    "count": 6,
+    "scope": "isolated module-equivalent smoke/regression; not repository CI"
+  },
+  "authority_direction": "state model -> transitions -> phase diagnostic",
+  "claim_boundaries": {
+    "modifies_quantum_chemistry": false,
+    "ranks_states": false,
+    "asserts_prime_generated_chemistry": false,
+    "promotion_requires_repo_validation": true
+  },
+  "canon_allowed": false
+}
