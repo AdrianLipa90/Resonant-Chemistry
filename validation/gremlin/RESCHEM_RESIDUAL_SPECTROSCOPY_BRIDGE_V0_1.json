@@ -1,0 +1,10 @@
+{
+  "schema":"RESCHEM_RESIDUAL_SPECTROSCOPY_BRIDGE_RECEIPT_V0_1",
+  "date":"2026-09-26",
+  "status":"IMPLEMENTED_CANDIDATE_LOCAL_3_OF_3_PASS",
+  "branch":"feat/residual-preserving-spectroscopy-bridge-v01-20260926",
+  "gremlin_input_schema":"GREMLIN_RESIDUAL_PRESERVING_SPECTROSCOPY_V0_2",
+  "local_tests":{"passed":3,"failed":0},
+  "exact":["spectrum payload preserved","unsafe destructive-denoising policy rejected","unresolved residual not promoted to chemical or physical assignment"],
+  "main_modified":false
+}
