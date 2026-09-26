@@ -142,3 +142,8 @@ Implementation does not imply validation; a numerical match does not establish o
 ## Informational phase / EB-orbital cross-reference
 
 The typed cross-repository interface is documented at `docs/INFORMATIONAL_PHASE_EB_ORBITAL_SPECTROSCOPY_CROSSWALK.md`. It keeps conventional chemistry authoritative while exposing candidate readouts from an admitted upstream potential through state energies, forces, Hessians and transition shifts. The physical informational/EB coupling remains OPEN.
+
+
+## Montgomery–Dyson phase spectroscopy candidate
+
+A downstream transition-set diagnostic is implemented in reschem/phase_spectroscopy.py and documented in docs/MONTGOMERY_DYSON_PHASE_SPECTROSCOPY_V0_1.md and textbook Chapter 22. It consumes already calculated transition coordinates, maps an explicit unfolding to unwrapped phase, and supplies GUE/form-factor and prime-power phase-scramble controls. It does not modify quantum-chemistry Hamiltonians, energies, state rankings, molecular gates, or semantic-card admission.
