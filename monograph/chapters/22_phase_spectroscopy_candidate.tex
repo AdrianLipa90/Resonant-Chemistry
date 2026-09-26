@@ -1,0 +1,45 @@
+\chapter{Montgomery--Dyson Phase Spectroscopy Candidate}
+\label{ch:phase-spectroscopy-candidate}
+\epstatus{CANDIDATE / IMPLEMENTED diagnostic; not a physical chemistry mechanism.}
+
+This layer is downstream of state construction and spectroscopic control.  Let \(x_j\) be transition coordinates already supplied by a declared physical or candidate calculation.  After an explicit unfolding \(u_j\), define
+\[
+\Phi_j=2\pi u_j.
+\]
+The Montgomery--Dyson/GUE reference is
+\[
+R_2(\Delta\Phi)
+=
+1-
+\left[
+\frac{\sin(\Delta\Phi/2)}{\Delta\Phi/2}
+\right]^2.
+\]
+The independent arithmetic probe uses
+\[
+\omega_{p,m}=m\log p=\log(p^m),
+\qquad
+w_{p,m}=\frac{\log p}{p^{m/2}},
+\]
+with
+\[
+P_\sigma(t)
+=
+-\frac{1}{\pi}
+\sum_{p^m\le P}
+w_{p,m}
+e^{-\sigma^2\omega_{p,m}^2/2}
+\cos(t\omega_{p,m}+\varphi_{p,m}).
+\]
+
+No atomic or molecular Hamiltonian is modified by these definitions.  The module does not generate energies, rank states, change molecular screening, or promote semantic-card status.  It is a diagnostic on a transition set.  The required reverse control preserves \(\omega_{p,m}\) and \(w_{p,m}\) while randomizing \(\varphi_{p,m}\).  A density-varying physical spectrum requires a separately declared smooth unfolding rather than the affine smoke/control transform.
+
+The repository therefore keeps the direction of authority fixed:
+\[
+\text{physical/candidate state model}
+\rightarrow
+\text{transition set}
+\rightarrow
+\text{phase diagnostic},
+\]
+never the reverse.
